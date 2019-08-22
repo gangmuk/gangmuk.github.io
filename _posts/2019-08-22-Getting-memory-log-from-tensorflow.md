@@ -1,10 +1,10 @@
 ---
-title: "Welcome to K's Research Note!"
+title: "Getting Memory Log from Tensorflow"
 date: 2019-08-22 10:40:28 -0400
-categories: Intro update
+categories: tensorflow tf memory log memorylog
 ---
 
-Getting Memory Log provided by Tensorflow
+Getting Memory Log from Tensorflow
 =========================================
 
 #### 1.	run하고자 하는 python 코드 맨 위에 아래 코드 추가

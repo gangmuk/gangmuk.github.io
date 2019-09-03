@@ -4,9 +4,6 @@ date: 2019-08-22 10:40:28 -0400
 categories: tensorflow tf memory log memorylog
 ---
 
-Getting Memory Log from Tensorflow
-=========================================
-
 #### 1.	run하고자 하는 python 코드 맨 위에 아래 코드 추가
 ```python
 import os

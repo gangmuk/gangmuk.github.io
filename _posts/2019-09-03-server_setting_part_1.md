@@ -23,14 +23,19 @@ prerequisite
       eno1:
         dhcp4: no
         dhcp6: no
-        addresses: [10.20.18.74/22]
-        gateway4: 10.20.18.1
+        addresses: [ip/port]
+        gateway4: gateway
         nameservers:
-                addresses: [10.0.2.204,10.0.2.220]
+                addresses: [dns1, dns2]
     ```
-    ```bash
-    netplan apply
-    ```
+  ```bash
+  netplan apply
+  ```
+- disk mount
+  ```bash
+  mkdir /mnt/data1
+  mnt /mnt/data1
+  ```
 - create an account
   - login to account having root authentication
   ```bash
@@ -56,23 +61,25 @@ prerequisite
       ```
     - default setting
       -press (2)
-    - Oh My Zsh install
-      ```bash
-      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-      ```
+  - Oh My Zsh 
+    - install
+    ```bash
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+    ```
+    - 
+    
   -tmux
     - install
       ```bash
       sudo apt-get install tmux
-      ```
-    - setting
+      ``` 
       - backup original tmux setting file 
       (if you haven't set your own tmux setting file, then there is no default tmux setting file)
       ```bash
       mkdir /home/gangmuk/backup
       cp 
-      ```bash
-      vi 
+      ```
+  - 
     
     
     

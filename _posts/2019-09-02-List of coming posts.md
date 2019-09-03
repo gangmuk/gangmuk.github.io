@@ -29,3 +29,5 @@ categories: candidate post near future
 
 - BERT
   - 
+- etc
+  - difference between curl and wget

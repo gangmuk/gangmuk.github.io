@@ -3,7 +3,6 @@ title: "List of coming posts"
 date: 2019-09-02 19:10:00 -0400
 categories: candidate post near future
 ---
-=========================================
 
 - deep learning training on memory centric architecture
   - why deep learning on memory centric architecture?

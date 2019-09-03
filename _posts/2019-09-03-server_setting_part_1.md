@@ -39,9 +39,10 @@ prerequisite
   ```bash
   gpasswd -a gangmuk sudo
   ```
-  - delete an account
+  - delete an account and its home directory
   ```bash
-  userdel gangmuk
+  sudo userdel -rf gangmuk
+  ```
 - basic application installation
   - zsh
     - install
@@ -55,6 +56,10 @@ prerequisite
       ```
     - default setting
       -press (2)
+    - Oh My Zsh install
+      ```bash
+      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+      ```
   -tmux
     - install
       ```bash

@@ -50,16 +50,18 @@ prerequisite
   ```
   
 - server domain name setting
-```bash
-sudo vi /etc/hosts
-```
-```bash
-xx.xx.xx.xx [server_name]
-```
-After this set up, you can access to this server using
-```bash
-ssh [server_name]
-```
+  - open
+  ```bash
+  sudo vi /etc/hosts
+  ```
+  - add a line like below in hosts file
+  ```bash
+  xx.xx.xx.xx [server_name]
+  ```
+  - After this set up, you can access to this server using
+  ```bash
+  ssh [server_name]
+  ```
 
 - basic application installation
   - zsh

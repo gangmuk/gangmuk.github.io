@@ -48,6 +48,19 @@ prerequisite
   ```bash
   sudo userdel -rf gangmuk
   ```
+  
+- server domain name setting
+```bash
+sudo vi /etc/hosts
+```
+```bash
+xx.xx.xx.xx [server_name]
+```
+After this set up, you can access to this server using
+```bash
+ssh [server_name]
+```
+
 - basic application installation
   - zsh
     - install

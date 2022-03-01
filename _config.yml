@@ -87,7 +87,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : "/Users/gangmuk/projects/gangmuk.github.io/photos/.sahara_camel_shot_0.png"
+og_image                 : "/photos/.sahara_camel_shot_0.png"
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -106,7 +106,7 @@ analytics:
 # Site Author
 author:
   name             : "Gangmuk Lim"
-  avatar           : "/Users/gangmuk/projects/gangmuk.github.io/photos/.sahara_camel_shot_0.png"
+  avatar           : "/photos/.sahara_camel_shot_0.png"
   bio              : "This place will be a heart of my deceleration. "
   location         : "South Korea (about to move to US for pursuing PhD)"
   email            : 

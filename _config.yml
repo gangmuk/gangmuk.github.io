@@ -23,7 +23,7 @@ url                      : "https://gangmuk.github.io" # the base hostname & pro
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "/photos/annapurna_0.png"
-logo                     : "/photos/sahara_camel_shot_0.png"
+logo                     : "/photos/annapurna_0.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200

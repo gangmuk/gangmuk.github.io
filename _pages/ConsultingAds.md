@@ -1,5 +1,5 @@
 ---
-title: "Computer Science 미국 석/박사 유학 컨설팅(이번 년도 탑스쿨 박사과정 합격생)"
+title: "Computer Science 미국 석/박사 유학 컨설팅(이번 년도 탑스쿨 박사과정 합격생, 이번년도 8월까지만 컨설팅)"
 permalink: /consulting/
 layout: single
 ---

@@ -17,10 +17,10 @@ layout: single
 ### 소개.
 안녕하세요, 2022 가을학기에 현재 전세계에서 가장 치열한 Computer Science 전공으로 미국 탑스쿨 박사과정에 5년 풀펀딩(등록금, 보험, stipend)으로 합격해 이번에 출국하는 학생입니다. (현재는 출국까지 시간이 남아 start-up에서 일하고 있습니다.) Computer Science 미국 석/박사 유학을 고려하고 계시는 학생 및 학부모님들께 제가 한 경험을 기반으로 올해(2022년) 8월까지 컨설팅을 하고자 합니다.
 
-### 이력.
+### 간단한 이력.
 - 외고 졸업.
 - 과기원 컴퓨터 공학 학/석사 졸업.
-- 컴퓨터 분야 해외 최고 학회에 등재된 두편의 1저자. (Two top conference papers as a first author).
+- 컴퓨터 분야 해외 최고 학회에 1저자로 두편의 논문 등재. (Two top conference papers as a first author).
 
 ### 컨설팅 Contents.
 - 현 미국 Top 스쿨 교수님들과의 인터뷰. 

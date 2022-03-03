@@ -4,7 +4,7 @@ permalink: /todo/
 layout: single
 ---
 
-##Todo
+## Todo
 - 도수치료 다 받기
 - 권교수님, 전교수님 admission 선물 고르기 + 사기
   - 와인, 위스키
@@ -18,20 +18,20 @@ layout: single
 - 인텔리지 주차권 빼기
 - 부동산에 방 올리기
 
-##Shopping List
+## Shopping List
 - 핸드폰
 - Tennis racket
 - Speaker
 - Gray color jogger pants
 
-##Exploration List
+## Exploration List
 - Koh Tao, Thailand (freediving)
 - Dahab, Egypt (freediving)
 - Lahdak, India (Pangkongcho)
 - Iceland
 - Everest Based Camp, Nepal
 
-##People to meet
+## People to meet
 - Seoul
   - 창률
   - 호은

@@ -1,6 +1,6 @@
 ---
-title: "Misc todo list"
-permalink: /todo/
+title: "Vocab Inventory"
+permalink: /vocab/
 layout: single
 ---
 

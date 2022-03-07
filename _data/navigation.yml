@@ -1,4 +1,6 @@
 # main link
 main:
   - title: "BlogMap"
-    url: https://gangmuk.github.io/blogmap
+    url: https://gangmuk.github.io/blogmap/
+  - title: "Vocab"
+    url: /vocab/

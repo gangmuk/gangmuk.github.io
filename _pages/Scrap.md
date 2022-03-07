@@ -1,5 +1,5 @@
 ---
-title: "Useful post link list"
+title: "Link Scrap for Useful Posts"
 permalink: /scrap/
 layout: single
 ---

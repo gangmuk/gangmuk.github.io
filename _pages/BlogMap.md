@@ -4,20 +4,27 @@ permalink: /blogmap/
 layout: single
 ---
 
-## gangmuk.github.io blog
+## BlogMap
 
----Adventure\
-\
----Research & Research\
-  |---Paper reviews\
-  |---TBD.\
-\
----Thoughts & Idea\
-  |---Thoughts\
-  |---Ideas\
-  |---English study\
-\
----Diary\
-\
----Misc\
-\
+- Adventure
+
+- Research & Research
+  - Paper reviews
+  - TBD.
+
+- Thoughts & Idea
+  - Thoughts
+  - Ideas
+  - English study
+
+- Daily
+
+- Vocab
+  - academic
+  - daily
+
+- Todo list
+  - todo list
+  - shopping list
+
+- Misc

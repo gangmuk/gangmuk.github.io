@@ -16,13 +16,18 @@ layout: single
 - 근로계약서 다시 쓰기
 - 계약금 받으면 세무서에 전입신고 거부 신고하기
 - 인텔리지 주차권 빼기
-- 부동산에 방 올리기
 
 ## Shopping List
-- 핸드폰
-- Tennis racket
-- Speaker
-- Gray color jogger pants
+- Small
+  - 구두쇠
+  - 락스
+
+- Big
+  - 핸드폰
+  - 핸드폰 외장 마이크
+  - Tennis racket
+  - Speaker
+  - Gray color jogger pants
 
 ## Exploration List
 - Koh Tao, Thailand (freediving)
@@ -30,11 +35,14 @@ layout: single
 - Lahdak, India (Pangkongcho)
 - Iceland
 - Everest Based Camp, Nepal
+- Austrailia road trip
+- Alaska road trip
+- South America
 
 ## People to meet
 - Seoul
-  - 창률
-  - 호은
+  - ~~창률~~
+  - ~~호은~~
   - 작은고모
   - 삼춘, 작은 엄마
   - 욱희형, 진웅형
@@ -43,6 +51,8 @@ layout: single
   - 교운
   - Russ
   - 장훈형
+  - 지연
+  - 지수
 
 - Daejeon
   - 권영진 교수님
@@ -50,11 +60,7 @@ layout: single
   - 
 
 - Ulsan
-  - 전명재 교수님, 연구실
-  - 승민, 
-  - 유정
+  - ~~전명재 교수님, 연구실 아이들~~
+  - ~~승민, ~~
+  - ~~유정~~
   - 
-
-- Other region
-  - 지연
-

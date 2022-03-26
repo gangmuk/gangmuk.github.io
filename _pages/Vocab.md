@@ -24,3 +24,6 @@ layout: single
 
 
 ## Daily 
+- undeserving
+- in the same breath
+- 

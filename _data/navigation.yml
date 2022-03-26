@@ -1,5 +1,7 @@
 # main link
 main:
+  - title: "CV"
+    url: /cv/
   - title: "BlogMap"
     url: https://gangmuk.github.io/blogmap/
   - title: "Todo"

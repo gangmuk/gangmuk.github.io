@@ -2,7 +2,7 @@
 title: "Curriculum Vitae"
 permalink: /cv/
 classes: wide
-layout: single
+layout: home
 ---
 
 # Publications

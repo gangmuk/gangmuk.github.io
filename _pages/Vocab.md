@@ -1,6 +1,7 @@
 ---
 title: "Vocab Inventory"
 permalink: /vocab/
+classes: wide
 layout: single
 ---
 

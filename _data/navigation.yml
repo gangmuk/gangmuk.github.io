@@ -4,13 +4,14 @@ main:
     url: /cv/
   - title: "BlogMap"
     url: https://gangmuk.github.io/blogmap/
-  - title: "Todo"
-    url: /todo/
   - title: "Vocab"
     url: /vocab/
   - title: "Stretching"
     url: /stretching/
-  - title: "Scrap"
-    url: /scrap/
+#  - title: "Todo"
+#    url: /todo/
+#  - title: "Scrap"
+#    url: /scrap/
+
 #  - title: "ConsultingAds"
 #    url: /consulting/

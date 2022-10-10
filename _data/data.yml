@@ -16,8 +16,9 @@ sidebar:
     # phone: 012 345 6789
     # timezone: America/Cancun Timezone
     # citizenship:
-    website: https://gangmuk.github.io #do not add http://
-    linkedin: https://www.linkedin.com/in/gangmuk-lim-258a76137/
+    website: gangmuk.github.io #do not add http://
+    # linkedin: https://www.linkedin.com/in/gangmuk-lim-258a76137/
+    linkedin: gangmuk
     # xing: alandoe
     # github: sharu725
     # telegram: # add your nickname without '@' sign
@@ -53,37 +54,24 @@ sidebar:
 career-profile:
     title: Career Profile
     summary: |
-      Summarise your career here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. You can [download this free resume/CV template here]().
-      Aenean commodo ligula eget dolor aenean massa. Cum sociis natoque
-      penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      Donec quam felis, ultricies nec, pellentesque eu.
-      Second paragraph if required.
+      PhD student at University of Illinois Urbana-Champaign
 education:
-    title: Education
+    title: Computer Science
     info:
       - degree: MSc in Computer Science
-        university: University of London
-        time: 2011 - 2012
+        university: UNIST
+        time: 2019 - 2021
         details: |
-          Describe your study here lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur
-          ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-          pretium quis, sem.
-            - Bullet point
-            - Bullet point
-      - degree: BSc in Applied Mathematics
-        university: Bristol University
-        time: 2007 - 2011
+          System for ML
+            - Bullet point 1
+            - Bullet point 2
+      - degree: BSc in Computer Sciene
+        university: UNIST
+        time: 2012 - 2019
         details: |
-          Describe your study here lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur
-          ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-          pretium quis, sem.
-            - Bullet point
-            - Bullet point
+          Period includes 2 years of military service.
+            - Bullet point 11
+            - Bullet point 22
 experiences:
     title: Experiences
     info:

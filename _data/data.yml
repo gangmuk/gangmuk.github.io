@@ -82,43 +82,36 @@ education:
 experiences:
     title: Experiences
     info:
-      - role: Lead Developer
-        time: 2015 - Present
-        company: Startup Hubs, San Francisco
+      - role: Graduate Research Assistant
+        time: Aug 2022 - Present
+        company: University of Illinois Urbana-Champaign, Champaign, IL
+#        details: |
+#            Implementing a software system that simulates SoC environment in software for debugging and for performance analysis of deep learning kernels.
+      - role: Research Intern
+        time: Aug 2021 - Apr 2022
+        company: Rebellions Inc., Seongname, South Korea
         details: |
-          Describe your role here lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-          Cum sociis natoque penatibus et magnis dis parturient montes,
-          nascetur ridiculus mus. Donec quam felis, ultricies nec,
-          pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-          enim. Donec pede justo. Sed ut perspiciatis unde omnis iste natus
-          error sit voluptatem accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-          architecto beatae vitae dicta sunt explicabo.
-            - Bullet point
-            - Bullet point
-      - role: Senior Software Engineer
-        time: 2014 - 2015
-        company: Google, London
+            Implementing a software system that simulates SoC environment in software for debugging and for performance analysis of deep learning kernels.
+      - role: Graduate Research Assistant
+        time: Aug 2019 - Jul 2021
+        company: Ulsan National Institute of Science and Technology(UNIST), Ulsan, South Korea
         details: |
-          Describe your role here lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-          Cum sociis natoque penatibus et magnis dis parturient montes,
-          nascetur ridiculus mus. Donec quam felis, ultricies nec,
-          pellentesque eu, pretium quis, sem.
-            - Bullet point
-            - Bullet point
-      - role: UI Developer
-        time: 2012 - 2014
-        company: Amazon, London
+            Designed and implemented a system supporting GPU sharing across concurrent DNN training jobs.
+            Devised an efficient and accurate quantile approximation algorithm for datacenter telemetry monitoring.
+            - Advisor: Prof.Myeongjae Jeon
+      - role: Undergraduate Research Intern
+        time: Jul 2018 - Aug 2018
+        company: Ulsan National Institute of Science and Technology(UNIST), Ulsan, South Korea
         details: |
-          Describe your role here lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-          Cum sociis natoque penatibus et magnis dis parturient montes,
-          nascetur ridiculus mus. Donec quam felis, ultricies nec,
-          pellentesque eu, pretium quis, sem.
-            - Bullet point
-            - Bullet point
+            Corporate revenue data and related sentence data collection from company quaterly reports for training stock price estimation NLP model.
+            - Advisor: Prof. Jaesik Choi
+      - role: Research Intern
+        time: Jul 2018 - Aug 2018
+        company: IDLab-MEDIA, Ghent University, Ghent, Belgium
+        details: |
+            Wrote a script using Unreal Engine 4 that generates super resolution panoramic image dataset for light field experiment in virtual reality.
+            - Supervisor: Ignace Saenan
+
 projects:
     title: Projects
     intro: >

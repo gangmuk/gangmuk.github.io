@@ -7,8 +7,8 @@ sidebar:
     education: True # set to False if you want education in main section instead of in sidebar
 
     # Profile information
-    name: Alan Doe
-    tagline: Full Stack Developer
+    name: Gangmuk Lim
+    tagline: PhD student in Computer Science
     avatar: profile.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
     # Sidebar links
@@ -28,7 +28,7 @@ sidebar:
     # stack-overflow: # Number/Username, e.g. 123456/alandoe
     # codewars:
     # goodreads: # Number-Username, e.g. 123456-alandoe
-    pdf: https://drive.google.com/file/d/114ywLoITHx_R92BMB-Y-dKnLD6dhhytl/view?usp=sharing
+    pdf: drive.google.com/file/d/114ywLoITHx_R92BMB-Y-dKnLD6dhhytl/view?usp=sharing
 
     languages:
       title: Languages
@@ -58,6 +58,13 @@ career-profile:
 education:
     title: Computer Science
     info:
+      - degree: PhD in Computer Science
+        university: University of Illinois Urbana-Champaign
+        time: 2019 - 2021
+        details: |
+          System for ML, Microservice architecture, Large scale system.
+            - Bullet point 1
+            - Bullet point 2
       - degree: MSc in Computer Science
         university: UNIST
         time: 2019 - 2021

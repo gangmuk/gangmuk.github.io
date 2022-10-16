@@ -115,9 +115,9 @@ experiences:
 projects:
     title: Projects
     intro: >
-      gangmuk_1 ganmguk_11
+      gangmuk_1 ganmguk_11 gangmuk_111
     assignments:
-      - title: Zico zico
+      - title: Zico Efficient
         link: "#hook"
         tagline: "A responsive website template designed to help startups promote, market and sell their products."
 

@@ -142,7 +142,7 @@ publications:
     intro: |
       gangmuk_2
     papers:
-      - title: Zico Efficient GPU Memory Sharing for Concurrent DNN Training
+      - title: Zico Efficient GPU Memory Sharing for Concurrent DNN Training.
         link: "#"
         authors: Donald E. Knuth
         conference: Addison-Wesley, 1968

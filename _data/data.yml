@@ -142,7 +142,7 @@ publications:
     intro: |
       gangmuk_2
     papers:
-      - title: The Art of Computer Programming
+      - title: Zico Efficient GPU Memory
         link: "#"
         authors: Donald E. Knuth
         conference: Addison-Wesley, 1968

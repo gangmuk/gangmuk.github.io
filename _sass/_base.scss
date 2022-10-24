@@ -224,14 +224,15 @@ p {
   }
 
   .publication-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     color: $text-color;
     margin-bottom: 1px;
   }
   .publication-authors {
+    font-size: 18px;
     font-style: italic;
-    color: $text-grey;
+    color: $darker-grey;
     margin-bottom: 1px;
   }
   .publications-section {

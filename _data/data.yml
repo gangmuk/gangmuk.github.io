@@ -82,8 +82,6 @@ education:
 
 publications:
     title: Publications
-    intro: |
-      
     papers:
       - title: "Zico Efficient GPU Memory Sharing for Concurrent DNN Training."
         link: "https://www.usenix.org/conference/atc21/presentation/lim"

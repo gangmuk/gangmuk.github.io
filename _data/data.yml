@@ -85,10 +85,14 @@ publications:
     intro: |
       
     papers:
-      - title: "Zico Efficient GPU Memory Sharing for Concurrent DNN Training.."
-        link: "#"
+      - title: "Zico Efficient GPU Memory Sharing for Concurrent DNN Training."
+        link: "https://www.usenix.org/conference/atc21/presentation/lim"
         authors: Gangmuk Lim, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon. 
         conference: USENIX Annual Technical Conference (USENIX ATC), Jul. 2021.
+      - title: "Approximate Quantiles for Data Center Telemetry Monitoring."
+        link: "https://ieeexplore.ieee.org/document/9101574"
+        authors: Gangmuk Lim, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin. 
+        conference: IEEE International Conference on Data Engineering (IEEE ICDE), Apr. 2020. (Short)
 
 experiences:
     title: Experiences

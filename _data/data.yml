@@ -85,7 +85,7 @@ publications:
     intro: |
       
     papers:
-      - title: "Zico Efficient GPU Memory Sharing for Concurrent DNN Training.."
+      - title: "Zico Efficient GPU Memory Sharing for Concurrent DNN Training."
         link: "https://www.usenix.org/conference/atc21/presentation/lim"
         authors: Gangmuk Lim, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon. 
         conference: USENIX Annual Technical Conference (USENIX ATC), Jul. 2021.

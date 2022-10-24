@@ -54,31 +54,31 @@ sidebar:
 career-profile:
     title: Career Profile
     summary: |
-      PhD student at University of Illinois Urbana-Champaign
+      Hello, I am a first year PhD student in Computer Science at the University of Illinois Urbana-Champaign. I am advised by prof.Brighten Godfrey. My research interest lies in large scale multi-tenant cloud system and system for machine learning. Currently, I am focusing on Microservice architecture and systems for machine laerning. I am looking for a 2023 summer PhD internship.
+
 education:
     title: Computer Science
     info:
       - degree: PhD in Computer Science
         university: University of Illinois Urbana-Champaign
-        time: 2019 - 2021
-        details: |
-          System for ML, Microservice architecture, Large scale system.
-            - Bullet point 1
-            - Bullet point 2
+        time: 2022 - 2027 (expected)
+#        details: |
+#          System for ML, Microservice architecture, Large scale system.
+#            - Bullet point 1
+#            - Bullet point 2
       - degree: MSc in Computer Science
         university: UNIST
         time: 2019 - 2021
-        details: |
-          System for ML
-            - Bullet point 1
-            - Bullet point 2
+#        details: |
+#          System for ML
+#            - Bullet point 1
+#            - Bullet point 2
       - degree: BSc in Computer Sciene
         university: UNIST
         time: 2012 - 2019
         details: |
-          Period includes 2 years of military service.
-            - Bullet point 11
-            - Bullet point 22
+            - Bullet point Period includes 2 years of military service.
+#            - Bullet point 22
 experiences:
     title: Experiences
     info:

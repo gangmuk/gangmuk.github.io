@@ -1,0 +1,17 @@
+# main link
+main:
+  - title: "CV"
+    url: /cv/
+  - title: "BlogMap"
+    url: https://gangmuk.github.io/blogmap/
+  - title: "Vocab"
+    url: /vocab/
+  - title: "Stretching"
+    url: /stretching/
+#  - title: "Todo"
+#    url: /todo/
+#  - title: "Scrap"
+#    url: /scrap/
+
+#  - title: "ConsultingAds"
+#    url: /consulting/

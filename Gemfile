@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 group :jekyll_plugins do
     gem 'classifier-reborn'
-    gem 'jekyll'
+    gem 'jekyll', '3.9.0'
+    gem 'minima', '2.5.1'  # Replace '2.5.1' with the version listed
     gem 'jekyll-archives'
     gem 'jekyll-email-protect'
-    gem 'jekyll-feed'
+    gem 'jekyll-feed', '~> 0.12'
     gem 'jekyll-get-json'
     gem 'jekyll-imagemagick'
     gem 'jekyll-jupyter-notebook'

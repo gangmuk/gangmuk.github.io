@@ -1,67 +1,147 @@
-<a href="https://jekyll-themes.com">
-<img src="https://img.shields.io/badge/featured%20on-JT-red.svg" height="20" alt="Jekyll Themes Shield" >
-</a>
+# Bay
 
-# Orbit
-> This theme is designed by Xiaoying Riley at [3rd Wave Media](http://themes.3rdwavemedia.com/).
-> Visit her [website](http://themes.3rdwavemedia.com/) for more themes.
+[![Version](https://img.shields.io/gem/v/bay_jekyll_theme)](https://rubygems.org/gems/bay_jekyll_theme)
+[![Downloads](https://img.shields.io/gem/dt/bay_jekyll_theme)](https://rubygems.org/gems/bay_jekyll_theme)
 
-I have made this into a Jekyll Theme. Checkout the live demo [here](https://online-cv.webjeda.com).
+Bay is a simple theme for Jekyll. [[view live]](https://eliottvincent.github.io/bay)
 
-<table>
-  <tr>
-    <th>Desktop</th>
-    <th>Mobile</th>
-  </tr>
-  <tr>
-    <td>
-        <img src="https://online-cv.webjeda.com/assets/images/desktop.png?raw=true" width="600"/>
-    </td>
-    <td>
-        <img src="https://online-cv.webjeda.com/assets/images/mobile.png?raw=true" width="250"/>
-    </td>
-  </tr>
-</table>
+Inspired by [dangrover.com](http://dangrover.com/). Current theme used at [eliottvincent.com](http://eliottvincent.com/).
 
-## Installation
+![](/screenshot.png)
 
-* [Fork](https://github.com/sharu725/online-cv/fork) the repository
-* Go to settings and set master branch as Github Pages source.
-* Your new site should be ready at `https://<username>.github.io/online-cv/`
-* Printable version of the site can be found at `https://<username>.github.io/online-cv/print`. Use a third party link https://pdflayer.com/, https://www.web2pdfconvert.com/ etc to get the printable PDF.
+### Installation
 
-Change all the details from one place: ``_data/data.yml``
 
-## To preview/edit localy with docker
+The easiest solution is to [fork this repo](https://github.com/eliottvincent/bay/fork).
+If you want to start from a clean website, follow the steps below:
 
-```sh
-docker-compose up
+Create a new Jekyll website:
+```
+jekyll new mysite
 ```
 
-*docker-compose.yml* file is used to create a container that is reachable under http://localhost:4000.
-Changes *_data/data.yml* will be visible after a while.
+Open `Gemfile` and replace the line:
+```
+gem "minima"
+```
+with:
+```
+gem "bay_jekyll_theme"
+```
 
-## Skins
+Open `_config.yml` and replace the line:
+```
+theme: minima
+```
+with:
+```
+theme: bay_jekyll_theme
+```
+or, for GitHub Pages:
+```
+remote_theme: eliottvincent/bay
+```
 
-There are 6 color schemes available:
+Finally, install the dependencies:
+```
+bundle install
+```
 
-| Blue | Turquoise | Green |
-|---------|---------|---------|
-| <img src="https://online-cv.webjeda.com/assets/images/blue.jpg" width="300"/> | <img src="https://online-cv.webjeda.com/assets/images/turquoise.jpg" width="300"/> | <img src="https://online-cv.webjeda.com/assets/images/green.jpg" width="300"/> |
+and build the website!
+```
+jekyll serve
+```
 
-| Berry | Orange | Ceramic |
-|---------|---------|---------|
-| <img src="https://online-cv.webjeda.com/assets/images/berry.jpg" width="300"/> | <img src="https://online-cv.webjeda.com/assets/images/orange.jpg" width="300"/> | <img src="https://online-cv.webjeda.com/assets/images/ceramic.jpg" width="300"/> |
 
-## Credits
+The website will look somewhat empty at first. That's normal. Follow the next instructions to complete the header and footer components, and the home and blog pages.
 
-Thanks to [Nelson Estevão](https://github.com/nelsonmestevao) for all the [contributions](https://github.com/sharu725/online-cv/commits?author=nelsonmestevao).
+### Header
+Open the `_config.yml` file and add the following:
+```yml
+header:
+  pages:
+    - name: Home
+      slug: /     # <-- index.md
+    - name: Blog  # <-- blog.md
+    - name: Whatever  # <-- whatever.md
+```
+Re-run `jekyll serve` to see the header updated.
 
-Thanks to [t-h-e(sfrost)](https://github.com/t-h-e) for all the [contributions](https://github.com/sharu725/online-cv/commits?author=t-h-e).
+### Footer
+Open the `_config.yml` file and add the following:
+```yml
+footer:
+  show_powered_by: true
+  contact:
+    - name: Email
+      value: yourmail@domain.com
+      link: mailto:yourmail@domain.com
+    - name: WeChat
+      value: YourWeChatUsername
+      link: "#"
+  follow:
+    - name: Twitter
+      link: http://twitter.com/YourTwitterUsername
+      username: "@YourTwitterUsername"
+    - name: Facebook
+      link: http://facebook.com/YourFacebookUsername
+    - name: LinkedIn
+      link: http://linkedin.com/in/YourLinkedInUsername
+    - name: GitHub
+      link: http://github.com/YourGitHubUsername
+    - name: Dribbble
+      link: https://dribbble.com/YourDribbbleUsername
+    - name: Weibo
+      link: http://weibo.com/u/YourWeiboUsername
+    - name: RSS
+      link: /feed.xml
+```
+Re-run `jekyll serve` to see the footer updated.
 
-Check out for more themes: [**Jekyll Themes**](http://jekyll-themes.com).
+### Home page
+Create (or edit) the `index.markdown` file and add the following:
+```yml
+---
+layout: home
+profile_picture:
+  src: /assets/img/profile-pic.jpg
+  alt: website picture
+---
 
-## Star History
+<p>
+  Welcome to mysite!
+</p>
+```
 
-[![Star History Chart](https://api.star-history.com/svg?repos=sharu725/online-cv&type=Date)](https://star-history.com/#sharu725/online-cv&Date)
+### Blog page
+Create `blog.markdown` file and add the following:
+```yml
+---
+layout: blog
+title: Blog
+slug: /blog
+---
 
+This is an example of a "Blog" page, displaying a list of posts.
+<br />
+```
+
+
+Your website is ready!
+
+
+### Development
+
+#### Run development instance (with hot-reload)
+```sh
+bundle exec jekyll serve
+```
+
+#### Build and publish the gem
+```sh
+gem build bay_jekyll_theme.gemspec
+```
+
+```sh
+gem push bay_jekyll_theme-1.x.x.gem
+```

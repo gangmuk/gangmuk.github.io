@@ -21,8 +21,9 @@ Previously, I was working on building system for machine learning application th
 ### News!
 <!-- You can add news items here -->
 <ul>
-  <li>Latest publication in ACM SIGCOMM 2024</li>
-  <li>Upcoming talk at the Cloud Computing Workshop, May 2024</li>
+  <li>Kivi accepted to USENIX ATC' 24</li>
+  <li>Gave a talk at KubeCon 23 about SLATE</li>
+  <li>Gave a talk at IstioCon 23 about SLATE</li>
 </ul>
 
 

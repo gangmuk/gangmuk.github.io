@@ -1,18 +1,18 @@
 ---
-layout: publication
-title: Publiaction
-slug: /publication
+layout: misc
+title: Misc
+slug: /misc
 items:
   - title: My Interest 1
     image:
       src: /assets/img/kohtao.png
       alt: kohtao
-    description: surfing at kohtao
+    description: freediving at kohtao
   - title: My Interest 2
     image:
       src: /assets/img/surfing.png
       alt: surfing
-    description: suring at essaouira
+    description: surfing at essaouira
 ---
 
 This is temporary. will be used as cv

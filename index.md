@@ -6,7 +6,7 @@ profile_picture:
 ---
 
 <p>
- My name is Gangmuk Lim. I am a 2nd year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor Brighten Godfrey. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor Myeongjae Jeon.
+ My name is Gangmuk Lim. I am a 2nd year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
 </p>
 
 <p>

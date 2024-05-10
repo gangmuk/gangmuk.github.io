@@ -26,6 +26,20 @@ Previously, I was working on building system for machine learning application th
   <li>Gave a talk at IstioCon 23 about SLATE</li>
 </ul>
 
+### Publication
+<!-- You can add news items here -->
+<ul>
+  <li>Kivi: Verification for Cluster Management<br>
+      Bingzhe Liu, Gangmuk Lim, Ryan Beckett, P. Brighten Godfrey.<br>
+      To appear in the USENIX Annual Technical Conference (ATC'24), 2024</li>
+  <li>Zico: Efficient GPU Memory Sharing for Concurrent DNN Training<br>
+      Gangmuk Lim, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.<br>
+      USENIX Annual Technical Conference (ATC'21), 2021</li>
+  <li>Approximate Quantiles for Data Center Telemetry Monitoring<br>
+      Gangmuk Lim, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.<br>
+      UIEEE ICDE' 20 short</li>
+</ul>
+
 
 <p>
  You can find my full CV

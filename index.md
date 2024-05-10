@@ -1,7 +1,7 @@
 ---
 layout: home
 profile_picture:
-  src: /assets/img/profile_photo.jpg
+  src: /assets/img/sahara.png
   alt: website picture
 ---
 
@@ -16,9 +16,18 @@ My research is improving performance of microservice application in cloud and im
 <p>
 Previously, I was working on building system for machine learning application that improves GPU resource utilization and throughput.
 </p>
- 
+
+
+### News!
+<!-- You can add news items here -->
+<ul>
+  <li>Latest publication in ACM SIGCOMM 2024</li>
+  <li>Upcoming talk at the Cloud Computing Workshop, May 2024</li>
+</ul>
+
+
 <p>
- You can find my full CV.
+ You can find my full CV
  <a href="http://gangmuk.github.io/cv.pdf">here</a>.
 </p>
 

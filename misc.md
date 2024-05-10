@@ -15,6 +15,5 @@ items:
     description: surfing at essaouira
 ---
 
-This is temporary. will be used as cv
 <br />
 <br />

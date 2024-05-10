@@ -13,8 +13,8 @@ header:
   pages:
     - name: Home
       slug: /
-    - name: CV
-    - name: Work
+    - name: Publication
+    # - name: Work
     - name: Blog
 
 footer:

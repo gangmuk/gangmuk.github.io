@@ -1,7 +1,7 @@
 ---
-layout: cv
-title: CV
-slug: /cv
+layout: publication
+title: Publiaction
+slug: /publication
 items:
   - title: My Interest 1
     image:

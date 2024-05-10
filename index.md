@@ -25,3 +25,8 @@ Previously, I was working on building system for machine learning application th
 <p>
   You can find me at Siebel building at 3rd floor.
 </p>
+
+<p>
+ <a href="http://linkedin.com/in/gangmuk">LinkedIn</a>
+ <a href="http://github.com/gangmuk">GitHub</a>
+</p>

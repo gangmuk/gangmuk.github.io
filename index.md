@@ -10,19 +10,19 @@ profile_picture:
 </p>
 
 <p>
-My research is improving performance of microservice application in cloud and improvining reliability of cluster management system. Currently, I am focusing on designing new service mesh system to minimize end-to-end latency and monetary cost of large scale microservice application.
+My research primarily revolves around improving performance of microservice application in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. My most recent research project focuses on designing new service mesh system to minimize end-to-end latency and monetary costs associated with large scale microservice applications in the cloud. I am actively on the lookout to work on new projects around distributed systems for machine learning. If you are interested in working with me, please don't hesitate to reach out at gangmuk2 at illinois dot edu.
 </p>
 
 <p>
-Previously, I was working on building system for machine learning application that improves GPU resource utilization and throughput.
+Previously, I was working on building a system for machine learning applications that improves GPU resource utilization and throughput by co-locating multiple training jobs.
 </p>
 
 <p>
  You can find my full CV
- <a href="http://gangmuk.github.io/cv.pdf">here</a>.
+ <a href="http://gangmuk.github.io/cv.pdf">here</a>.<br>
 <!-- </p>
 <p> -->
-  Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.
+  Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.<br>
 <!-- </p>
 <p> -->
  <a href="http://linkedin.com/in/gangmuk">LinkedIn</a>, <a href="http://github.com/gangmuk">GitHub</a>
@@ -32,9 +32,9 @@ Previously, I was working on building system for machine learning application th
 ### News!
 <!-- You can add news items here -->
 <ul>
-  <li>Kivi accepted to USENIX ATC 24'</li>
-  <li>Gave a talk at KubeCon 23' about SLATE. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">GitHub</a></li>
-  <li>Gave a talk at IstioCon 23' about SLATE</li>
+  <li><em>Kivi</em> accepted to USENIX ATC 24'</li>
+  <li>Gave a talk at KubeCon 23' about <em>SLATE</em> . <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
+  <li>Gave a talk at IstioCon 23' about <em>SLATE</em> </li>
 </ul>
 
 ### Publication
@@ -48,12 +48,12 @@ Previously, I was working on building system for machine learning application th
 
 <ul>
   <li>Kivi: Verification for Cluster Management<br>
-      *Bingzhe Liu, Gangmuk Lim, Ryan Beckett, P. Brighten Godfrey.*<br>
-      USENIX Annual Technical Conference (ATC'24), 2024</li>
+      <i>Bingzhe Liu, Gangmuk Lim, Ryan Beckett, P. Brighten Godfrey.</i><br>
+      <i>USENIX Annual Technical Conference (ATC'24), 2024</i></li>
   <li>Zico: Efficient GPU Memory Sharing for Concurrent DNN Training<br>
-      *Gangmuk Lim, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.*<br>
-      USENIX Annual Technical Conference (ATC'21), 2021</li>
+      <i>Gangmuk Lim, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</i><br>
+      <i>USENIX Annual Technical Conference (ATC'21), 2021</i></li>
   <li>Approximate Quantiles for Data Center Telemetry Monitoring<br>
-      *Gangmuk Lim, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin*.<br>
-      UIEEE ICDE' 20 short</li>
+      <i>Gangmuk Lim, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</i><br>
+      <i>IEEE ICDE' 20 short</i></li>
 </ul>

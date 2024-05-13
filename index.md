@@ -33,7 +33,7 @@ Previously, I was working on building system for machine learning application th
 <!-- You can add news items here -->
 <ul>
   <li>Kivi accepted to USENIX ATC 24'</li>
-  <li>Gave a talk at KubeCon 23' about SLATE. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">Talk<\a></li>
+  <li>Gave a talk at KubeCon 23' about SLATE. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">GitHub</a></li>
   <li>Gave a talk at IstioCon 23' about SLATE</li>
 </ul>
 

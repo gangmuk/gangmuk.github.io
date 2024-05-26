@@ -9,7 +9,6 @@ og_image: /assets/img/content/post-example/Banner.jpg
 This is a record of mine for learning CUDA.
 
 Created: May 24th, 2024
-<!-- Modified: May 25th, 2024 -->
 
 # Intuition behind GPU architecture
 Reference: [https://www.youtube.com/watch?v=3l10o0DYJXg][Stephen Jones's talk]

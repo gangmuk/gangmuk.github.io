@@ -151,20 +151,21 @@ More papers that I read
   - There are few RAG system paper though!
     - PipeRAG and 
 
-## What I did
-- Reading a lot of papers.
-- Watching a lot of talks.
-- Trying to talk to people.
+#### What I learned 
+After the project is done, when you are in the phase of finding a new project intensively as a main task, **the concrete plan and deadline must be set**. Otherwise, it will be indefinite process.
 
-## Categorizing by area
-Serverless
-Machine learning based system
-System for machine learning
-LLM specific system
-Cost optimization in cloud
-CUDA, GPU
+*Why?*
+1. **Otherwise, you will find yourself reading papers forever for nothing**. There is no answer for how many paper you have to read or how many papers will guarantee you to find a project. 
+2. Let's say a few ideas come up but you are not sure about them. So what you end up doing is learning more to weigh up if that will be good project(good paper). Hence, you sit back and resume reading more papers, watching more talks, reading more blog posts. When are you able to tell if a potential project is good or will be good or even feasible? (Feasibility should be considered more seriously and carefully though). You **CANNOT**. In other words, **reading papers will not give you anwser, hence you should stop at some point**.
+3. **Moreover, you will feel like you are doing something (learning specifically)**. It is easy way to learn new things. However, as you notice, the pitfall is 
+4. **There are indefinitely endless number of papers and talks**. When will you think that you read enough papers? There is no rule of thumb. When will you stop? You don't know and you won't find the answer because there is no! It is very dangerous.
 
+***Problem summary***:
+Basically, it is swamp. You don't know you are in the middle of swamp and slowly sinking because you are learning something. Learning is not the goal. Learning is easy. People will not pay you because you know a lot. There are tons of people who know a lot. Why? Because it is easy and you might feel you are doing a great job, landing on excessive self-satisfaction.
 
-## What I learned (technical stuff)
+**Solution**
+1. **Set a exact timeline**. Max two weeks. Intensive one week is better.
+2. **Set areas**. In my case, it was RDMA, SmartNIC, CXL, RAG, LLM serving, Video Gen, Federated learning. And try not to be distracted when encountering papers in other areas.
 
-## What I leanred (non-technical stuff)
+**Conclusion**
+Be mindful when you are exclusively spending time on finding a new project. It is very easy to be trapped in the swamp of learning. Write down the plan with the timeline for it.

@@ -10,7 +10,7 @@ This is a record of mine for learning CUDA.
 
 Created: May 24th, 2024
 
-# Intuition behind GPU architecture
+## Intuition behind GPU architecture
 Reference: [https://www.youtube.com/watch?v=3l10o0DYJXg][Stephen Jones's talk]
 This is by far THE best intro to GPU architecture I've ever seen. The talk is just so perfectly streamlined.
 

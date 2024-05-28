@@ -7,10 +7,11 @@ og_image: /assets/img/content/post-example/Banner.jpg
 ---
 
 This is an essay about my journey to find a new second research project in my PhD.
-I decide to write this essay because it is truly non-trivial. In addition, I am doing things that I have not done before.
+I decide to write this essay because it is truly non-trivial. In addition, I am doing things that I have not done before. I need to look back what I did by myself as well.
 Why am I writing it
-1. It will be useful now. It will be useful for me to understand what I am doing and if I am doing things correctly/efficiently, etc. Right now, I am doing it in a very ad-hoc way. I don't have a roadmap.
-2. It will be useful in the future when I need to find a new project again.
+1. It is useful for me to understand what I am doing and tell if I am doing things correctly/efficiently. Right now, I am doing it in a very ad-hoc way. I don't have a roadmap.
+2. It will be useful for future me when I need to find a new project again.
+3. It might be useful for other phd students. It might resonate with other PhD students going through the same thing and let them know that it is common hardship!
 
 ## Timeline
 NSDI submission: May 7th, Tue
@@ -25,24 +26,24 @@ NSDI submission: May 7th, Tue
 - Talking to **Fan Lai**
 - At this point, federated learning looks sort of done.
 - LLM specific federated learning could be interesting. I don't recall many paper in this area.
+- It seems it won't be not easy to initiate collaboration without having at least some rough idea of a potential project. 
 
-**May 15th**
+*May 15th*
 - Taking a glimpse of **video Gen pipeline** (**TODO: Needs to talk to Rahul**)s
-- Meeting with Brighten
+- Meeting with B
   - I wanna explore new things.
-  - ATC attending
-  - authorship 
+  - ATC/OSDI ?
 
-**May 16th**
+*May 16th*
 - I don't recall what I did
   
-**May 17th**
+*May 17th*
 - **SLATE project meeting**
   - Creating SLATE project website
   - Writing README
   - Update paper
   - Reaching out to people
-    - Solo.io
+    <!-- - Solo.io
       - Louis (xx)
       - John Howard (xx)
     - Tetrate
@@ -55,10 +56,10 @@ NSDI submission: May 7th, Tue
       - Charles
     - Uber?
     - Netflix?
-    - Robinhood?
+    - Robinhood? -->
   - Editing SLATE DoNotDistribute version
 
-May 19th - 21st: Reading SmartNIC, RDMA papers:  
+*May 19th - 21st* SmartNIC, RDMA papers
 - **RDMA**
   - Azure storage with RDMA
   - Congestion control for RDMA cluster
@@ -86,7 +87,7 @@ May 19th - 21st: Reading SmartNIC, RDMA papers:
     - Disaggregated memory
   - *Lesson: SmartNIC is also well explored.*
 
-May 21st: 
+*May 21st*
 - Talking to **Jongyul**
   - SmartNIC research
     - NVIDIA SmartNIC load map, accelerator in the SmartNIC chip, SmartNIC for AI workload
@@ -102,33 +103,32 @@ May 21st:
   - Framework system for CXL
   - The problem of CXL research is hardware. Namsung Kim lab has it only....
 
-May 21st: 
-- *Studying CXL*
-  - CXL HW: CXL intel CPU cluster
-  - How to use it?
-    - Adding more DRAM in CXL slot
-  - Multiple machines are sharing a large pool of memory in CXL at low latency.
-  - CXL memory pool will be recognized as another numa machine
-  - CXL latency: 100ns??? don't remember exactly.
-  - CXL supports cache coherence
-    - What does it mean exactly?
-  - HotNet '23
-    - A Case Against CXL Memory Pooling (**I like this paper!**). Will CXL disappear eventually?
-    - Lesson: CXL
-  - Demistifying CXL, MICRO '23 
-  - *Lesson*
-    - In the middle of the meeting: I want to do CXL!
-    - Right after the meeting: Hmm.. SmartNIC, RDMA will not be easy and almost impossible considering the fact that I don't have background knowledge but at the same time it is not too late to change the topic.
-    - After a bit more of time: CXL will be actually pretty tricky.. hmm.. still.. possible.. 
+*May 21st*: CXL
+- CXL HW: CXL intel CPU cluster
+- How to use it?
+  - Adding more DRAM in CXL slot
+- Multiple machines are sharing a large pool of memory in CXL at low latency.
+- CXL memory pool will be recognized as another numa machine
+- CXL latency: 100ns??? don't remember exactly.
+- CXL supports cache coherence
+  - What does it mean exactly?
+- HotNet '23
+  - A Case Against CXL Memory Pooling (**I like this paper!**). Will CXL disappear eventually?
+  - Lesson: CXL
+- Demistifying CXL, MICRO '23 
+- *Lesson*
+  - In the middle of the meeting: I want to do CXL!
+  - Right after the meeting: Hmm.. SmartNIC, RDMA will not be easy and almost impossible considering the fact that I don't have background knowledge but at the same time it is not too late to change the topic.
+  - After a bit more of time: CXL will be actually pretty tricky.. hmm.. still.. possible.. 
 
-May 22nd
+*May 22nd*
 - I don't think I did any meaningful work. What did I do? Don't remember.
 
-May 23rd: **reading LDOS**
-- Two thoughts after reading LDOS
+*May 23rd*: **reading LD**
+- Two thoughts after reading LD
   - **1. This is a kind of big picture that can be a thesis. In this sense, maybe I should.**
     - Should I jump on this project?
-    - **I need to talk about it with Brighten.**
+    - **I need to talk about it with B.**
   - **[IMPORTANT] 2. It makes me think about SLATE + Cloud project more.**
     - Self-running cloud can be extension of SLATE by adding more components and solve them with machine learning.
       - Request routing component
@@ -138,7 +138,7 @@ May 23rd: **reading LDOS**
         - request reordering (timebomb)
       - Service mesh oriented autoscaler
         - Measuring instantaneous throughput in each service with the help of proxy
-        - Brighten's comment: There are autoscaler using latency as a metric. How is it different? 
+        - B's comment: There are autoscaler using latency as a metric. How is it different? 
       - Request prediction
         - Request path (call tree)
           - where is benchmark though.... 
@@ -149,11 +149,12 @@ May 23rd: **reading LDOS**
         - Same resource, same VM, but one pod is running with more noisy neighbor
     - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform.
 
-May 24th, 25th: Learning CUDA
+*May 24th, 25th*: Learning CUDA
 - Watching Stephen Jones's talk and summarizing it by myself
 - CUDA mode lecture 2,3
+- There is a separate (very messy) blog post for it. Go take a look!
 
-May 25th, Sat: Today
+*May 25th*: Today
 
 **[INTERESTING] Also, I thought about systems for AI workload**
 **LLM serving**
@@ -168,7 +169,19 @@ May 25th, Sat: Today
 **RAG system**
   - After reading some blog post and paper like
   - There are few RAG system paper though!
-    - PipeRAG and 
+    - PipeRAG and ?(there were two more)
+
+#### [IMPORTANT] What I am going to do
+1. No more arbitrary paper shopping.
+2. More likely to choose LD or SLATE
+3. SLATE
+   1. Look at May 23rd the second bullet point.
+4. LD
+  1. Needs to talk to B
+     1. What's the status
+     2. It is a large fund and I see each one having subproblem. Does it matter?
+     3. **Collaboration**?
+5. Two projects would be good. Ideally, one in SLATE and the other in ML related (LD or MLSys)
 
 #### What I learned 
 After the project is done, when you are in the phase of finding a new project intensively as a main task, **the concrete plan and deadline must be set**. Otherwise, it will be indefinite process.

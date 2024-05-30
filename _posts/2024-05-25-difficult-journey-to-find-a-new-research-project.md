@@ -12,6 +12,10 @@ Why am I writing it
 1. It is useful for me to understand what I am doing and tell if I am doing things correctly/efficiently. Right now, I am doing it in a very ad-hoc way. I don't have a roadmap.
 2. It will be useful for future me when I need to find a new project again.
 3. It might be useful for other phd students. It might resonate with other PhD students going through the same thing and let them know that it is common hardship!
+4. Also, it is useful to justify the time that I spent. Hynotize myself that it is not a waste of time! [Expecto Patronum][https://harrypotterspellscursesandcharms.fandom.com/wiki/Expecto_Patronum]!
+
+
+Alert! It is NOT organized at all. It is something like me speaking to myself randomly in a stream of consciousness. If it were handwritten, it would have been unreadable.
 
 ## Timeline
 NSDI submission: May 7th, Tue
@@ -125,7 +129,7 @@ NSDI submission: May 7th, Tue
 - I don't think I did any meaningful work. What did I do? Don't remember.
 
 *May 23rd*: **reading LD**
-- Two thoughts after reading LD
+<!-- - Two thoughts after reading LD
   - **1. This is a kind of big picture that can be a thesis. In this sense, maybe I should.**
     - Should I jump on this project?
     - **I need to talk about it with B.**
@@ -147,7 +151,7 @@ NSDI submission: May 7th, Tue
         - One pod has less resource
         - Same resource, but one pod is running in 
         - Same resource, same VM, but one pod is running with more noisy neighbor
-    - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform.
+    - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform. -->
 
 *May 24th, 25th*: Learning CUDA
 - Watching Stephen Jones's talk and summarizing it by myself

@@ -129,7 +129,8 @@ NSDI submission: May 7th, Tue
 - I don't think I did any meaningful work. What did I do? Don't remember.
 
 *May 23rd*: **reading LD**
-<!-- - Two thoughts after reading LD
+<!-- 
+- Two thoughts after reading LD
   - **1. This is a kind of big picture that can be a thesis. In this sense, maybe I should.**
     - Should I jump on this project?
     - **I need to talk about it with B.**
@@ -151,8 +152,9 @@ NSDI submission: May 7th, Tue
         - One pod has less resource
         - Same resource, but one pod is running in 
         - Same resource, same VM, but one pod is running with more noisy neighbor
-    - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform. -->
-
+    - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform.
+ -->
+ 
 *May 24th, 25th*: Learning CUDA
 - Watching Stephen Jones's talk and summarizing it by myself
 - CUDA mode lecture 2,3

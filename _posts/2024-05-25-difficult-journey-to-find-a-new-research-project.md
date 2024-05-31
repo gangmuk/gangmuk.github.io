@@ -129,31 +129,7 @@ NSDI submission: May 7th, Tue
 - I don't think I did any meaningful work. What did I do? Don't remember.
 
 *May 23rd*: **reading LD,**
-<!---
-Two thoughts after reading LD
-  - **1. This is a kind of big picture that can be a thesis. In this sense, maybe I should.**
-    - Should I jump on this project?
-    - **I need to talk about it with B.**
-  - **[IMPORTANT] 2. It makes me think about SLATE + Cloud project more.**
-    - Self-running cloud can be extension of SLATE by adding more components and solve them with machine learning.
-      - Request routing component
-        - routing
-        - circuit break
-        - adaptive concurrency
-        - request reordering (timebomb)
-      - Service mesh oriented autoscaler
-        - Measuring instantaneous throughput in each service with the help of proxy
-        - B's comment: There are autoscaler using latency as a metric. How is it different? 
-      - Request prediction
-        - Request path (call tree)
-          - where is benchmark though.... 
-      - Request routing + Autoscaler
-      - Heteorogeneous pod/vm aware routing
-        - One pod has less resource
-        - Same resource, but one pod is running in 
-        - Same resource, same VM, but one pod is running with more noisy neighbor
-    - The thing is... I don't think there are many people working on request routing in microservices.. maybe good to work... less competitive and I have SLATE implementation that can be used as a platform.
- --->
+
 
 *May 24th, 25th*: Learning CUDA
 - Watching Stephen Jones's talk and summarizing it by myself

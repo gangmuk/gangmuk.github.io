@@ -10,7 +10,9 @@ profile_picture:
 </p>
 
 <p>
-My research primarily revolves around improving performance of microservice application in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. My most recent research project focuses on designing new service mesh system to minimize end-to-end latency and monetary costs associated with large scale microservice applications in the cloud. I am actively on the lookout to work on new projects around distributed systems for machine learning. If you are interested in working with me, please don't hesitate to reach out at gangmuk2 at illinois dot edu.
+My research primarily revolves around improving performance of microservice application in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. 
+<!-- My most recent research project focuses on designing new service mesh system to minimize end-to-end latency and monetary costs associated with large scale microservice applications in the cloud.  -->
+I am actively on the lookout to work on new projects around distributed systems for machine learning. If you are interested in working with me, please don't hesitate to reach out at gangmuk2 at illinois dot edu.
 </p>
 
 <p>
@@ -32,7 +34,7 @@ Previously, I was working on building a system for machine learning applications
 ### News!
 <!-- You can add news items here -->
 <ul>
-  <li><em>Kivi</em> accepted to USENIX ATC 24'</li>
+  <li><em>Kivi</em> accepted to USENIX ATC 24' <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a></li>
   <li>Gave a talk at KubeCon 23' about <em>SLATE</em> . <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
   <li>Gave a talk at IstioCon 23' about <em>SLATE</em> </li>
 </ul>

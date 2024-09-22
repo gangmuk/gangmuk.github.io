@@ -1,3 +1,22 @@
+## To add homepage
+
+## To add new page
+add new page in ```_config.yml```
+```yaml
+header:
+  pages:
+    - name: Home
+      slug: /
+    - name: Misc
+    - name: Blog
+```
+
+## To update blog homepage
+Edit ```blog.md```
+
+## To add blog post
+
+---
 # Bay
 
 [![Version](https://img.shields.io/gem/v/bay_jekyll_theme)](https://rubygems.org/gems/bay_jekyll_theme)

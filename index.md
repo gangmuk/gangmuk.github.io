@@ -57,14 +57,14 @@ Previously, I also worked on building a resource efficient machine learning trai
 <ul>
   <li>Kivi: Verification for Cluster Management<br>
       <i><ins>Gangmuk Lim</ins>, Aditya Prerepa, Brighten Godfrey, Radhika Mittal</i><br>
-      <i>HotNets, 2024, 2024</i></li>
+      <i>HotNets 2024</i></li>
   <li>Kivi: Verification for Cluster Management<br>
       <i>Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</i><br>
-      <i>USENIX Annual Technical Conference (ATC'24), 2024</i></li>
+      <i>USENIX Annual Technical Conference, 2024</i></li>
   <li>Zico: Efficient GPU Memory Sharing for Concurrent DNN Training<br>
       <i><ins>Gangmuk Lim</ins>, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</i><br>
-      <i>USENIX Annual Technical Conference (ATC'21), 2021</i></li>
+      <i>USENIX Annual Technical Conference, 2021</i></li>
   <li>Approximate Quantiles for Data Center Telemetry Monitoring<br>
       <i><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</i><br>
-      <i>IEEE ICDE' 20 short</i></li>
+      <i>IEEE ICDE 2020 short</i></li>
 </ul>

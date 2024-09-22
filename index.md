@@ -11,6 +11,9 @@ profile_picture:
 
 <p>
 My research primarily revolves around improving performance of microservice application in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. 
+</p>
+
+<p>
 The most recent research project focuses on designing new service mesh system to minimize end-to-end latency and monetary costs associated with large scale microservice applications spanning geo-distributed multiple clusters in the cloud.
 <!-- I am actively on the lookout to work on new projects around distributed systems for machine learning. If you are interested in working with me, please don't hesitate to reach out at gangmuk2 at illinois dot edu. -->
 </p>

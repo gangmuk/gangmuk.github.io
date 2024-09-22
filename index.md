@@ -38,11 +38,11 @@ Previously, I also worked on building a resource efficient machine learning trai
 <!-- You can add news items here -->
 
 <ul>
-  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to HotNets 24' <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">paper</a></li>
-  <li><em><b>Kivi</b></em> accepted to USENIX ATC 24' <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a></li>
-  <li>Gave a talk at KubeCon 23' about <em>Kivi</em> . <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
-  <li>Gave a talk at KubeCon 23' about <em>SLATE</em> . <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
-  <li>Gave a talk at IstioCon 23' about <em>SLATE</em> </li>
+  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to HotNets 24'. <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">paper</a></li>
+  <li><em><b>Kivi</b></em> accepted to USENIX ATC 24'. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a></li>
+  <li>Gave a talk at KubeCon 23' about <em>Kivi</em>. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
+  <li>Gave a talk at KubeCon 23' about <em>SLATE</em>. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
+  <li>Gave a talk at IstioCon 23' about <em>SLATE</em>. </li>
 </ul>
 
 ### Publication

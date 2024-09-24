@@ -55,7 +55,7 @@ Previously, I also worked on building a resource efficient machine learning trai
 </style>
 
 <ul>
-  <li>Kivi: Verification for Cluster Management<br>
+  <li>Opportunities and Challenges in Service Layer Traffic Engineering<br>
       <i><ins>Gangmuk Lim</ins>, Aditya Prerepa, Brighten Godfrey, Radhika Mittal</i><br>
       <i>HotNets 2024</i></li>
   <li>Kivi: Verification for Cluster Management<br>

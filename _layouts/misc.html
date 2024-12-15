@@ -35,31 +35,14 @@
       font-size: 1em;
       color: #555;
     }
-
-    iframe {
-      margin-top: 5px;
-      max-width: 100%;
-    }
   </style>
 
-  {% for item in page.items %}
+  {% for photo in site.data.photos %}
   <div class="album-item">
-    <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" class="album-image" />
+    <img src="{{ photo.src }}" alt="{{ photo.alt }}" class="album-image" />
     <div class="album-info">
-      <h3>{{ item.title }}</h3>
-      <p>{{ item.description }}</p>
-      {% if item.video %}
-      <iframe
-        width="560"
-        height="315"
-        src="{{ item.video }}"
-        title="{{ item.title }} Video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-      {% endif %}
+      <h3>{{ photo.title }}</h3>
+      <p>{{ photo.description }}</p>
     </div>
   </div>
   {% endfor %}

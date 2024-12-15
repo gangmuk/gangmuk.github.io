@@ -12,6 +12,16 @@ items:
   - title: Surfing
     image:
       src: /assets/img/surfing.png
-      alt: Surfing
+      alt: Essaouira
     description: Surfing at Essaouira, Morocco.
+  - title: Desert
+    image:
+      src: /assets/img/sahara.png
+      alt: Sahara
+    description: Sahara desert, Morocco.
+  - title: Trekking
+    image:
+      src: /assets/img/annapurna.png
+      alt: Annapurna
+    description: Annapurna trekking, Nepal.
 ---

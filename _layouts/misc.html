@@ -1,36 +1,64 @@
-<!DOCTYPE html>
-<html>
-  {% include head.html %}
+<div class="album">
+  <style>
+    .album {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 20px;
+    }
 
-  <body>
-    {% include header.html %}
+    .album-item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      padding: 10px;
+      text-align: center;
+    }
 
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="Misc">
-          <h1 class="page-heading">{{ page.title }}</h1>
-          {{ content }}
+    .album-image {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
 
-          {% for item in page.items %}
-          <div class="work-item">
-            <img
-              src="{{ item.image.src | absolute_url }}"
-              alt="{{ item.image.alt }}"
-              class="work-bubble"
-            />
-            <span class="work-text">
-              <strong>{{ item.title }}</strong>
-              &mdash;
-              {{ item.description }}
-            </span>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
+    .album-info h3 {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+
+    .album-info p {
+      margin: 10px 0;
+      font-size: 1em;
+      color: #555;
+    }
+
+    iframe {
+      margin-top: 10px;
+      max-width: 100%;
+    }
+  </style>
+
+  {% for item in page.items %}
+  <div class="album-item">
+    <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" class="album-image" />
+    <div class="album-info">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+      {% if item.video %}
+      <iframe
+        width="560"
+        height="315"
+        src="{{ item.video }}"
+        title="{{ item.title }} Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+      {% endif %}
     </div>
-
-    {% include footer.html %}
-
-    {% include foot.html %}
-  </body>
-</html>
+  </div>
+  {% endfor %}
+</div>

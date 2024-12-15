@@ -6,15 +6,15 @@ profile_picture:
 ---
 
 <p>
- My name is Gangmuk Lim. I am a <s>2nd</s> 3rd year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
+ My name is Gangmuk Lim. I am a <s>2nd</s> 3rd year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>, and also closely working with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
 </p>
 
 <p>
-My research primarily revolves around improving performance of microservice application in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. 
+My research primarily revolves around improving performance of microservice applications in the cloud, reliability of cluster management system, and performance & resource utilization for machine learning applications. 
 </p>
 
 <p>
-The most recent research project focuses on designing new service mesh system to minimize end-to-end latency and monetary costs associated with large scale microservice applications spanning geo-distributed multiple clusters in the cloud.
+The most recent research project focuses on optimizing request routing in microservice applications to minimize end-to-end latency and egress bandwidht costs associated with large scale microservice applications spanning geo-distributed multiple clusters in the cloud.
 <!-- I am actively on the lookout to work on new projects around distributed systems for machine learning. If you are interested in working with me, please don't hesitate to reach out at gangmuk2 at illinois dot edu. -->
 </p>
 
@@ -25,11 +25,9 @@ Previously, I also worked on building a resource efficient machine learning trai
 <p>
  You can find my full CV
  <a href="http://gangmuk.github.io/cv.pdf">here</a>.<br>
-<!-- </p>
-<p> -->
-  Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.<br>
-<!-- </p>
-<p> -->
+
+Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.<br>
+
  <a href="http://linkedin.com/in/gangmuk">LinkedIn</a>, <a href="http://github.com/gangmuk">GitHub</a>
 </p>
 
@@ -38,11 +36,11 @@ Previously, I also worked on building a resource efficient machine learning trai
 <!-- You can add news items here -->
 
 <ul>
-  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to HotNets 24'. <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">paper</a></li>
-  <li><em><b>Kivi</b></em> accepted to USENIX ATC 24'. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a></li>
-  <li>Gave a talk at KubeCon 23' about <em>Kivi</em>. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
-  <li>Gave a talk at KubeCon 23' about <em>SLATE</em>. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
-  <li>Gave a talk at IstioCon 23' about <em>SLATE</em>. </li>
+  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a></li>. See you at Irvine, CA!
+  <li><em><b>Kivi</b></em> accepted to USENIX ATC '24. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a></li>
+  <li>Gave a talk at KubeCon '23 about <em>Kivi</em>. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
+  <li>Gave a talk at EnvoyCon '23 about <em>SLATE</em>. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
+  <li>Gave a talk at IstioCon '23 about <em>SLATE</em>. </li>
 </ul>
 
 ### Publication
@@ -56,7 +54,7 @@ Previously, I also worked on building a resource efficient machine learning trai
 
 <ul>
   <li>Opportunities and Challenges in Service Layer Traffic Engineering<br>
-      <i><ins>Gangmuk Lim</ins>, Aditya Prerepa, Brighten Godfrey, Radhika Mittal</i><br>
+      <i><ins>Gangmuk Lim<sup>*</sup></ins>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</i><br>
       <i>HotNets 2024</i></li>
   <li>Kivi: Verification for Cluster Management<br>
       <i>Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</i><br>

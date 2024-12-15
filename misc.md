@@ -22,11 +22,14 @@ slug: /misc
   .album-item:hover {
     transform: scale(1.05);
   }
+
   .album-item img {
     width: 100%;
-    height: auto;
-    border-bottom: 2px solid #f4f4f4;
-    padding-bottom: 100%; /* This ensures the square aspect ratio */
+    height: 0;
+    padding-bottom: 100%; /* Maintains square ratio */
+    object-fit: cover; /* Ensures image covers the square fully */
+    display: block; /* Removes inline spacing */
+    margin-bottom: 0; /* Removes gap below the image */
   }
   .album-title {
     font-size: 18px;
@@ -36,7 +39,7 @@ slug: /misc
   .album-description {
     font-size: 14px;
     color: #555;
-    margin-bottom: 8px;
+    margin-bottom: 0 0 8px;
   }
 </style>
 

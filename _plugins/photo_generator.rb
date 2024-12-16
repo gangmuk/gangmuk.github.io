@@ -5,24 +5,16 @@ module Jekyll
     
     def generate(site)
       photo_dir = File.join(site.source, 'assets', 'img', 'photos')
-      puts "Looking for photos in directory: #{photo_dir}"  # Debug line
-      
-      files = Dir.glob("#{photo_dir}/*.{jpg,png,gif,jpeg}")
-      puts "Found these files: #{files.join(', ')}"  # Debug line
-      
-      photos = files.map do |file|
+      photos = Dir.glob("#{photo_dir}/*.{jpg,png,gif,jpeg,PNG}").map do |file|
         filename = File.basename(file)
-        url = "https://gangmuk.github.io/assets/img/photos/#{filename}"
-        puts "Generated URL: #{url}"  # Debug line
-        
+        # URL encode the filename to handle special characters
+        encoded_filename = ERB::Util.url_encode(filename)
         {
-          'src' => url,
+          'src' => "https://gangmuk.github.io/assets/img/photos/#{encoded_filename}",
           'alt' => File.basename(file, File.extname(file)).capitalize,
           'title' => File.basename(file, File.extname(file)).capitalize,
         }
       end
-      
-      puts "Generated #{photos.length} photo entries"  # Debug line
       site.data['photos'] = photos
     end
   end

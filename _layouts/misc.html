@@ -39,7 +39,7 @@
 
   {% for photo in site.data.photos %}
   <div class="album-item">
-    <img src="{{ photo.src }}" alt="{{ photo.alt }}" class="album-image" />
+    <img src="{{ photo.src | relative_url }}" alt="{{ photo.alt }}" class="album-image" />
     <div class="album-info">
       <h3>{{ photo.title }}</h3>
       <p>{{ photo.description }}</p>

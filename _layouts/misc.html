@@ -37,14 +37,51 @@
     }
   </style>
 
-  {% for photo in site.data.photos %}
-  <div class="album-item">
-    <!-- <img src="{{ photo.src | relative_url }}" alt="{{ photo.alt }}" class="album-image" /> -->
-    <img src="{{ photo.src }}" alt="{{ photo.alt }}" class="album-image" onerror="console.log('Failed to load:', this.src);" />
+
+   <!-- Test with a direct image first -->
+   <div class="album-item">
+    <img src="https://gangmuk.github.io/assets/img/photos/sahara.png" alt="Sahara" class="album-image" />
     <div class="album-info">
-      <h3>{{ photo.title }}</h3>
-      <p>{{ photo.description }}</p>
+      <h3>Sahara</h3>
+      <p>Sahara Desert</p>
     </div>
   </div>
-  {% endfor %}
-</div>
+  
+  <!-- Then use the loop -->
+  {% for photo in site.data.photos %}
+  <div class="album-item">
+    <img src="{{ photo.src }}" alt="{{ photo.alt }}" class="album-image" />
+      <div class="album-info">
+        <h3>{{ photo.title }}</h3>
+        <p>{{ photo.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div style="display: none;">
+    Debug info:
+    {% if site.data.photos %}
+      Number of photos: {{ site.data.photos | size }}
+      {% for photo in site.data.photos %}
+        Photo URL: {{ photo.src }}
+      {% endfor %}
+    {% else %}
+      No photos found in site.data.photos
+    {% endif %}
+  </div>
+
+  <!--
+    {% for photo in site.data.photos %}
+    <div class="album-item">
+      <img src="{{ photo.src | relative_url }}" alt="{{ photo.alt }}" class="album-image" />
+      <img src="{{ photo.src }}" alt="{{ photo.alt }}" class="album-image" onerror="console.log('Failed to load:', this.src);" />
+      <div class="album-info">
+        <h3>{{ photo.title }}</h3>
+        <p>{{ photo.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  -->
+  

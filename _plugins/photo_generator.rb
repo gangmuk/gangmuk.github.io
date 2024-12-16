@@ -10,7 +10,6 @@ module Jekyll
             'src' => "/#{file.sub(site.source + '/', '')}",
             'alt' => File.basename(file, File.extname(file)).capitalize,
             'title' => File.basename(file, File.extname(file)).capitalize,
-            'description' => "Description for #{File.basename(file, File.extname(file)).capitalize}."
           }
         end
         site.data['photos'] = photos

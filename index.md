@@ -1,7 +1,7 @@
 ---
 layout: home
 profile_picture:
-  src: /assets/img/photos/sahara.png
+  src: profile.jpg
   alt: website picture
 ---
 

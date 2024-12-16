@@ -5,20 +5,28 @@ module Jekyll
     
     def generate(site)
       photo_dir = File.join(site.source, 'assets', 'img', 'photos')
-      photos = Dir.glob("#{photo_dir}/*.{jpg,png,gif,jpeg}").map do |file|
+      puts "Looking for photos in directory: #{photo_dir}"  # Debug line
+      
+      files = Dir.glob("#{photo_dir}/*.{jpg,png,gif,jpeg}")
+      puts "Found these files: #{files.join(', ')}"  # Debug line
+      
+      photos = files.map do |file|
         filename = File.basename(file)
-        # Use the full URL that we know works
+        url = "https://gangmuk.github.io/assets/img/photos/#{filename}"
+        puts "Generated URL: #{url}"  # Debug line
+        
         {
-          'src' => "https://gangmuk.github.io/assets/img/photos/#{filename}",
+          'src' => url,
           'alt' => File.basename(file, File.extname(file)).capitalize,
           'title' => File.basename(file, File.extname(file)).capitalize,
         }
       end
+      
+      puts "Generated #{photos.length} photo entries"  # Debug line
       site.data['photos'] = photos
     end
   end
 end
-
 
 
 # module Jekyll

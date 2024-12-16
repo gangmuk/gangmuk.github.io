@@ -7,7 +7,7 @@ module Jekyll
         photo_dir = File.join(site.source, 'assets', 'img', 'photos')
         photos = Dir.glob("#{photo_dir}/*.{jpg,png,gif,jpeg}").map do |file|
           {
-            'src' => "/#{file.sub(site.source + '/', '')}",
+            'src' => "#{site.baseurl}#{site.config['photourl']}/#{File.basename(file)}",
             'alt' => File.basename(file, File.extname(file)).capitalize,
             'title' => File.basename(file, File.extname(file)).capitalize,
           }

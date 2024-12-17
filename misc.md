@@ -66,10 +66,6 @@ items:
     src: /assets/img/photos_optimized/Dune de Pilat,France-Downhill of Dune_optimized.jpg
   title: Dune de Pilat,France Downhill of Dune
 - image:
-    alt: Ulsan,Korea Graduation
-    src: /assets/img/photos_optimized/Ulsan,Korea-Graduation_optimized.jpg
-  title: Ulsan,Korea Graduation
-- image:
     alt: Taghazout,Morocco surfing and sunset
     src: /assets/img/photos_optimized/Taghazout,Morocco-surfing and sunset_optimized.jpg
   title: Taghazout,Morocco surfing and sunset
@@ -261,6 +257,10 @@ items:
     alt: Bratislava,Slovakia trip with friends
     src: /assets/img/photos_optimized/Bratislava,Slovakia-trip with friends_optimized.jpg
   title: Bratislava,Slovakia trip with friends
+- image:
+    alt: Ulsan,Korea Graduation
+    src: /assets/img/photos_optimized/Ulsan,Korea-Graduation_optimized.jpg
+  title: Ulsan,Korea Graduation
 - image:
     alt: Annapurna,Nepal People at ABC
     src: /assets/img/photos_optimized/Annapurna,Nepal-People at ABC_optimized.jpg

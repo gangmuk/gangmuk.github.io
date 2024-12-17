@@ -1,0 +1,76 @@
+<div class="masonry-album">
+    <style>
+      .masonry-album {
+        columns: 8 200px;
+        column-gap: 8px;
+        padding: 8px;
+      }
+  
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+  
+      .masonry-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+  
+      .masonry-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+  
+      .masonry-item:hover .masonry-info {
+        opacity: 1;
+      }
+  
+      .masonry-item:hover .masonry-image {
+        transform: scale(1.02);
+      }
+  
+      .masonry-info h3 {
+        margin: 0;
+        color: white;
+        font-size: 0.9em;
+        text-align: center;
+      }
+  
+      @media (max-width: 800px) {
+        .masonry-album {
+          columns: 3 180px;
+        }
+      }
+  
+      @media (max-width: 600px) {
+        .masonry-album {
+          columns: 2 160px;
+        }
+      }
+    </style>
+  
+    {% for item in page.items %}
+      <div class="masonry-item">
+        <img 
+          src="{{ item.image.src }}" 
+          alt="{{ item.image.alt }}" 
+          class="masonry-image" 
+          loading="lazy"
+        />
+        <div class="masonry-info">
+          <h3>{{ item.title }}</h3>
+        </div>
+      </div>
+    {% endfor %}
+  </div>

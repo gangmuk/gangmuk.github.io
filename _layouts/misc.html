@@ -2,37 +2,36 @@
   <style>
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(8, 1fr);
       grid-auto-rows: 200px;
       grid-auto-flow: dense;
       gap: 8px;
       padding: 8px;
     }
-
+    
     .grid-item {
       position: relative;
       border-radius: 8px;
       overflow: hidden;
       background: #f0f0f0;
     }
-
-    .wide {
-      grid-column: span 2;
-    }
-
-    .tall {
+    
+    /* Horizontal Variations */
+    .wide-1 { grid-column: span 2; }
+    .wide-2 { grid-column: span 2; }
+    .panorama { grid-column: span 3; }
+    .ultra-panorama { grid-column: span 4; }
+    
+    /* Vertical Variations */
+    .tall-1 { grid-row: span 2; }
+    .tall-2 { grid-row: span 2; }
+    
+    /* Combined Size Variations */
+    .large-wide { 
+      grid-column: span 3;
       grid-row: span 2;
     }
-
-    .panorama {
-      grid-column: span 3;  /* Force 3-column span */
-    }
-
-    .large {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-
+    
     .grid-image {
       width: 100%;
       height: 100%;
@@ -41,11 +40,11 @@
       transition: transform 0.3s ease, opacity 0.3s ease;
       opacity: 0;
     }
-
+    
     .grid-image.loaded {
       opacity: 1;
     }
-
+    
     .grid-info {
       position: absolute;
       bottom: 0;
@@ -56,42 +55,47 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-
+    
     .grid-item:hover .grid-info {
       opacity: 1;
     }
-
+    
     .grid-item:hover .grid-image {
       transform: scale(1.02);
     }
-
+    
     .grid-info h3 {
       margin: 0;
       color: white;
       font-size: 0.9em;
       text-align: center;
     }
-
+    
     @media (max-width: 1400px) {
       .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-template-columns: repeat(6, 1fr);
         grid-auto-rows: 180px;
       }
+      .panorama { grid-column: span 3; }
+      .ultra-panorama { grid-column: span 4; }
     }
-
+    
     @media (max-width: 1000px) {
       .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: 150px;
       }
+      .wide-1, .wide-2, .panorama, .ultra-panorama { grid-column: span 2; }
+      .tall-1, .tall-2, .large-wide { grid-row: span 1; }
     }
-
+    
     @media (max-width: 600px) {
       .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: 120px;
       }
-      .wide, .tall, .large {
+      .wide-1, .wide-2, .panorama, .ultra-panorama, 
+      .tall-1, .tall-2, .large-wide { 
         grid-column: span 1;
         grid-row: span 1;
       }
@@ -121,15 +125,27 @@
     const aspectRatio = img.naturalWidth / img.naturalHeight;
     const item = document.getElementById(`item-${index}`);
     
-    // Aspect ratio based sizing
-    if (aspectRatio > 3 || img.naturalWidth > 4000) {
-      item.classList.add('panorama');  // New class
-    } else if (aspectRatio > 1.5 && aspectRatio <= 2) {
-      item.classList.add('wide');
+    // Comprehensive Image Categorization
+    if (aspectRatio > 5) {
+      item.classList.add('ultra-panorama');
+    } else if (aspectRatio > 3) {
+      item.classList.add('panorama');
+    } else if (aspectRatio > 2) {
+      item.classList.add('wide-2');
+    } else if (aspectRatio > 1.5) {
+      item.classList.add('wide-1');
+    }
+    
+    if (aspectRatio < 0.5) {
+      item.classList.add('tall-2');
     } else if (aspectRatio < 0.7) {
-      item.classList.add('tall');
-    } else if (aspectRatio > 2 || (aspectRatio > 1.5 && img.naturalWidth > 2000)) {
-      item.classList.add('large');
+      item.classList.add('tall-1');
+    }
+    
+    // Complex sizing for larger images
+    if ((aspectRatio > 1.5 && img.naturalWidth > 2500) || 
+        (aspectRatio > 1 && img.naturalWidth > 3000)) {
+      item.classList.add('large-wide');
     }
   }
 

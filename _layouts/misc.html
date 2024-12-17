@@ -1,27 +1,52 @@
-<div class="masonry-album">
+<div class="photo-grid">
   <style>
-    .masonry-album {
-      columns: 8 200px;
-      column-gap: 8px;
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: 200px;
+      grid-auto-flow: dense;
+      gap: 8px;
       padding: 8px;
     }
 
-    .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 8px;
+    .grid-item {
+      position: relative;
       border-radius: 8px;
       overflow: hidden;
-      position: relative;
+      background: #f0f0f0;
     }
 
-    .masonry-image {
+    .wide {
+      grid-column: span 2;
+    }
+
+    .tall {
+      grid-row: span 2;
+    }
+
+    .panorama {
+      grid-column: span 3;  /* Force 3-column span */
+    }
+
+    .large {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .grid-image {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
     }
 
-    .masonry-info {
+    .grid-image.loaded {
+      opacity: 1;
+    }
+
+    .grid-info {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -32,45 +57,97 @@
       transition: opacity 0.3s ease;
     }
 
-    .masonry-item:hover .masonry-info {
+    .grid-item:hover .grid-info {
       opacity: 1;
     }
 
-    .masonry-item:hover .masonry-image {
+    .grid-item:hover .grid-image {
       transform: scale(1.02);
     }
 
-    .masonry-info h3 {
+    .grid-info h3 {
       margin: 0;
       color: white;
       font-size: 0.9em;
       text-align: center;
     }
 
-    @media (max-width: 800px) {
-      .masonry-album {
-        columns: 3 180px;
+    @media (max-width: 1400px) {
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-auto-rows: 180px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-auto-rows: 150px;
       }
     }
 
     @media (max-width: 600px) {
-      .masonry-album {
-        columns: 2 160px;
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-auto-rows: 120px;
+      }
+      .wide, .tall, .large {
+        grid-column: span 1;
+        grid-row: span 1;
       }
     }
   </style>
 
   {% for item in page.items %}
-    <div class="masonry-item">
+    <div class="grid-item" id="item-{{ forloop.index }}">
       <img 
         src="{{ item.image.src }}" 
-        alt="{{ item.image.alt }}" 
-        class="masonry-image" 
+        alt="{{ item.alt }}" 
+        class="grid-image" 
         loading="lazy"
+        onload="handleImageLoad(this, '{{ forloop.index }}')"
       />
-      <div class="masonry-info">
+      <div class="grid-info">
         <h3>{{ item.title }}</h3>
       </div>
     </div>
   {% endfor %}
 </div>
+
+<script>
+  function handleImageLoad(img, index) {
+    img.classList.add('loaded');
+    
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
+    const item = document.getElementById(`item-${index}`);
+    
+    // Aspect ratio based sizing
+    if (aspectRatio > 3 || img.naturalWidth > 4000) {
+      item.classList.add('panorama');  // New class
+    } else if (aspectRatio > 1.5 && aspectRatio <= 2) {
+      item.classList.add('wide');
+    } else if (aspectRatio < 0.7) {
+      item.classList.add('tall');
+    } else if (aspectRatio > 2 || (aspectRatio > 1.5 && img.naturalWidth > 2000)) {
+      item.classList.add('large');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.grid-image');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (!img.complete) {
+            img.src = img.src;
+          }
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+  });
+</script>

@@ -147,10 +147,6 @@ items:
     src: /assets/img/photos_optimized/Inle,Myanmar-cooking_optimized.jpg
   title: Inle,Myanmar cooking
 - image:
-    alt: Yangon,Myanmar flooding scene at Yangon
-    src: /assets/img/photos_optimized/Yangon,Myanmar-flooding scene at Yangon_optimized.jpg
-  title: Yangon,Myanmar flooding scene at Yangon
-- image:
     alt: Marrakesh,Morocco Squeezing orange
     src: /assets/img/photos_optimized/Marrakesh,Morocco-Squeezing orange_optimized.jpg
   title: Marrakesh,Morocco Squeezing orange
@@ -208,10 +204,6 @@ items:
     alt: Kohtao,Thai Sairee beach1
     src: /assets/img/photos_optimized/Kohtao,Thai-Sairee beach1_optimized.jpg
   title: Kohtao,Thai Sairee beach1
-- image:
-    alt: Jeju,Korea horse on the background
-    src: /assets/img/photos_optimized/Jeju,Korea-horse on the background_optimized.jpg
-  title: Jeju,Korea horse on the background
 - image:
     alt: Fez,Morroco South Gate
     src: /assets/img/photos_optimized/Fez,Morroco-South Gate_optimized.jpg

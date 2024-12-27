@@ -417,6 +417,10 @@ items:
     alt: Bagan,Myanmar sitting on a temple2
     src: /assets/img/photos_optimized/Bagan,Myanmar-sitting on a temple2_optimized.jpg
   title: Bagan,Myanmar sitting on a temple2
+- image:
+    alt: Champaign,IL,Sunset in complete peace
+    src: /assets/img/photos_optimized/Champaign,IL,Sunset in complete peace_optimized.jpg
+  title: Champaign,IL,Sunset in complete peace
 layout: misc
 slug: /misc
 title: Life

@@ -1,3 +1,21 @@
+## GANGMUK
+
+### Misc page
+Misc is esssentially just photo gallery for now.
+run ```python generate_misc.py``` to update misc page with optimized images.
+##### how to update misc page
+1. add photos to the ```assets/img/photos``` directory
+2. what ```generate_misc.py``` does
+   1. Processes images from ```assets/img/photos``` directory
+   2. Optimizes each image by:
+     - Converting RGBA images to RGB
+     - Resizing large images while maintaining aspect ratio (max dimension: 1200px)
+     - Compressing images to stay under 500KB
+     - Saving optimized versions to ```assets/img/photos_optimized```
+   3. Generates ```misc.md``` with YAML front matter containing:
+
+
+
 ## To add homepage
 
 ## To add new page

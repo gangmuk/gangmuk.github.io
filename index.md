@@ -6,7 +6,7 @@ profile_picture:
 ---
 
 <p>
- My name is Gangmuk Lim. I am a Ph.D. candidate at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>, and also closely working with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
+ My name is Gangmuk Lim. I am a Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign, working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>, and also closely working with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. Before starting my Ph.D., I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
 </p>
 
 <p>
@@ -35,6 +35,7 @@ Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.<br>
 <!-- You can add news items here -->
 
 <ul>
+  <li>Started an internship at Serverless infrastructure team, Bytedance. Cloud-native infrastructure GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)<li>
   <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a></li>. See you at Irvine, CA!
   <li><em><b>Kivi</b></em> accepted to USENIX ATC '24. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper (Thanks to USENIX ATC for the travel grant that helped me attend!)</a></li>
   <li>Gave a talk at KubeCon '23 about <em>Kivi</em>. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>

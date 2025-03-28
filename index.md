@@ -32,19 +32,16 @@ Most likely, you can find me at Siebel building on 3rd floor at Urbana, IL.<br>
 
 
 ### News!
-<!-- You can add news items here -->
-
 <ul>
-  <li>Started an internship at Serverless infrastructure team, Bytedance. Cloud-native infrastructure GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)<li>
-  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a></li>. See you at Irvine, CA!
+  <li>Started an internship at Serverless infrastructure team, Bytedance. Cloud-native infrastructure GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)</li>
+  <li><em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a>. See you at Irvine, CA!</li>
   <li><em><b>Kivi</b></em> accepted to USENIX ATC '24. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper (Thanks to USENIX ATC for the travel grant that helped me attend!)</a></li>
   <li>Gave a talk at KubeCon '23 about <em>Kivi</em>. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
   <li>Gave a talk at EnvoyCon '23 about <em>SLATE</em>. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
-  <li>Gave a talk at IstioCon '23 about <em>SLATE</em>. </li>
+  <li>Gave a talk at IstioCon '23 about <em>SLATE</em>.</li>
 </ul>
 
 ### Publication
-<!-- You can add news items here -->
 <style>
   li br {
     margin-bottom: 0px; /* Reduces space below the break */

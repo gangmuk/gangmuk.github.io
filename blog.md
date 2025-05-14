@@ -4,5 +4,5 @@ title: Blog
 slug: /blog
 ---
 
-Under construction.
+Blog posts!
 <br />

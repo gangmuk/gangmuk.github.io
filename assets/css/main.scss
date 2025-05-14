@@ -36,9 +36,13 @@ $on-laptop: 800px;
 
 /* Custom styles for blog posts */
 .post-content {
+    /* Increase the font size for normal text */
+    font-size: 16px;
+    line-height: 1.5;
+
     h1, h2, h3, h4, h5, h6 {
       font-family: Helvetica, sans-serif;
-      font-weight: 600;
+      font-weight: 400; // Make headings bold
     }
     
     pre, code {

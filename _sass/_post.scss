@@ -35,33 +35,69 @@
 }
 
 .post-content {
-  margin-bottom: $spacing-unit;
-  font-family: Helvetica, sans-serif;
-  width: 100%;
-  h2 {
-    font-size: 32px;
-
-    @include media-query($on-mobile) {
-      font-size: 28px;
+    margin-bottom: $spacing-unit;
+    font-family: Helvetica, sans-serif;
+    width: 100%;
+    
+    /* Add specific styling for headings */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Helvetica, sans-serif; /* Make headings match content font */
+      font-weight: 600; /* Slightly bold */
     }
-  }
-
-  h3 {
-    font-size: 26px;
-
-    @include media-query($on-mobile) {
-      font-size: 22px;
+    
+    /* Existing heading sizes, which you can also adjust if needed */
+    h2 {
+      font-size: 28px; /* Reduced from 32px */
+  
+      @include media-query($on-mobile) {
+        font-size: 24px; /* Reduced from 28px */
+      }
     }
-  }
-
-  h4 {
-    font-size: 20px;
-
-    @include media-query($on-mobile) {
-      font-size: 18px;
+  
+    h3 {
+      font-size: 22px; /* Reduced from 26px */
+  
+      @include media-query($on-mobile) {
+        font-size: 20px; /* Reduced from 22px */
+      }
     }
+  
+    h4 {
+      font-size: 18px; /* Reduced from 20px */
+  
+      @include media-query($on-mobile) {
+        font-size: 16px; /* Reduced from 18px */
+      }
+    }
+
+    pre, code {
+        font-family: "Consolas", "Monaco", "Courier New", monospace;
+        font-size: 14px; /* Smaller font size for code */
+        line-height: 1.4;
+      }
+      
+      pre {
+        padding: 10px;
+        background-color: #f5f5f5; /* Lighter background for code blocks */
+        border: 1px solid #eee;
+        border-radius: 4px;
+        overflow-x: auto;
+        
+        > code {
+          border: 0;
+          padding-right: 0;
+          padding-left: 0;
+          font-size: 14px; /* Ensure consistent size */
+          background-color: transparent;
+        }
+      }
+      
+      code {
+        padding: 2px 4px;
+        background-color: #f5f5f5;
+        border-radius: 3px;
+      }
   }
-}
 
 .post-pic {
   border: #999 1px solid;

@@ -5,7 +5,10 @@ This is the story of a mysterious performance bottleneck at the intersection of 
 The Mystery: Fast Predictions, Slow Responses
 Our machine learning team built a latency prediction service using FastAPI and XGBoost with GPU acceleration. Individual predictions were blazing fast - typically 10-30ms per prediction on GPU. Yet our end-to-end request latency was 6000-8000ms - orders of magnitude slower than expected.
 Let me show you a simplified version of what our service looked like:
-pythonfrom fastapi import FastAPI
+
+
+```python
+from fastapi import FastAPI
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import xgboost as xgb
@@ -15,8 +18,11 @@ import time
 app = FastAPI()
 thread_pool = ThreadPoolExecutor(max_workers=8)
 model = xgb.XGBRegressor()  # Pretend this is loaded with our trained model
+```
 
 # Process a single prediction in a thread
+
+```python
 def process_prediction(input_data):
     # Transform input data
     df = pd.DataFrame([input_data])
@@ -30,7 +36,9 @@ def process_prediction(input_data):
         "prediction": float(prediction),
         "prediction_time_ms": prediction_time
     }
+```
 
+```python
 @app.post("/predict")
 async def predict(inputs: list[dict]):
     start_time = time.time()
@@ -53,18 +61,26 @@ async def predict(inputs: list[dict]):
         "predictions": results,
         "total_time_ms": processing_time
     }
+```
+
 Seems reasonable, right? The design makes sense:
 
 FastAPI uses asyncio for handling concurrent requests
 We're using ThreadPoolExecutor for CPU-bound prediction tasks
 We gather all predictions and return them together
 
-But when we tested it with a batch of 10 inputs, we were shocked:
+But when we tested it with a batch of 10 inputs, it was frustratingly slow:
+
+```
 Total time: 6583ms
 Prediction times: [23ms, 19ms, 28ms, 15ms, 21ms, 18ms, 16ms, 22ms, 20ms, 17ms]
+```
+
 Something was very wrong. The predictions took a total of ~200ms, but the API response took over 6 seconds!
 The Investigation: Tracing the Invisible Time
 My first thought was, "I must be missing a timestamp somewhere." So I added more detailed timing:
+
+```python
 python@app.post("/predict")
 async def predict(inputs: list[dict]):
     start_time = time.time()
@@ -99,6 +115,8 @@ async def predict(inputs: list[dict]):
         "timing": timing,
         "total_time_ms": total_time
     }
+```
+
 The new timing logs revealed something strange:
 Timing breakdown:
 - Task creation: 3ms
@@ -187,6 +205,8 @@ import concurrent.futures
 from concurrent.futures import ThreadPoolExecutor
 
 # Simulate our prediction function (takes 20ms)
+
+```python
 def mock_prediction(x):
     time.sleep(0.02)  # Simulate 20ms of work
     return x * 2
@@ -239,6 +259,7 @@ async def run_benchmarks():
     print(f"Asyncio + ThreadPoolExecutor: {sum(asyncio_times)/len(asyncio_times):.2f}ms")
     print(f"Direct ThreadPoolExecutor: {sum(direct_thread_times)/len(direct_thread_times):.2f}ms")
     print(f"Sequential Processing: {sum(sequential_times)/len(sequential_times):.2f}ms")
+```
 
 # Run the benchmarks
 asyncio.run(run_benchmarks())
@@ -258,6 +279,8 @@ The Solutions: Right Tool for the Right Job
 After discovering the root cause, I implemented several solutions and benchmarked them.
 Solution 1: Direct ThreadPoolExecutor (No Asyncio)
 The simplest fix is to avoid mixing concurrency models:
+
+```python
 python@app.post("/predict")
 def predict(inputs: list[dict]):
     start_time = time.time()
@@ -274,12 +297,15 @@ def predict(inputs: list[dict]):
         "predictions": results,
         "total_time_ms": total_time
     }
+```
+
 Note that this endpoint isn't async - and that's intentional. For CPU-bound work, we're better off without the asyncio overhead.
 Solution 2: Use a Pre-warmed Dedicated Thread Pool
 If you need to keep the async interface (e.g., for non-blocking handling of many requests), create a dedicated thread pool:
 python# Global thread pool
 prediction_pool = ThreadPoolExecutor(max_workers=16, thread_name_prefix="predict-")
 
+```python
 @app.on_event("shutdown")
 def shutdown_thread_pool():
     prediction_pool.shutdown(wait=True)
@@ -306,9 +332,13 @@ async def predict(inputs: list[dict]):
         "predictions": results,
         "total_time_ms": total_time
     }
+```
+
 This approach reduces some of the coordination overhead by using a persistent thread pool and a more direct executor interface.
 Solution 3: Batch Processing for ML Workloads
 For ML predictions specifically, batch processing is usually the most efficient approach. Instead of processing each input separately in its own thread, we can combine all inputs into a single batch and make one prediction call:
+
+```python
 python@app.post("/predict")
 async def predict_batch(inputs: list[dict]):
     start_time = time.time()
@@ -328,9 +358,13 @@ async def predict_batch(inputs: list[dict]):
         "predictions": results,
         "total_time_ms": total_time
     }
+```
+
 This approach eliminates all threading overhead and leverages the ML model's native batch processing capabilities, which are often GPU-accelerated.
 Batch Processing: The Ultimate Solution for ML Inference
-In the end, the batch processing approach proved to be the most effective. When we implemented it and ran detailed timing analysis, the results were astounding:
+In the end, the batch processing approach proved to be the most effective. When we implemented it and ran detailed timing analysis, the results were finally good:
+
+```
 2025-05-14 09:02:20,826 - INFO - requestID: 223, TS_START: 1747213340.825983, starting batch prediction request
 2025-05-14 09:02:20,826 - INFO - requestID: 223, TS_BEFORE_RECORDS: 1747213340.826060, delta: 0.08ms
 2025-05-14 09:02:20,826 - INFO - requestID: 223, TS_AFTER_RECORDS: 1747213340.826116, delta: 0.06ms, created 7 records
@@ -341,12 +375,14 @@ In the end, the batch processing approach proved to be the most effective. When 
 2025-05-14 09:02:20,837 - INFO - requestID: 223, Used Pipeline predict for ttft
 2025-05-14 09:02:20,837 - INFO - requestID: 223, TS_AFTER_TARGET_ttft: 1747213340.837649, delta: 5.24ms, predicted 7 values
 2025-05-14 09:02:20,837 - INFO - requestID: 223, TS_END: 1747213340.837729, batch predictions completed in 11ms for 7 pods
+```
+
 Compare this to our original approach:
 
 Original asyncio + ThreadPoolExecutor: 3087ms
 Batch processing approach: 11ms
 
-That's a 280x speedup!
+That's a `280x` speedup!
 The batch approach eliminates all the threading overhead:
 
 DataFrame creation takes less than 1ms

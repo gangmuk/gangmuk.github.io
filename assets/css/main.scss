@@ -37,13 +37,19 @@ $on-laptop: 800px;
 /* Custom styles for blog posts */
 .post-content {
     /* Increase the font size for normal text */
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.5;
+    color: #000
 
     h1, h2, h3, h4, h5, h6 {
       font-family: Helvetica, sans-serif;
       font-weight: 400; // Make headings bold
+      color: #000
     }
+
+    p {
+        color: #000; /* Ensure paragraphs are black too */
+      }
     
     pre, code {
       font-family: Consolas, Monaco, "Courier New", monospace;
@@ -52,17 +58,50 @@ $on-laptop: 800px;
     }
     
     pre {
-      padding: 10px;
-      background-color: #f5f5f5;
-      border: 1px solid #eee;
-      border-radius: 4px;
-      overflow-x: auto;
-      
-      > code {
-        border: 0;
-        padding: 0;
-        font-size: 14px;
-        background-color: transparent;
+        padding: 16px;
+        background-color: #f8f8f8; /* Lighter, more subtle background */
+        border: 1px solid #e8e8e8;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+        
+        > code {
+          border: 0;
+          padding: 0;
+          font-size: 14px;
+          background-color: transparent;
+          color: #333; /* Dark gray for code text */
+        }
       }
-    }
+      
+      code {
+        padding: 2px 5px;
+        background-color: #f0f0f0;
+        border-radius: 3px;
+        color: #d14; /* Reddish color for inline code */
+      }
+      
+      /* Add some syntax highlighting colors */
+      .language-python .keyword, 
+      .language-python .control,
+      .language-python .operator {
+        color: #0070c1; /* Blue for keywords */
+      }
+      
+      .language-python .string {
+        color: #a31515; /* Red for strings */
+      }
+      
+      .language-python .comment {
+        color: #008000; /* Green for comments */
+      }
+      
+      .language-python .function {
+        color: #795e26; /* Brownish for functions */
+      }
+      
+      .language-python .number {
+        color: #098658; /* Green for numbers */
+      }
   }

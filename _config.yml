@@ -10,6 +10,10 @@ photourl: "/assets/img/photos"
 og_image: /assets/img/gangmuk.png
 google_analytics: "UA-83979019-1"
 
+
+
+
+
 header:
   pages:
     - name: Home
@@ -44,6 +48,14 @@ footer:
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: python
+    css_class: 'highlight'
+    
 sass:
     style: :compressed
 plugins:

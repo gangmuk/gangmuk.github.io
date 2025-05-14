@@ -4,7 +4,7 @@ Have you ever stared at your performance logs, completely baffled about where yo
 
 The culprit? A single line of code: `await asyncio.gather(*tasks)`.
 
-This is the story of a mysterious performance bottleneck at the intersection of two popular Python concurrency models: asyncio and ThreadPoolExecutor. I'll walk you through my debugging journey, explain the fundamental mismatch between these models, and share concrete solutions with benchmark results.
+This is the story of a mysterious performance bottleneck at the intersection of two popular Python concurrency models: asyncio and ThreadPoolExecutor.
 
 ## The Mystery: Fast Predictions, Slow Responses
 
@@ -357,7 +357,7 @@ The most dramatic improvement came from batch processing, which is ideal for ML 
 
 ## Lessons Learned
 
-This debugging journey taught me several important lessons:
+Important lessons:
 
 1. **Don't blindly mix concurrency models**: Asyncio and ThreadPoolExecutor have fundamentally different designs and combining them can lead to massive overhead.
 
@@ -386,7 +386,7 @@ Here's a quick guide on when to use each concurrency model:
 
 ## Conclusion
 
-My journey from bafflement to understanding led to a 30-150x performance improvement in our prediction service. The most surprising part was that the bottleneck wasn't in our computation or GPU utilization, but in the coordination between concurrency models.
+Asyncio which I thought it wouldn't be the root cause of performance overhead was the one. It led to a 30-150x performance improvement in our prediction service. The most surprising part was that the bottleneck wasn't in our computation or GPU utilization, but in the coordination between concurrency models.
 
 When designing high-performance systems, it's critical to understand not just the individual components, but how they interact. A mismatch between concurrency models can create overhead that dwarfs the actual work being done.
 

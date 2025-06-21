@@ -73,7 +73,8 @@ def generate_misc_md():
         if photo_file.suffix.lower() in image_extensions:
             processed += 1
             print(f"\nProcessing file {processed}/{total_files}: {photo_file.name}")
-            optimized_path = optimized_dir / f"{photo_file.stem}_optimized.jpg"
+            # optimized_path = optimized_dir / f"{photo_file.stem}_optimized.jpg"
+            optimized_path = optimized_dir / f"{photo_file.stem}_optimized{photo_file.suffix}"
             
             # Optimize image if not already optimized
             if not optimized_path.exists():

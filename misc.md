@@ -2,7 +2,7 @@
 items:
 - image:
     alt: Inle,Myanmar girls biking to school
-    src: /assets/img/photos_optimized/Inle,Myanmar-girls biking to school_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-girls biking to school_optimized.jpeg
   title: Inle,Myanmar girls biking to school
 - image:
     alt: Bordeux,France lego
@@ -43,7 +43,7 @@ items:
   title: Ghent,Belgium friends in a train
 - image:
     alt: Ulsan,Korea Glaring autum leaves
-    src: /assets/img/photos_optimized/Ulsan,Korea-Glaring autum leaves_optimized.jpg
+    src: /assets/img/photos_optimized/Ulsan,Korea-Glaring autum leaves_optimized.jpeg
   title: Ulsan,Korea Glaring autum leaves
 - image:
     alt: Kunsan,Korea on the rock
@@ -55,7 +55,7 @@ items:
   title: Chefchaouen,Morroco Colors
 - image:
     alt: Kohtao,Thailand immersion
-    src: /assets/img/photos_optimized/Kohtao,Thailand-immersion_optimized.jpg
+    src: /assets/img/photos_optimized/Kohtao,Thailand-immersion_optimized.png
   title: Kohtao,Thailand immersion
 - image:
     alt: Bagan,Myanmar watching temples
@@ -75,7 +75,7 @@ items:
   title: Busan,Korea Guangan ri beach
 - image:
     alt: Annapurna,Nepal Golden tip
-    src: /assets/img/photos_optimized/Annapurna,Nepal-Golden tip_optimized.jpg
+    src: /assets/img/photos_optimized/Annapurna,Nepal-Golden tip_optimized.png
   title: Annapurna,Nepal Golden tip
 - image:
     alt: Inle Lake,Myanmar market on the Inle Lake
@@ -95,19 +95,19 @@ items:
   title: Inle,Myanmar on a boat
 - image:
     alt: Inle,Myanmar manual shipping no cart
-    src: /assets/img/photos_optimized/Inle,Myanmar-manual shipping no cart_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-manual shipping no cart_optimized.jpeg
   title: Inle,Myanmar manual shipping no cart
 - image:
     alt: Annapurna,Nepal,view 2
-    src: /assets/img/photos_optimized/Annapurna,Nepal,view-2_optimized.jpg
+    src: /assets/img/photos_optimized/Annapurna,Nepal,view-2_optimized.png
   title: Annapurna,Nepal,view 2
 - image:
     alt: Inle,Myanmar street food noodle soup cooking
-    src: /assets/img/photos_optimized/Inle,Myanmar-street food noodle soup cooking_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-street food noodle soup cooking_optimized.jpeg
   title: Inle,Myanmar street food noodle soup cooking
 - image:
     alt: Zagreb,Crotia backpack in backpacking
-    src: /assets/img/photos_optimized/Zagreb,Crotia-backpack in backpacking_optimized.jpg
+    src: /assets/img/photos_optimized/Zagreb,Crotia-backpack in backpacking_optimized.jpeg
   title: Zagreb,Crotia backpack in backpacking
 - image:
     alt: Chefchauen,Morocco Blue village panarama
@@ -115,11 +115,11 @@ items:
   title: Chefchauen,Morocco Blue village panarama
 - image:
     alt: Ulsan,Korea view from UNIST dorm
-    src: /assets/img/photos_optimized/Ulsan,Korea-view from UNIST dorm_optimized.jpg
+    src: /assets/img/photos_optimized/Ulsan,Korea-view from UNIST dorm_optimized.jpeg
   title: Ulsan,Korea view from UNIST dorm
 - image:
     alt: Ulsan,Korea UNIST engineering building
-    src: /assets/img/photos_optimized/Ulsan,Korea-UNIST engineering building_optimized.jpg
+    src: /assets/img/photos_optimized/Ulsan,Korea-UNIST engineering building_optimized.jpeg
   title: Ulsan,Korea UNIST engineering building
 - image:
     alt: Don't remember,Korea
@@ -168,7 +168,7 @@ items:
   title: Marrakesh,Morocco hand squeezed orange juice in the morning
 - image:
     alt: Ulsan,Korea Once upon a time in college
-    src: /assets/img/photos_optimized/Ulsan,Korea-Once upon a time in college_optimized.jpg
+    src: /assets/img/photos_optimized/Ulsan,Korea-Once upon a time in college_optimized.jpeg
   title: Ulsan,Korea Once upon a time in college
 - image:
     alt: Beaufort,France Alps in snow
@@ -197,7 +197,7 @@ items:
   title: Ghent,Belgium with VR headset
 - image:
     alt: Kohtao,Thai Sairee beach1
-    src: /assets/img/photos_optimized/Kohtao,Thai-Sairee beach1_optimized.jpg
+    src: /assets/img/photos_optimized/Kohtao,Thai-Sairee beach1_optimized.jpeg
   title: Kohtao,Thai Sairee beach1
 - image:
     alt: Fez,Morroco South Gate
@@ -205,15 +205,15 @@ items:
   title: Fez,Morroco South Gate
 - image:
     alt: Leogang,Austria mountain landscape1
-    src: /assets/img/photos_optimized/Leogang,Austria-mountain landscape1_optimized.jpg
+    src: /assets/img/photos_optimized/Leogang,Austria-mountain landscape1_optimized.jpeg
   title: Leogang,Austria mountain landscape1
 - image:
     alt: Leogang,Austria landscape2
-    src: /assets/img/photos_optimized/Leogang,Austria-landscape2_optimized.jpg
+    src: /assets/img/photos_optimized/Leogang,Austria-landscape2_optimized.jpeg
   title: Leogang,Austria landscape2
 - image:
     alt: Essaouira,Morocco with surfing board
-    src: /assets/img/photos_optimized/Essaouira,Morocco-with surfing board_optimized.jpg
+    src: /assets/img/photos_optimized/Essaouira,Morocco-with surfing board_optimized.png
   title: Essaouira,Morocco with surfing board
 - image:
     alt: Gosausee,Austria Gosausee like mirror
@@ -233,7 +233,7 @@ items:
   title: Varanasi,India alley in Varanasi
 - image:
     alt: Bellevue,US,bytedance office 1
-    src: /assets/img/photos_optimized/Bellevue,US,bytedance office-1_optimized.jpg
+    src: /assets/img/photos_optimized/Bellevue,US,bytedance office-1_optimized.JPG
   title: Bellevue,US,bytedance office 1
 - image:
     alt: Yangon,Myanmar Shedagon Pagoda at night
@@ -241,7 +241,7 @@ items:
   title: Yangon,Myanmar Shedagon Pagoda at night
 - image:
     alt: Riomaggiore,Italy Village on Cliff
-    src: /assets/img/photos_optimized/Riomaggiore,Italy-Village on Cliff_optimized.jpg
+    src: /assets/img/photos_optimized/Riomaggiore,Italy-Village on Cliff_optimized.jpeg
   title: Riomaggiore,Italy Village on Cliff
 - image:
     alt: Marrakesh,Morocco colors
@@ -254,7 +254,7 @@ items:
   title: Ghent,Belgium Ghentfeetsen, friends with their name in Korean
 - image:
     alt: Kohtao,Thai freediving 1
-    src: /assets/img/photos_optimized/Kohtao,Thai-freediving-1_optimized.jpg
+    src: /assets/img/photos_optimized/Kohtao,Thai-freediving-1_optimized.png
   title: Kohtao,Thai freediving 1
 - image:
     alt: Bratislava,Slovakia trip with friends
@@ -270,7 +270,7 @@ items:
   title: Annapurna,Nepal People at ABC
 - image:
     alt: Inle,Myanmar Street food roti
-    src: /assets/img/photos_optimized/Inle,Myanmar-Street food roti_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-Street food roti_optimized.jpeg
   title: Inle,Myanmar Street food roti
 - image:
     alt: Annapurna,Nepal,view1
@@ -290,19 +290,27 @@ items:
   title: Inle,Myanmar craftman on a boat house
 - image:
     alt: Bangkok,Thailand Reggae
-    src: /assets/img/photos_optimized/Bangkok,Thailand-Reggae_optimized.jpg
+    src: /assets/img/photos_optimized/Bangkok,Thailand-Reggae_optimized.png
   title: Bangkok,Thailand Reggae
+- image:
+    alt: Bellevue,US,happyhacking,macroshot
+    src: /assets/img/photos_optimized/Bellevue,US,happyhacking,macroshot_optimized.JPG
+  title: Bellevue,US,happyhacking,macroshot
 - image:
     alt: Yangon,Myanmar Golden temple
     src: /assets/img/photos_optimized/Yangon,Myanmar-Golden temple_optimized.jpg
   title: Yangon,Myanmar Golden temple
+- image:
+    alt: Bellevue,US,ibm keyboard macroshot
+    src: /assets/img/photos_optimized/Bellevue,US,ibm-keyboard-macroshot_optimized.JPG
+  title: Bellevue,US,ibm keyboard macroshot
 - image:
     alt: Leogang,Austria friends
     src: /assets/img/photos_optimized/Leogang,Austria-friends_optimized.jpg
   title: Leogang,Austria friends
 - image:
     alt: Inle,Myanmar market,fruits,lady
-    src: /assets/img/photos_optimized/Inle,Myanmar-market,fruits,lady_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-market,fruits,lady_optimized.jpeg
   title: Inle,Myanmar market,fruits,lady
 - image:
     alt: Vienna,Austria drunk
@@ -336,7 +344,7 @@ items:
   title: Essaouira,Morocco gazing on the roof
 - image:
     alt: Inle,Myanmar ladies on street
-    src: /assets/img/photos_optimized/Inle,Myanmar-ladies on street_optimized.jpg
+    src: /assets/img/photos_optimized/Inle,Myanmar-ladies on street_optimized.jpeg
   title: Inle,Myanmar ladies on street
 - image:
     alt: Kohtao,Thai freediving2
@@ -360,7 +368,7 @@ items:
   title: Sahara Desert Lying on sand
 - image:
     alt: Bellevue,US,construction view from the bytedance office 1
-    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-1_optimized.jpg
+    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-1_optimized.JPG
   title: Bellevue,US,construction view from the bytedance office 1
 - image:
     alt: Paris,France Iaeste5
@@ -399,7 +407,7 @@ items:
 - image:
     alt: Yangon,Myanmar staring man standing on yellow block
     src: /assets/img/photos_optimized/Yangon,Myanmar-staring man standing on yellow
-      block_optimized.jpg
+      block_optimized.jpeg
   title: Yangon,Myanmar staring man standing on yellow block
 - image:
     alt: Ghent,Belgium Iaeste2
@@ -415,7 +423,7 @@ items:
   title: Ostend,Belgium Iaeste4
 - image:
     alt: Bellevue,US,construction view from the bytedance office 2
-    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-2_optimized.jpg
+    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-2_optimized.JPG
   title: Bellevue,US,construction view from the bytedance office 2
 - image:
     alt: Annapurna,Nepal Gold mountain
@@ -431,7 +439,7 @@ items:
   title: Bagan,Myanmar sitting on a temple2
 - image:
     alt: Champaign,IL,Sunset in complete peace
-    src: /assets/img/photos_optimized/Champaign,IL,Sunset in complete peace_optimized.jpg
+    src: /assets/img/photos_optimized/Champaign,IL,Sunset in complete peace_optimized.png
   title: Champaign,IL,Sunset in complete peace
 layout: misc
 slug: /misc

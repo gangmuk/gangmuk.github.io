@@ -104,7 +104,7 @@
 
   {% for item in page.items %}
     <div class="grid-item" id="item-{{ forloop.index }}">
-      <a href="{{ item.image.src | replace: '_optimized', '' }}" target="_blank">
+      <a href="{{ item.image.src | replace: '_optimized.jpg', '.JPG' | replace: '_optimized.jpeg', '.jpeg' | replace: '_optimized.png', '.png' | replace: 'photos_optimized', 'photos' }}" target="_blank">
         <img 
           src="{{ item.image.src }}" 
           alt="{{ item.alt }}" 

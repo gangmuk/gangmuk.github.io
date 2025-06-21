@@ -4,6 +4,30 @@ from pathlib import Path
 from PIL import Image
 import io
 
+def cleanup_orphaned_optimized_files(photos_dir, optimized_dir):
+    """Remove optimized files that no longer have corresponding originals"""
+    print(f"\nCleaning up orphaned files in {optimized_dir}")
+    
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.PNG'}
+    cleaned_count = 0
+    
+    for optimized_file in optimized_dir.glob("*_optimized.*"):
+        # Extract original filename by removing '_optimized' suffix
+        original_stem = optimized_file.stem.replace('_optimized', '')
+        
+        # Check if any original file with this stem exists
+        original_exists = any(
+            (photos_dir / f"{original_stem}{ext}").exists() 
+            for ext in image_extensions
+        )
+        
+        if not original_exists:
+            print(f"  Removing orphaned file: {optimized_file.name}")
+            optimized_file.unlink()
+            cleaned_count += 1
+    
+    print(f"Cleaned up {cleaned_count} orphaned files")
+
 def optimize_image(image_path, max_size_kb=500):
     """Optimize image by resizing and compressing until it's under max_size_kb"""
     print(f"\nProcessing {image_path.name}:")
@@ -58,6 +82,8 @@ def generate_misc_md():
     print(f"\nCreating optimized directory: {optimized_dir}")
     optimized_dir.mkdir(exist_ok=True)
 
+    cleanup_orphaned_optimized_files(photos_dir, optimized_dir)
+    
     # List to store photo items
     items = []
     
@@ -72,12 +98,12 @@ def generate_misc_md():
     for photo_file in photos_dir.iterdir():
         if photo_file.suffix.lower() in image_extensions:
             processed += 1
-            print(f"\nProcessing file {processed}/{total_files}: {photo_file.name}")
             # optimized_path = optimized_dir / f"{photo_file.stem}_optimized.jpg"
             optimized_path = optimized_dir / f"{photo_file.stem}_optimized{photo_file.suffix}"
             
             # Optimize image if not already optimized
             if not optimized_path.exists():
+                print(f"Original input photo: {processed}/{total_files}, output: {optimized_path}")
                 try:
                     optimized_img = optimize_image(photo_file)
                     optimized_img.save(optimized_path, 'JPEG', quality=85)
@@ -86,7 +112,7 @@ def generate_misc_md():
                     print(f"Error processing {photo_file}: {e}")
                     continue
             else:
-                print("Optimized version already exists, skipping")
+                print(f"Optimized version already exists, skipping for {optimized_path}")
 
             # Create item entry with optimized image path
             item = {

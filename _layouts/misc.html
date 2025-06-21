@@ -104,13 +104,15 @@
 
   {% for item in page.items %}
     <div class="grid-item" id="item-{{ forloop.index }}">
-      <img 
-        src="{{ item.image.src }}" 
-        alt="{{ item.alt }}" 
-        class="grid-image" 
-        loading="lazy"
-        onload="handleImageLoad(this, '{{ forloop.index }}')"
-      />
+      <a href="{{ item.image.src | replace: '_optimized', '' }}" target="_blank">
+        <img 
+          src="{{ item.image.src }}" 
+          alt="{{ item.alt }}" 
+          class="grid-image" 
+          loading="lazy"
+          onload="handleImageLoad(this, '{{ forloop.index }}')"
+        />
+      </a>
       <div class="grid-info">
         <h3>{{ item.title }}</h3>
       </div>

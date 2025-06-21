@@ -98,6 +98,10 @@ items:
     src: /assets/img/photos_optimized/Inle,Myanmar-manual shipping no cart_optimized.jpg
   title: Inle,Myanmar manual shipping no cart
 - image:
+    alt: Annapurna,Nepal,view 2
+    src: /assets/img/photos_optimized/Annapurna,Nepal,view-2_optimized.jpg
+  title: Annapurna,Nepal,view 2
+- image:
     alt: Inle,Myanmar street food noodle soup cooking
     src: /assets/img/photos_optimized/Inle,Myanmar-street food noodle soup cooking_optimized.jpg
   title: Inle,Myanmar street food noodle soup cooking
@@ -121,11 +125,6 @@ items:
     alt: Don't remember,Korea
     src: /assets/img/photos_optimized/Don't remember,Korea_optimized.jpg
   title: Don't remember,Korea
-- image:
-    alt: Annapurna,Nepal Right before ABC with legendary porter
-    src: /assets/img/photos_optimized/Annapurna,Nepal-Right before ABC with legendary
-      porter_optimized.jpg
-  title: Annapurna,Nepal Right before ABC with legendary porter
 - image:
     alt: Inle,Myanmar brown Inle Lake
     src: /assets/img/photos_optimized/Inle,Myanmar-brown Inle Lake_optimized.jpg
@@ -233,6 +232,10 @@ items:
     src: /assets/img/photos_optimized/Varanasi,India-alley in Varanasi_optimized.jpg
   title: Varanasi,India alley in Varanasi
 - image:
+    alt: Bellevue,US,bytedance office 1
+    src: /assets/img/photos_optimized/Bellevue,US,bytedance office-1_optimized.jpg
+  title: Bellevue,US,bytedance office 1
+- image:
     alt: Yangon,Myanmar Shedagon Pagoda at night
     src: /assets/img/photos_optimized/Yangon,Myanmar-Shedagon Pagoda at night_optimized.jpg
   title: Yangon,Myanmar Shedagon Pagoda at night
@@ -270,9 +273,9 @@ items:
     src: /assets/img/photos_optimized/Inle,Myanmar-Street food roti_optimized.jpg
   title: Inle,Myanmar Street food roti
 - image:
-    alt: Annapurna,Nepal view1
-    src: /assets/img/photos_optimized/Annapurna,Nepal-view1_optimized.jpg
-  title: Annapurna,Nepal view1
+    alt: Annapurna,Nepal,view1
+    src: /assets/img/photos_optimized/Annapurna,Nepal,view1_optimized.jpg
+  title: Annapurna,Nepal,view1
 - image:
     alt: Quinsac,France baking cookie
     src: /assets/img/photos_optimized/Quinsac,France-baking cookie_optimized.jpg
@@ -285,10 +288,6 @@ items:
     alt: Inle,Myanmar craftman on a boat house
     src: /assets/img/photos_optimized/Inle,Myanmar-craftman on a boat house_optimized.jpg
   title: Inle,Myanmar craftman on a boat house
-- image:
-    alt: annapurna
-    src: /assets/img/photos_optimized/annapurna_optimized.jpg
-  title: annapurna
 - image:
     alt: Bangkok,Thailand Reggae
     src: /assets/img/photos_optimized/Bangkok,Thailand-Reggae_optimized.jpg
@@ -327,6 +326,11 @@ items:
     src: /assets/img/photos_optimized/Ghent,Belgium-tipsy night_optimized.jpg
   title: Ghent,Belgium tipsy night
 - image:
+    alt: Annapurna,NepalmRight before ABC with legendary porter
+    src: /assets/img/photos_optimized/Annapurna,NepalmRight before ABC with legendary
+      porter_optimized.jpg
+  title: Annapurna,NepalmRight before ABC with legendary porter
+- image:
     alt: Essaouira,Morocco gazing on the roof
     src: /assets/img/photos_optimized/Essaouira,Morocco-gazing on the roof_optimized.jpg
   title: Essaouira,Morocco gazing on the roof
@@ -354,6 +358,10 @@ items:
     alt: Sahara Desert Lying on sand
     src: /assets/img/photos_optimized/Sahara Desert-Lying on sand_optimized.jpg
   title: Sahara Desert Lying on sand
+- image:
+    alt: Bellevue,US,construction view from the bytedance office 1
+    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-1_optimized.jpg
+  title: Bellevue,US,construction view from the bytedance office 1
 - image:
     alt: Paris,France Iaeste5
     src: /assets/img/photos_optimized/Paris,France-Iaeste5_optimized.jpg
@@ -405,6 +413,10 @@ items:
     alt: Ostend,Belgium Iaeste4
     src: /assets/img/photos_optimized/Ostend,Belgium-Iaeste4_optimized.jpg
   title: Ostend,Belgium Iaeste4
+- image:
+    alt: Bellevue,US,construction view from the bytedance office 2
+    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-2_optimized.jpg
+  title: Bellevue,US,construction view from the bytedance office 2
 - image:
     alt: Annapurna,Nepal Gold mountain
     src: /assets/img/photos_optimized/Annapurna,Nepal-Gold mountain_optimized.jpg

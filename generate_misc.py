@@ -28,7 +28,7 @@ def cleanup_orphaned_optimized_files(photos_dir, optimized_dir):
     
     print(f"Cleaned up {cleaned_count} orphaned files")
 
-def optimize_image(image_path, max_size_kb=500):
+def optimize_image(image_path, max_size_kb):
     """Optimize image by resizing and compressing until it's under max_size_kb"""
     print(f"\nProcessing {image_path.name}:")
     img = Image.open(image_path)
@@ -75,7 +75,7 @@ def optimize_image(image_path, max_size_kb=500):
     print(f"  Final size: {current_size:.2f}KB")
     return img
 
-def generate_misc_md():
+def generate_misc_md(max_size_kb):
     # Path to your photos directory and optimized photos directory
     photos_dir = Path("assets/img/photos")
     optimized_dir = Path("assets/img/photos_optimized")
@@ -105,7 +105,7 @@ def generate_misc_md():
             if not optimized_path.exists():
                 print(f"Original input photo: {processed}/{total_files}, output: {optimized_path}")
                 try:
-                    optimized_img = optimize_image(photo_file)
+                    optimized_img = optimize_image(photo_file, max_size_kb)
                     optimized_img.save(optimized_path, 'JPEG', quality=85)
                     print(f"Saved optimized image to: {optimized_path}")
                 except Exception as e:
@@ -144,4 +144,9 @@ def generate_misc_md():
     print("\nFinished! misc.md has been updated.")
 
 if __name__ == "__main__":
-    generate_misc_md()
+    import sys
+    max_size_kb = sys.argv[1] if len(sys.argv) > 1 else 500
+    print(f"Max size for optimized images: {max_size_kb}KB")
+    generate_misc_md(max_size_kb)
+    print(f"Optimization done! Max size for optimized images: {max_size_kb}KB")
+    

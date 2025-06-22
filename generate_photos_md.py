@@ -97,7 +97,7 @@ def optimize_image(image_path, max_size_kb):
     print(f"  Final size: {current_size:.2f}KB")
     return img
 
-def generate_misc_md(max_size_kb):
+def generate_photos_md(max_size_kb):
     # Path to your photos directory and optimized photos directory
     photos_dir = Path("assets/img/photos")
     optimized_dir = Path("assets/img/photos_optimized")
@@ -152,29 +152,29 @@ def generate_misc_md(max_size_kb):
             }
             items.append(item)
 
-    print(f"\nGenerating misc.md with {len(items)} items")
+    print(f"\nGenerating photos.md with {len(items)} items")
     # Create front matter
     front_matter = {
-        'layout': 'misc',
+        'layout': 'photos',
         'title': 'Life',
-        'slug': '/misc',
+        'slug': '/photos',
         'items': items
     }
 
-    # Generate the misc.md content
+    # Generate the photos.md content
     content = "---\n"
     content += yaml.dump(front_matter, allow_unicode=True, default_flow_style=False)
     content += "---\n"
 
-    # Write to misc.md
-    with open('misc.md', 'w', encoding='utf-8') as f:
+    # Write to photos.md
+    with open('photos.md', 'w', encoding='utf-8') as f:
         f.write(content)
-    print("\nFinished! misc.md has been updated.")
+    print("\nFinished! photos.md has been updated.")
 
 if __name__ == "__main__":
     import sys
     max_size_kb = sys.argv[1] if len(sys.argv) > 1 else 500
     print(f"Max size for optimized images: {max_size_kb}KB")
-    generate_misc_md(max_size_kb)
+    generate_photos_md(max_size_kb)
     print(f"Optimization done! Max size for optimized images: {max_size_kb}KB")
     

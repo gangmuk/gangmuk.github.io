@@ -106,10 +106,8 @@
       z-index: 1000;
       max-width: 250px;
       text-align: center;
-      /* Remove the animation that causes movement */
       pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      /* Remove opacity and transition for instant appearance */
     }
 
     .photo-tooltip::after {
@@ -396,18 +394,14 @@
       </div>
     `;
     
-    // Position immediately
+    // Position and add to DOM immediately
     const rect = gridItem.getBoundingClientRect();
     tooltip.style.left = `${rect.left + rect.width/2}px`;
     tooltip.style.top = `${rect.top - 15}px`;
     tooltip.style.transform = 'translate(-50%, -100%)';
+    tooltip.style.opacity = '1'; // Show immediately
     
     document.body.appendChild(tooltip);
-    
-    // Fade in smoothly without movement
-    requestAnimationFrame(() => {
-      tooltip.style.opacity = '1';
-    });
   }
 
   function hideTooltip(index) {

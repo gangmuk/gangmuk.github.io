@@ -6,14 +6,11 @@ import io
 
 
 def parse_location(filename):
-    """Parse city and country from filename like 'Inle,Myanmar-description'"""
-    if ',' in filename and '-' in filename:
-        location_part = filename.split('-')[0]
-        if ',' in location_part:
-            city = location_part.split(',')[0].strip()
-            country = location_part.split(',')[1].strip()
-            return city, country
-    return None, None
+    if ',' in filename:
+        city = filename.split(',')[0].strip()
+        country = filename.split(',')[1].strip()
+        return city, country
+    return "Unknown", "Unknown"
 
 def cleanup_orphaned_optimized_files(photos_dir, optimized_dir):
     """Remove optimized files that no longer have corresponding originals"""
@@ -127,6 +124,7 @@ def generate_misc_md(max_size_kb):
 
             # Create item entry with optimized image path
             city, country = parse_location(photo_file.stem)
+            print(f"{photo_file.name}\n - City: {city}, Country: {country}")
             item = {
                 'title': photo_file.stem.replace('-', ' ').replace('_', ' '),
                 'image': {

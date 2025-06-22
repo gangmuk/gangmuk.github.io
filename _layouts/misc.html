@@ -81,48 +81,51 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     
+    /* wiggle effect on hover */
+    /* 
     .grid-item:hover {
       z-index: 10;
       animation: wiggle 0.5s ease-in-out;
-    }
-
-    /* Floating Popup textbox tooltip styles */
-    .photo-tooltip {
-      position: absolute;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      z-index: 100;
-      max-width: 250px;
-      text-align: center;
-      animation: tooltipAppear 0.3s ease-out;
-      pointer-events: none; /* This allows interactions to pass through */
-    }
-
-    .photo-tooltip::before {
-      content: '';
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 8px solid #667eea;
-    }
-
-    @keyframes tooltipAppear {
-      from { transform: translateY(10px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
 
     @keyframes wiggle {
       0%, 100% { transform: rotate(0deg); }
       25% { transform: rotate(1deg); }
       75% { transform: rotate(-1deg); }
+    }
+    */
+
+    /* Floating Popup textbox tooltip styles */
+    .photo-tooltip {
+      position: fixed;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 250px;
+      text-align: center;
+      animation: tooltipAppear 0.3s ease-out;
+      pointer-events: none;
+    }
+
+    .photo-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 12px solid #764ba2;
+    }
+
+    @keyframes tooltipAppear {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .tooltip-location {
@@ -334,77 +337,72 @@
 
   }
 
-// Photo click handling
-let activeTooltips = new Set();
+  // Photo click handling
+  let activeTooltips = new Set();
 
-function handlePhotoClick(index) {
-  const items = {{ page.items | jsonify }};
-  const item = items[index - 1];
-  const gridItem = document.getElementById(`item-${index}`);
-  
-  if (activeTooltips.has(index)) {
-    // Second click - open original photo
-    const originalSrc = item.image.src.replace('_optimized', '');
-    window.open(originalSrc, '_blank');
-  } else {
-    // First click - show tooltip
-    showTooltip(item, index, gridItem);
-    activeTooltips.add(index);
+  function handlePhotoClick(index) {
+    const items = {{ page.items | jsonify }};
+    const item = items[index - 1];
+    const gridItem = document.getElementById(`item-${index}`);
     
-    // Auto-hide tooltip after 5 seconds
-    setTimeout(() => {
-      hideTooltip(index);
-    }, 5000);
+    if (activeTooltips.has(index)) {
+      // Second click - open original photo
+      const originalSrc = item.image.src.replace('_optimized', '');
+      window.open(originalSrc, '_blank');
+    } else {
+      // First click - clear all tooltips, then show new one
+      clearAllTooltips();
+      showTooltip(item, index, gridItem);
+      activeTooltips.add(index);
+      
+      // Auto-hide tooltip after 5 seconds
+      setTimeout(() => {
+        hideTooltip(index);
+      }, 5000);
+    }
   }
-}
 
-function showTooltip(item, index, gridItem) {
-  // Remove existing tooltip for this item
-  hideTooltip(index);
-  
-  // Create tooltip
-  const tooltip = document.createElement('div');
-  tooltip.className = 'photo-tooltip';
-  tooltip.id = `tooltip-${index}`;
-  tooltip.innerHTML = `
-    <div class="tooltip-location">
-      📍 ${item.city || 'Unknown City'}, ${item.country || 'Unknown Country'}
-    </div>
-    <div class="tooltip-sentiment">
-      ${item.sentiment || 'A beautiful moment captured! ✨'}
-    </div>
-    <div class="tooltip-hint">
-      💡 Click again to view full size
-    </div>
-  `;
-  
-  // Position tooltip above the photo
-  const rect = gridItem.getBoundingClientRect();
-  tooltip.style.position = 'fixed';
-  tooltip.style.left = `${rect.left + rect.width/2}px`;
-  tooltip.style.top = `${rect.top - 10}px`;
-  tooltip.style.transform = 'translate(-50%, -100%)';
-  
-  document.body.appendChild(tooltip);
-}
-
-function hideTooltip(index) {
-  const tooltip = document.getElementById(`tooltip-${index}`);
-  if (tooltip) {
-    tooltip.remove();
-    activeTooltips.delete(index);
+  function clearAllTooltips() {
+    // Remove all existing tooltips
+    document.querySelectorAll('.photo-tooltip').forEach(tooltip => tooltip.remove());
+    activeTooltips.clear();
   }
-}
 
-// Hide tooltips when scrolling
-window.addEventListener('scroll', () => {
-  activeTooltips.forEach(index => hideTooltip(index));
-});
+  function showTooltip(item, index, gridItem) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'photo-tooltip';
+    tooltip.id = `tooltip-${index}`;
+    tooltip.innerHTML = `
+      <div class="tooltip-location">
+        📍 ${item.city || 'Unknown City'}, ${item.country || 'Unknown Country'}
+      </div>
+      <div class="tooltip-sentiment">
+        ${item.sentiment || 'A beautiful moment captured! ✨'}
+      </div>
+      <div class="tooltip-hint">
+        💡 Click again to view full size
+      </div>
+    `;
+    
+    // Position tooltip above the photo (speech bubble pointing down to photo)
+    const rect = gridItem.getBoundingClientRect();
+    tooltip.style.left = `${rect.left + rect.width/2}px`;
+    tooltip.style.top = `${rect.top - 15}px`;
+    tooltip.style.transform = 'translate(-50%, -100%)';
+    
+    document.body.appendChild(tooltip);
+  }
 
-// Hide tooltips when window is resized
-window.addEventListener('resize', () => {
-  activeTooltips.forEach(index => hideTooltip(index));
-});
+  function hideTooltip(index) {
+    const tooltip = document.getElementById(`tooltip-${index}`);
+    if (tooltip) {
+      tooltip.remove();
+      activeTooltips.delete(index);
+    }
+  }
 
+  // Hide tooltips when scrolling or resizing
+  window.addEventListener('scroll', clearAllTooltips);
+  window.addEventListener('resize', clearAllTooltips);
 
 </script>

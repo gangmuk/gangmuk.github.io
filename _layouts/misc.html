@@ -106,8 +106,10 @@
       z-index: 1000;
       max-width: 250px;
       text-align: center;
-      animation: tooltipAppear 0.3s ease-out;
+      /* Remove the animation that causes movement */
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .photo-tooltip::after {
@@ -394,13 +396,18 @@
       </div>
     `;
     
-    // Position tooltip above the photo (speech bubble pointing down to photo)
+    // Position immediately
     const rect = gridItem.getBoundingClientRect();
     tooltip.style.left = `${rect.left + rect.width/2}px`;
     tooltip.style.top = `${rect.top - 15}px`;
     tooltip.style.transform = 'translate(-50%, -100%)';
     
     document.body.appendChild(tooltip);
+    
+    // Fade in smoothly without movement
+    requestAnimationFrame(() => {
+      tooltip.style.opacity = '1';
+    });
   }
 
   function hideTooltip(index) {

@@ -69,7 +69,7 @@
     }
     
 
-    
+    /* zoom on hover effect */
     .grid-item:hover .grid-info {
       opacity: 1;
     }
@@ -86,6 +86,62 @@
       animation: wiggle 0.5s ease-in-out;
     }
 
+    /* Popup styles */
+    .photo-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 350px;
+      text-align: center;
+      animation: popupAppear 0.3s ease-out;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes popupAppear {
+      from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .popup-location {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .popup-sentiment {
+      font-size: 1em;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .popup-hint {
+      font-size: 0.8em;
+      opacity: 0.8;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      padding-top: 15px;
+    }
     
 
     .grid-image {
@@ -136,8 +192,8 @@
   </style>
 
   {% for item in page.items %}
-    <div class="grid-item" id="item-{{ forloop.index }}">
-      <a href="{{ item.image.src | replace: '_optimized', '' }}" target="_blank">
+    <div class="grid-item" id="item-{{ forloop.index }}" data-index="{{ forloop.index }}">
+      <div class="photo-wrapper" onclick="handlePhotoClick({{ forloop.index }})">
         <img 
           src="{{ item.image.src }}" 
           alt="{{ item.alt }}" 
@@ -145,7 +201,7 @@
           loading="lazy"
           onload="handleImageLoad(this, '{{ forloop.index }}')"
         />
-      </a>
+      </div>
       <div class="grid-info">
         <h3>{{ item.title }}</h3>
       </div>
@@ -290,5 +346,65 @@ function initializeFilters() {
 
 // Initialize filters when page loads
 document.addEventListener('DOMContentLoaded', initializeFilters);
+
+// Photo click handling
+let clickedPhotoIndex = null;
+
+function handlePhotoClick(index) {
+  const items = {{ page.items | jsonify }};
+  const item = items[index - 1]; // Arrays are 0-indexed
+  
+  if (clickedPhotoIndex === index) {
+    // Second click - open original photo
+    const originalSrc = item.image.src.replace('_optimized', '');
+    window.open(originalSrc, '_blank');
+    closePopup();
+  } else {
+    // First click - show popup
+    showPopup(item, index);
+    clickedPhotoIndex = index;
+  }
+}
+
+function showPopup(item, index) {
+  // Remove existing popup
+  closePopup();
+  
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'popup-overlay';
+  overlay.onclick = closePopup;
+  
+  // Create popup
+  const popup = document.createElement('div');
+  popup.className = 'photo-popup';
+  popup.innerHTML = `
+    <div class="popup-location">
+      📍 ${item.city || 'Unknown City'}, ${item.country || 'Unknown Country'}
+    </div>
+    <div class="popup-sentiment">
+      ${item.sentiment || 'A beautiful moment captured! ✨'}
+    </div>
+    <div class="popup-hint">
+      💡 Click the photo again to view full size
+    </div>
+  `;
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(popup);
+}
+
+function closePopup() {
+  const overlay = document.querySelector('.popup-overlay');
+  const popup = document.querySelector('.photo-popup');
+  if (overlay) overlay.remove();
+  if (popup) popup.remove();
+  clickedPhotoIndex = null;
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePopup();
+});
 
 </script>

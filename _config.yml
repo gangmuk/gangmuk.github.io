@@ -18,8 +18,8 @@ header:
   pages:
     - name: Home
       slug: /
-    - name: Misc
-    # - name: Work
+    - name: Photos
+      # slug: /photos
     - name: Blog
 
 footer:

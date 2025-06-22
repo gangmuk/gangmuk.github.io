@@ -4,6 +4,20 @@ from pathlib import Path
 from PIL import Image
 import io
 
+def generate_sentiment(filename):
+    """Generate a cute sentiment/description for the photo"""
+    # Simple placeholder - you can make this more sophisticated later
+    sentiments = [
+        "What a magical moment! ✨",
+        "This brings back wonderful memories 💭",
+        "Adventure awaits around every corner 🌟",
+        "Life is beautiful in all its forms 🌸",
+        "Capturing the essence of wanderlust 🗺️",
+        "A picture worth a thousand stories 📚",
+        "Finding beauty in everyday moments ☀️",
+        "Travel feeds the soul 🌍"
+    ]
+    return sentiments[hash(filename) % len(sentiments)]
 
 def parse_location(filename):
     if ',' in filename:
@@ -124,7 +138,8 @@ def generate_misc_md(max_size_kb):
 
             # Create item entry with optimized image path
             city, country = parse_location(photo_file.stem)
-            print(f"{photo_file.name}\n - City: {city}, Country: {country}")
+            sentiment = generate_sentiment(photo_file.stem)
+            print(f"{photo_file.name}\n - City: {city}, Country: {country}, Sentiment: {sentiment}")
             item = {
                 'title': photo_file.stem.replace('-', ' ').replace('_', ' '),
                 'image': {
@@ -132,7 +147,8 @@ def generate_misc_md(max_size_kb):
                     'alt': photo_file.stem.replace('-', ' ').replace('_', ' ')
                 },
                 'city': city,
-                'country': country
+                'country': country,
+                'sentiment': sentiment,
             }
             items.append(item)
 

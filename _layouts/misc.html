@@ -86,73 +86,67 @@
       animation: wiggle 0.5s ease-in-out;
     }
 
-    /* Popup styles */
-    .photo-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    /* Floating Popup textbox tooltip styles */
+    .photo-tooltip {
+      position: absolute;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      z-index: 1000;
-      max-width: 350px;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 100;
+      max-width: 250px;
       text-align: center;
-      animation: popupAppear 0.3s ease-out;
+      animation: tooltipAppear 0.3s ease-out;
+      pointer-events: none; /* This allows interactions to pass through */
     }
 
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-      animation: fadeIn 0.3s ease-out;
+    .photo-tooltip::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #667eea;
     }
 
-    @keyframes popupAppear {
-      from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    @keyframes tooltipAppear {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(1deg); }
+      75% { transform: rotate(-1deg); }
     }
 
-    .popup-location {
-      font-size: 1.2em;
+    .tooltip-location {
+      font-size: 1em;
       font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .tooltip-sentiment {
+      font-size: 0.9em;
+      font-style: italic;
       margin-bottom: 10px;
     }
 
-    .popup-sentiment {
-      font-size: 1em;
-      font-style: italic;
-      margin-bottom: 15px;
-    }
-
-    .popup-hint {
-      font-size: 0.8em;
+    .tooltip-hint {
+      font-size: 0.7em;
       opacity: 0.8;
       border-top: 1px solid rgba(255,255,255,0.3);
-      padding-top: 15px;
+      padding-top: 8px;
     }
+
+
     
 
-    .grid-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-    
     .grid-info h3 {
       margin: 0;
       color: white;
@@ -256,59 +250,9 @@
     });
 
     images.forEach(img => imageObserver.observe(img));
-  });
 
-
-  // Add filtering functionality
-function initializeFilters() {
-  const items = {%- assign items_json = page.items | jsonify -%}{{ items_json }};
-  
-  // Populate dropdowns
-  const countries = [...new Set(items.filter(item => item.country).map(item => item.country))].sort();
-  const cities = [...new Set(items.filter(item => item.city).map(item => item.city))].sort();
-  
-  const countrySelect = document.getElementById('country-filter');
-  const citySelect = document.getElementById('city-filter');
-  
-  countries.forEach(country => {
-    const option = document.createElement('option');
-    option.value = option.textContent = country;
-    countrySelect.appendChild(option);
-  });
-  
-  cities.forEach(city => {
-    const option = document.createElement('option');
-    option.value = option.textContent = city;
-    citySelect.appendChild(option);
-  });
-  
-  // Filter function
-  function filterPhotos() {
-    const searchTerm = document.getElementById('search-input').value.toLowerCase();
-    const selectedCountry = document.getElementById('country-filter').value;
-    const selectedCity = document.getElementById('city-filter').value;
-    
-    document.querySelectorAll('.grid-item').forEach((item, index) => {
-      const itemData = items[index];
-      const title = itemData.title.toLowerCase();
-      
-      const matchesSearch = !searchTerm || title.includes(searchTerm);
-      const matchesCountry = !selectedCountry || itemData.country === selectedCountry;
-      const matchesCity = !selectedCity || itemData.city === selectedCity;
-      
-      item.style.display = (matchesSearch && matchesCountry && matchesCity) ? 'block' : 'none';
-    });
-  }
-  
-  // Event listeners
-  document.getElementById('search-input').addEventListener('input', filterPhotos);
-  document.getElementById('country-filter').addEventListener('change', filterPhotos);
-  document.getElementById('city-filter').addEventListener('change', filterPhotos);
-  document.getElementById('clear-filters').addEventListener('click', () => {
-    document.getElementById('search-input').value = '';
-    document.getElementById('country-filter').value = '';
-    document.getElementById('city-filter').value = '';
-    filterPhotos();
+    initializeFilters();
+    initializeRandomPhoto(); // Call the function here
   });
 
   // Random photo functionality
@@ -336,75 +280,131 @@ function initializeFilters() {
     });
   }
 
-  // Initialize both features
-  document.addEventListener('DOMContentLoaded', function() {
-    initializeFilters();
-    initializeRandomPhoto();
-  });
+  // Add filtering functionality
+  function initializeFilters() {
+    const items = {%- assign items_json = page.items | jsonify -%}{{ items_json }};
+    
+    // Populate dropdowns
+    const countries = [...new Set(items.filter(item => item.country).map(item => item.country))].sort();
+    const cities = [...new Set(items.filter(item => item.city).map(item => item.city))].sort();
+    
+    const countrySelect = document.getElementById('country-filter');
+    const citySelect = document.getElementById('city-filter');
+    
+    countries.forEach(country => {
+      const option = document.createElement('option');
+      option.value = option.textContent = country;
+      countrySelect.appendChild(option);
+    });
+    
+    cities.forEach(city => {
+      const option = document.createElement('option');
+      option.value = option.textContent = city;
+      citySelect.appendChild(option);
+    });
+    
+    // Filter function
+    function filterPhotos() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const selectedCountry = document.getElementById('country-filter').value;
+      const selectedCity = document.getElementById('city-filter').value;
+      
+      document.querySelectorAll('.grid-item').forEach((item, index) => {
+        const itemData = items[index];
+        const title = itemData.title.toLowerCase();
+        
+        const matchesSearch = !searchTerm || title.includes(searchTerm);
+        const matchesCountry = !selectedCountry || itemData.country === selectedCountry;
+        const matchesCity = !selectedCity || itemData.city === selectedCity;
+        
+        item.style.display = (matchesSearch && matchesCountry && matchesCity) ? 'block' : 'none';
+      });
+    }
+    
+    // Event listeners
+    document.getElementById('search-input').addEventListener('input', filterPhotos);
+    document.getElementById('country-filter').addEventListener('change', filterPhotos);
+    document.getElementById('city-filter').addEventListener('change', filterPhotos);
+    document.getElementById('clear-filters').addEventListener('click', () => {
+      document.getElementById('search-input').value = '';
+      document.getElementById('country-filter').value = '';
+      document.getElementById('city-filter').value = '';
+      filterPhotos();
+    });
 
-}
-
-// Initialize filters when page loads
-document.addEventListener('DOMContentLoaded', initializeFilters);
+  }
 
 // Photo click handling
-let clickedPhotoIndex = null;
+let activeTooltips = new Set();
 
 function handlePhotoClick(index) {
   const items = {{ page.items | jsonify }};
-  const item = items[index - 1]; // Arrays are 0-indexed
+  const item = items[index - 1];
+  const gridItem = document.getElementById(`item-${index}`);
   
-  if (clickedPhotoIndex === index) {
+  if (activeTooltips.has(index)) {
     // Second click - open original photo
     const originalSrc = item.image.src.replace('_optimized', '');
     window.open(originalSrc, '_blank');
-    closePopup();
   } else {
-    // First click - show popup
-    showPopup(item, index);
-    clickedPhotoIndex = index;
+    // First click - show tooltip
+    showTooltip(item, index, gridItem);
+    activeTooltips.add(index);
+    
+    // Auto-hide tooltip after 5 seconds
+    setTimeout(() => {
+      hideTooltip(index);
+    }, 5000);
   }
 }
 
-function showPopup(item, index) {
-  // Remove existing popup
-  closePopup();
+function showTooltip(item, index, gridItem) {
+  // Remove existing tooltip for this item
+  hideTooltip(index);
   
-  // Create overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'popup-overlay';
-  overlay.onclick = closePopup;
-  
-  // Create popup
-  const popup = document.createElement('div');
-  popup.className = 'photo-popup';
-  popup.innerHTML = `
-    <div class="popup-location">
+  // Create tooltip
+  const tooltip = document.createElement('div');
+  tooltip.className = 'photo-tooltip';
+  tooltip.id = `tooltip-${index}`;
+  tooltip.innerHTML = `
+    <div class="tooltip-location">
       📍 ${item.city || 'Unknown City'}, ${item.country || 'Unknown Country'}
     </div>
-    <div class="popup-sentiment">
+    <div class="tooltip-sentiment">
       ${item.sentiment || 'A beautiful moment captured! ✨'}
     </div>
-    <div class="popup-hint">
-      💡 Click the photo again to view full size
+    <div class="tooltip-hint">
+      💡 Click again to view full size
     </div>
   `;
   
-  document.body.appendChild(overlay);
-  document.body.appendChild(popup);
+  // Position tooltip above the photo
+  const rect = gridItem.getBoundingClientRect();
+  tooltip.style.position = 'fixed';
+  tooltip.style.left = `${rect.left + rect.width/2}px`;
+  tooltip.style.top = `${rect.top - 10}px`;
+  tooltip.style.transform = 'translate(-50%, -100%)';
+  
+  document.body.appendChild(tooltip);
 }
 
-function closePopup() {
-  const overlay = document.querySelector('.popup-overlay');
-  const popup = document.querySelector('.photo-popup');
-  if (overlay) overlay.remove();
-  if (popup) popup.remove();
-  clickedPhotoIndex = null;
+function hideTooltip(index) {
+  const tooltip = document.getElementById(`tooltip-${index}`);
+  if (tooltip) {
+    tooltip.remove();
+    activeTooltips.delete(index);
+  }
 }
 
-// Close popup on escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closePopup();
+// Hide tooltips when scrolling
+window.addEventListener('scroll', () => {
+  activeTooltips.forEach(index => hideTooltip(index));
 });
+
+// Hide tooltips when window is resized
+window.addEventListener('resize', () => {
+  activeTooltips.forEach(index => hideTooltip(index));
+});
+
 
 </script>

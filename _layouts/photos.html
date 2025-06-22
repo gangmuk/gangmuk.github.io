@@ -1,5 +1,12 @@
 <!-- photos.html -->
 
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    {% include header.html %}
+
+
 <div class="search-controls" style="margin-bottom: 20px; text-align: center;">
   <input type="text" id="search-input" placeholder="Search photos..." style="margin-right: 10px; padding: 8px;">
   <select id="country-filter" style="margin-right: 10px; padding: 8px;">
@@ -188,6 +195,9 @@
         grid-row: span 1;
       }
     }
+
+
+    
   </style>
 
   {% for item in page.items %}
@@ -418,3 +428,10 @@
   window.addEventListener('resize', clearAllTooltips);
 
 </script>
+
+
+
+{% include footer.html %}
+{% include foot.html %}
+</body>
+</html>

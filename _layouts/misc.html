@@ -352,11 +352,10 @@
         // .replace('_optimized', '');             // Remove _optimized from filename
       
       // Handle extension differences (jpg vs JPG, etc.)
-      if (originalSrc.includes('.jpg')) {
-        // Try .JPG first, then fall back to .jpg
-        const jpgVersion = originalSrc.replace('.jpg', '.JPG');
-        originalSrc = jpgVersion;
-      }
+      // if (originalSrc.includes('.jpg')) {
+      //  const jpgVersion = originalSrc.replace('.jpg', '.JPG');
+      //  originalSrc = jpgVersion;
+      // }
       
       window.open(originalSrc, '_blank');
     } else {

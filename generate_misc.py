@@ -4,6 +4,17 @@ from pathlib import Path
 from PIL import Image
 import io
 
+
+def parse_location(filename):
+    """Parse city and country from filename like 'Inle,Myanmar-description'"""
+    if ',' in filename and '-' in filename:
+        location_part = filename.split('-')[0]
+        if ',' in location_part:
+            city = location_part.split(',')[0].strip()
+            country = location_part.split(',')[1].strip()
+            return city, country
+    return None, None
+
 def cleanup_orphaned_optimized_files(photos_dir, optimized_dir):
     """Remove optimized files that no longer have corresponding originals"""
     print(f"\nCleaning up orphaned files in {optimized_dir}")
@@ -115,12 +126,15 @@ def generate_misc_md(max_size_kb):
                 print(f"Optimized version already exists, skipping for {optimized_path}")
 
             # Create item entry with optimized image path
+            city, country = parse_location(photo_file.stem)
             item = {
                 'title': photo_file.stem.replace('-', ' ').replace('_', ' '),
                 'image': {
                     'src': f"/assets/img/photos_optimized/{optimized_path.name}",
                     'alt': photo_file.stem.replace('-', ' ').replace('_', ' ')
-                }
+                },
+                'city': city,
+                'country': country
             }
             items.append(item)
 

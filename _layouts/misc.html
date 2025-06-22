@@ -1,3 +1,14 @@
+<div class="search-controls" style="margin-bottom: 20px; text-align: center;">
+  <input type="text" id="search-input" placeholder="Search photos..." style="margin-right: 10px; padding: 8px;">
+  <select id="country-filter" style="margin-right: 10px; padding: 8px;">
+    <option value="">All Countries</option>
+  </select>
+  <select id="city-filter" style="margin-right: 10px; padding: 8px;">
+    <option value="">All Cities</option>
+  </select>
+  <button id="clear-filters" style="padding: 8px 15px;">Clear All</button>
+</div>
+
 <div class="photo-grid">
   <style>
     .photo-grid {
@@ -168,4 +179,62 @@
 
     images.forEach(img => imageObserver.observe(img));
   });
+
+
+  // Add filtering functionality
+function initializeFilters() {
+  const items = {%- assign items_json = page.items | jsonify -%}{{ items_json }};
+  
+  // Populate dropdowns
+  const countries = [...new Set(items.filter(item => item.country).map(item => item.country))].sort();
+  const cities = [...new Set(items.filter(item => item.city).map(item => item.city))].sort();
+  
+  const countrySelect = document.getElementById('country-filter');
+  const citySelect = document.getElementById('city-filter');
+  
+  countries.forEach(country => {
+    const option = document.createElement('option');
+    option.value = option.textContent = country;
+    countrySelect.appendChild(option);
+  });
+  
+  cities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = option.textContent = city;
+    citySelect.appendChild(option);
+  });
+  
+  // Filter function
+  function filterPhotos() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const selectedCountry = document.getElementById('country-filter').value;
+    const selectedCity = document.getElementById('city-filter').value;
+    
+    document.querySelectorAll('.grid-item').forEach((item, index) => {
+      const itemData = items[index];
+      const title = itemData.title.toLowerCase();
+      
+      const matchesSearch = !searchTerm || title.includes(searchTerm);
+      const matchesCountry = !selectedCountry || itemData.country === selectedCountry;
+      const matchesCity = !selectedCity || itemData.city === selectedCity;
+      
+      item.style.display = (matchesSearch && matchesCountry && matchesCity) ? 'block' : 'none';
+    });
+  }
+  
+  // Event listeners
+  document.getElementById('search-input').addEventListener('input', filterPhotos);
+  document.getElementById('country-filter').addEventListener('change', filterPhotos);
+  document.getElementById('city-filter').addEventListener('change', filterPhotos);
+  document.getElementById('clear-filters').addEventListener('click', () => {
+    document.getElementById('search-input').value = '';
+    document.getElementById('country-filter').value = '';
+    document.getElementById('city-filter').value = '';
+    filterPhotos();
+  });
+}
+
+// Initialize filters when page loads
+document.addEventListener('DOMContentLoaded', initializeFilters);
+
 </script>

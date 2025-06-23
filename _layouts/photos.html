@@ -309,21 +309,23 @@
     
     if (aspectRatio > 5) {
       item.classList.add('ultra-panorama');
-    } else if (aspectRatio > 3) {
+    } 
+    else if (aspectRatio > 3) {
       item.classList.add('panorama');
-    } else if (aspectRatio > 2) {
+    } 
+    else if (aspectRatio > 2) {
       item.classList.add('wide-2');
-    } else if (aspectRatio > 1.5) {
+    } 
+    else if (aspectRatio > 1.5) {
       item.classList.add('wide-1');
     }
-    
-    if (aspectRatio < 0.5) {
+    else if (aspectRatio < 0.5) {
       item.classList.add('tall-2');
-    } else if (aspectRatio < 0.7) {
+    } 
+    else if (aspectRatio < 0.7) {
       item.classList.add('tall-1');
     }
-    
-    if ((aspectRatio > 1.5 && img.naturalWidth > 2500) || 
+    else if ((aspectRatio > 1.5 && img.naturalWidth > 2500) || 
         (aspectRatio > 1 && img.naturalWidth > 3000)) {
       item.classList.add('large-wide');
     }

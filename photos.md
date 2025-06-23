@@ -128,13 +128,6 @@ items:
       and magic wagon.PNG
   sentiment: This brings back wonderful memories 💭
   title: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
-- city: Seattle
-  country: WA
-  image:
-    alt: Seattle,WA,you dont need anything just run
-    src: /assets/img/photos_optimized/Seattle,WA,you dont need anything just run.jpg
-  sentiment: A picture worth a thousand stories 📚
-  title: Seattle,WA,you dont need anything just run
 - city: Leogang
   country: Austria
   image:

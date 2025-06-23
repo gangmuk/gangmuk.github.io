@@ -198,6 +198,59 @@
 
 
     
+    /* Bling bling effect for surprise me */
+    @keyframes blingBling {
+      0% { 
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+        transform: scale(1);
+      }
+      25% { 
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0.5), 
+                    0 0 20px 5px rgba(255, 215, 0, 0.8);
+        transform: scale(1.02);
+      }
+      50% { 
+        box-shadow: 0 0 0 20px rgba(0, 123, 255, 0.3), 
+                    0 0 40px 10px rgba(255, 215, 0, 0.6),
+                    0 0 60px 15px rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+      }
+      75% { 
+        box-shadow: 0 0 0 30px rgba(0, 123, 255, 0.1), 
+                    0 0 60px 20px rgba(255, 215, 0, 0.4);
+        transform: scale(1.02);
+      }
+      100% { 
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        transform: scale(1);
+      }
+    }
+
+    .bling-effect {
+      animation: blingBling 2s ease-in-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    /* Sparkle particles */
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+      100% { opacity: 0; transform: scale(0) rotate(360deg); }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(45deg, #ffd700, #ffff00);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1001;
+    }
+
+
+
   </style>
 
   {% for item in page.items %}
@@ -270,7 +323,6 @@
     initializeRandomPhoto(); // Call the function here
   });
 
-  // Random photo functionality
   function initializeRandomPhoto() {
     document.getElementById('random-photo').addEventListener('click', () => {
       const visibleItems = Array.from(document.querySelectorAll('.grid-item')).filter(item => 
@@ -287,12 +339,66 @@
         block: 'center' 
       });
       
-      // Add a highlight effect
-      randomItem.style.boxShadow = '0 0 20px #007bff';
+      // Wait longer for scroll to complete, then add effects
       setTimeout(() => {
-        randomItem.style.boxShadow = '';
-      }, 2000);
+        randomItem.classList.add('bling-effect');
+        
+        // Create sparkle particles
+        createSparkles(randomItem);
+        
+        // Wait a bit more, then show tooltip after scroll is definitely done
+        setTimeout(() => {
+          const index = parseInt(randomItem.dataset.index);
+          const items = {%- assign items_json = page.items | jsonify -%}{{ items_json }};
+          const item = items[index - 1];
+          
+          // Always clear all tooltips first
+          clearAllTooltips();
+          
+          // Force show the tooltip with updated position
+          showTooltip(item, index, randomItem);
+          activeTooltips.add(index);
+          
+          console.log('Final tooltip attempt for index:', index);
+        }, 200); // Additional delay for tooltip positioning
+        
+        // Remove effects after animation
+        setTimeout(() => {
+          randomItem.classList.remove('bling-effect');
+          hideTooltip(index);
+        }, 3000);
+        
+      }, 1000); // Increased delay to ensure scroll completes
     });
+  }
+  
+  function createSparkles(element) {
+    const rect = element.getBoundingClientRect();
+    const numSparkles = 8;
+    
+    for (let i = 0; i < numSparkles; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      
+      // Random position around the element
+      const angle = (i / numSparkles) * 2 * Math.PI;
+      const radius = 60 + Math.random() * 40;
+      const x = rect.left + rect.width/2 + Math.cos(angle) * radius;
+      const y = rect.top + rect.height/2 + Math.sin(angle) * radius;
+      
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      sparkle.style.animation = `sparkle 1.5s ease-out ${i * 0.1}s`;
+      
+      document.body.appendChild(sparkle);
+      
+      // Remove sparkle after animation
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.parentNode.removeChild(sparkle);
+        }
+      }, 1500 + (i * 100));
+    }
   }
 
   // Add filtering functionality
@@ -390,6 +496,8 @@
   }
 
   function showTooltip(item, index, gridItem) {
+    console.log('showTooltip called with:', { item, index, gridItem });
+    
     const tooltip = document.createElement('div');
     tooltip.className = 'photo-tooltip';
     tooltip.id = `tooltip-${index}`;
@@ -407,12 +515,22 @@
     
     // Position and add to DOM immediately
     const rect = gridItem.getBoundingClientRect();
+    console.log('Grid item rect:', rect);
+    
     tooltip.style.left = `${rect.left + rect.width/2}px`;
     tooltip.style.top = `${rect.top - 15}px`;
     tooltip.style.transform = 'translate(-50%, -100%)';
     tooltip.style.opacity = '1'; // Show immediately
+    tooltip.style.zIndex = '9999'; // Make sure it's on top
+    
+    console.log('Tooltip styles:', {
+      left: tooltip.style.left,
+      top: tooltip.style.top,
+      opacity: tooltip.style.opacity
+    });
     
     document.body.appendChild(tooltip);
+    console.log('Tooltip added to DOM:', tooltip);
   }
 
   function hideTooltip(index) {

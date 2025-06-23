@@ -453,7 +453,7 @@
       citySelect.appendChild(option);
     });
     
-    // Filter function
+    // Filter function search function, search bar
     function filterPhotos() {
       const searchTerm = document.getElementById('search-input').value.toLowerCase();
       const selectedCountry = document.getElementById('country-filter').value;
@@ -462,8 +462,12 @@
       document.querySelectorAll('.grid-item').forEach((item, index) => {
         const itemData = items[index];
         const title = itemData.title.toLowerCase();
+        const objects = (itemData.objects || '').toLowerCase(); // Add objects field to search
         
-        const matchesSearch = !searchTerm || title.includes(searchTerm);
+        // Search in both title and objects fields
+        const matchesSearch = !searchTerm || 
+                             title.includes(searchTerm) || 
+                             objects.includes(searchTerm);
         const matchesCountry = !selectedCountry || itemData.country === selectedCountry;
         const matchesCity = !selectedCity || itemData.city === selectedCity;
         

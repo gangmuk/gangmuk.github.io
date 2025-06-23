@@ -6,7 +6,7 @@ items:
     alt: Renton,WA,our usual table looking
     src: /assets/img/photos_optimized/Renton,WA,our usual table looking.jpg
   objects: cup,bowl,bottle,person,laptop,chair,dining table,laptop,chair,bottle,fork
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: What a magical moment! ✨
   title: Renton,WA,our usual table looking
 - city: Seattle
   country: WA
@@ -14,7 +14,7 @@ items:
     alt: Seattle,WA,me on the mirror with leica q
     src: /assets/img/photos_optimized/Seattle,WA,me on the mirror with leica q.JPG
   objects: person,car,fire hydrant
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Finding beauty in everyday moments ☀️
   title: Seattle,WA,me on the mirror with leica q
 - city: Renton
   country: WA
@@ -22,7 +22,7 @@ items:
     alt: Renton,WA,it was nice sunday
     src: /assets/img/photos_optimized/Renton,WA,it was nice sunday.jpg
   objects: person,laptop,chair,laptop,chair,chair,cell phone
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: What a magical moment! ✨
   title: Renton,WA,it was nice sunday
 - city: Annapurna
   country: Nepal
@@ -30,7 +30,7 @@ items:
     alt: Annapurna,Nepal,view,2
     src: /assets/img/photos_optimized/Annapurna,Nepal,view,2.png
   objects: None
-  sentiment: This brings back wonderful memories 💭
+  sentiment: What a magical moment! ✨
   title: Annapurna,Nepal,view,2
 - city: Kohtao
   country: Thailand
@@ -38,7 +38,7 @@ items:
     alt: Kohtao,Thailand,immersion
     src: /assets/img/photos_optimized/Kohtao,Thailand,immersion.png
   objects: person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: What a magical moment! ✨
   title: Kohtao,Thailand,immersion
 - city: Ulsan
   country: Korea
@@ -46,7 +46,7 @@ items:
     alt: Ulsan,Korea,UNIST engineering building
     src: /assets/img/photos_optimized/Ulsan,Korea,UNIST engineering building.jpeg
   objects: person,person,person,person,person,person,person,person,person,person,person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Ulsan,Korea,UNIST engineering building
 - city: Essaouira
   country: Morocco
@@ -54,7 +54,7 @@ items:
     alt: Essaouira,Morocco,with surfing board
     src: /assets/img/photos_optimized/Essaouira,Morocco,with surfing board.png
   objects: person,surfboard,person,person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Essaouira,Morocco,with surfing board
 - city: Sanjose
   country: CA
@@ -62,7 +62,7 @@ items:
     alt: Sanjose,CA,trying not to miss workout
     src: /assets/img/photos_optimized/Sanjose,CA,trying not to miss workout.jpg
   objects: person,handbag
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Sanjose,CA,trying not to miss workout
 - city: Paris
   country: France
@@ -71,7 +71,7 @@ items:
     src: /assets/img/photos_optimized/Paris,France,chilling in front of the Eiffel
       tower with friends.jpg
   objects: person,person,person,person,person,backpack,handbag
-  sentiment: Travel feeds the soul 🌍
+  sentiment: What a magical moment! ✨
   title: Paris,France,chilling in front of the Eiffel tower with friends
 - city: Beaufort
   country: France
@@ -79,7 +79,7 @@ items:
     alt: Beaufort,France,Alps in snow
     src: /assets/img/photos_optimized/Beaufort,France,Alps in snow.jpg
   objects: person
-  sentiment: What a magical moment! ✨
+  sentiment: This brings back wonderful memories 💭
   title: Beaufort,France,Alps in snow
 - city: Renton
   country: WA
@@ -95,7 +95,7 @@ items:
     alt: Kunsan,Korea,on the rock
     src: /assets/img/photos_optimized/Kunsan,Korea,on the rock.jpg
   objects: person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Life is beautiful in all its forms 🌸
   title: Kunsan,Korea,on the rock
 - city: Essaouira
   country: Morocco
@@ -103,7 +103,7 @@ items:
     alt: Essaouira,Morocco,step toward unknown world
     src: /assets/img/photos_optimized/Essaouira,Morocco,step toward unknown world.jpg
   objects: person,surfboard
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Essaouira,Morocco,step toward unknown world
 - city: Sanjose
   country: CA
@@ -111,7 +111,7 @@ items:
     alt: Sanjose,CA,hard to wake up
     src: /assets/img/photos_optimized/Sanjose,CA,hard to wake up.jpg
   objects: bed,person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Sanjose,CA,hard to wake up
 - city: Inle
   country: Myanmar
@@ -127,7 +127,7 @@ items:
     alt: Gosausee,Austria,Gosausee like mirror
     src: /assets/img/photos_optimized/Gosausee,Austria,Gosausee like mirror.jpg
   objects: None
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Gosausee,Austria,Gosausee like mirror
 - city: Seattle
   country: WA
@@ -135,7 +135,7 @@ items:
     alt: Seattle,WA,pike place tea shop
     src: /assets/img/photos_optimized/Seattle,WA,pike place tea shop.jpg
   objects: person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: What a magical moment! ✨
   title: Seattle,WA,pike place tea shop
 - city: Seattle
   country: WA
@@ -144,7 +144,7 @@ items:
     src: /assets/img/photos_optimized/Seattle,WA,inspiring purple sorcerer with tiger
       and magic wagon.PNG
   objects: person,person,dog,dog
-  sentiment: What a magical moment! ✨
+  sentiment: Travel feeds the soul 🌍
   title: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
 - city: Leogang
   country: Austria
@@ -152,7 +152,7 @@ items:
     alt: Leogang,Austria,mountain landscape1
     src: /assets/img/photos_optimized/Leogang,Austria,mountain landscape1.jpeg
   objects: None
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Leogang,Austria,mountain landscape1
 - city: Renton
   country: WA
@@ -160,7 +160,7 @@ items:
     alt: Renton,WA,mom reading books and me working unnecessarily
     src: /assets/img/photos_optimized/Renton,WA,mom reading books and me working unnecessarily.jpg
   objects: book,cup,person,bowl,cup,bottle,dining table,fork,knife,chair,spoon
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Renton,WA,mom reading books and me working unnecessarily
 - city: Busan
   country: Korea
@@ -168,7 +168,7 @@ items:
     alt: Busan,Korea,Guangan ri beach
     src: /assets/img/photos_optimized/Busan,Korea,Guangan-ri beach.jpg
   objects: umbrella,person,umbrella,person,person,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,person,umbrella,umbrella,umbrella,umbrella,person,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella,umbrella
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Busan,Korea,Guangan ri beach
 - city: Ghent
   country: Belgium
@@ -177,7 +177,7 @@ items:
     src: /assets/img/photos_optimized/Ghent,Belgium,Ghentfeetsen, friends with their
       name in Korean.jpg
   objects: person,person,person,cake,cake
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Finding beauty in everyday moments ☀️
   title: Ghent,Belgium,Ghentfeetsen, friends with their name in Korean
 - city: Seattle
   country: WA
@@ -185,7 +185,7 @@ items:
     alt: Seattle,WA,cute snack with mom
     src: /assets/img/photos_optimized/Seattle,WA,cute snack with mom.JPG
   objects: bowl,bowl,spoon,spoon,fork,cup,sandwich,knife,dining table,sandwich
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Life is beautiful in all its forms 🌸
   title: Seattle,WA,cute snack with mom
 - city: Sanjose
   country: CA
@@ -201,7 +201,7 @@ items:
     alt: Dune de Pilat,France,Downhill of Dune
     src: /assets/img/photos_optimized/Dune de Pilat,France,Downhill of Dune.jpg
   objects: person,person,person,person,person,person,person,person,person,person,person,person,person,person
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: This brings back wonderful memories 💭
   title: Dune de Pilat,France,Downhill of Dune
 - city: Chiangmai
   country: Thailand
@@ -209,7 +209,7 @@ items:
     alt: Chiangmai,Thailand,street and cat
     src: /assets/img/photos_optimized/Chiangmai,Thailand,street and cat.jpg
   objects: cat,bowl,refrigerator,dog
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: A picture worth a thousand stories 📚
   title: Chiangmai,Thailand,street and cat
 - city: Bagan
   country: Myanmar
@@ -226,7 +226,7 @@ items:
     src: /assets/img/photos_optimized/Seattle,WA,broombroom first time e schooter
       fo.jpg
   objects: person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Travel feeds the soul 🌍
   title: Seattle,WA,broombroom first time e schooter fo
 - city: Ghent
   country: Belgium
@@ -234,7 +234,7 @@ items:
     alt: Ghent,Belgium,friends and smiles
     src: /assets/img/photos_optimized/Ghent,Belgium,friends and smiles.jpg
   objects: person,person,person,person,person,person,backpack,backpack
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Travel feeds the soul 🌍
   title: Ghent,Belgium,friends and smiles
 - city: Seattle
   country: WA
@@ -242,7 +242,7 @@ items:
     alt: Seattle,WA,chair bag and laptop at greenlake
     src: /assets/img/photos_optimized/Seattle,WA,chair bag and laptop at greenlake.JPG
   objects: chair,person,backpack,person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Finding beauty in everyday moments ☀️
   title: Seattle,WA,chair bag and laptop at greenlake
 - city: Renton
   country: WA
@@ -258,7 +258,7 @@ items:
     alt: Bordeux,France,lego
     src: /assets/img/photos_optimized/Bordeux,France,lego.jpg
   objects: person,person,person,person,person,cake,cake,person,cake,person,backpack,person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Travel feeds the soul 🌍
   title: Bordeux,France,lego
 - city: Jeju
   country: Korea
@@ -266,7 +266,7 @@ items:
     alt: Jeju,Korea,Flaming sunset before typoon
     src: /assets/img/photos_optimized/Jeju,Korea,Flaming sunset before typoon.jpg
   objects: None
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Jeju,Korea,Flaming sunset before typoon
 - city: Renton
   country: WA
@@ -275,7 +275,7 @@ items:
     src: /assets/img/photos_optimized/Renton,WA,Cleaning fallen leaves and branches
       on snoopy pj.jpg
   objects: person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Life is beautiful in all its forms 🌸
   title: Renton,WA,Cleaning fallen leaves and branches on snoopy pj
 - city: Yangon
   country: Myanmar
@@ -284,7 +284,7 @@ items:
     src: /assets/img/photos_optimized/Yangon,Myanmar,staring man standing on yellow
       block.jpeg
   objects: person,person,person,person,car,car,car
-  sentiment: Travel feeds the soul 🌍
+  sentiment: This brings back wonderful memories 💭
   title: Yangon,Myanmar,staring man standing on yellow block
 - city: Bagan
   country: Myanmar
@@ -292,7 +292,7 @@ items:
     alt: Bagan,Myanmar,sitting on a temple2
     src: /assets/img/photos_optimized/Bagan,Myanmar,sitting on a temple2.jpg
   objects: person
-  sentiment: What a magical moment! ✨
+  sentiment: Travel feeds the soul 🌍
   title: Bagan,Myanmar,sitting on a temple2
 - city: Seattle
   country: WA
@@ -301,7 +301,7 @@ items:
     src: /assets/img/photos_optimized/Seattle,WA,weirdly peaceful and harmonious two
       people on a bench.JPG
   objects: person,backpack,person,bench,cell phone,book,person,person
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Adventure awaits around every corner 🌟
   title: Seattle,WA,weirdly peaceful and harmonious two people on a bench
 - city: Chefchaouen
   country: Morocco
@@ -309,7 +309,7 @@ items:
     alt: Chefchaouen,Morocco,on the hill
     src: /assets/img/photos_optimized/Chefchaouen,Morocco,on the hill.jpg
   objects: person,backpack
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Finding beauty in everyday moments ☀️
   title: Chefchaouen,Morocco,on the hill
 - city: Ghent
   country: Belgium
@@ -317,7 +317,7 @@ items:
     alt: Ghent,Belgium,Playing violin
     src: /assets/img/photos_optimized/Ghent,Belgium,Playing violin.jpg
   objects: person,person,person,person,umbrella,person,umbrella,handbag,suitcase,umbrella,suitcase,cup
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: Adventure awaits around every corner 🌟
   title: Ghent,Belgium,Playing violin
 - city: Essaouira
   country: Morocco
@@ -325,7 +325,7 @@ items:
     alt: Essaouira,Morocco,gazing on the roof
     src: /assets/img/photos_optimized/Essaouira,Morocco,gazing on the roof.jpg
   objects: person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: This brings back wonderful memories 💭
   title: Essaouira,Morocco,gazing on the roof
 - city: Ulsan
   country: Korea
@@ -333,7 +333,7 @@ items:
     alt: Ulsan,Korea,Glaring autum leaves
     src: /assets/img/photos_optimized/Ulsan,Korea,Glaring autum leaves.jpeg
   objects: car,truck
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: This brings back wonderful memories 💭
   title: Ulsan,Korea,Glaring autum leaves
 - city: Sanjose
   country: CA
@@ -341,7 +341,7 @@ items:
     alt: Sanjose,CA,lazy on comforter
     src: /assets/img/photos_optimized/Sanjose,CA,lazy on comforter.jpg
   objects: person,bed
-  sentiment: What a magical moment! ✨
+  sentiment: Finding beauty in everyday moments ☀️
   title: Sanjose,CA,lazy on comforter
 - city: Sanjose
   country: CA
@@ -349,7 +349,7 @@ items:
     alt: Sanjose,CA,here is water
     src: /assets/img/photos_optimized/Sanjose,CA,here is water.JPG
   objects: person,cup
-  sentiment: This brings back wonderful memories 💭
+  sentiment: A picture worth a thousand stories 📚
   title: Sanjose,CA,here is water
 - city: Paris
   country: France
@@ -357,7 +357,7 @@ items:
     alt: Paris,France,Iaeste5
     src: /assets/img/photos_optimized/Paris,France,Iaeste5.jpg
   objects: person,person,person,person,person,person,person,person,person,person,person
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: A picture worth a thousand stories 📚
   title: Paris,France,Iaeste5
 - city: Ulsan
   country: Korea
@@ -365,7 +365,7 @@ items:
     alt: Ulsan,Korea,view from UNIST dorm
     src: /assets/img/photos_optimized/Ulsan,Korea,view from UNIST dorm.jpeg
   objects: None
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Adventure awaits around every corner 🌟
   title: Ulsan,Korea,view from UNIST dorm
 - city: Marrakesh
   country: Morocco
@@ -381,7 +381,7 @@ items:
     alt: Chefchauen,Morocco,Blue village panarama
     src: /assets/img/photos_optimized/Chefchauen,Morocco,Blue village panarama.jpg
   objects: None
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Chefchauen,Morocco,Blue village panarama
 - city: Ostend
   country: Belgium
@@ -389,7 +389,7 @@ items:
     alt: Ostend,Belgium,Iaeste4
     src: /assets/img/photos_optimized/Ostend,Belgium,Iaeste4.jpg
   objects: person,person,person,person,person,backpack
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Finding beauty in everyday moments ☀️
   title: Ostend,Belgium,Iaeste4
 - city: Ghent
   country: Belgium
@@ -397,7 +397,7 @@ items:
     alt: Ghent,Belgium,Are you crazy at Reneta's apt
     src: /assets/img/photos_optimized/Ghent,Belgium,Are you crazy at Reneta's apt.jpg
   objects: tv,person,laptop
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Ghent,Belgium,Are you crazy at Reneta's apt
 - city: Inle Lake
   country: Myanmar
@@ -405,7 +405,7 @@ items:
     alt: Inle Lake,Myanmar,market on the Inle Lake
     src: /assets/img/photos_optimized/Inle Lake,Myanmar,market on the Inle Lake.jpg
   objects: person,person,person,person,person,person,handbag,person,cup,person,person,person,person,handbag,person,person,bowl,person,cup,person,person,person,bowl,person,handbag
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Travel feeds the soul 🌍
   title: Inle Lake,Myanmar,market on the Inle Lake
 - city: Ghent
   country: Belgium
@@ -413,7 +413,7 @@ items:
     alt: Ghent,Belgium,Iaeste2
     src: /assets/img/photos_optimized/Ghent,Belgium,Iaeste2.jpg
   objects: person,person,person,person,person,person,person,person,person,person,chair,person,person,person,person,person,person,person,person,person,person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: What a magical moment! ✨
   title: Ghent,Belgium,Iaeste2
 - city: Ulsan
   country: Korea
@@ -421,7 +421,7 @@ items:
     alt: Ulsan,Korea,Graduation
     src: /assets/img/photos_optimized/Ulsan,Korea,Graduation.jpg
   objects: person
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Adventure awaits around every corner 🌟
   title: Ulsan,Korea,Graduation
 - city: Ghent
   country: Belgium
@@ -429,7 +429,7 @@ items:
     alt: Ghent,Belgium,Iaeste3
     src: /assets/img/photos_optimized/Ghent,Belgium,Iaeste3.jpg
   objects: person,person,person,person,person,person,person,motorcycle,person,bicycle,person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Ghent,Belgium,Iaeste3
 - city: Sanjose
   country: CA
@@ -447,7 +447,7 @@ items:
       in seattle.JPG
   objects: chair,person,chair,person,person,dining table,cup,chair,person,person,person,chair,person,dining
     table,person,person,backpack
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: This brings back wonderful memories 💭
   title: Seattle,WA,Zoka uvilleage my favorite place in seattle
 - city: Annapurna
   country: Nepal
@@ -465,7 +465,7 @@ items:
     src: /assets/img/photos_optimized/Renton,WA,hotdog at costco with mom.jpg
   objects: person,cup,person,cup,person,bench,person,person,bench,umbrella,dining
     table,hot dog,person,bench,person,person,person,hot dog,dining table,dining table,person,bench,person,bench
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: Adventure awaits around every corner 🌟
   title: Renton,WA,hotdog at costco with mom
 - city: Bellevue
   country: US
@@ -473,7 +473,7 @@ items:
     alt: Bellevue,US,ibm,keyboard macroshot
     src: /assets/img/photos_optimized/Bellevue,US,ibm,keyboard-macroshot.JPG
   objects: keyboard
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: Travel feeds the soul 🌍
   title: Bellevue,US,ibm,keyboard macroshot
 - city: Sanjose
   country: CA
@@ -481,7 +481,7 @@ items:
     alt: Sanjose,CA,hmm what bagel should I get
     src: /assets/img/photos_optimized/Sanjose,CA,hmm what bagel should I get.JPG
   objects: person,person,person,bottle,chair,refrigerator,bottle,bottle,person,refrigerator,bottle,refrigerator,bottle,person
-  sentiment: What a magical moment! ✨
+  sentiment: Finding beauty in everyday moments ☀️
   title: Sanjose,CA,hmm what bagel should I get
 - city: Gosausee
   country: Austria
@@ -489,7 +489,7 @@ items:
     alt: Gosausee,Austria,crystal clean see
     src: /assets/img/photos_optimized/Gosausee,Austria,crystal clean see.jpg
   objects: None
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Gosausee,Austria,crystal clean see
 - city: Bagna
   country: Myanmar
@@ -505,7 +505,7 @@ items:
     alt: Inle,Myanmar,girls biking to school
     src: /assets/img/photos_optimized/Inle,Myanmar,girls biking to school.jpeg
   objects: bicycle,bicycle,person,person,backpack,backpack
-  sentiment: This brings back wonderful memories 💭
+  sentiment: A picture worth a thousand stories 📚
   title: Inle,Myanmar,girls biking to school
 - city: Seattle
   country: WA
@@ -513,7 +513,7 @@ items:
     alt: Seattle,WA,my very first fishing
     src: /assets/img/photos_optimized/Seattle,WA,my very first fishing.JPG
   objects: person,person,bird,person,car,cup,person
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: This brings back wonderful memories 💭
   title: Seattle,WA,my very first fishing
 - city: Chefchaouen
   country: Morroco
@@ -521,7 +521,7 @@ items:
     alt: Chefchaouen,Morroco,Colors
     src: /assets/img/photos_optimized/Chefchaouen,Morroco,Colors.jpg
   objects: scissors,toothbrush,toothbrush,bowl
-  sentiment: This brings back wonderful memories 💭
+  sentiment: A picture worth a thousand stories 📚
   title: Chefchaouen,Morroco,Colors
 - city: Bellevue
   country: US
@@ -529,7 +529,7 @@ items:
     alt: Bellevue,US,construction,view from the bytedance office 1
     src: /assets/img/photos_optimized/Bellevue,US,construction,view-from-the-bytedance-office-1.JPG
   objects: person,person,car,car
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Bellevue,US,construction,view from the bytedance office 1
 - city: Ghent
   country: Belgium
@@ -537,7 +537,7 @@ items:
     alt: Ghent,Belgium,with VR headset
     src: /assets/img/photos_optimized/Ghent,Belgium,with VR headset.jpg
   objects: person,tv,tv,cup,tv,tv
-  sentiment: Travel feeds the soul 🌍
+  sentiment: What a magical moment! ✨
   title: Ghent,Belgium,with VR headset
 - city: Inle
   country: Myanmar
@@ -545,7 +545,7 @@ items:
     alt: Inle,Myanmar,manual shipping no cart
     src: /assets/img/photos_optimized/Inle,Myanmar,manual shipping no cart.jpeg
   objects: truck,truck,truck,person,bench,suitcase,chair,truck,person
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Travel feeds the soul 🌍
   title: Inle,Myanmar,manual shipping no cart
 - city: Ghent
   country: Belgium
@@ -553,7 +553,7 @@ items:
     alt: Ghent,Belgium,Iaeste Brazil night
     src: /assets/img/photos_optimized/Ghent,Belgium,Iaeste Brazil night.jpg
   objects: person,person,chair,person,person,person,person,person,person,person,person,person,kite,person,person,person,person,person,person,person
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Finding beauty in everyday moments ☀️
   title: Ghent,Belgium,Iaeste Brazil night
 - city: Zagreb
   country: Crotia
@@ -561,7 +561,7 @@ items:
     alt: Zagreb,Crotia,backpack in backpacking
     src: /assets/img/photos_optimized/Zagreb,Crotia,backpack in backpacking.jpeg
   objects: handbag,backpack
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Zagreb,Crotia,backpack in backpacking
 - city: Leogang
   country: Austria
@@ -585,7 +585,7 @@ items:
     alt: Jiri mountain,Korea
     src: /assets/img/photos_optimized/Jiri mountain,Korea.jpg
   objects: backpack,person,bench,person,backpack
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Travel feeds the soul 🌍
   title: Jiri mountain,Korea
 - city: Chefchaouen
   country: Morocco
@@ -593,7 +593,7 @@ items:
     alt: Chefchaouen,Morocco,mountain sunny day
     src: /assets/img/photos_optimized/Chefchaouen,Morocco,mountain sunny day.jpg
   objects: person,person,person,person,person,person,person,person,person,person,person,person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Chefchaouen,Morocco,mountain sunny day
 - city: Sanjose
   country: CA
@@ -601,7 +601,7 @@ items:
     alt: Sanjose,CA,biting the best bagel in SJ
     src: /assets/img/photos_optimized/Sanjose,CA,biting the best bagel in SJ.JPG
   objects: person,handbag,person,person,person,person,person,person,banana,handbag
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Sanjose,CA,biting the best bagel in SJ
 - city: Bellevue
   country: US
@@ -609,7 +609,7 @@ items:
     alt: Bellevue,US,construction,view from the bytedance office 2
     src: /assets/img/photos_optimized/Bellevue,US,construction,view-from-the-bytedance-office-2.JPG
   objects: truck,truck
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Bellevue,US,construction,view from the bytedance office 2
 - city: Fez
   country: Morroco
@@ -617,7 +617,7 @@ items:
     alt: Fez,Morroco,South Gate
     src: /assets/img/photos_optimized/Fez,Morroco,South Gate.jpg
   objects: person,person,person,person,person,person,person,car,person,person,person,person,person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Finding beauty in everyday moments ☀️
   title: Fez,Morroco,South Gate
 - city: Bagan
   country: Myanmar
@@ -625,7 +625,7 @@ items:
     alt: Bagan,Myanmar,Lonely temple in Bagan
     src: /assets/img/photos_optimized/Bagan,Myanmar,Lonely temple in Bagan.jpg
   objects: None
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Adventure awaits around every corner 🌟
   title: Bagan,Myanmar,Lonely temple in Bagan
 - city: Renton
   country: WA
@@ -633,7 +633,7 @@ items:
     alt: Renton,WA,working home sunday in a cozy house
     src: /assets/img/photos_optimized/Renton,WA,working home sunday in a cozy house.jpg
   objects: laptop,book,person,laptop,chair,bottle,cup
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Renton,WA,working home sunday in a cozy house
 - city: Sanfrancisco
   country: CA
@@ -641,7 +641,7 @@ items:
     alt: Sanfrancisco,CA,AIBrix meetup
     src: /assets/img/photos_optimized/Sanfrancisco,CA,AIBrix meetup.JPG
   objects: person,person,laptop,tv
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Life is beautiful in all its forms 🌸
   title: Sanfrancisco,CA,AIBrix meetup
 - city: Bangkok
   country: Thailand
@@ -649,7 +649,7 @@ items:
     alt: Bangkok,Thailand,Reggae
     src: /assets/img/photos_optimized/Bangkok,Thailand,Reggae.png
   objects: person,person,bottle,bottle,bottle,bottle
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Adventure awaits around every corner 🌟
   title: Bangkok,Thailand,Reggae
 - city: Seattle
   country: WA
@@ -657,7 +657,7 @@ items:
     alt: Seattle,WA,obedient posture at chilly weather
     src: /assets/img/photos_optimized/Seattle,WA,obedient posture at chilly weather.jpg
   objects: person
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: What a magical moment! ✨
   title: Seattle,WA,obedient posture at chilly weather
 - city: Yangon
   country: Myanmar
@@ -665,7 +665,7 @@ items:
     alt: Yangon,Myanmar,Golden temple
     src: /assets/img/photos_optimized/Yangon,Myanmar,Golden temple.jpg
   objects: None
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Finding beauty in everyday moments ☀️
   title: Yangon,Myanmar,Golden temple
 - city: Taghazout
   country: Morocco
@@ -673,7 +673,7 @@ items:
     alt: Taghazout,Morocco,airbnb place with cooked foods
     src: /assets/img/photos_optimized/Taghazout,Morocco,airbnb place with cooked foods.jpg
   objects: person,bottle,dining table,cup,couch,cup,cup,bottle,fork,cup,chair,pizza,couch
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: This brings back wonderful memories 💭
   title: Taghazout,Morocco,airbnb place with cooked foods
 - city: Sahara Desert
   country: Morocco
@@ -690,7 +690,7 @@ items:
     src: /assets/img/photos_optimized/Ghent,Belgium,friends in a train.jpg
   objects: person,person,person,person,person,person,cup,person,person,person,cell
     phone,person,person,person,person,person,person,cell phone,book,backpack
-  sentiment: Travel feeds the soul 🌍
+  sentiment: A picture worth a thousand stories 📚
   title: Ghent,Belgium,friends in a train
 - city: Seattle
   country: WA
@@ -706,8 +706,16 @@ items:
     alt: Inle,Myanmar,craftman on a boat house
     src: /assets/img/photos_optimized/Inle,Myanmar,craftman on a boat house.jpg
   objects: person,vase,vase,vase,vase,bowl
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: This brings back wonderful memories 💭
   title: Inle,Myanmar,craftman on a boat house
+- city: Champaign
+  country: IL
+  image:
+    alt: Champaign,IL,beard hair headphone and backpack
+    src: /assets/img/photos_optimized/Champaign,IL,beard hair headphone and backpack.png
+  objects: person,backpack
+  sentiment: Adventure awaits around every corner 🌟
+  title: Champaign,IL,beard hair headphone and backpack
 - city: Inle
   country: Myanmar
   image:
@@ -715,7 +723,7 @@ items:
     src: /assets/img/photos_optimized/Inle,Myanmar,construction.jpg
   objects: person,person,person,person,person,truck,person,person,person,person,person,baseball
     bat,person,baseball bat
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Travel feeds the soul 🌍
   title: Inle,Myanmar,construction
 - city: Bellevue
   country: US
@@ -723,7 +731,7 @@ items:
     alt: Bellevue,US,bytedance office,1
     src: /assets/img/photos_optimized/Bellevue,US,bytedance office,1.JPG
   objects: laptop,tv,potted plant,tv,mouse,backpack,chair,chair,chair,tv,person,tv,tv,car,chair
-  sentiment: Travel feeds the soul 🌍
+  sentiment: What a magical moment! ✨
   title: Bellevue,US,bytedance office,1
 - city: Bordeux
   country: France
@@ -731,7 +739,7 @@ items:
     alt: Bordeux,France,Brodeux river
     src: /assets/img/photos_optimized/Bordeux,France,Brodeux river.jpg
   objects: None
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Adventure awaits around every corner 🌟
   title: Bordeux,France,Brodeux river
 - city: Seattle
   country: WA
@@ -739,7 +747,7 @@ items:
     alt: Seattle,WA,looking at wines
     src: /assets/img/photos_optimized/Seattle,WA,looking at wines.jpg
   objects: person,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Seattle,WA,looking at wines
 - city: Beaufort
   country: France
@@ -748,7 +756,7 @@ items:
     src: /assets/img/photos_optimized/Beaufort,France,walking in foggy snowy alsp
       mountain.jpg
   objects: person,backpack
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Beaufort,France,walking in foggy snowy alsp mountain
 - city: Sanjose
   country: CA
@@ -756,7 +764,7 @@ items:
     alt: Sanjose,CA,mcdo
     src: /assets/img/photos_optimized/Sanjose,CA,mcdo.JPG
   objects: car,traffic light,traffic light,traffic light,car,car,traffic light,bicycle,bicycle,car,car,car
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: What a magical moment! ✨
   title: Sanjose,CA,mcdo
 - city: Marrakesh
   country: Morocco
@@ -765,7 +773,7 @@ items:
     src: /assets/img/photos_optimized/Marrakesh,Morocco,hand squeezed orange juice
       in the morning.jpg
   objects: person,dining table,cup,bowl,bowl
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Travel feeds the soul 🌍
   title: Marrakesh,Morocco,hand squeezed orange juice in the morning
 - city: Leogang
   country: Austria
@@ -782,7 +790,7 @@ items:
     src: /assets/img/photos_optimized/Pasterze Glacier,Austria,glacier to the top
       with Nono,Paul,Tim.jpg
   objects: None
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Finding beauty in everyday moments ☀️
   title: Pasterze Glacier,Austria,glacier to the top with Nono,Paul,Tim
 - city: Sahara Desert
   country: Morocco
@@ -790,7 +798,7 @@ items:
     alt: Sahara Desert,Morocco,sand dance
     src: /assets/img/photos_optimized/Sahara Desert,Morocco,sand dance.jpg
   objects: person
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Finding beauty in everyday moments ☀️
   title: Sahara Desert,Morocco,sand dance
 - city: Annapurna
   country: Nepal
@@ -798,7 +806,7 @@ items:
     alt: Annapurna,Nepal,guestmount at ABC
     src: /assets/img/photos_optimized/Annapurna,Nepal,guestmount at ABC.jpg
   objects: None
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Annapurna,Nepal,guestmount at ABC
 - city: Sahara Desert
   country: Morocco
@@ -806,7 +814,7 @@ items:
     alt: Sahara Desert,Morocco,watching a camel
     src: /assets/img/photos_optimized/Sahara Desert,Morocco,watching a camel.jpg
   objects: person,dog
-  sentiment: Travel feeds the soul 🌍
+  sentiment: This brings back wonderful memories 💭
   title: Sahara Desert,Morocco,watching a camel
 - city: Seattle
   country: WA
@@ -814,7 +822,7 @@ items:
     alt: Seattle,WA,baguette on the backpack
     src: /assets/img/photos_optimized/Seattle,WA,baguette on the backpack.jpg
   objects: person,person,backpack,car,car,backpack,car
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: A picture worth a thousand stories 📚
   title: Seattle,WA,baguette on the backpack
 - city: Ghent
   country: Belgium
@@ -830,7 +838,7 @@ items:
     alt: Seattle,WA,on wobbling floating concrete
     src: /assets/img/photos_optimized/Seattle,WA,on wobbling floating concrete.jpg
   objects: person,cell phone,person,person,person,stop sign
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Seattle,WA,on wobbling floating concrete
 - city: Seattle
   country: WA
@@ -838,7 +846,7 @@ items:
     alt: Seattle,WA,waiting for sister at Seatac airport
     src: /assets/img/photos_optimized/Seattle,WA,waiting for sister at Seatac airport.jpg
   objects: person,person,bottle,laptop,cell phone,cell phone,car
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: A picture worth a thousand stories 📚
   title: Seattle,WA,waiting for sister at Seatac airport
 - city: Ulsan
   country: Korea
@@ -846,7 +854,7 @@ items:
     alt: Ulsan,Korea,Once upon a time in college
     src: /assets/img/photos_optimized/Ulsan,Korea,Once upon a time in college.jpeg
   objects: person,backpack
-  sentiment: What a magical moment! ✨
+  sentiment: A picture worth a thousand stories 📚
   title: Ulsan,Korea,Once upon a time in college
 - city: Inle
   country: Myanmar
@@ -855,7 +863,7 @@ items:
     src: /assets/img/photos_optimized/Inle,Myanmar,little girl on a boat with a school
       bag.jpg
   objects: person,person,boat,boat
-  sentiment: What a magical moment! ✨
+  sentiment: Life is beautiful in all its forms 🌸
   title: Inle,Myanmar,little girl on a boat with a school bag
 - city: Inle
   country: Myanmar
@@ -863,7 +871,7 @@ items:
     alt: Inle,Myanmar,brown Inle Lake
     src: /assets/img/photos_optimized/Inle,Myanmar,brown Inle Lake.jpg
   objects: boat,boat,boat,boat,boat
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Adventure awaits around every corner 🌟
   title: Inle,Myanmar,brown Inle Lake
 - city: Inle
   country: Myanmar
@@ -879,7 +887,7 @@ items:
     alt: Seattle,WA,man on black jacket with nice hat
     src: /assets/img/photos_optimized/Seattle,WA,man on black jacket with nice hat.JPG
   objects: person,traffic light
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Finding beauty in everyday moments ☀️
   title: Seattle,WA,man on black jacket with nice hat
 - city: Sanjose
   country: CA
@@ -888,7 +896,7 @@ items:
     src: /assets/img/photos_optimized/Sanjose,CA,picking up matcha and egg sandwitch.JPG
   objects: person,person,person,chair,cup,person,cup,chair,umbrella,dining table,chair,person,potted
     plant
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Adventure awaits around every corner 🌟
   title: Sanjose,CA,picking up matcha and egg sandwitch
 - city: Leogang
   country: Austria
@@ -897,7 +905,7 @@ items:
     src: /assets/img/photos_optimized/Leogang,Austria,little trekking in Leogang with
       friends.jpg
   objects: person,person,person,person,backpack,backpack
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: Travel feeds the soul 🌍
   title: Leogang,Austria,little trekking in Leogang with friends
 - city: Kohtao
   country: Thai
@@ -905,7 +913,7 @@ items:
     alt: Kohtao,Thai,Sairee beach1
     src: /assets/img/photos_optimized/Kohtao,Thai,Sairee beach1.jpeg
   objects: boat,boat,boat,boat,boat,boat,boat
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: This brings back wonderful memories 💭
   title: Kohtao,Thai,Sairee beach1
 - city: Sahara Desert
   country: Morocco
@@ -913,7 +921,7 @@ items:
     alt: Sahara Desert,Morocco,walking on desert
     src: /assets/img/photos_optimized/Sahara Desert,Morocco,walking on desert.jpg
   objects: person
-  sentiment: Travel feeds the soul 🌍
+  sentiment: This brings back wonderful memories 💭
   title: Sahara Desert,Morocco,walking on desert
 - city: Annapurna
   country: Nepal
@@ -921,7 +929,7 @@ items:
     alt: Annapurna,Nepal,Gold mountain
     src: /assets/img/photos_optimized/Annapurna,Nepal,Gold mountain.jpg
   objects: person,person
-  sentiment: What a magical moment! ✨
+  sentiment: Travel feeds the soul 🌍
   title: Annapurna,Nepal,Gold mountain
 - city: Inle
   country: Myanmar
@@ -929,7 +937,7 @@ items:
     alt: Inle,Myanmar,street food noodle soup cooking
     src: /assets/img/photos_optimized/Inle,Myanmar,street food noodle soup cooking.jpeg
   objects: bowl,bowl,bowl,bowl,bottle,bowl,bowl,bowl
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Adventure awaits around every corner 🌟
   title: Inle,Myanmar,street food noodle soup cooking
 - city: Inle
   country: Myanmar
@@ -937,7 +945,7 @@ items:
     alt: Inle,Myanmar,ladies on street
     src: /assets/img/photos_optimized/Inle,Myanmar,ladies on street.jpeg
   objects: person,person,person,handbag,handbag,handbag,umbrella,handbag
-  sentiment: Travel feeds the soul 🌍
+  sentiment: This brings back wonderful memories 💭
   title: Inle,Myanmar,ladies on street
 - city: Seattle
   country: WA
@@ -947,7 +955,7 @@ items:
       beer cafe).JPG
   objects: person,bottle,vase,bottle,bottle,bottle,bottle,bottle,bottle,bottle,potted
     plant,bicycle,cup,bottle,cup,cup,person,cup,cup,bottle,cup
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Seattle,WA,found a nice place (human people beer cafe)
 - city: Gosausee
   country: Austria
@@ -955,7 +963,7 @@ items:
     alt: Gosausee,Austria,see2
     src: /assets/img/photos_optimized/Gosausee,Austria,see2.jpg
   objects: None
-  sentiment: Travel feeds the soul 🌍
+  sentiment: A picture worth a thousand stories 📚
   title: Gosausee,Austria,see2
 - city: Taghazout
   country: Morocco
@@ -963,7 +971,7 @@ items:
     alt: Taghazout,Morocco,surfing and sunset
     src: /assets/img/photos_optimized/Taghazout,Morocco,surfing and sunset.jpg
   objects: surfboard,person,surfboard
-  sentiment: What a magical moment! ✨
+  sentiment: This brings back wonderful memories 💭
   title: Taghazout,Morocco,surfing and sunset
 - city: Ghent
   country: Belgium
@@ -972,7 +980,7 @@ items:
     src: /assets/img/photos_optimized/Ghent,Belgium,my apt during internship.jpg
   objects: banana,bottle,chair,dining table,bed,bottle,bottle,sink,backpack,dining
     table,chair,chair
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Adventure awaits around every corner 🌟
   title: Ghent,Belgium,my apt during internship
 - city: Annapurna
   country: Nepal
@@ -989,7 +997,7 @@ items:
     src: /assets/img/photos_optimized/Ghent,Belgium,Hologram at Technological park
       office.jpg
   objects: person,cup,cup,cup,mouse,bottle,book,mouse,chair
-  sentiment: What a magical moment! ✨
+  sentiment: Finding beauty in everyday moments ☀️
   title: Ghent,Belgium,Hologram at Technological park office
 - city: Seattle
   country: WA
@@ -997,7 +1005,7 @@ items:
     alt: Seattle,WA,walking to starbucks
     src: /assets/img/photos_optimized/Seattle,WA,walking to starbucks.jpg
   objects: person,bicycle,cell phone
-  sentiment: What a magical moment! ✨
+  sentiment: Finding beauty in everyday moments ☀️
   title: Seattle,WA,walking to starbucks
 - city: Seattle
   country: WA
@@ -1006,7 +1014,7 @@ items:
     src: /assets/img/photos_optimized/Seattle,WA,buying sourdough at nice bakery in
       pike place.jpg
   objects: person,person
-  sentiment: What a magical moment! ✨
+  sentiment: A picture worth a thousand stories 📚
   title: Seattle,WA,buying sourdough at nice bakery in pike place
 - city: Taghazout
   country: Morocco
@@ -1014,7 +1022,7 @@ items:
     alt: Taghazout,Morocco,airbnb place with cooked foods2
     src: /assets/img/photos_optimized/Taghazout,Morocco,airbnb place with cooked foods2.jpg
   objects: couch,person,tv,bottle,couch,dining table,cup,chair,bottle,cup,cup,couch,bowl
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Taghazout,Morocco,airbnb place with cooked foods2
 - city: Renton
   country: WA
@@ -1030,7 +1038,7 @@ items:
     alt: Renton,WA,almost looking like local haha
     src: /assets/img/photos_optimized/Renton,WA,almost looking like local haha.JPG
   objects: person,dining table,pizza,person,person,person,person,bowl,person,person,bowl,umbrella,person,umbrella,person
-  sentiment: Capturing the essence of wanderlust 🗺️
+  sentiment: Adventure awaits around every corner 🌟
   title: Renton,WA,almost looking like local haha
 - city: Seattle
   country: WA
@@ -1038,7 +1046,7 @@ items:
     alt: Seattle,WA,yo comfy couch
     src: /assets/img/photos_optimized/Seattle,WA,yo comfy couch.jpg
   objects: person,person,person,car,couch,couch,person,chair
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Seattle,WA,yo comfy couch
 - city: Inle
   country: Myanmar
@@ -1046,7 +1054,7 @@ items:
     alt: Inle,Myanmar,fishing
     src: /assets/img/photos_optimized/Inle,Myanmar,fishing.jpg
   objects: person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Adventure awaits around every corner 🌟
   title: Inle,Myanmar,fishing
 - city: Seattle
   country: WA
@@ -1055,7 +1063,7 @@ items:
     src: /assets/img/photos_optimized/Seattle,WA,a guy who taught me fishing for the
       first time in my life.jpg
   objects: person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Life is beautiful in all its forms 🌸
   title: Seattle,WA,a guy who taught me fishing for the first time in my life
 - city: Kohtao
   country: Thai
@@ -1063,7 +1071,7 @@ items:
     alt: Kohtao,Thai,freediving 1
     src: /assets/img/photos_optimized/Kohtao,Thai,freediving-1.png
   objects: person,skis
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Adventure awaits around every corner 🌟
   title: Kohtao,Thai,freediving 1
 - city: Beaufort
   country: France
@@ -1071,7 +1079,7 @@ items:
     alt: Beaufort,France,darkness and stars
     src: /assets/img/photos_optimized/Beaufort,France,darkness and stars.jpg
   objects: None
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: A picture worth a thousand stories 📚
   title: Beaufort,France,darkness and stars
 - city: Sanjose
   country: CA
@@ -1081,7 +1089,7 @@ items:
   objects: bench,person,person,fire hydrant,traffic light,person,chair,traffic light,person,chair,bicycle,car,car,traffic
     light,bench,chair,traffic light,traffic light,bicycle,handbag,bench,bench,traffic
     light
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: What a magical moment! ✨
   title: Sanjose,CA,sunny day view at bagel place
 - city: Vienna
   country: Austria
@@ -1089,7 +1097,7 @@ items:
     alt: Vienna,Austria,drunk
     src: /assets/img/photos_optimized/Vienna,Austria,drunk.jpg
   objects: person,person,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: What a magical moment! ✨
   title: Vienna,Austria,drunk
 - city: Kohtao
   country: Thai
@@ -1097,7 +1105,7 @@ items:
     alt: Kohtao,Thai,freediving2
     src: /assets/img/photos_optimized/Kohtao,Thai,freediving2.jpg
   objects: person
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: Finding beauty in everyday moments ☀️
   title: Kohtao,Thai,freediving2
 - city: Ghent
   country: Belgium
@@ -1105,7 +1113,7 @@ items:
     alt: Ghent,Belgium,Slovakia night1
     src: /assets/img/photos_optimized/Ghent,Belgium,Slovakia night1.jpg
   objects: person,person,person,person,person,person,person,car
-  sentiment: What a magical moment! ✨
+  sentiment: Capturing the essence of wanderlust 🗺️
   title: Ghent,Belgium,Slovakia night1
 - city: Annapurna
   country: Nepal
@@ -1113,7 +1121,7 @@ items:
     alt: Annapurna,Nepal,Golden tip
     src: /assets/img/photos_optimized/Annapurna,Nepal,Golden tip.png
   objects: None
-  sentiment: What a magical moment! ✨
+  sentiment: A picture worth a thousand stories 📚
   title: Annapurna,Nepal,Golden tip
 - city: Ghent
   country: Belgium
@@ -1121,7 +1129,7 @@ items:
     alt: Ghent,Belgium,tipsy night
     src: /assets/img/photos_optimized/Ghent,Belgium,tipsy night.jpg
   objects: person,person,person,person,person,person,person,person,person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Adventure awaits around every corner 🌟
   title: Ghent,Belgium,tipsy night
 - city: Bratislava
   country: Slovakia
@@ -1137,7 +1145,7 @@ items:
     alt: Seattle,WA,no run but rollerblade
     src: /assets/img/photos_optimized/Seattle,WA,no run but rollerblade.JPG
   objects: person,skateboard
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Life is beautiful in all its forms 🌸
   title: Seattle,WA,no run but rollerblade
 - city: Bagan
   country: Myanmar
@@ -1154,7 +1162,7 @@ items:
     src: /assets/img/photos_optimized/Springfield,IL,picking up my new car tesla model
       y.jpg
   objects: person,car,car,car
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Springfield,IL,picking up my new car tesla model y
 - city: Marrakesh
   country: Morocco
@@ -1162,7 +1170,7 @@ items:
     alt: Marrakesh,Morocco,colors
     src: /assets/img/photos_optimized/Marrakesh,Morocco,colors.jpg
   objects: person,bowl,bowl,bowl,bowl
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: This brings back wonderful memories 💭
   title: Marrakesh,Morocco,colors
 - city: Sanjose
   country: CA
@@ -1172,7 +1180,7 @@ items:
   objects: fire hydrant,chair,person,person,chair,bench,dining table,bench,truck,traffic
     light,chair,traffic light,person,bicycle,chair,traffic light,dining table,bench,chair,person,traffic
     light,traffic light,car
-  sentiment: What a magical moment! ✨
+  sentiment: Adventure awaits around every corner 🌟
   title: Sanjose,CA,view from bagel place
 - city: Inle
   country: Myanmar
@@ -1180,7 +1188,7 @@ items:
     alt: Inle,Myanmar,Street food roti
     src: /assets/img/photos_optimized/Inle,Myanmar,Street food roti.jpeg
   objects: person,bottle
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: A picture worth a thousand stories 📚
   title: Inle,Myanmar,Street food roti
 - city: Brussel
   country: Belgium
@@ -1189,7 +1197,7 @@ items:
     src: /assets/img/photos_optimized/Brussel,Belgium,chocolate crepe.jpg
   objects: person,person,person,backpack,person,person,person,hot dog,person,person,person,hot
     dog
-  sentiment: Adventure awaits around every corner 🌟
+  sentiment: What a magical moment! ✨
   title: Brussel,Belgium,chocolate crepe
 - city: Sanjose
   country: CA
@@ -1197,7 +1205,7 @@ items:
     alt: Sanjose,CA,insideout 2 with B
     src: /assets/img/photos_optimized/Sanjose,CA,insideout 2 with B.JPG
   objects: person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Sanjose,CA,insideout 2 with B
 - city: Quinsac
   country: France
@@ -1213,7 +1221,7 @@ items:
     alt: Varanasi,India,alley in Varanasi
     src: /assets/img/photos_optimized/Varanasi,India,alley in Varanasi.jpg
   objects: person,person,person,car,handbag
-  sentiment: A picture worth a thousand stories 📚
+  sentiment: What a magical moment! ✨
   title: Varanasi,India,alley in Varanasi
 - city: Seattle
   country: WA
@@ -1221,7 +1229,7 @@ items:
     alt: Seattle,WA,running sorcerer
     src: /assets/img/photos_optimized/Seattle,WA,running sorcerer.PNG
   objects: person,car,person,car
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: This brings back wonderful memories 💭
   title: Seattle,WA,running sorcerer
 - city: Inle
   country: Myanmar
@@ -1229,7 +1237,7 @@ items:
     alt: Inle,Myanmar,cooking
     src: /assets/img/photos_optimized/Inle,Myanmar,cooking.jpg
   objects: person,bottle,bottle,bottle,bowl,vase,cup,potted plant,bowl
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Adventure awaits around every corner 🌟
   title: Inle,Myanmar,cooking
 - city: Annapurna
   country: Nepal
@@ -1237,7 +1245,7 @@ items:
     alt: Annapurna,Nepal,People at ABC
     src: /assets/img/photos_optimized/Annapurna,Nepal,People at ABC.jpg
   objects: person,person,chair,person,chair,chair,chair,person,chair,bench,person,chair,chair,bench,car,bench
-  sentiment: Travel feeds the soul 🌍
+  sentiment: A picture worth a thousand stories 📚
   title: Annapurna,Nepal,People at ABC
 - city: Yangon
   country: Myanmar
@@ -1245,7 +1253,7 @@ items:
     alt: Yangon,Myanmar,Barefoo at Shedagon pagoda
     src: /assets/img/photos_optimized/Yangon,Myanmar,Barefoo at Shedagon pagoda.jpg
   objects: person,backpack,handbag,bird,person,backpack
-  sentiment: Travel feeds the soul 🌍
+  sentiment: Finding beauty in everyday moments ☀️
   title: Yangon,Myanmar,Barefoo at Shedagon pagoda
 - city: Seattle
   country: WA
@@ -1253,7 +1261,7 @@ items:
     alt: Seattle,WA,Zoka Greenlake monochrome
     src: /assets/img/photos_optimized/Seattle,WA,Zoka Greenlake monochrome.JPG
   objects: fire hydrant,dog,parking meter,chair,parking meter,dining table
-  sentiment: Life is beautiful in all its forms 🌸
+  sentiment: This brings back wonderful memories 💭
   title: Seattle,WA,Zoka Greenlake monochrome
 - city: Riomaggiore
   country: Italy
@@ -1269,7 +1277,7 @@ items:
     alt: Yangon,Myanmar,Shedagon Pagoda at night
     src: /assets/img/photos_optimized/Yangon,Myanmar,Shedagon Pagoda at night.jpg
   objects: person,person,umbrella,handbag,person,person,person,handbag,handbag,person
-  sentiment: Finding beauty in everyday moments ☀️
+  sentiment: Travel feeds the soul 🌍
   title: Yangon,Myanmar,Shedagon Pagoda at night
 - city: Champaign
   country: IL
@@ -1277,7 +1285,7 @@ items:
     alt: Champaign,IL,Sunset in complete peace
     src: /assets/img/photos_optimized/Champaign,IL,Sunset in complete peace.png
   objects: person,person
-  sentiment: This brings back wonderful memories 💭
+  sentiment: Life is beautiful in all its forms 🌸
   title: Champaign,IL,Sunset in complete peace
 layout: photos
 slug: /photos

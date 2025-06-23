@@ -1,7 +1,8 @@
 import os
+import sys
 import yaml
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageOps
 import io
 
 def generate_sentiment(filename):
@@ -53,7 +54,10 @@ def cleanup_orphaned_optimized_files(photos_dir, optimized_dir):
 def optimize_image(image_path, max_size_kb):
     """Optimize image by resizing and compressing until it's under max_size_kb"""
     print(f"\nProcessing {image_path.name}:")
+    
+    # Open image and apply EXIF orientation to prevent rotation issues
     img = Image.open(image_path)
+    img = ImageOps.exif_transpose(img)  # This fixes rotation issues
     
     # Convert RGBA to RGB if necessary
     if img.mode in ('RGBA', 'LA'):
@@ -73,13 +77,25 @@ def optimize_image(image_path, max_size_kb):
         print(f"  Image is already under {max_size_kb}KB, skipping optimization")
         return img
 
-    # Calculate new dimensions while maintaining aspect ratio
+    # Calculate new dimensions while maintaining exact aspect ratio
+    original_width, original_height = img.size
+    aspect_ratio = original_width / original_height
+    
+    # Start with a reasonable max dimension and scale down if needed
     max_dimension = 1200
-    ratio = min(max_dimension/img.size[0], max_dimension/img.size[1])
-    new_size = tuple([int(x*ratio) for x in img.size])
-    print(f"  Original dimensions: {img.size}")
-    print(f"  New dimensions: {new_size}")
-    img = img.resize(new_size, Image.Resampling.LANCZOS)
+    
+    if original_width > original_height:
+        new_width = min(max_dimension, original_width)
+        new_height = int(new_width / aspect_ratio)
+    else:
+        new_height = min(max_dimension, original_height)
+        new_width = int(new_height * aspect_ratio)
+    
+    print(f"  Original dimensions: {original_width}x{original_height}")
+    print(f"  New dimensions: {new_width}x{new_height}")
+    print(f"  Aspect ratio preserved: {aspect_ratio:.3f}")
+    
+    img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
 
     # Compress with decreasing quality until size is under max_size_kb
     quality = 85
@@ -172,7 +188,6 @@ def generate_photos_md(max_size_kb):
     print("\nFinished! photos.md has been updated.")
 
 if __name__ == "__main__":
-    import sys
     max_size_kb = sys.argv[1] if len(sys.argv) > 1 else 500
     print(f"Max size for optimized images: {max_size_kb}KB")
     generate_photos_md(max_size_kb)

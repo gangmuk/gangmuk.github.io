@@ -7,17 +7,226 @@
     {% include header.html %}
 
 
-<div class="search-controls" style="margin-bottom: 20px; text-align: center;">
-  <input type="text" id="search-input" placeholder="Search photos with title, objects, or location..." style="margin-right: 10px; padding: 8px; width: 50%; max-width: 300px;">
-  <select id="country-filter" style="margin-right: 10px; padding: 8px;">
-    <option value="">All Countries</option>
-  </select>
-  <select id="city-filter" style="margin-right: 10px; padding: 8px;">
-    <option value="">All Cities</option>
-  </select>
-  <button id="clear-filters" style="padding: 8px 15px; margin-right: 10px;">Clear All</button>
-  <button id="random-photo" style="padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Surprise Me!</button>
-</div>
+    <div class="search-controls" style="margin-bottom: 20px; text-align: center;">
+      <!-- First line: Text search -->
+      <div style="margin-top: 20px; margin-bottom: 15px;">
+        <input type="text" id="search-input" placeholder="Search photos with title, objects, location, or sentiments..." style="padding: 8px; width: 60%; max-width: 500px; position: relative; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s ease;">
+      </div>
+      
+      <style>
+        #search-input {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        #search-input::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, 
+            rgba(255, 105, 180, 0.6) 0%,     /* Hot pink */
+            rgba(138, 43, 226, 0.6) 25%,     /* Blue violet */
+            rgba(30, 144, 255, 0.6) 50%,     /* Dodger blue */
+            rgba(0, 255, 127, 0.6) 75%,      /* Spring green */
+            rgba(255, 215, 0, 0.6) 100%      /* Gold */
+          );
+          border-radius: 6px;
+          transition: left 0.8s ease;
+          pointer-events: none;
+          z-index: -1;
+        }
+        
+        #search-input:hover::before {
+          left: 0%;
+        }
+        
+        #search-input:hover {
+          border-color: rgba(138, 43, 226, 0.5);
+          box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+          transform: translateY(-2px);
+        }
+        
+        #search-input:focus {
+          outline: none;
+          border-color: rgba(138, 43, 226, 0.7);
+          box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+        }
+        
+        #search-input:focus::before {
+          left: 0%;
+          animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+      </style>
+      
+      <!-- Second line: Location filters -->
+      <div style="margin-bottom: 15px;">
+        <select id="country-filter" style="margin-right: 15px; padding: 8px; min-width: 150px;">
+          <option value="">All Countries</option>
+        </select>
+        <select id="city-filter" style="margin-right: 15px; padding: 8px; min-width: 150px;">
+          <option value="">All Cities</option>
+        </select>
+        <button id="clear-filters" style="padding: 8px 15px;">Clear All</button>
+      </div>
+      
+      <!-- Third line: Surprise button -->
+      <div>
+        <button id="random-photo" class="surprise-btn">
+          <span class="btn-text">🎉 Surprise Me! ✨</span>
+          <div class="sparkles"></div>
+        </button>
+      </div>
+      
+      <style>
+        .surprise-btn {
+          position: relative;
+          padding: 15px 30px;
+          font-size: 18px;
+          font-weight: bold;
+          color: white;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          overflow: hidden;
+          background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+          background-size: 400% 400%;
+          animation: rainbowShift 3s ease infinite;
+          transform: perspective(1000px) rotateX(0deg);
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .surprise-btn:hover {
+          transform: perspective(1000px) rotateX(-10deg) translateY(-5px) scale(1.05);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+          animation: rainbowShift 0.5s ease infinite, wiggle 0.6s ease infinite;
+        }
+        
+        .surprise-btn:active {
+          transform: perspective(1000px) rotateX(-5deg) translateY(-2px) scale(0.98);
+          animation: explode 0.6s ease;
+        }
+        
+        .btn-text {
+          position: relative;
+          z-index: 2;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .sparkles {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        
+        .surprise-btn:hover .sparkles::before,
+        .surprise-btn:hover .sparkles::after {
+          content: '✨';
+          position: absolute;
+          color: #fff;
+          font-size: 12px;
+          animation: sparkleFloat 2s infinite;
+        }
+        
+        .surprise-btn:hover .sparkles::before {
+          top: 20%;
+          left: 15%;
+          animation-delay: 0s;
+        }
+        
+        .surprise-btn:hover .sparkles::after {
+          top: 60%;
+          right: 20%;
+          animation-delay: 1s;
+        }
+        
+        @keyframes rainbowShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes wiggle {
+          0%, 100% { transform: perspective(1000px) rotateX(-10deg) translateY(-5px) scale(1.05) rotate(0deg); }
+          25% { transform: perspective(1000px) rotateX(-10deg) translateY(-5px) scale(1.05) rotate(1deg); }
+          75% { transform: perspective(1000px) rotateX(-10deg) translateY(-5px) scale(1.05) rotate(-1deg); }
+        }
+        
+        @keyframes sparkleFloat {
+          0% { 
+            opacity: 0;
+            transform: translateY(0px) scale(0);
+          }
+          50% { 
+            opacity: 1;
+            transform: translateY(-10px) scale(1);
+          }
+          100% { 
+            opacity: 0;
+            transform: translateY(-20px) scale(0);
+          }
+        }
+        
+        @keyframes explode {
+          0% { transform: perspective(1000px) rotateX(-5deg) scale(0.98); }
+          50% { 
+            transform: perspective(1000px) rotateX(-15deg) scale(1.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+          }
+          100% { transform: perspective(1000px) rotateX(-5deg) scale(0.98); }
+        }
+        
+        /* Additional floating sparkles on hover */
+        .surprise-btn:hover::before {
+          content: '🎊';
+          position: absolute;
+          top: -10px;
+          left: 10%;
+          font-size: 16px;
+          animation: floatUp 1.5s infinite ease-out;
+          pointer-events: none;
+        }
+        
+        .surprise-btn:hover::after {
+          content: '🌟';
+          position: absolute;
+          top: -10px;
+          right: 10%;
+          font-size: 14px;
+          animation: floatUp 1.5s infinite ease-out 0.5s;
+          pointer-events: none;
+        }
+        
+        @keyframes floatUp {
+          0% { 
+            opacity: 0;
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% { 
+            opacity: 1;
+            transform: translateY(-15px) rotate(180deg);
+          }
+          100% { 
+            opacity: 0;
+            transform: translateY(-30px) rotate(360deg);
+          }
+        }
+      </style>
+    </div>
+      
 
 <div class="photo-grid">
   <style>
@@ -456,9 +665,10 @@
       document.querySelectorAll('.grid-item').forEach((item, index) => {
         const itemData = items[index];
         const title = itemData.title.toLowerCase();
-        const objects = (itemData.objects || '').toLowerCase(); // Add objects field to search
+        const objects = (itemData.objects || '').toLowerCase();
         const city = (itemData.city || '').toLowerCase();
         const country = (itemData.country || '').toLowerCase();
+        const sentiments = (itemData.sentiment || '').toLowerCase();
         
         // Search in both title and objects fields
         const matchesSearch = !searchTerm || 

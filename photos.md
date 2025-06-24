@@ -32,6 +32,14 @@ items:
   objects: person,car,fire hydrant
   sentiment: ''
   title: Seattle,WA,me on the mirror with leica q
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,small cute Zoka sign
+    src: /assets/img/photos_optimized/Seattle,WA,small cute Zoka sign.JPG
+  objects: car
+  sentiment: ''
+  title: Seattle,WA,small cute Zoka sign
 - city: Renton
   country: WA
   image:
@@ -162,6 +170,15 @@ items:
   objects: person
   sentiment: ''
   title: Kunsan,Korea,on the rock
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,closing Zoka at 5pm
+    src: /assets/img/photos_optimized/Seattle,WA,closing Zoka at 5pm.JPG
+  objects: dining table,chair,chair,chair,person,chair,chair,chair,chair,dining table,chair,dining
+    table,chair,refrigerator,dining table,bench
+  sentiment: ''
+  title: Seattle,WA,closing Zoka at 5pm
 - city: Essaouira
   country: Morocco
   image:
@@ -418,6 +435,15 @@ items:
   objects: person,backpack
   sentiment: ''
   title: Chefchaouen,Morocco,on the hill
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,you need to have fun like babies
+    src: /assets/img/photos_optimized/Seattle,WA,you need to have fun like babies.JPG
+  objects: person,person,person,person,person,person,person,person,person,person,sports
+    ball,sports ball,bottle,person,person,cup,sports ball,person,person,person
+  sentiment: ''
+  title: Seattle,WA,you need to have fun like babies
 - city: Ghent
   country: Belgium
   image:
@@ -442,6 +468,15 @@ items:
   objects: car,truck
   sentiment: ''
   title: Ulsan,Korea,Glaring autum leaves
+- city: Bellevue
+  country: WA
+  image:
+    alt: Bellevue,WA,scotty with a film book at my last day
+    src: /assets/img/photos_optimized/Bellevue,WA,scotty with a film book at my last
+      day.JPG
+  objects: person,sink,microwave,bottle
+  sentiment: ''
+  title: Bellevue,WA,scotty with a film book at my last day
 - city: Sanjose
   country: CA
   image:
@@ -831,6 +866,14 @@ items:
   objects: person,bottle,dining table,cup,couch,cup,cup,bottle,fork,cup,chair,pizza,couch
   sentiment: ''
   title: Taghazout,Morocco,airbnb place with cooked foods
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,colorful trees on 5410 Keystone
+    src: /assets/img/photos_optimized/Seattle,WA,colorful trees on 5410 Keystone.jpeg
+  objects: person,car,car,car,person,person,car,car,person,car,car,car,person,car,person,car,car
+  sentiment: ''
+  title: Seattle,WA,colorful trees on 5410 Keystone
 - city: Sahara Desert
   country: Morocco
   image:
@@ -839,6 +882,14 @@ items:
   objects: person
   sentiment: ''
   title: Sahara Desert,Morocco,Lying on sand
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,the most friendly street at seattle
+    src: /assets/img/photos_optimized/Seattle,WA,the most friendly street at seattle.JPG
+  objects: car,car,car,car,car,car
+  sentiment: ''
+  title: Seattle,WA,the most friendly street at seattle
 - city: Springfield
   country: IL
   image:
@@ -914,6 +965,15 @@ items:
   objects: person,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle
   sentiment: ''
   title: Seattle,WA,looking at wines
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,while waiting for friends
+    src: /assets/img/photos_optimized/Seattle,WA,while waiting for friends.JPG
+  objects: chair,potted plant,laptop,potted plant,potted plant,person,person,dining
+    table,potted plant,chair,bottle,person,chair,dining table
+  sentiment: ''
+  title: Seattle,WA,while waiting for friends
 - city: Beaufort
   country: France
   image:
@@ -1021,6 +1081,15 @@ items:
   objects: person,person,bottle,laptop,cell phone,cell phone,car
   sentiment: ''
   title: Seattle,WA,waiting for sister at Seatac airport
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,smiling cool bartender
+    src: /assets/img/photos_optimized/Seattle,WA,smiling cool bartender.JPG
+  objects: person,bottle,vase,bottle,bottle,bottle,potted plant,bottle,bottle,wine
+    glass,bottle,bottle,wine glass,bottle,wine glass,wine glass,cup
+  sentiment: ''
+  title: Seattle,WA,smiling cool bartender
 - city: Ulsan
   country: Korea
   image:
@@ -1396,6 +1465,14 @@ items:
   objects: person,handbag,person,person,bench,person,bench,person,person
   sentiment: ''
   title: Bagan,Myanmar,mom an dad
+- city: Bellevue
+  country: US
+  image:
+    alt: Bellevue,US,bytedance office my desk 1
+    src: /assets/img/photos_optimized/Bellevue,US,bytedance office-my-desk-1.JPG
+  objects: laptop,tv,potted plant,tv,mouse,backpack,chair,chair,chair,tv,person,tv,tv,car,chair
+  sentiment: ''
+  title: Bellevue,US,bytedance office my desk 1
 - city: Springfield
   country: IL
   image:
@@ -1405,6 +1482,14 @@ items:
   objects: person,car,car,car
   sentiment: ''
   title: Springfield,IL,picking up my new car tesla model y
+- city: Bellevue
+  country: US
+  image:
+    alt: Bellevue,US,construction view from the bytedance office 1
+    src: /assets/img/photos_optimized/Bellevue,US,construction-view-from-the-bytedance-office-1.JPG
+  objects: person,person,car,car
+  sentiment: ''
+  title: Bellevue,US,construction view from the bytedance office 1
 - city: Marrakesh
   country: Morocco
   image:
@@ -1456,6 +1541,15 @@ items:
   objects: person
   sentiment: ''
   title: Sanjose,CA,insideout 2 with B
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,Say goodbye to Zoka for now see you soon
+    src: /assets/img/photos_optimized/Seattle,WA,Say goodbye to Zoka for now see you
+      soon.JPG
+  objects: car,person,car,car,car
+  sentiment: ''
+  title: Seattle,WA,Say goodbye to Zoka for now see you soon
 - city: Quinsac
   country: France
   image:
@@ -1472,14 +1566,6 @@ items:
   objects: person,person,person,car,handbag
   sentiment: ''
   title: Varanasi,India,alley in Varanasi
-- city: Seattle
-  country: WA
-  image:
-    alt: Seattle,WA,running sorcerer
-    src: /assets/img/photos_optimized/Seattle,WA,running sorcerer.PNG
-  objects: person,car,person,car
-  sentiment: ''
-  title: Seattle,WA,running sorcerer
 - city: Inle
   country: Myanmar
   image:

@@ -138,6 +138,14 @@ items:
   objects: person,person,cup,person,handbag,cell phone,person,backpack
   sentiment: ''
   title: Bellevue,WA,trying oakley should I buy that model
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,I think this kid is spy
+    src: /assets/img/photos_optimized/Seattle,WA,I think this kid is spy.jpeg
+  objects: person,person,car,cell phone,bicycle,bicycle,chair
+  sentiment: ''
+  title: Seattle,WA,I think this kid is spy
 - city: Beaufort
   country: France
   image:
@@ -304,6 +312,15 @@ items:
 - city: Seattle
   country: WA
   image:
+    alt: Seattle,WA,uncoordinated but not a problem at all it's life
+    src: /assets/img/photos_optimized/Seattle,WA,uncoordinated but not a problem at
+      all it's life.jpg
+  objects: person,person,car,car,car,bicycle,car,car,car,car,car,car,car,car,car,car,car
+  sentiment: ''
+  title: Seattle,WA,uncoordinated but not a problem at all it's life
+- city: Seattle
+  country: WA
+  image:
     alt: Seattle,WA,broombroom first time e schooter fo
     src: /assets/img/photos_optimized/Seattle,WA,broombroom first time e schooter
       fo.jpg
@@ -374,6 +391,15 @@ items:
   objects: None
   sentiment: ''
   title: Jeju,Korea,Flaming sunset before typoon
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,cute and distant eye contact
+    src: /assets/img/photos_optimized/Seattle,WA,cute and distant eye contact.jpg
+  objects: backpack,person,chair,person,chair,chair,dining table,backpack,person,chair,cell
+    phone,potted plant,potted plant,potted plant,potted plant,backpack
+  sentiment: ''
+  title: Seattle,WA,cute and distant eye contact
 - city: Renton
   country: WA
   image:
@@ -845,6 +871,16 @@ items:
 - city: Seattle
   country: WA
   image:
+    alt: Seattle,WA,long hair guys at Seattle cafe bar
+    src: /assets/img/photos_optimized/Seattle,WA,long hair guys at Seattle cafe bar.jpeg
+  objects: person,chair,person,person,person,dining table,bottle,bottle,bottle,bottle,bottle,potted
+    plant,potted plant,dining table,chair,dining table,bottle,bottle,chair,bottle,person,dining
+    table
+  sentiment: ''
+  title: Seattle,WA,long hair guys at Seattle cafe bar
+- city: Seattle
+  country: WA
+  image:
     alt: Seattle,WA,obedient posture at chilly weather
     src: /assets/img/photos_optimized/Seattle,WA,obedient posture at chilly weather.jpg
   objects: person
@@ -858,6 +894,15 @@ items:
   objects: None
   sentiment: ''
   title: Yangon,Myanmar,Golden temple
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,cute beer taps
+    src: /assets/img/photos_optimized/Seattle,WA,cute beer taps.jpg
+  objects: bottle,bottle,bottle,bottle,bottle,bottle,vase,bottle,person,cup,bottle,vase,cup,potted
+    plant,vase,cup,cup,cup,cup,cup,potted plant,wine glass
+  sentiment: ''
+  title: Seattle,WA,cute beer taps
 - city: Taghazout
   country: Morocco
   image:
@@ -941,6 +986,14 @@ items:
     bat,person,baseball bat
   sentiment: ''
   title: Inle,Myanmar,construction
+- city: Seattle
+  country: WA
+  image:
+    alt: Seattle,WA,how excitement look likes
+    src: /assets/img/photos_optimized/Seattle,WA,how excitement look likes.jpg
+  objects: person,person,person,person,person,person,person,person
+  sentiment: ''
+  title: Seattle,WA,how excitement look likes
 - city: Bellevue
   country: US
   image:
@@ -1361,6 +1414,14 @@ items:
 - city: Seattle
   country: WA
   image:
+    alt: Seattle,WA,fyi this dog is not his dog
+    src: /assets/img/photos_optimized/Seattle,WA,fyi this dog is not his dog.jpg
+  objects: dog,person,dog,person,person,person,person
+  sentiment: ''
+  title: Seattle,WA,fyi this dog is not his dog
+- city: Seattle
+  country: WA
+  image:
     alt: Seattle,WA,a guy who taught me fishing for the first time in my life
     src: /assets/img/photos_optimized/Seattle,WA,a guy who taught me fishing for the
       first time in my life.jpg
@@ -1465,6 +1526,15 @@ items:
   objects: person,handbag,person,person,bench,person,bench,person,person
   sentiment: ''
   title: Bagan,Myanmar,mom an dad
+- city: Gorakpur
+  country: India
+  image:
+    alt: Gorakpur,India,train station in india
+    src: /assets/img/photos_optimized/Gorakpur,India,train station in india.JPG
+  objects: suitcase,person,person,person,person,suitcase,suitcase,person,handbag,person,person,person,suitcase,person,cell
+    phone,person,handbag,person,person
+  sentiment: ''
+  title: Gorakpur,India,train station in india
 - city: Bellevue
   country: US
   image:

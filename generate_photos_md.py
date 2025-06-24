@@ -6,24 +6,12 @@ from PIL import Image, ImageOps
 import io
 from object_detection import detect_object
 from image_description import describe_image
+from sentiment_analysis import analyze_single_image
+from analyze_color import analyze_color
 import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def generate_sentiment(filename):
-    """Generate a cute sentiment/description for the photo"""
-    # Simple placeholder - you can make this more sophisticated later
-    sentiments = [
-        "What a magical moment! ✨",
-        "This brings back wonderful memories 💭",
-        "Adventure awaits around every corner 🌟",
-        "Life is beautiful in all its forms 🌸",
-        "Capturing the essence of wanderlust 🗺️",
-        "A picture worth a thousand stories 📚",
-        "Finding beauty in everyday moments ☀️",
-        "Travel feeds the soul 🌍"
-    ]
-    return sentiments[hash(filename) % len(sentiments)]
 
 def parse_location(filename):
     if ',' in filename:
@@ -156,7 +144,7 @@ def generate_photos_md(max_size_kb):
     
     # Process each image
     total_files = len([f for f in photos_dir.iterdir() if f.suffix.lower() in image_extensions])
-    logger.info(f"\nFound {total_files} images to process")
+    logger.info(f"Found {total_files} images to process")
     
     processed = 0
     for photo_file in photos_dir.iterdir():
@@ -164,7 +152,7 @@ def generate_photos_md(max_size_kb):
             processed += 1
             # optimized_path = optimized_dir / f"{photo_file.stem}_optimized.jpg"
             optimized_path = optimized_dir / f"{photo_file.stem}{photo_file.suffix}"
-            
+            logger.info(f"Processing {photo_file.name} ({processed}/{total_files})")
             # Optimize image if not already optimized
             if not optimized_path.exists():
                 logger.info(f"Original input photo: {processed}/{total_files}, output: {optimized_path}")
@@ -176,24 +164,44 @@ def generate_photos_md(max_size_kb):
                     logger.info(f"Error processing {photo_file}: {e}")
                     continue
             else:
-                logger.info(f"Optimized version already exists, skipping for {optimized_path}")
+                logger.info(f"- Skipping optimizing process, optimized file already exists")
 
             # Create item entry with optimized image path
             city, country = parse_location(photo_file.stem)
-            sentiment = generate_sentiment(photo_file.stem)
-            
-            
             photo_title = photo_file.stem.replace('-', ' ').replace('_', ' ')
             existing_item = existing_items.get(photo_title, {})
             
+            sentiments_str = "" 
+            # # Check if sentiment already exists
+            # if 'sentiment' in existing_item and existing_item['sentiment'] and existing_item['sentiment'] != 'None':
+            #     logger.info(f"- Skipping analysis, sentiment field already exists")
+            #     sentiments_str = existing_item['sentiment']
+            # else:
+            #     sentiment_list = analyze_single_image(photo_file, confidence_threshold=0.2)
+            #     sentiments_str = ', '.join(sentiment_list) if sentiment_list else 'None'
+            #     logger.info(f"- Analyzed sentiment: {sentiments_str}")
+            
+            color_str = ""
+            # Check if color already exists
+            if 'color' in existing_item and existing_item['color'] and existing_item['color'] != 'None':
+                logger.info(f"- Skipping color analysis, color field already exists")
+                color_str = existing_item['color']
+            else:
+                try:
+                    color_list = analyze_color(photo_file)
+                    color_str = ', '.join(color_list) if color_list else 'None'
+                    logger.info(f"- color: {color_str}")
+                except Exception as e:
+                    logger.info(f"Error analyzing color for {photo_file.name}: {e}")
+                    color_str = 'None'
+            
             if 'objects' in existing_item and existing_item['objects']:
-                logger.info(f"Objects field already exists for {photo_file.name}, skipping detection")
+                logger.info(f"- Skipping object detection, objects field already exists")
                 objects_str = existing_item['objects']
             else:
-                logger.info(f"Running object detection for {photo_file.name}")
                 objects = detect_object(photo_file, 'l', 640)
                 objects_str = ",".join(objects) if objects else "None"
-                print(f"Detected objects: {objects_str}")
+                logger.info(f"- Detected objects: {objects_str}")
 
             logger.info(f"{photo_file.name}\n - City: {city}, Country: {country}")
             item = {
@@ -204,8 +212,9 @@ def generate_photos_md(max_size_kb):
                 },
                 'city': city,
                 'country': country,
-                'sentiment': sentiment,
+                'sentiment': sentiments_str,
                 'objects': objects_str,
+                'color': color_str,
                 # 'description': description,
             }
             items.append(item)

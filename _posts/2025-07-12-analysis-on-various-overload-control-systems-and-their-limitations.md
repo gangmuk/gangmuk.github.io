@@ -241,7 +241,7 @@ Protego has **performance-driven** admission control (This high level approach i
 If throughput improvement with additional load is less than the efficiency threshold or if the drop rate exceeds the maximum drop rate, Protego stops accepting further load. 
 
 Admission control core logic:
-```
+```text
 After increasing load by X:
 if throughput_improvement < efficiency_threshold(te) * load_increase:
     Reduce admission (multiplicative decrease)
@@ -264,8 +264,8 @@ It first calculates the target delay based on SLO and max number of retries. And
 
 Before placing the request in each queue at **each lock**, it first checks the instantaneous queueing delay (time taken until acquiring the lock) of the certain lock and drops the request if the queueing delay of the target lock is greater than the request's remaining queueing delay budget.
 
-Core logic:
-```
+ASQM core logic:
+```text
 At each lock:
 if (current_lock_queue_delay > remaining_request_budget):
     Drop request immediately

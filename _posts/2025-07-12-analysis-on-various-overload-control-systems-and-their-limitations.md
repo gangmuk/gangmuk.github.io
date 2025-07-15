@@ -1,4 +1,25 @@
+
 # Analysis on Various Overload Control Systems and their Limitaions
+
+- [Analysis on Various Overload Control Systems and their Limitaions](#analysis-on-various-overload-control-systems-and-their-limitaions)
+  - [Background](#background)
+    - [Goroutine States](#goroutine-states)
+    - [Request Processing Time Breakdown](#request-processing-time-breakdown)
+  - [Overload Control System](#overload-control-system)
+    - [Quick Comparison](#quick-comparison)
+    - [Overview](#overview)
+    - [Rajomon](#rajomon)
+      - [Limitations](#limitations)
+    - [Breakwater](#breakwater)
+      - [Limitations](#limitations-1)
+    - [Protego](#protego)
+      - [Performance-Driven Admission Control](#performance-driven-admission-control)
+      - [Active Synchronization Queue Management (ASQM)](#active-synchronization-queue-management-asqm)
+      - [Limitation\*\*](#limitation)
+    - [Envoy Adaptive Concurrency](#envoy-adaptive-concurrency)
+      - [Limitations](#limitations-2)
+  - [Conclusion](#conclusion)
+  - [References](#references)
 
 Recently, I have been thinking about concurrency control and overload control system. Overload control mainly has two pieces, detecting overload and handling overload. It is critical for maintaining the reliability from unexpected high load or failure. In industry, oftentimes it falls into SRE team's work. I picked four overload control systems, three from academia works (Breakwater, Protego, Rajomon) and one from cloud-native open-source proxy work (Envoy). In this post, I will analyze their detection mechanism to understand their design, and limitations. Their detailed overload handling algorithms are not the focus of this post. 
 
@@ -81,9 +102,9 @@ During GC pause:
 - Managing memory and stack information
 
 
-### Overload Control System
+## Overload Control System
 
-#### Quick Comparison
+### Quick Comparison
 This is the quick summary of . You can revisit this table after reading the entire section.
 
 **What Each System Can and Cannot See**
@@ -108,7 +129,7 @@ Proxy Level      ← Envoy measures here
     ↓ (gap: network noise, composite metrics, inference lag)
 ```
 
-#### Overview
+### Overview
 When servers receive more requests than they can handle efficiently, performance degrades rapidly. The core of overload control systems consists of two things. *1. how to detect overload* and *2. how to handle it when it happens*. In this post, we are going to focus on the first one, overload detection mechanism.
 
 To discuss about overload detection mechanism, we need to define it first. What's the definition of being overloaded? 
@@ -125,7 +146,7 @@ There are different sources of high latency, for example, CPU overload, I/O over
 
 Let's see how each system is designed to detect overload and what are the limitations of each system.
 
-#### Rajomon
+### Rajomon
 
 NOTE: I am not going to discuss Rajomon's decentralized algorithm deeply; pricing, token, price propagation, per-interface admission control, etc. In this post, I am only focusing on overload detection mechanism.
 
@@ -135,7 +156,7 @@ When a system is CPU-overloaded, goroutines spend more time in the "runnable" st
 
 Hence, Rajomon cannot detect other sources of overhead such as, lock contention overload, I/O-based overload, Memory pressure (GC effect), metwork latency, or application internal queueing.
 
-##### Limitations
+#### Limitations
 
 However, Rajomon has critical limitations. Out of the five categories of the times, Rajomon only sees one type of time.
 
@@ -163,7 +184,7 @@ Similarly, when a goroutine makes a system call for I/O, it calls `runtime.enter
 
 **Cloud-native limitation**: Its current implementation also has limitation to be cloud-native. Rajomon is tightly coupled to Go's runtime internals and relies on Go-specific metrics like `/sched/latencies:seconds`. This creates a fundamental barrier to cloud-native adoption, where services are often written in different languages (Java, Python, Rust, etc.). The same logic can be implemented in other languages, but well I don't know if it is a good approach. It is not cloud friendly and high maintenance cost. And what if the language does not provide such metrics.
 
-#### Breakwater
+### Breakwater
 Breakwater is an overload control system published at OSDI 2019. It has a fundamentally different approach to overload detection by operating at the operating system level rather than the application runtime level. It instruments the *Shenango* operating system to measure actual queuing delays at two critical system bottlenecks in the request processing pipeline, **packet queue time** and **thread queue time**.
 Packet queue time is the time between packet arrival and packet processing by the kernel. Thread queue time is the time between thread creation and thread execution by the OS scheduler (thread queue time is kinda similar to Rajomon's runnable time.)
 
@@ -186,7 +207,7 @@ Hence, what Breakwater detects well are:
 - **OS-level resource contention**: When multiple processes compete for system resources, the OS queues work - visible to Breakwater.
 - **Hardware bottlenecks**: When CPU, memory, or I/O subsystems become saturated, the queuing appears in kernel data structures that Breakwater can observe.
 
-##### Limitations
+#### Limitations
 
 However, Breakwater has some critical limitation especially in cloud environment where multiple containers are running under the same OS kernel and resources.
 In containerized environments that dominate modern deployments, multiple containers share the same OS queues. Therefore, Breakwater would measure **aggregate system queuing**, not per-container queuing. 
@@ -207,14 +228,14 @@ What containers do not isolate are
 - Interrupt handling - hardware interrupts are handled by the shared kernel
 - System call processing - all containers use the same kernel syscall interface
 
-#### Protego
+### Protego
 Protego: Overload Control for Applications with Unpredictable Lock Contention
 
 Protego is an overload control system published at NSDI 2023. The overload control consists of two places. 1. Performance-driven (throughput) admission control and 2. active queue management 
 
 Protego's overload detection mechanism has two components: **Performance-Driven Admission Control (Server level)** before forwarding request and **Active Synchronization Queue Management (Per lock level)** operating during request processing at each lock acqusition point.
 
-##### Performance-Driven Admission Control
+#### Performance-Driven Admission Control
 Protego has **performance-driven** admission control (This high level approach is same as Envoy adaptive concurrency.). Instead of using traditional overload control signals such as CPU utilization, or queueing delay, **it admits load as long as it observes throughput improvements**. It measures efficiency as the slope of the throughput curve, asking *"If I admit X more requests, do I get Y more completed requests?"*.
 
 If throughput improvement with additional load is less than the efficiency threshold or if the drop rate exceeds the maximum drop rate, Protego stops accepting further load. 
@@ -230,7 +251,7 @@ else:
 
 In this algorithm, maximum drop rate and efficiency_threshold are hyperparameters. Efficiency threshold (te): Default 10% in the paper. Efficiency threshold means how much improvement in throughput is required to admit(justify) additional load.
 
-##### Active Synchronization Queue Management (ASQM)
+#### Active Synchronization Queue Management (ASQM)
 
 Unlike Rajomon and Breakwater, which focus on queueing delay caused by CPU resourece contention, Protego focuses on queueing caused by lock contention. A request can experience contention when multiple requests attempt to access the same critical section.
 Protego's active synchronization queue managament(ASQM) detects and handle it. It runs inside the application and operates at every lock acquisition point.
@@ -282,11 +303,7 @@ bool mutex_lock_if_uncongested(mutex_t *);
 bool condvar_wait_if_uncongested(condvar_t *, mutex_t *);
 ```
 
-##### Pros
-- **More application-aware**: ASQM operates at the application level, understanding request semantics and business logic
-- **Proactive**: Can prevent overload rather than just detecting it after it happens
-
-##### Limitation**
+#### Limitation**
 By design, it requires tight integration with application code! Applications must replace standard mutex_lock() calls with mutex_lock_if_uncongested(). In addition, application must handle state cleanup when ASQM drops a request. Also, Protego has Shenango dependency. It will only work with the custom OS.
 These will be a huge barrier to adoption in existing applications or in cloud-native where you cannot modify the application code as infra.
 
@@ -295,10 +312,15 @@ Additionally, Protego ASQM allows requests to be dropped after they have been pa
 Regarding admission control, the reason that it has performance driven admission control is that its ASQM alone can only handle overload caused by lock contention. If CPU resources are overloaded only without lock being bottleneck, then ASQM will not do anything. Hence, you need more general overload control and that is its performance-driven admission control. One might say CPU contention makes the lock release slow and eventually affect the lock contention but it is not direct and the manifestation is not guaranteed to happen always.
 
 Then, two questions. 1. does it work in general for other source of overloads too?, 2. will the algorithm work in microservice architecture application?
-For the question 1, in Protego all other overload sources should be managed by admission control. Load increases -> check the throughput changes -> if throughput increases, then admit more load, if throughput decreases, then reduce the load. They use rate limiting as control mechanism. In other words, any overload that reduces the throughput will be detected by Protego admission controller. Then, we can rewrite the question. If overload happens, does the throughput always decrease? This turns out to be not true! For example, a service might maintain 1000 RPS throughput but with 99th percentile latency increasing from 10ms to 500ms due to I/O bottlenecks. Protego's admission control wouldn't detect this overload. And high tail latency is common.
-For the question 2, 
+
+
+
+**1. does it work in general for other source of overloads too?**
+
+In Protego all other overload sources should be managed by admission control. Load increases -> check the throughput changes -> if throughput increases, then admit more load, if throughput decreases, then reduce the load. They use rate limiting as control mechanism. In other words, any overload that reduces the throughput will be detected by Protego admission controller. Then, we can rewrite the question. If overload happens, does the throughput always decrease? This turns out to be not true! For example, a service might maintain 1000 RPS throughput but with 99th percentile latency increasing from 10ms to 500ms due to I/O bottlenecks. Protego's admission control wouldn't detect this overload. And high tail latency is common.
 
 **2. will the algorithm work in microservice architecture application?**
+
 Let's assume a request flows through three services, A -> B -> C. and to be fair, let's assume that Protego is deployed on all three services.
 
 Example,
@@ -315,7 +337,7 @@ Actually, this is a good behavior. Earlier rejection is always better to prevent
 Another issue is coordination lag. Changes propagate through the chain with delay. Since it is not coordinated, you simply wait for it to propagate by backpressure. At the worst case, it can cause oscillations in load control.
 
 
-#### Envoy Adaptive Concurrency
+### Envoy Adaptive Concurrency
 
 Envoy is a cloud-native proxy designed to handle service-to-service communication in microservices architectures. Often it is deployed as a sidecar. One envoy instance is basically series of filters that process requests and responses. Adaptive concurrency filter is one of those filters that is designed to control the concurrency of requests sent to a backend service based on observed round-trip time (RTT) measurements. It is not a standalone overload control system like the other two, but it can be thought of as an overload control system in the context of preventing performance collapse and maintaining application performance.
 
@@ -362,7 +384,7 @@ Regarding the third point, it is not good because it is coarse not differentiati
 
 The most significant one will be network latency since it is common. And it can happen not only due to actual backbone network failure but also due to back pressure from the downstream.
 
-##### Limitations
+#### Limitations
 
 The limitations of Envoy's adaptive concurrency filter are:
 
@@ -379,7 +401,7 @@ Should we reduce concurrency even when the source of increased RTT is downstream
 
 ***TODO(gangmuk): ... needs more thoughts on this.***
 
-###### Network Noise Pollution
+**Network Noise Pollution**
 What Envoy measures:
 total_RTT = network_latency + server_processing + server_queuing + client_overhead
 
@@ -394,7 +416,7 @@ Network variance: ±50ms between client and server
 
 Signal-to-noise ratio: 10ms / 50ms = 20% signal, 80% noise
 
-###### Multi-Cluster(network) and Heterogenous Cluster(compute)
+**Multi-Cluster(network) and Heterogenous Cluster(compute)**
 
 There are multiple instances for each downstream service and based on where the request is routed, each can experience different latency due to different size of the instances, different load in each instance, or different network latency to each downstream instance. Different requests will travel through different paths (instances) of downstream call graph. However, adaptive concurrency filter on one of upstream service instance does not differentiate where a given request was routed to in each downstream service. 
 
@@ -422,7 +444,8 @@ Adaptive concurrency filter on A1  sees average latency (23 + 34 + 54 + 34) / 4 
 
 The similar problem arises by heterogeneous instances even if all are in the same network cluster with the same network latency. X1 instances have more CPU cores than X2 instances. Assuming round robin load balancing, load will be equally distributed to B1 and B2. and subsequently same from B to C. Adaptive concurrency filter on A1 instance will simply aggregate all the latencies as one group. There are four different paths possible that can be dispatched from A1 instance.
 
-###### No Application Context
+**No Application Context**
+
 Cannot distinguish between "server is overloaded" vs "server is waiting for slow database" vs "network path changed" vs "server is performing legitimate expensive computation."
 
 **Concurrency vs. Queue Length Confusion**: Envoy controls concurrency (number of simultaneous requests) as a proxy for controlling queue length, but these are different concepts. A server might handle high concurrency efficiently with no queuing, or might struggle with low concurrency due to internal bottlenecks.
@@ -431,11 +454,14 @@ Cannot distinguish between "server is overloaded" vs "server is waiting for slow
 
 Request processing involves five distinct time categories, each telling a different story about system health. While Rajomon provides valuable insights into CPU scheduling pressure, Breakwater offers accurate but impractical OS-level measurements, and Envoy provides deployable but imprecise network-level inference, none of these approaches can match the accuracy and practicality of direct application-level queue measurement.
 
-#### References
-Envoy Adaptive Concurrency: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/adaptive_concurrency_filter
+## References
 
-Rajomon: Decentralized and Coordinated Overload Control for Latency-Sensitive Microservices, NSDI 2025
+[Rajomon: Decentralized and Coordinated Overload Control for Latency-Sensitive Microservices, NSDI 2025](https://www.usenix.org/conference/nsdi25/presentation/rajomon)
 
-Overload Control for µs-scale RPCs with Breakwater, OSDI 2020
+[Overload Control for µs-scale RPCs with Breakwater, OSDI 2020](https://www.usenix.org/conference/osdi20/presentation/breakwater)
 
-Google's "The site reliability workbook": https://sre.google/workbook/table-of-contents/
+[Protego: Overload Control for Applications with Unpredictable Lock Contention](https://www.usenix.org/conference/nsdi23/presentation/cho-inho)
+
+[Envoy Adaptive Concurrency](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/adaptive_concurrency_filter)
+
+[The site reliability workbook](https://sre.google/workbook/table-of-contents/)

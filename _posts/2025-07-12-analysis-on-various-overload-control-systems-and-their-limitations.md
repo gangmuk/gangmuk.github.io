@@ -109,12 +109,12 @@ This is the quick summary of . You can revisit this table after reading the enti
 
 **What Each System Can and Cannot See**
 
-| System | Measurement Layer | What It Sees | What It Misses | Deployment Reality | Call garph-aware |
+| System | Measurement Layer | What It Sees | What It Misses | Deployment Reality | Microserivce-aware |
 |--------|------------------|--------------|----------------|-------------------|
 | **Rajomon** | Go Runtime Scheduler | Goroutine scheduling delays | Lock contention, I/O waits, GC pauses, app-level queuing | ❌ Language-specific, incomplete overload detection | ✅ |
 | **Breakwater** | OS Kernel Queues | True OS-level queuing | Application logic, multi-tenant noise, container isolation | ❌ Requires custom OS, incompatible with cloud | ❌ |
 | **Protego** | Application Level | Lock contention delays, throughput efficiency | Network delays, OS-level queuing, non-lock bottlenecks | ❌ Requires application code changes, custom OS dependency | ❌ |
-| **Envoy** | Network RTT | End-to-end latency changes | Network noise, non-queuing delays, root cause ambiguity | ✅ Deployable anywhere, but inaccurate | ❌ |
+| **Envoy** | end-to-end RTT | End-to-end latency changes | Network noise, non-queuing delays, root cause ambiguity | Easy but high overhead | ❌ |
 
 Each system operates at a different abstraction level, creating measurement gaps. The higher you measure, the more application context you have but generally the less universally deployable. The lower you measure, the more universally deployable but the less relevant to application specific behavior.
 

@@ -6,6 +6,9 @@ blurb: "A look at an example post using Bay Jekyll theme."
 og_image: /assets/img/content/post-example/Banner.jpg
 ---
 
+initial date: 2024-05-14
+updated: 2025-07-13
+
 #### Intuition behind NVIDIA GPU architecture
 
 Whenever accelerator company launches their new accelerator, they always say "We have 1000 TFLOPS" or "We have 10x more FLOPS than the previous generation". Most of companies say our accelerator has higher max FLOPS than NVIDIA's XX GPU. Even then there are reasons people don't buy them and there is a reason that NVIDIA is the highest marketcap company in the world. There must be a reason. Instead of just saying "yeah it is CUDA moat", let's try to understand it from technical perspective.

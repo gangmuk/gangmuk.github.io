@@ -1,9 +1,9 @@
 # Analysis on Various Overload Control Systems and their Limitaions
 
-Recently, I have been thinking about overload control system. Overload control is a mechanism to detect when a system is overloaded and take action to prevent performance degradation or service outages. It is critical for maintaining the reliability. In industry, oftentimes it falls into SRE team's work. I picked three overload control systems from academia works (Breakwater, Protego, Rajomon) and concurruncy control in cloud-native open-source proxy (Envoy) to understand their design, and limitations.
+Recently, I have been thinking about concurrency control and overload control system. Overload control mainly has two pieces, detecting overload and handling overload. It is critical for maintaining the reliability from unexpected high load or failure. In industry, oftentimes it falls into SRE team's work. I picked four overload control systems, three from academia works (Breakwater, Protego, Rajomon) and one from cloud-native open-source proxy work (Envoy). In this post, I will analyze their detection mechanism to understand their design, and limitations. Their detailed overload handling algorithms are not the focus of this post. 
 
 ## Background
-Before going into analysis of each system. I will talk about different states of thread and different times that a thread go through to help understand later part of this post. I will use Go routine as a concrete example. It can be understood as general concept too in other languages. 
+Before going into analysis of each system, let's talk about different states of thread and different categories of time that a thread/request goes through in its lifecycle. Different overload control systems use different thread state and time catogory, depending on their focus. I will use Go routine as a concrete example. It can be understood as general concept too in other languages. (You can roughly think of Go routine as a thread in other languages like C++ or Python. I will use them interchangeably in this post.)
 
 ### Goroutine States
 Goroutine is a lightweight software thread managed by the Go runtime like C++'s `std::thread` or Python's `threading.Thread`. Goroutines are designed to be cheap to create and easy to manage, allowing developers to write concurrent programs without worrying about the underlying thread management. The Go runtime manages goroutines through a well-defined state machine. There are five primary states a goroutine can be based on its execution context.
@@ -20,22 +20,7 @@ Goroutine is a lightweight software thread managed by the Go runtime like C++'s 
 
 This is the State Machine of Goroutine States based on runtime events:
 
-```mermaid
-graph TD
-    A[Runnable] -->|Scheduler assigns thread| B[Running]
-    B -->|Blocks on I/O, lock, channel| C[Waiting]
-    B -->|Preemption or yield| A
-    C -->|Condition satisfied| A
-    B -->|System call| D[Syscall]
-    D -->|System call completes| A
-    B -->|Goroutine finishes| E[Dead]
-    
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
-    style C fill:#ffecb3
-    style D fill:#f8bbd9
-    style E fill:#ffcdd2
-```
+![Go routine state machine](go_routine_state_machine.png)
 
 - **Runnable → Running**: Scheduler assigns the goroutine to an available OS thread
 - **Running → Waiting**: Goroutine blocks on I/O, lock, channel, or other synchronization primitive
@@ -47,8 +32,9 @@ graph TD
 
 ### Request Processing Time Breakdown
 
-When a request is processed by a server, it goes through various stages that can be categorized into four different types of times, Running, Runnable, Non-runnable, Context Switch, and GC Suspended.
-In goroutine example, I try to map those goroutine states to times.
+When a thread is processed by a server, it goes through various stages that can be categorized into five different types of times a thread can be at a given time, Running, Runnable, Non-runnable, Context Switch, and GC Suspended.
+
+Let's map each goroutine state to time category.
 
 | Time Category | Goroutine State | Example Scenario | Is Included in Go Runtime Scheduling Latency |
 |---------------|-----------------|------------------|---------------------------|
@@ -58,31 +44,31 @@ In goroutine example, I try to map those goroutine states to times.
 | GC Suspended | Suspended | Garbage collection stop-the-world | No |
 | Context Switch | ??? | State changes, scheduler overhead | No |
 
-* The last column introduces new term, 'Go runtime scheduling latency'. It has time that a goroutine spent in runnabale state, which means times spent on waitng to be scheduled (time between runnable and running state). In Go runtime's library, you can get this time by calling `/sched/latencies:seconds` metric.
+* The last column introduces new term, 'Go runtime scheduling latency'. It has time that a thread spent in runnabale state, which means times spent on waitng to be scheduled (time between runnable and running state). In Go runtime's library, you can get this time by calling `/sched/latencies:seconds` metric.
 
-* Don't get bothered by context switch overhead. We will consider it as a negligible overhead in this post, which is true most of cases.
+* Don't get bothered by context switch overhead. We will consider it negligible in this post.
 
-**Running Time**: The goroutine is executing application code on a CPU core. This includes performing calculations, executing business logic, processing data structures, and any active code execution.
+**Running Time**: The thread is executing application code on a CPU core. This includes performing calculations, executing business logic, processing data structures, and any active code execution.
 
-**Runnable Time**: The goroutine has work to do and is ready to execute, but is waiting for an available CPU thread. This occurs when:
-- The system has more goroutines ready to work than available CPU cores
-- High concurrency scenarios where goroutines compete for limited threads
+**Runnable Time**: The thread has work to do and is ready to execute, but is waiting for an available CPU thread. This occurs when:
+- The system has more threads ready to work than available CPU cores
+- High concurrency scenarios where threads compete for limited threads
 - CPU-intensive workloads with many parallel operations
 
 This time indicates resource contention at the system level. High runnable time means the system is CPU-bound.
 
-**Non-runnable Time**: The goroutine is blocked, waiting for something to happen before it can continue. It's not ready to use CPU time because it's waiting for an external condition.
+**Non-runnable Time**: The thread is blocked, waiting for something to happen before it can continue. It's not ready to use CPU time because it's waiting for an external condition.
 
 This includes:
-- **Waiting for locks**: When a goroutine tries to acquire a mutex that another goroutine is holding, it gets parked until the lock becomes available.
+- **Waiting for locks**: When a thread tries to acquire a mutex that another thread is holding, it gets parked until the lock becomes available.
 - **Waiting for I/O operations**: Network calls, database queries, file operations - anything that involves waiting for external systems.
 - **Waiting for channels**: When sending to a full channel or receiving from an empty channel.
 - **System calls**: File operations, network operations, any interaction with the operating system kernel.
 
-During non-runnable time, the goroutine isn't competing for CPU resources. It's waiting for something else to happen first.
+During non-runnable time, the thread isn't competing for CPU resources. It's waiting for something else to happen first.
 
-**GC Suspended Time**: Time when the garbage collector forces all goroutines to pause. During "stop-the-world" phases, goroutines that were running or ready to run get suspended until garbage collection completes.
-Not all goroutines get suspended during GC. If a goroutine was already non-runnable (blocked on I/O), it stays in that state since it wasn't running Go code anyway.
+**GC Suspended Time**: Time when the garbage collector forces all threads to pause. During "stop-the-world" phases, threads that were running or ready to run get suspended until garbage collection completes. This only happens in languages with garbage collection like Go, Java, or Python not in C, C++, or Rust.
+If a thread was already non-runnable (blocked on I/O), it stays in that state since it wasn't running Go code anyway.
 
 During GC pause:
 - Goroutines executing Go code → get suspended
@@ -98,7 +84,7 @@ During GC pause:
 ### Overload Control System
 
 #### Quick Comparison
-This is the quick summary. You can revisit this table after reading the entire section.
+This is the quick summary of . You can revisit this table after reading the entire section.
 
 **What Each System Can and Cannot See**
 
@@ -107,43 +93,41 @@ This is the quick summary. You can revisit this table after reading the entire s
 | **Rajomon** | Go Runtime Scheduler | Goroutine scheduling delays | Lock contention, I/O waits, GC pauses, app-level queuing | ❌ Language-specific, incomplete overload detection |
 | **Breakwater** | OS Kernel Queues | True OS-level queuing | Application logic, multi-tenant noise, container isolation | ❌ Requires custom OS, incompatible with cloud |
 | **Envoy** | Network RTT | End-to-end latency changes | Network noise, non-queuing delays, root cause ambiguity | ✅ Deployable anywhere, but inaccurate |
-| **Direct Queue Measurement** | Application Queue | Actual request queuing | Nothing (direct measurement) | ✅ Practical, accurate, cloud-native |
-
 
 Each system operates at a different abstraction level, creating a hierarchy of measurement gaps. The higher you measure, the more application context you have but the less universally deployable. The lower you measure, the more universally deployable but the less relevant to application behavior.
 
 ```
-Application Level  ← Direct queue measurement (optimal)
+Application Level
     ↓ (gap: business logic, request prioritization)
 Go Runtime Level   ← Rajomon measures here
     ↓ (gap: language-specific, lock contention, I/O waits)
 OS Kernel Level    ← Breakwater measures here
-    ↓ (gap: multi-tenancy, container isolation, deployment reality)
+    ↓ (gap: multi-tenancy, container isolation, deployment 
+    reality)
 Proxy Level      ← Envoy measures here
     ↓ (gap: network noise, composite metrics, inference lag)
 ```
 
 #### Overview
-I will start to explain in details about each system. 
+When servers receive more requests than they can handle efficiently, performance degrades rapidly. The core of overload control systems consists of two things. *1. how to detect overload* and *2. how to handle it when it happens*. In this post, we are going to focus on the first one, overload detection mechanism.
 
-Now let's look at each overload control system. When servers receive more requests than they can handle efficiently, performance degrades rapidly. The core of overload control systems consists of two things. *1.* how to detect overload and *2.* how to handle it when it happens. In this post, we are going to focus on the first one, overload detection mechanism.
+To discuss about overload detection mechanism, we need to define it first. What's the definition of being overloaded? 
+It is "when the system cannot handle incoming requests without significantly degrading performance". Okay, then how should we detect the performance degradation?
 
-To discuss about overload detection mechanism, we need to define it first. What should be defined as overload? 
-The definition of overload is "when the system cannot handle incoming requests without degrading performance". Okay, then how should we detect the performance degradation?
+High CPU utilization? High load (RPS)? High memory usage? High error rate? High queue length? High queueing delay? What queue should we use? High latency? What latency? Compute, network, end-to-end? or all of them?
 
-High CPU utilization? High load (RPS)? High memory usage? High error rate? High queue length? High queueing delay? High latency? or all of them?
+Good overload detection should be quick and the detection technique should be  easy to apply and universal. CPU utilization sounds reasonable. This metric is easy to get and exists everywhere. However, it might be slow. High memory usage is not the direct load indicator and will be definitely too risky to use it alone (OOM crashes the program. This is the worst). High error rate? Even if it is overloaded, requests might not fail immediately, so high error rate might not be the best indicator too. RPS is not a good indicator either because it is not directly related to performance degradation. 
 
-Ideally, it should be quick to detect. Maybe high CPU utilization will be too slow. High memory usage will be definitely too risky. Even if it is overloaded, requests might not fail immediately, so high error rate might not be the best indicator too.
+Rajomon, Breakwater, and Protego use "queuing delay" to detect overload. They try to either guess the queueing or directly observe the queue. Queue can be built up in various places, such as CPU thread queue, I/O queue, lock queue, network queue, etc. Each focus on different queues. 
+On the other hand, Envoy adaptive concurrency controller uses end-to-end RTT. (Is it basically same as queueing delay? We will discuss it later in this post.)
 
-Both Rajomon and Breakwater detects overload using "queuing delay". They try to either guess the queueing or directly observe the queue. On the other hand, Envoy adaptive concurrency filter defines overload as "increased round-trip time (RTT)". Is it basically same as queueing delay? We will discuss it later in this post.
+There are different sources of high latency, for example, CPU overload, I/O overload, lock contention, memory pressure, network failure, etc. CPU overload makes thread wait in the queue (runnable, assuming it is satisfying the runnnable conditions), I/O overload makes thread wait for I/O operation to complete (non-runnable), lock contention makes thread wait for lock to be released (non-runnable), memory pressure triggers garbage collection in Go and Python (non-runnable), network failure makes thread wait for the response from downstream service (non-runnable) consuming CPU and memory resources.
 
-There are different sources of high latency, for example, CPU overload, I/O overload, lock contention, memory pressure, network failure, etc. CPU overload makes thread wait in the queue (runnable), I/O overload makes thread wait for I/O operation to complete (non-runnable), lock contention makes thread wait for lock to be released (non-runnable), memory pressure triggers garbage collection in Go and Python (non-runnable), network failure makes thread wait for the response from downstream service (non-runnable) consuming CPU and memory resources.
-
-Let's see how each system detects overload and what are the limitations of each system.
+Let's see how each system is designed to detect overload and what are the limitations of each system.
 
 #### Rajomon
 
-NOTE: I am not discussing Rajomon's decentralized part; pricing, token, price propagation, per-interface admission control, etc. In this post, I am only focusing on overload detection mechanism.
+NOTE: I am not going to discuss Rajomon's decentralized algorithm deeply; pricing, token, price propagation, per-interface admission control, etc. In this post, I am only focusing on overload detection mechanism.
 
 Rajomon is a decentralized overload control system published at NSDI 2025. The core of its overload detection mechanism is to measure queueing delay and convert it to price. The price is calculated for each interface in each service. And all the prices of downsteram service will propgagte to the upstream. Upstream services receives updated price of downstream service will add them up. At the client (entrance), each request gets a certain number of tokens assigned. While traveling, at every hop, Rajomon (implemented as grpc intercept) will check if the request has enough token, higher measures "runnable time" - the time goroutines spend waiting to be scheduled on CPU threads. It uses Go's built-in runtime metric `/sched/latencies:seconds` to detect when the system is under scheduling pressure.
 Rajomon monitors the Go runtime's scheduling histogram, which tracks how long goroutines wait between becoming "runnable" and actually starting to execute.

@@ -460,8 +460,8 @@ Request processing involves five distinct time categories, each telling a differ
 
 [Overload Control for µs-scale RPCs with Breakwater, OSDI 2020](https://www.usenix.org/conference/osdi20/presentation/breakwater)
 
-[Protego: Overload Control for Applications with Unpredictable Lock Contention](https://www.usenix.org/conference/nsdi23/presentation/cho-inho)
+[Protego: Overload Control for Applications with Unpredictable Lock Contention, NSDI 2023](https://www.usenix.org/conference/nsdi23/presentation/cho-inho)
 
 [Envoy Adaptive Concurrency](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/adaptive_concurrency_filter)
 
-[The site reliability workbook](https://sre.google/workbook/table-of-contents/)
+[The Site Reliability Workbook](https://sre.google/workbook/table-of-contents/)

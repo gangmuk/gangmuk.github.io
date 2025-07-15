@@ -88,22 +88,22 @@ This is the quick summary of . You can revisit this table after reading the enti
 
 **What Each System Can and Cannot See**
 
-| System | Measurement Layer | What It Sees | What It Misses | Deployment Reality |
+| System | Measurement Layer | What It Sees | What It Misses | Deployment Reality | Call garph-aware |
 |--------|------------------|--------------|----------------|-------------------|
-| **Rajomon** | Go Runtime Scheduler | Goroutine scheduling delays | Lock contention, I/O waits, GC pauses, app-level queuing | ❌ Language-specific, incomplete overload detection |
-| **Breakwater** | OS Kernel Queues | True OS-level queuing | Application logic, multi-tenant noise, container isolation | ❌ Requires custom OS, incompatible with cloud |
-| **Envoy** | Network RTT | End-to-end latency changes | Network noise, non-queuing delays, root cause ambiguity | ✅ Deployable anywhere, but inaccurate |
+| **Rajomon** | Go Runtime Scheduler | Goroutine scheduling delays | Lock contention, I/O waits, GC pauses, app-level queuing | ❌ Language-specific, incomplete overload detection | ✅ |
+| **Breakwater** | OS Kernel Queues | True OS-level queuing | Application logic, multi-tenant noise, container isolation | ❌ Requires custom OS, incompatible with cloud | ❌ |
+| **Protego** | Application Level | Lock contention delays, throughput efficiency | Network delays, OS-level queuing, non-lock bottlenecks | ❌ Requires application code changes, custom OS dependency | ❌ |
+| **Envoy** | Network RTT | End-to-end latency changes | Network noise, non-queuing delays, root cause ambiguity | ✅ Deployable anywhere, but inaccurate | ❌ |
 
-Each system operates at a different abstraction level, creating a hierarchy of measurement gaps. The higher you measure, the more application context you have but the less universally deployable. The lower you measure, the more universally deployable but the less relevant to application behavior.
+Each system operates at a different abstraction level, creating measurement gaps. The higher you measure, the more application context you have but generally the less universally deployable. The lower you measure, the more universally deployable but the less relevant to application specific behavior.
 
 ```
 Application Level
     ↓ (gap: business logic, request prioritization)
 Go Runtime Level   ← Rajomon measures here
     ↓ (gap: language-specific, lock contention, I/O waits)
-OS Kernel Level    ← Breakwater measures here
-    ↓ (gap: multi-tenancy, container isolation, deployment 
-    reality)
+OS Kernel Level    ← Breakwater and Protego measures here
+    ↓ (gap: multi-tenancy, container isolation, deployment reality)
 Proxy Level      ← Envoy measures here
     ↓ (gap: network noise, composite metrics, inference lag)
 ```
@@ -377,7 +377,7 @@ Should we reduce concurrency even when the source of increased RTT is network la
 
 Should we reduce concurrency even when the source of increased RTT is downstream not server queuing?
 
-***TODO: ... needs more thoughts on this.***
+***TODO(gangmuk): ... needs more thoughts on this.***
 
 ###### Network Noise Pollution
 What Envoy measures:

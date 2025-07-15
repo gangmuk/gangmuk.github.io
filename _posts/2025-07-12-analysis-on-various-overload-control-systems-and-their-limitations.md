@@ -118,7 +118,7 @@ This is the quick summary of . You can revisit this table after reading the enti
 
 Each system operates at a different abstraction level, creating measurement gaps. The higher you measure, the more application context you have but generally the less universally deployable. The lower you measure, the more universally deployable but the less relevant to application specific behavior.
 
-```
+```text
 Application Level
     ↓ (gap: business logic, request prioritization)
 Go Runtime Level   ← Rajomon measures here
@@ -189,7 +189,7 @@ Breakwater is an overload control system published at OSDI 2019. It has a fundam
 Packet queue time is the time between packet arrival and packet processing by the kernel. Thread queue time is the time between thread creation and thread execution by the OS scheduler (thread queue time is kinda similar to Rajomon's runnable time.)
 
 Based on them, Breakwater defines the total queuing delay as:
-```
+```text
 Total queuing delay = max(packet_queue_delay) + max(thread_queue_delay)
 ```
 
@@ -274,7 +274,7 @@ else:
 ```
 
 In timeline visualization, it looks like
-```
+```text
 <--------------------------------------E2E-------------------------------------->
 
 <---Network-in--->
@@ -298,7 +298,7 @@ Network-out: network latency (outbound)
 
 
 To use Protego ASQM, the application should be rewritten to replace existing lock codes with the following Protego APIs. And to use this APIs, the application must run on the custom OS.
-```go
+```c++
 bool mutex_lock_if_uncongested(mutex_t *);
 bool condvar_wait_if_uncongested(condvar_t *, mutex_t *);
 ```
@@ -324,7 +324,7 @@ In Protego all other overload sources should be managed by admission control. Lo
 Let's assume a request flows through three services, A -> B -> C. and to be fair, let's assume that Protego is deployed on all three services.
 
 Example,
-```
+```text
 Service C was overloaded.
 Service C would detect its overload and reduce admission.
 And now Service B would see reduced throughput due to C's admission control. Remember C is dropping and that will be manifested to B's throughput.
@@ -355,7 +355,7 @@ The core insight is that as concurrency approaches server capacity, response tim
 
 The key distintction between the above two overload control system's detection mechanism and Envoy adaptive concurrency is that it measures the RTT directly. It is simpler as in it only relies on RTT which is always observable and universal all applications. 
 
-```
+```text
 1. Find min RTT (every X seconds):
    - concurrency limit = min concurrency limit, e.g., 3
    - Measure RTT and update min_rtt
@@ -370,7 +370,7 @@ The key distintction between the above two overload control system's detection m
 ```
 
 Envoy's "Queuing Detection" 
-```
+```text
 if RTT_current - RTT_minimum > threshold AND RTT_gradient > gradient_threshold
     Queueing = True 
 else

@@ -57,13 +57,13 @@ When a thread is processed by a server, it goes through various stages that can 
 
 Let's map each goroutine state to time category.
 
-| Time Category | Goroutine State | Example Scenario | Is Included in Go Runtime Scheduling Latency |
+| Time Category | Goroutine State | Example Scenario |
 |---------------|-----------------|------------------|---------------------------|
-| Running | Running | Executing business logic, performing calculations | No (not latency) |
-| Runnable | Runnable | Waiting for CPU thread, high concurrency | Yes  |
-| Non-runnable | Waiting/Syscall | Blocked on mutex, I/O operations, channels, file operations | No |
-| GC Suspended | Suspended | Garbage collection stop-the-world | No |
-| Context Switch | ??? | State changes, scheduler overhead | No |
+| Running | Running | Executing business logic, performing calculations  |
+| Runnable | Runnable | Waiting for CPU thread, high concurrency |
+| Non-runnable | Waiting/Syscall | Blocked on mutex, I/O operations, channels, file operations |
+| GC Suspended | Suspended | Garbage collection stop-the-world |
+| Context Switch | ??? | State changes, scheduler overhead |
 
 * The last column introduces new term, 'Go runtime scheduling latency'. It has time that a thread spent in runnabale state, which means times spent on waitng to be scheduled (time between runnable and running state). In Go runtime's library, you can get this time by calling `/sched/latencies:seconds` metric.
 

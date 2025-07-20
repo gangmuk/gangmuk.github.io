@@ -52,7 +52,7 @@ Most likely, you can find me on 3rd floor at Siebel Center for Computer Science 
 
   <li>Nov 2023 | Gave a talk at EnvoyCon '23 about <em>SLATE</em>, Chicago, IL. <a href="https://youtu.be/iBQaaGBQVMA?si=8dB91JyVAFoTUVUj">talk</a></li>
 
-  <li>Gave a talk at IstioCon '23 about <em>SLATE</em>, Virtual.</li>
+  <li>Mar 2023 | Gave a talk at IstioCon '23 about <em>SLATE</em>, Virtual.</li>
 </ul>
 
 ## Publication

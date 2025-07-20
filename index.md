@@ -40,13 +40,13 @@ Most likely, you can find me on 3rd floor at Siebel Center for Computer Science 
 
 ## News!
 <ul>
-  <li>Jul, 2025 | <em><b>SLATE: Service Layer Traffic Engineering</b></em> accepted to <em>USENIX NSDI '26</em>, Renton, WA.</li>
+  <li>Jul, 2025 | <em><b>SLATE: Service Layer Traffic Engineering</b></em> was accepted to <em>USENIX NSDI '26</em>, Renton, WA.</li>
 
   <li>Jan 2025 | Started internship at Bytedance, Compute Infra team, Seattle. Cloud-native infrastructure for GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)</li>
 
-  <li>Sep 2024 | <em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a>. See you at Irvine, CA!</li>
+  <li>Sep 2024 | <em><b>Opportunities and Challenges in Service Layer Traffic Engineering</b></em> was accepted to <a href="https://conferences.sigcomm.org/hotnets/2024/accepted.html">HotNets '24</a>. See you at Irvine, CA!</li>
 
-  <li>Apr 2024 | <em><b>Kivi</b></em> accepted to USENIX ATC '24, Santa Clara, CA. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper (Thank USENIX ATC for the travel grant)</a></li>
+  <li>Apr 2024 | <em><b>Kivi</b></em> was accepted to USENIX ATC '24, Santa Clara, CA. <a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper (Thank USENIX ATC for the travel grant)</a></li>
 
   <li>Nov 2023 | Gave a talk at KubeCon '23 about <em>Kivi</em>, Chicago, IL. <a href="https://www.youtube.com/watch?v=EEj8ptQmZmY&t=1s">talk</a></li>
 

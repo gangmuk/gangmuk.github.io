@@ -10,7 +10,7 @@
     <div class="search-controls" style="margin-bottom: 20px; text-align: center;">
       <!-- First line: Text search -->
       <div style="margin-top: 20px; margin-bottom: 15px;">
-        <input type="text" id="search-input" placeholder="Search photos with title, objects, location, or sentiments..." style="padding: 8px; width: 60%; max-width: 500px; position: relative; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s ease;">
+        <input type="text" id="search-input" placeholder="Search photos with title, objects, location, color, or sentiments..." style="padding: 8px; width: 60%; max-width: 500px; position: relative; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s ease;">
       </div>
       
       <style>
@@ -668,14 +668,18 @@
         const objects = (itemData.objects || '').toLowerCase();
         const city = (itemData.city || '').toLowerCase();
         const country = (itemData.country || '').toLowerCase();
-        const sentiments = (itemData.sentiment || '').toLowerCase();
+        const sentiment = (itemData.sentiment || '').toLowerCase();
+        const color = (itemData.color || '').toLowerCase();
         
         // Search in both title and objects fields
         const matchesSearch = !searchTerm || 
                               title.includes(searchTerm) || 
                               objects.includes(searchTerm) ||
                               city.includes(searchTerm) ||
+                              color.includes(searchTerm) ||
+                              sentiment.includes(searchTerm) ||
                               country.includes(searchTerm);
+                              
         const matchesCountry = !selectedCountry || itemData.country === selectedCountry;
         const matchesCity = !selectedCity || itemData.city === selectedCity;
         
@@ -747,7 +751,7 @@
         📍 ${item.city || 'Unknown City'}, ${item.country || 'Unknown Country'}
       </div>
       <div class="tooltip-sentiment">
-        ${item.sentiment || 'A beautiful moment captured! ✨'}
+        ${item.color || ""}
       </div>
       <div class="tooltip-hint">
         💡 Click again to view full size

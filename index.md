@@ -114,3 +114,30 @@ In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), J
 <i><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</i><br>
 In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.
 </div>
+
+## Experiences
+
+<div class="publication-item">
+Bytedance, Seattle, Compute Infra team, Research intern, 2025 Jan - Jun
+<br>
+</div>
+<div class="publication-item">
+Rebellions, Seongnam, Korea, Software engineer, 2025 Jul - Apr
+<br>
+</div>
+<div class="publication-item">
+Ghent University, Ghent, Belgium, Media Lab, Research intern, 2018 Jan - Jun
+<br>
+</div>
+
+## Others Facts
+
+### Sports
+I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennnis, and more.
+<br>
+
+### Backpacking
+In the past, I enjoyed rather extreme backpacking trips, mostly solo trips. Extreme as in no plan, no reservation (hotel or transportation), just a backpack and taking a flight to a new place by myself, not knowing where to go other than the first city. It is like an unopened gift box. I did it intentionally to meet as many new and diverse people as possible and hidden gems in the world. And it definitely worked.
+This extreme style of traveling started from a solo backpacking that I made at 15 years old to Japan where I lost all the cashes I had and cried on a random street.
+The places I have been are from Japan, Thailand, India, Nepal, Myammar, Cambodia, Morroco, all Europe countries except for the north part, etc. 
+<br>

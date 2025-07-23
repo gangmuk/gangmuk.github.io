@@ -1,37 +1,70 @@
 ---
 items:
-- city: Osaka
-  color: gray, black, beige, silver, navy
-  country: Japan
+- city: Klamath
+  color: black, brown
+  country: CA
   image:
-    alt: Osaka,Japan,sleepy kid on a bike rear seat
-    src: /assets/img/photos_optimized/Osaka,Japan,sleepy kid on a bike rear seat.JPG
-  objects: person,person,bicycle,chair,handbag
+    alt: Klamath,CA,raw horizon
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,raw
+      horizon.JPG
+  objects: ''
   sentiment: ''
   timestamp: ''
-  title: Osaka,Japan,sleepy kid on a bike rear seat
-- city: Darjeeling
-  color: silver, brown, gray, black, beige, pink, navy
-  country: India
+  title: Klamath,CA,raw horizon
+- city: Fort Bragg
+  color: gray, black, bright_gray
+  country: CA
   image:
-    alt: Darjeeling,India,cool cleaning guy at stay
-    src: /assets/img/photos_optimized/Darjeeling,India,cool cleaning guy at stay.JPG
-  objects: person,chair,bed,bed
+    alt: Fort Bragg,CA,I like walking together
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,I
+      like walking together.JPG
+  objects: ''
   sentiment: ''
   timestamp: ''
-  title: Darjeeling,India,cool cleaning guy at stay
-- city: Renton
-  color: gray, silver, black, navy, brown, pink, beige
-  country: WA
+  title: Fort Bragg,CA,I like walking together
+- city: Klamath
+  color: ''
+  country: CA
   image:
-    alt: Renton,WA,our usual table looking
-    src: /assets/img/photos_optimized/Renton,WA,our usual table looking.jpg
-  objects: cup,bowl,bottle,person,laptop,chair,dining table,laptop,chair,bottle,fork
+    alt: Klamath,CA,aura centered
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,aura
+      centered.jpg
+  objects: ''
   sentiment: ''
   timestamp: ''
-  title: Renton,WA,our usual table looking
+  title: Klamath,CA,aura centered
+- city: Jeju
+  color: brown, orange, black, purple
+  country: Korea
+  image:
+    alt: Jeju,Korea,Flaming sunset before typoon
+    src: /assets/img/photos_optimized/Jeju,Korea,Flaming sunset before typoon.jpg
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Jeju,Korea,Flaming sunset before typoon
+- city: Yangon
+  color: sky_blue, brown, gray
+  country: Myanmar
+  image:
+    alt: Yangon,Myanmar,Golden temple
+    src: /assets/img/photos_optimized/Yangon,Myanmar,Golden temple.jpg
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Yangon,Myanmar,Golden temple
+- city: Sahara Desert
+  color: sky_blue, orange, pink, bright_gray, brown
+  country: Morocco
+  image:
+    alt: Sahara Desert,Morocco,walking on desert
+    src: /assets/img/photos_optimized/Sahara Desert,Morocco,walking on desert.jpg
+  objects: person
+  sentiment: ''
+  timestamp: ''
+  title: Sahara Desert,Morocco,walking on desert
 - city: Seattle
-  color: gray, black, silver
+  color: gray, black, bright_gray
   country: WA
   image:
     alt: Seattle,WA,me on the mirror with leica q
@@ -40,18 +73,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Seattle,WA,me on the mirror with leica q
-- city: Seattle
-  color: gray, black, beige, silver
-  country: WA
-  image:
-    alt: Seattle,WA,small cute Zoka sign
-    src: /assets/img/photos_optimized/Seattle,WA,small cute Zoka sign.JPG
-  objects: car
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,small cute Zoka sign
 - city: Renton
-  color: gray, silver, beige, black
+  color: gray, bright_gray, sky_blue, black
   country: WA
   image:
     alt: Renton,WA,it was nice sunday
@@ -60,8 +83,18 @@ items:
   sentiment: ''
   timestamp: ''
   title: Renton,WA,it was nice sunday
+- city: Chefchauen
+  color: black, sky_blue, gray, beige, bright_gray, navy
+  country: Morocco
+  image:
+    alt: Chefchauen,Morocco,Blue village panarama
+    src: /assets/img/photos_optimized/Chefchauen,Morocco,Blue village panarama.jpg
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Chefchauen,Morocco,Blue village panarama
 - city: Annapurna
-  color: navy, black, gray
+  color: black, navy, sky_blue
   country: Nepal
   image:
     alt: Annapurna,Nepal,view,2
@@ -77,8 +110,40 @@ items:
     has_exif: false
     raw_timestamps: {}
   title: Annapurna,Nepal,view,2
+- city: Fort Bragg
+  color: gray, pink, black, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,waves on seaside beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,waves
+      on seaside beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,waves on seaside beach
+- city: Iksan
+  color: ''
+  country: Korea
+  image:
+    alt: Iksan,Korea,when I was baby
+    src: /assets/img/photos_optimized/Iksan,Korea,when I was baby.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Iksan,Korea,when I was baby
+- city: Renton
+  color: gray, black, sky_blue, beige, bright_gray, brown
+  country: WA
+  image:
+    alt: Renton,WA,Cleaning fallen leaves and branches on snoopy pj
+    src: /assets/img/photos_optimized/Renton,WA,Cleaning fallen leaves and branches
+      on snoopy pj.jpg
+  objects: person
+  sentiment: ''
+  timestamp: ''
+  title: Renton,WA,Cleaning fallen leaves and branches on snoopy pj
 - city: Champaign
-  color: black, gray, silver, brown, pink, beige
+  color: black, gray, bright_gray, brown, pink, beige
   country: IL
   image:
     alt: Champaign,IL,on the train to chicago
@@ -97,35 +162,49 @@ items:
   sentiment: ''
   timestamp: ''
   title: Kohtao,Thailand,immersion
-- city: Ulsan
-  color: brown, gray, silver, black, beige, navy
-  country: Korea
+- city: Marrakesh
+  color: brown, black, gray, bright_gray, sky_blue, white
+  country: Morocco
   image:
-    alt: Ulsan,Korea,UNIST engineering building
-    src: /assets/img/photos_optimized/Ulsan,Korea,UNIST engineering building.jpeg
-  objects: person,person,person,person,person,person,person,person,person,person,person,person
+    alt: Marrakesh,Morocco,hand squeezed orange juice in the morning
+    src: /assets/img/photos_optimized/Marrakesh,Morocco,hand squeezed orange juice
+      in the morning.jpg
+  objects: person,dining table,cup,bowl,bowl
   sentiment: ''
   timestamp: ''
-  title: Ulsan,Korea,UNIST engineering building
+  title: Marrakesh,Morocco,hand squeezed orange juice in the morning
 - city: Essaouira
-  color: gray, silver, beige, navy
+  color: gray, sky_blue, bright_gray, navy
   country: Morocco
   image:
     alt: Essaouira,Morocco,with surfing board
     src: /assets/img/photos_optimized/Essaouira,Morocco,with surfing board.png
   objects: person,surfboard,person,person
   sentiment: ''
-  timestamp:
-    all_timestamps: {}
-    camera_info: {}
-    datetime_digitized: null
-    datetime_modified: null
-    datetime_original: null
-    has_exif: false
-    raw_timestamps: {}
+  timestamp: ''
   title: Essaouira,Morocco,with surfing board
+- city: Bagan
+  color: sky_blue, gray, black, brown, bright_gray
+  country: Myanmar
+  image:
+    alt: Bagan,Myanmar,Lonely temple in Bagan
+    src: /assets/img/photos_optimized/Bagan,Myanmar,Lonely temple in Bagan.jpg
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Bagan,Myanmar,Lonely temple in Bagan
+- city: Annapurna
+  color: sky_blue, black, navy, gray
+  country: Nepal
+  image:
+    alt: Annapurna,Nepal,Golden tip on Annapurna
+    src: /assets/img/photos_optimized/Annapurna,Nepal,Golden tip on Annapurna.JPG
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Annapurna,Nepal,Golden tip on Annapurna
 - city: Chicago
-  color: brown, gray, silver, beige, black, pink
+  color: brown, gray, bright_gray, beige, black, pink
   country: IL
   image:
     alt: Chicago,IL,brunch at lulu cafe
@@ -134,8 +213,18 @@ items:
   sentiment: ''
   timestamp: ''
   title: Chicago,IL,brunch at lulu cafe
+- city: Chefchaouen
+  color: navy, black, gray, beige, sky_blue, bright_gray
+  country: Morocco
+  image:
+    alt: Chefchaouen,Morocco,mountain sunny day
+    src: /assets/img/photos_optimized/Chefchaouen,Morocco,mountain sunny day.jpg
+  objects: person,person,person,person,person,person,person,person,person,person,person,person,person
+  sentiment: ''
+  timestamp: ''
+  title: Chefchaouen,Morocco,mountain sunny day
 - city: Sanjose
-  color: gray, silver, brown, black, beige, pink
+  color: gray, brown, black, sky_blue, beige, bright_gray, pink
   country: CA
   image:
     alt: Sanjose,CA,trying not to miss workout
@@ -145,7 +234,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,trying not to miss workout
 - city: Chicago
-  color: silver, gray, beige, navy
+  color: sky_blue, gray, navy, beige
   country: IL
   image:
     alt: Chicago,IL,chicago trip with Henry
@@ -155,7 +244,7 @@ items:
   timestamp: ''
   title: Chicago,IL,chicago trip with Henry
 - city: Champaign
-  color: brown, silver, gray, black, beige, white
+  color: brown, bright_gray, gray, black, beige, white
   country: IL
   image:
     alt: Champaign,IL,singingggg at Starkaraoke
@@ -165,7 +254,7 @@ items:
   timestamp: ''
   title: Champaign,IL,singingggg at Starkaraoke
 - city: Paris
-  color: black, gray, beige, navy, white, silver
+  color: black, gray, beige, navy, sky_blue, white
   country: France
   image:
     alt: Paris,France,chilling in front of the Eiffel tower with friends
@@ -176,7 +265,7 @@ items:
   timestamp: ''
   title: Paris,France,chilling in front of the Eiffel tower with friends
 - city: Bellevue
-  color: gray, black, silver
+  color: gray, black, bright_gray
   country: WA
   image:
     alt: Bellevue,WA,trying oakley should I buy that model
@@ -197,7 +286,7 @@ items:
   timestamp: ''
   title: Seattle,WA,I think this kid is spy
 - city: Beaufort
-  color: silver, gray
+  color: sky_blue, gray
   country: France
   image:
     alt: Beaufort,France,Alps in snow
@@ -207,7 +296,7 @@ items:
   timestamp: ''
   title: Beaufort,France,Alps in snow
 - city: Renton
-  color: gray, black, beige, silver, white
+  color: gray, black, sky_blue, beige, white, bright_gray
   country: WA
   image:
     alt: Renton,WA,way to find a nice brunch place
@@ -217,7 +306,7 @@ items:
   timestamp: ''
   title: Renton,WA,way to find a nice brunch place
 - city: Champaign
-  color: gray, black, beige, silver, navy
+  color: gray, black, bright_gray, sky_blue, navy, beige
   country: IL
   image:
     alt: Champaign,IL,after running with friends
@@ -227,7 +316,7 @@ items:
   timestamp: ''
   title: Champaign,IL,after running with friends
 - city: Kunsan
-  color: silver, black, gray, brown, pink
+  color: sky_blue, black, gray, brown
   country: Korea
   image:
     alt: Kunsan,Korea,on the rock
@@ -237,7 +326,7 @@ items:
   timestamp: ''
   title: Kunsan,Korea,on the rock
 - city: Seattle
-  color: black, gray, navy
+  color: black, gray, navy, sky_blue
   country: WA
   image:
     alt: Seattle,WA,closing Zoka at 5pm
@@ -248,7 +337,7 @@ items:
   timestamp: ''
   title: Seattle,WA,closing Zoka at 5pm
 - city: Essaouira
-  color: black, gray, silver, beige, pink
+  color: black, sky_blue, gray, beige, pink, bright_gray
   country: Morocco
   image:
     alt: Essaouira,Morocco,step toward unknown world
@@ -258,7 +347,7 @@ items:
   timestamp: ''
   title: Essaouira,Morocco,step toward unknown world
 - city: Sanjose
-  color: gray, black, silver, pink
+  color: gray, black, bright_gray, pink
   country: CA
   image:
     alt: Sanjose,CA,hard to wake up
@@ -268,7 +357,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,hard to wake up
 - city: Inle
-  color: silver, black, gray, beige, navy
+  color: sky_blue, black, navy, gray
   country: Myanmar
   image:
     alt: Inle,Myanmar,on a boat
@@ -278,7 +367,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,on a boat
 - city: Gosausee
-  color: navy, gray, silver, beige, white
+  color: navy, sky_blue, gray, white
   country: Austria
   image:
     alt: Gosausee,Austria,Gosausee like mirror
@@ -288,7 +377,7 @@ items:
   timestamp: ''
   title: Gosausee,Austria,Gosausee like mirror
 - city: Seattle
-  color: black, gray, silver, brown, beige
+  color: black, gray, bright_gray, brown, beige
   country: WA
   image:
     alt: Seattle,WA,pike place tea shop
@@ -297,19 +386,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Seattle,WA,pike place tea shop
-- city: Seattle
-  color: gray, silver, navy, black, brown
-  country: WA
-  image:
-    alt: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
-    src: /assets/img/photos_optimized/Seattle,WA,inspiring purple sorcerer with tiger
-      and magic wagon.PNG
-  objects: person,person,dog,dog
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
 - city: Leogang
-  color: brown, navy, blue, gray, black, silver, beige
+  color: sky_blue, brown, navy, gray, black
   country: Austria
   image:
     alt: Leogang,Austria,mountain landscape1
@@ -319,7 +397,7 @@ items:
   timestamp: ''
   title: Leogang,Austria,mountain landscape1
 - city: Renton
-  color: silver, pink, beige, gray, brown, black
+  color: pink, bright_gray, sky_blue, gray, brown, black
   country: WA
   image:
     alt: Renton,WA,mom reading books and me working unnecessarily
@@ -329,7 +407,7 @@ items:
   timestamp: ''
   title: Renton,WA,mom reading books and me working unnecessarily
 - city: Busan
-  color: navy, blue, silver
+  color: navy, sky_blue, blue, bright_gray
   country: Korea
   image:
     alt: Busan,Korea,Guangan ri beach
@@ -339,7 +417,7 @@ items:
   timestamp: ''
   title: Busan,Korea,Guangan ri beach
 - city: Ghent
-  color: black, gray, silver, brown
+  color: black, gray, bright_gray, brown
   country: Belgium
   image:
     alt: Ghent,Belgium,Ghentfeetsen, friends with their name in Korean
@@ -350,7 +428,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Ghentfeetsen, friends with their name in Korean
 - city: Seattle
-  color: brown, gray, pink, orange, beige, silver
+  color: brown, gray, pink, orange, beige, bright_gray
   country: WA
   image:
     alt: Seattle,WA,cute snack with mom
@@ -360,7 +438,7 @@ items:
   timestamp: ''
   title: Seattle,WA,cute snack with mom
 - city: Sanjose
-  color: gray, silver, black, brown, beige
+  color: gray, black, bright_gray, sky_blue, brown, beige
   country: CA
   image:
     alt: Sanjose,CA,legit bagel place looking
@@ -370,7 +448,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,legit bagel place looking
 - city: Dune de Pilat
-  color: black, pink, silver, gray, brown
+  color: black, pink, sky_blue, gray, brown
   country: France
   image:
     alt: Dune de Pilat,France,Downhill of Dune
@@ -379,18 +457,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Dune de Pilat,France,Downhill of Dune
-- city: Chiangmai
-  color: black, gray, silver, brown
-  country: Thailand
-  image:
-    alt: Chiangmai,Thailand,street and cat
-    src: /assets/img/photos_optimized/Chiangmai,Thailand,street and cat.jpg
-  objects: cat,bowl,refrigerator,dog
-  sentiment: ''
-  timestamp: ''
-  title: Chiangmai,Thailand,street and cat
 - city: Bagan
-  color: silver, gray, brown, black
+  color: sky_blue, brown, gray, black
   country: Myanmar
   image:
     alt: Bagan,Myanmar,watching temples
@@ -400,18 +468,7 @@ items:
   timestamp: ''
   title: Bagan,Myanmar,watching temples
 - city: Seattle
-  color: gray, black, olive, brown, beige
-  country: WA
-  image:
-    alt: Seattle,WA,uncoordinated but not a problem at all it's life
-    src: /assets/img/photos_optimized/Seattle,WA,uncoordinated but not a problem at
-      all it's life.jpg
-  objects: person,person,car,car,car,bicycle,car,car,car,car,car,car,car,car,car,car,car
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,uncoordinated but not a problem at all it's life
-- city: Seattle
-  color: gray, silver, beige, black, navy
+  color: sky_blue, gray, beige, black, navy, bright_gray
   country: WA
   image:
     alt: Seattle,WA,broombroom first time e schooter fo
@@ -422,7 +479,7 @@ items:
   timestamp: ''
   title: Seattle,WA,broombroom first time e schooter fo
 - city: Ghent
-  color: gray, black, beige, silver, white
+  color: gray, black, sky_blue, bright_gray, beige, white
   country: Belgium
   image:
     alt: Ghent,Belgium,friends and smiles
@@ -431,129 +488,6 @@ items:
   sentiment: ''
   timestamp: ''
   title: Ghent,Belgium,friends and smiles
-- city: Seattle
-  color: black, gray, silver, beige
-  country: WA
-  image:
-    alt: Seattle,WA,chair bag and laptop at greenlake
-    src: /assets/img/photos_optimized/Seattle,WA,chair bag and laptop at greenlake.JPG
-  objects: chair,person,backpack,person
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,chair bag and laptop at greenlake
-- city: Newyork
-  color: gray, blue, black, brown, silver, beige
-  country: NY
-  image:
-    alt: Newyork,NY,central park buildings on the back
-    src: /assets/img/photos_optimized/Newyork,NY,central park buildings on the back.JPG
-  objects: person,backpack,person,person,person,person,person,person,person,person,person,person
-  sentiment: ''
-  timestamp: ''
-  title: Newyork,NY,central park buildings on the back
-- city: Bellevue
-  color: gray, black, silver, beige, brown
-  country: WA
-  image:
-    alt: Bellevue,WA,happy old dudes at lego shop
-    src: /assets/img/photos_optimized/Bellevue,WA,happy old dudes at lego shop.JPG
-  objects: person,person,person,person
-  sentiment: ''
-  timestamp: ''
-  title: Bellevue,WA,happy old dudes at lego shop
-- city: Chicago
-  color: gray, silver, beige, navy
-  country: IL
-  image:
-    alt: Chicago,IL,solo trip to chicago
-    src: /assets/img/photos_optimized/Chicago,IL,solo trip to chicago.JPG
-  objects: person,person,cell phone,person,person,person,handbag,backpack
-  sentiment: ''
-  timestamp: ''
-  title: Chicago,IL,solo trip to chicago
-- city: Renton
-  color: gray, silver, black, brown, navy
-  country: WA
-  image:
-    alt: Renton,WA,watching hailstorm since centry funfun
-    src: /assets/img/photos_optimized/Renton,WA,watching hailstorm since centry funfun.JPG
-  objects: person
-  sentiment: ''
-  timestamp: ''
-  title: Renton,WA,watching hailstorm since centry funfun
-- city: Bordeux
-  color: brown, gray, black, olive, orange, pink, gold, silver
-  country: France
-  image:
-    alt: Bordeux,France,lego
-    src: /assets/img/photos_optimized/Bordeux,France,lego.jpg
-  objects: person,person,person,person,person,cake,cake,person,cake,person,backpack,person
-  sentiment: ''
-  timestamp: ''
-  title: Bordeux,France,lego
-- city: Jeju
-  color: brown, orange, black, purple
-  country: Korea
-  image:
-    alt: Jeju,Korea,Flaming sunset before typoon
-    src: /assets/img/photos_optimized/Jeju,Korea,Flaming sunset before typoon.jpg
-  objects: None
-  sentiment: ''
-  timestamp: ''
-  title: Jeju,Korea,Flaming sunset before typoon
-- city: Seattle
-  color: black, brown, gray, navy
-  country: WA
-  image:
-    alt: Seattle,WA,cute and distant eye contact
-    src: /assets/img/photos_optimized/Seattle,WA,cute and distant eye contact.jpg
-  objects: backpack,person,chair,person,chair,chair,dining table,backpack,person,chair,cell
-    phone,potted plant,potted plant,potted plant,potted plant,backpack
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,cute and distant eye contact
-- city: Renton
-  color: gray, black, silver, beige, brown
-  country: WA
-  image:
-    alt: Renton,WA,Cleaning fallen leaves and branches on snoopy pj
-    src: /assets/img/photos_optimized/Renton,WA,Cleaning fallen leaves and branches
-      on snoopy pj.jpg
-  objects: person
-  sentiment: ''
-  timestamp: ''
-  title: Renton,WA,Cleaning fallen leaves and branches on snoopy pj
-- city: Yangon
-  color: black, gray, silver, brown
-  country: Myanmar
-  image:
-    alt: Yangon,Myanmar,staring man standing on yellow block
-    src: /assets/img/photos_optimized/Yangon,Myanmar,staring man standing on yellow
-      block.jpeg
-  objects: person,person,person,person,car,car,car
-  sentiment: ''
-  timestamp: ''
-  title: Yangon,Myanmar,staring man standing on yellow block
-- city: Champaign
-  color: brown, gray, black, silver
-  country: IL
-  image:
-    alt: Champaign,IL,making katsuuuu
-    src: /assets/img/photos_optimized/Champaign,IL,making katsuuuu.JPG
-  objects: person,bowl,bowl,bowl,bowl,bottle,bowl,orange
-  sentiment: ''
-  timestamp: ''
-  title: Champaign,IL,making katsuuuu
-- city: Bagan
-  color: white, beige, silver, gray, black
-  country: Myanmar
-  image:
-    alt: Bagan,Myanmar,sitting on a temple2
-    src: /assets/img/photos_optimized/Bagan,Myanmar,sitting on a temple2.jpg
-  objects: person
-  sentiment: ''
-  timestamp: ''
-  title: Bagan,Myanmar,sitting on a temple2
 - city: Champaign
   color: brown, gray, beige, black
   country: IL
@@ -567,7 +501,109 @@ items:
   timestamp: ''
   title: Champaign,IL,Late night snack on Merry Ann's diner
 - city: Seattle
-  color: olive, gray, brown, beige, silver, black
+  color: black, gray, sky_blue, bright_gray, beige
+  country: WA
+  image:
+    alt: Seattle,WA,chair bag and laptop at greenlake
+    src: /assets/img/photos_optimized/Seattle,WA,chair bag and laptop at greenlake.JPG
+  objects: chair,person,backpack,person
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,chair bag and laptop at greenlake
+- city: Newyork
+  color: sky_blue, gray, black, brown, beige
+  country: NY
+  image:
+    alt: Newyork,NY,central park buildings on the back
+    src: /assets/img/photos_optimized/Newyork,NY,central park buildings on the back.JPG
+  objects: person,backpack,person,person,person,person,person,person,person,person,person,person
+  sentiment: ''
+  timestamp: ''
+  title: Newyork,NY,central park buildings on the back
+- city: Bellevue
+  color: gray, black, bright_gray, beige, brown, sky_blue
+  country: WA
+  image:
+    alt: Bellevue,WA,happy old dudes at lego shop
+    src: /assets/img/photos_optimized/Bellevue,WA,happy old dudes at lego shop.JPG
+  objects: person,person,person,person
+  sentiment: ''
+  timestamp: ''
+  title: Bellevue,WA,happy old dudes at lego shop
+- city: Chicago
+  color: gray, beige, navy, sky_blue, bright_gray
+  country: IL
+  image:
+    alt: Chicago,IL,solo trip to chicago
+    src: /assets/img/photos_optimized/Chicago,IL,solo trip to chicago.JPG
+  objects: person,person,cell phone,person,person,person,handbag,backpack
+  sentiment: ''
+  timestamp: ''
+  title: Chicago,IL,solo trip to chicago
+- city: Renton
+  color: gray, bright_gray, black, sky_blue, brown, navy
+  country: WA
+  image:
+    alt: Renton,WA,watching hailstorm since centry funfun
+    src: /assets/img/photos_optimized/Renton,WA,watching hailstorm since centry funfun.JPG
+  objects: person
+  sentiment: ''
+  timestamp: ''
+  title: Renton,WA,watching hailstorm since centry funfun
+- city: Bordeux
+  color: brown, gray, black, olive, orange, pink, gold, sky_blue
+  country: France
+  image:
+    alt: Bordeux,France,lego
+    src: /assets/img/photos_optimized/Bordeux,France,lego.jpg
+  objects: person,person,person,person,person,cake,cake,person,cake,person,backpack,person
+  sentiment: ''
+  timestamp: ''
+  title: Bordeux,France,lego
+- city: Seattle
+  color: black, brown, gray, navy
+  country: WA
+  image:
+    alt: Seattle,WA,cute and distant eye contact
+    src: /assets/img/photos_optimized/Seattle,WA,cute and distant eye contact.jpg
+  objects: backpack,person,chair,person,chair,chair,dining table,backpack,person,chair,cell
+    phone,potted plant,potted plant,potted plant,potted plant,backpack
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,cute and distant eye contact
+- city: Yangon
+  color: black, gray, bright_gray, brown
+  country: Myanmar
+  image:
+    alt: Yangon,Myanmar,staring man standing on yellow block
+    src: /assets/img/photos_optimized/Yangon,Myanmar,staring man standing on yellow
+      block.jpeg
+  objects: person,person,person,person,car,car,car
+  sentiment: ''
+  timestamp: ''
+  title: Yangon,Myanmar,staring man standing on yellow block
+- city: Champaign
+  color: brown, gray, black, sky_blue, bright_gray
+  country: IL
+  image:
+    alt: Champaign,IL,making katsuuuu
+    src: /assets/img/photos_optimized/Champaign,IL,making katsuuuu.JPG
+  objects: person,bowl,bowl,bowl,bowl,bottle,bowl,orange
+  sentiment: ''
+  timestamp: ''
+  title: Champaign,IL,making katsuuuu
+- city: Bagan
+  color: sky_blue, gray, black, beige, white
+  country: Myanmar
+  image:
+    alt: Bagan,Myanmar,sitting on a temple2
+    src: /assets/img/photos_optimized/Bagan,Myanmar,sitting on a temple2.jpg
+  objects: person
+  sentiment: ''
+  timestamp: ''
+  title: Bagan,Myanmar,sitting on a temple2
+- city: Seattle
+  color: olive, gray, brown, beige, black, sky_blue, bright_gray
   country: WA
   image:
     alt: Seattle,WA,weirdly peaceful and harmonious two people on a bench
@@ -578,7 +614,7 @@ items:
   timestamp: ''
   title: Seattle,WA,weirdly peaceful and harmonious two people on a bench
 - city: Chefchaouen
-  color: gray, black, silver, beige, white
+  color: sky_blue, gray, black, beige, white
   country: Morocco
   image:
     alt: Chefchaouen,Morocco,on the hill
@@ -588,7 +624,7 @@ items:
   timestamp: ''
   title: Chefchaouen,Morocco,on the hill
 - city: Seattle
-  color: gray, black, navy
+  color: gray, black, sky_blue, navy
   country: WA
   image:
     alt: Seattle,WA,you need to have fun like babies
@@ -599,7 +635,7 @@ items:
   timestamp: ''
   title: Seattle,WA,you need to have fun like babies
 - city: Ghent
-  color: silver, gray, navy, black, beige, brown
+  color: bright_gray, gray, navy, black, beige, brown
   country: Belgium
   image:
     alt: Ghent,Belgium,Playing violin
@@ -609,7 +645,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Playing violin
 - city: Essaouira
-  color: silver, beige, gray, black, brown
+  color: beige, sky_blue, bright_gray, gray, black, brown
   country: Morocco
   image:
     alt: Essaouira,Morocco,gazing on the roof
@@ -619,7 +655,7 @@ items:
   timestamp: ''
   title: Essaouira,Morocco,gazing on the roof
 - city: Ulsan
-  color: gray, brown, white, silver, black, beige, pink
+  color: brown, gray, sky_blue, bright_gray, black, pink
   country: Korea
   image:
     alt: Ulsan,Korea,Glaring autum leaves
@@ -629,7 +665,7 @@ items:
   timestamp: ''
   title: Ulsan,Korea,Glaring autum leaves
 - city: Bellevue
-  color: silver, gray, black, brown
+  color: bright_gray, gray, black, brown
   country: WA
   image:
     alt: Bellevue,WA,scotty with a film book at my last day
@@ -640,7 +676,7 @@ items:
   timestamp: ''
   title: Bellevue,WA,scotty with a film book at my last day
 - city: Sanjose
-  color: gray, silver, brown, black, beige
+  color: gray, bright_gray, sky_blue, brown, black, beige
   country: CA
   image:
     alt: Sanjose,CA,lazy on comforter
@@ -660,7 +696,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,here is water
 - city: Paris
-  color: navy, silver, black, gray, pink, blue
+  color: sky_blue, navy, black, gray
   country: France
   image:
     alt: Paris,France,Iaeste5
@@ -669,18 +705,29 @@ items:
   sentiment: ''
   timestamp: ''
   title: Paris,France,Iaeste5
-- city: Ulsan
-  color: brown, pink, silver, white
-  country: Korea
+- city: Seattle
+  color: gray, black, beige, bright_gray
+  country: WA
   image:
-    alt: Ulsan,Korea,view from UNIST dorm
-    src: /assets/img/photos_optimized/Ulsan,Korea,view from UNIST dorm.jpeg
-  objects: None
+    alt: Seattle,WA,small cute Zoka sign
+    src: /assets/img/photos_optimized/Seattle,WA,small cute Zoka sign.JPG
+  objects: car
   sentiment: ''
   timestamp: ''
-  title: Ulsan,Korea,view from UNIST dorm
+  title: Seattle,WA,small cute Zoka sign
+- city: Seattle
+  color: gray, sky_blue, navy, black, brown
+  country: WA
+  image:
+    alt: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
+    src: /assets/img/photos_optimized/Seattle,WA,inspiring purple sorcerer with tiger
+      and magic wagon.PNG
+  objects: person,person,dog,dog
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,inspiring purple sorcerer with tiger and magic wagon
 - city: Marrakesh
-  color: gray, black, silver, white, brown, pink
+  color: gray, black, bright_gray, white, brown, pink
   country: Morocco
   image:
     alt: Marrakesh,Morocco,Squeezing orange
@@ -690,7 +737,7 @@ items:
   timestamp: ''
   title: Marrakesh,Morocco,Squeezing orange
 - city: Champaign
-  color: gray, silver, black, pink
+  color: gray, sky_blue, bright_gray, black
   country: IL
   image:
     alt: Champaign,IL,OPH with mom (the best!)
@@ -699,18 +746,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Champaign,IL,OPH with mom (the best!)
-- city: Chefchauen
-  color: beige, black, gray, silver, navy
-  country: Morocco
-  image:
-    alt: Chefchauen,Morocco,Blue village panarama
-    src: /assets/img/photos_optimized/Chefchauen,Morocco,Blue village panarama.jpg
-  objects: None
-  sentiment: ''
-  timestamp: ''
-  title: Chefchauen,Morocco,Blue village panarama
 - city: Ostend
-  color: gray, silver, navy, black
+  color: gray, navy, bright_gray, sky_blue, black
   country: Belgium
   image:
     alt: Ostend,Belgium,Iaeste4
@@ -720,7 +757,7 @@ items:
   timestamp: ''
   title: Ostend,Belgium,Iaeste4
 - city: Ghent
-  color: black, gray, navy, silver
+  color: black, gray, sky_blue, navy
   country: Belgium
   image:
     alt: Ghent,Belgium,Are you crazy at Reneta's apt
@@ -730,7 +767,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Are you crazy at Reneta's apt
 - city: Inle Lake
-  color: black, brown, gray, beige, silver, white
+  color: black, brown, gray, beige, bright_gray, white, sky_blue
   country: Myanmar
   image:
     alt: Inle Lake,Myanmar,market on the Inle Lake
@@ -740,7 +777,7 @@ items:
   timestamp: ''
   title: Inle Lake,Myanmar,market on the Inle Lake
 - city: Ghent
-  color: gray, black, beige, silver, pink, brown
+  color: gray, black, beige, bright_gray, pink, brown
   country: Belgium
   image:
     alt: Ghent,Belgium,Iaeste2
@@ -750,7 +787,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Iaeste2
 - city: Ulsan
-  color: brown, gray, red, navy, silver, black
+  color: brown, gray, red, sky_blue, navy, bright_gray, black
   country: Korea
   image:
     alt: Ulsan,Korea,Graduation
@@ -780,7 +817,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,smily attendance on the plane
 - city: Seattle
-  color: gray, black, brown, silver, beige
+  color: gray, black, brown, bright_gray, beige
   country: WA
   image:
     alt: Seattle,WA,Zoka uvilleage my favorite place in seattle
@@ -792,7 +829,7 @@ items:
   timestamp: ''
   title: Seattle,WA,Zoka uvilleage my favorite place in seattle
 - city: Annapurna
-  color: navy, brown, white, pink, gray, silver, black
+  color: navy, brown, white, sky_blue, gray, bright_gray, black
   country: Nepal
   image:
     alt: Annapurna,Nepal,Right before ABC with legendary porter
@@ -803,7 +840,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,Right before ABC with legendary porter
 - city: Champaign
-  color: gray, black, navy, silver, beige
+  color: black, gray, sky_blue, bright_gray, navy, beige
   country: IL
   image:
     alt: Champaign,IL,a dollar ski guy in ideashop
@@ -813,7 +850,7 @@ items:
   timestamp: ''
   title: Champaign,IL,a dollar ski guy in ideashop
 - city: Champaign
-  color: black, gray, silver, brown
+  color: black, gray, bright_gray, brown
   country: IL
   image:
     alt: Champaign,IL,people around fire
@@ -823,7 +860,7 @@ items:
   timestamp: ''
   title: Champaign,IL,people around fire
 - city: Renton
-  color: gray, black, silver, beige
+  color: gray, black, bright_gray, beige, sky_blue
   country: WA
   image:
     alt: Renton,WA,hotdog at costco with mom
@@ -833,18 +870,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Renton,WA,hotdog at costco with mom
-- city: Bellevue
-  color: brown, black, navy
-  country: US
-  image:
-    alt: Bellevue,US,ibm,keyboard macroshot
-    src: /assets/img/photos_optimized/Bellevue,US,ibm,keyboard-macroshot.JPG
-  objects: keyboard
-  sentiment: ''
-  timestamp: ''
-  title: Bellevue,US,ibm,keyboard macroshot
 - city: Sanjose
-  color: gray, black, silver, beige
+  color: gray, black, sky_blue, bright_gray, beige
   country: CA
   image:
     alt: Sanjose,CA,hmm what bagel should I get
@@ -854,7 +881,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,hmm what bagel should I get
 - city: Gosausee
-  color: navy, blue, silver, beige
+  color: navy, sky_blue
   country: Austria
   image:
     alt: Gosausee,Austria,crystal clean see
@@ -864,7 +891,7 @@ items:
   timestamp: ''
   title: Gosausee,Austria,crystal clean see
 - city: Bagna
-  color: white, beige, gray, black, silver
+  color: sky_blue, gray, black, white, beige
   country: Myanmar
   image:
     alt: Bagna,Myanmar,sitting on a temple
@@ -874,7 +901,7 @@ items:
   timestamp: ''
   title: Bagna,Myanmar,sitting on a temple
 - city: Inle
-  color: gray, brown, black, beige, silver
+  color: gray, brown, black, beige, bright_gray
   country: Myanmar
   image:
     alt: Inle,Myanmar,girls biking to school
@@ -884,7 +911,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,girls biking to school
 - city: Seattle
-  color: gray, silver, beige, black, navy, brown, olive
+  color: gray, sky_blue, black, beige, bright_gray, navy, brown, olive
   country: WA
   image:
     alt: Seattle,WA,my very first fishing
@@ -894,7 +921,7 @@ items:
   timestamp: ''
   title: Seattle,WA,my very first fishing
 - city: Chefchaouen
-  color: gray, black, beige, silver
+  color: gray, black, beige, bright_gray
   country: Morroco
   image:
     alt: Chefchaouen,Morroco,Colors
@@ -904,7 +931,7 @@ items:
   timestamp: ''
   title: Chefchaouen,Morroco,Colors
 - city: Bellevue
-  color: gray, black, silver, brown
+  color: gray, black, bright_gray, brown, sky_blue
   country: US
   image:
     alt: Bellevue,US,construction,view from the bytedance office 1
@@ -914,7 +941,7 @@ items:
   timestamp: ''
   title: Bellevue,US,construction,view from the bytedance office 1
 - city: Ghent
-  color: gray, black, beige, brown, silver
+  color: black, gray, sky_blue, beige, brown
   country: Belgium
   image:
     alt: Ghent,Belgium,with VR headset
@@ -924,7 +951,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,with VR headset
 - city: Inle
-  color: gray, brown, black, silver, beige
+  color: brown, gray, black, sky_blue, bright_gray, beige
   country: Myanmar
   image:
     alt: Inle,Myanmar,manual shipping no cart
@@ -934,7 +961,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,manual shipping no cart
 - city: Ghent
-  color: black, gray, silver, beige, pink, white
+  color: black, gray, sky_blue, bright_gray, pink, white, beige
   country: Belgium
   image:
     alt: Ghent,Belgium,Iaeste Brazil night
@@ -944,7 +971,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Iaeste Brazil night
 - city: Annapurna
-  color: gray, black, beige, navy
+  color: gray, black, beige, navy, sky_blue
   country: Nepal
   image:
     alt: Annapurna,Nepal,brushing teeth on the way to Annapurna Base Camp
@@ -955,7 +982,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,brushing teeth on the way to Annapurna Base Camp
 - city: Zagreb
-  color: gray, black, brown, beige, navy, silver
+  color: gray, black, brown, beige, navy, bright_gray
   country: Crotia
   image:
     alt: Zagreb,Crotia,backpack in backpacking
@@ -965,7 +992,7 @@ items:
   timestamp: ''
   title: Zagreb,Crotia,backpack in backpacking
 - city: Leogang
-  color: beige, gray, black, silver, brown, navy
+  color: sky_blue, black, gray, beige, brown, navy
   country: Austria
   image:
     alt: Leogang,Austria,friends
@@ -975,7 +1002,7 @@ items:
   timestamp: ''
   title: Leogang,Austria,friends
 - city: Champaign
-  color: gray, silver, navy, black
+  color: gray, bright_gray, navy, black
   country: US
   image:
     alt: Champaign,US,abla at costco
@@ -985,7 +1012,7 @@ items:
   timestamp: ''
   title: Champaign,US,abla at costco
 - city: Jiri mountain
-  color: gray, silver, beige, navy, black
+  color: sky_blue, gray, bright_gray, navy, black
   country: Korea
   image:
     alt: Jiri mountain,Korea
@@ -994,18 +1021,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Jiri mountain,Korea
-- city: Chefchaouen
-  color: navy, gray, black, beige, silver
-  country: Morocco
-  image:
-    alt: Chefchaouen,Morocco,mountain sunny day
-    src: /assets/img/photos_optimized/Chefchaouen,Morocco,mountain sunny day.jpg
-  objects: person,person,person,person,person,person,person,person,person,person,person,person,person
-  sentiment: ''
-  timestamp: ''
-  title: Chefchaouen,Morocco,mountain sunny day
 - city: Chicago
-  color: silver, gray, black, beige, brown, gold, olive
+  color: bright_gray, gray, black, beige, brown, gold, olive
   country: IL
   image:
     alt: Chicago,IL,Henry being authentic korean Azeosi
@@ -1015,7 +1032,7 @@ items:
   timestamp: ''
   title: Chicago,IL,Henry being authentic korean Azeosi
 - city: Sanjose
-  color: gray, silver, black, beige, pink
+  color: gray, sky_blue, black, beige, bright_gray
   country: CA
   image:
     alt: Sanjose,CA,biting the best bagel in SJ
@@ -1025,7 +1042,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,biting the best bagel in SJ
 - city: Bellevue
-  color: gray, black, silver, brown, navy
+  color: black, gray, bright_gray, sky_blue, brown, navy
   country: US
   image:
     alt: Bellevue,US,construction,view from the bytedance office 2
@@ -1035,7 +1052,7 @@ items:
   timestamp: ''
   title: Bellevue,US,construction,view from the bytedance office 2
 - city: Fez
-  color: navy, gray, silver, black, pink
+  color: sky_blue, navy, gray, black, bright_gray, pink
   country: Morroco
   image:
     alt: Fez,Morroco,South Gate
@@ -1044,28 +1061,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Fez,Morroco,South Gate
-- city: Bagan
-  color: silver, gray, black, brown
-  country: Myanmar
-  image:
-    alt: Bagan,Myanmar,Lonely temple in Bagan
-    src: /assets/img/photos_optimized/Bagan,Myanmar,Lonely temple in Bagan.jpg
-  objects: None
-  sentiment: ''
-  timestamp: ''
-  title: Bagan,Myanmar,Lonely temple in Bagan
-- city: Annapurna
-  color: black, silver, navy, blue, gray, beige
-  country: Nepal
-  image:
-    alt: Annapurna,Nepal,Golden tip on Annapurna
-    src: /assets/img/photos_optimized/Annapurna,Nepal,Golden tip on Annapurna.JPG
-  objects: None
-  sentiment: ''
-  timestamp: ''
-  title: Annapurna,Nepal,Golden tip on Annapurna
 - city: Renton
-  color: gray, silver, brown, beige, black
+  color: gray, brown, bright_gray, sky_blue, black, beige
   country: WA
   image:
     alt: Renton,WA,working home sunday in a cozy house
@@ -1075,7 +1072,7 @@ items:
   timestamp: ''
   title: Renton,WA,working home sunday in a cozy house
 - city: Sanfrancisco
-  color: gray, silver, black, blue, beige
+  color: gray, black, bright_gray, blue, sky_blue, beige
   country: CA
   image:
     alt: Sanfrancisco,CA,AIBrix meetup
@@ -1085,7 +1082,7 @@ items:
   timestamp: ''
   title: Sanfrancisco,CA,AIBrix meetup
 - city: Bangkok
-  color: gray, black, beige, silver, brown
+  color: black, gray, sky_blue, brown, bright_gray, beige
   country: Thailand
   image:
     alt: Bangkok,Thailand,Reggae
@@ -1095,19 +1092,7 @@ items:
   timestamp: ''
   title: Bangkok,Thailand,Reggae
 - city: Seattle
-  color: black, brown, gray, beige
-  country: WA
-  image:
-    alt: Seattle,WA,long hair guys at Seattle cafe bar
-    src: /assets/img/photos_optimized/Seattle,WA,long hair guys at Seattle cafe bar.jpeg
-  objects: person,chair,person,person,person,dining table,bottle,bottle,bottle,bottle,bottle,potted
-    plant,potted plant,dining table,chair,dining table,bottle,bottle,chair,bottle,person,dining
-    table
-  sentiment: ''
-  timestamp: ''
-  title: Seattle,WA,long hair guys at Seattle cafe bar
-- city: Seattle
-  color: navy, silver, blue, gray, black
+  color: navy, bright_gray, sky_blue, gray, black
   country: WA
   image:
     alt: Seattle,WA,obedient posture at chilly weather
@@ -1116,18 +1101,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Seattle,WA,obedient posture at chilly weather
-- city: Yangon
-  color: brown, gray, silver
-  country: Myanmar
-  image:
-    alt: Yangon,Myanmar,Golden temple
-    src: /assets/img/photos_optimized/Yangon,Myanmar,Golden temple.jpg
-  objects: None
-  sentiment: ''
-  timestamp: ''
-  title: Yangon,Myanmar,Golden temple
 - city: Seattle
-  color: black, gray, brown, beige
+  color: black, brown, gray, beige, sky_blue
   country: WA
   image:
     alt: Seattle,WA,cute beer taps
@@ -1138,7 +1113,7 @@ items:
   timestamp: ''
   title: Seattle,WA,cute beer taps
 - city: Taghazout
-  color: silver, gray, black, pink, beige
+  color: bright_gray, gray, black, pink, sky_blue
   country: Morocco
   image:
     alt: Taghazout,Morocco,airbnb place with cooked foods
@@ -1148,7 +1123,7 @@ items:
   timestamp: ''
   title: Taghazout,Morocco,airbnb place with cooked foods
 - city: Seattle
-  color: brown, black, gray, beige, silver
+  color: brown, black, gray, sky_blue, beige
   country: WA
   image:
     alt: Seattle,WA,colorful trees on 5410 Keystone
@@ -1157,8 +1132,18 @@ items:
   sentiment: ''
   timestamp: ''
   title: Seattle,WA,colorful trees on 5410 Keystone
+- city: Chiangmai
+  color: black, gray, bright_gray, sky_blue, brown
+  country: Thailand
+  image:
+    alt: Chiangmai,Thailand,street and cat
+    src: /assets/img/photos_optimized/Chiangmai,Thailand,street and cat.jpg
+  objects: cat,bowl,refrigerator,dog
+  sentiment: ''
+  timestamp: ''
+  title: Chiangmai,Thailand,street and cat
 - city: Sahara Desert
-  color: brown, silver, gray, black
+  color: brown, sky_blue, gray, black
   country: Morocco
   image:
     alt: Sahara Desert,Morocco,Lying on sand
@@ -1168,7 +1153,7 @@ items:
   timestamp: ''
   title: Sahara Desert,Morocco,Lying on sand
 - city: Seattle
-  color: gray, black, brown, silver, beige
+  color: gray, black, brown, bright_gray, beige, sky_blue
   country: WA
   image:
     alt: Seattle,WA,the most friendly street at seattle
@@ -1178,7 +1163,7 @@ items:
   timestamp: ''
   title: Seattle,WA,the most friendly street at seattle
 - city: Springfield
-  color: silver, gray, beige, pink, black
+  color: bright_gray, gray, beige, pink, black
   country: IL
   image:
     alt: Springfield,IL,abracadabra at boardgame store at Springfield IL
@@ -1189,7 +1174,7 @@ items:
   timestamp: ''
   title: Springfield,IL,abracadabra at boardgame store at Springfield IL
 - city: Ghent
-  color: gray, black, silver, beige
+  color: gray, black, bright_gray, beige, sky_blue
   country: Belgium
   image:
     alt: Ghent,Belgium,friends in a train
@@ -1200,7 +1185,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,friends in a train
 - city: Seattle
-  color: silver, black, gray, brown
+  color: sky_blue, black, bright_gray, brown, gray
   country: WA
   image:
     alt: Seattle,WA,seattle nightview on hill with mom
@@ -1210,7 +1195,7 @@ items:
   timestamp: ''
   title: Seattle,WA,seattle nightview on hill with mom
 - city: Inle
-  color: black, gray, brown, silver, beige
+  color: black, gray, brown, bright_gray, sky_blue
   country: Myanmar
   image:
     alt: Inle,Myanmar,craftman on a boat house
@@ -1220,7 +1205,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,craftman on a boat house
 - city: Champaign
-  color: silver, gray, black, beige
+  color: bright_gray, gray, black, beige
   country: IL
   image:
     alt: Champaign,IL,beard hair headphone and backpack
@@ -1230,7 +1215,7 @@ items:
   timestamp: ''
   title: Champaign,IL,beard hair headphone and backpack
 - city: Inle
-  color: gray, black, silver, beige
+  color: gray, black, sky_blue, bright_gray
   country: Myanmar
   image:
     alt: Inle,Myanmar,construction
@@ -1251,7 +1236,7 @@ items:
   timestamp: ''
   title: Seattle,WA,how excitement look likes
 - city: Bellevue
-  color: black, gray, silver, beige
+  color: black, gray, sky_blue
   country: US
   image:
     alt: Bellevue,US,bytedance office,1
@@ -1261,7 +1246,7 @@ items:
   timestamp: ''
   title: Bellevue,US,bytedance office,1
 - city: Bordeux
-  color: gray, silver, navy
+  color: sky_blue, bright_gray, navy
   country: France
   image:
     alt: Bordeux,France,Brodeux river
@@ -1271,7 +1256,7 @@ items:
   timestamp: ''
   title: Bordeux,France,Brodeux river
 - city: Seattle
-  color: gray, black, brown, silver, beige
+  color: gray, black, brown, bright_gray, beige
   country: WA
   image:
     alt: Seattle,WA,looking at wines
@@ -1281,7 +1266,7 @@ items:
   timestamp: ''
   title: Seattle,WA,looking at wines
 - city: Seattle
-  color: black, gray, white, silver
+  color: black, gray, white, bright_gray
   country: WA
   image:
     alt: Seattle,WA,while waiting for friends
@@ -1292,7 +1277,7 @@ items:
   timestamp: ''
   title: Seattle,WA,while waiting for friends
 - city: Beaufort
-  color: navy, silver, blue
+  color: sky_blue, navy
   country: France
   image:
     alt: Beaufort,France,walking in foggy snowy alsp mountain
@@ -1303,7 +1288,7 @@ items:
   timestamp: ''
   title: Beaufort,France,walking in foggy snowy alsp mountain
 - city: Sanjose
-  color: beige, gray, brown, black, silver
+  color: sky_blue, beige, gray, brown, black, bright_gray
   country: CA
   image:
     alt: Sanjose,CA,mcdo
@@ -1313,7 +1298,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,mcdo
 - city: Champaign
-  color: gray, silver, black, beige, pink
+  color: sky_blue, gray, black, bright_gray
   country: IL
   image:
     alt: Champaign,IL,mom on windy day at OPH
@@ -1322,19 +1307,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Champaign,IL,mom on windy day at OPH
-- city: Marrakesh
-  color: brown, black, gray, silver, white
-  country: Morocco
-  image:
-    alt: Marrakesh,Morocco,hand squeezed orange juice in the morning
-    src: /assets/img/photos_optimized/Marrakesh,Morocco,hand squeezed orange juice
-      in the morning.jpg
-  objects: person,dining table,cup,bowl,bowl
-  sentiment: ''
-  timestamp: ''
-  title: Marrakesh,Morocco,hand squeezed orange juice in the morning
 - city: Leogang
-  color: gray, navy, black, blue, silver
+  color: gray, sky_blue, black, navy, bright_gray
   country: Austria
   image:
     alt: Leogang,Austria,landscape2
@@ -1344,7 +1318,7 @@ items:
   timestamp: ''
   title: Leogang,Austria,landscape2
 - city: Pasterze Glacier
-  color: navy, gray, silver, black, beige
+  color: navy, sky_blue, gray, black
   country: Austria
   image:
     alt: Pasterze Glacier,Austria,glacier to the top with Nono,Paul,Tim
@@ -1355,7 +1329,7 @@ items:
   timestamp: ''
   title: Pasterze Glacier,Austria,glacier to the top with Nono,Paul,Tim
 - city: Sahara Desert
-  color: gray, silver, black, beige, pink, white
+  color: sky_blue, black, beige, gray
   country: Morocco
   image:
     alt: Sahara Desert,Morocco,sand dance
@@ -1365,7 +1339,7 @@ items:
   timestamp: ''
   title: Sahara Desert,Morocco,sand dance
 - city: Annapurna
-  color: gray, black, navy, brown
+  color: gray, black, sky_blue, navy, brown
   country: Nepal
   image:
     alt: Annapurna,Nepal,guestmount at ABC
@@ -1375,7 +1349,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,guestmount at ABC
 - city: Sahara Desert
-  color: silver, gray, black, brown, orange, pink
+  color: sky_blue, black, brown, orange, pink, bright_gray, gray
   country: Morocco
   image:
     alt: Sahara Desert,Morocco,watching a camel
@@ -1385,7 +1359,7 @@ items:
   timestamp: ''
   title: Sahara Desert,Morocco,watching a camel
 - city: Seattle
-  color: black, beige, gray, silver, brown, navy
+  color: black, beige, gray, bright_gray, brown, navy
   country: WA
   image:
     alt: Seattle,WA,baguette on the backpack
@@ -1395,7 +1369,7 @@ items:
   timestamp: ''
   title: Seattle,WA,baguette on the backpack
 - city: Ghent
-  color: gray, black, beige, silver, navy
+  color: gray, sky_blue, black, navy
   country: Belgium
   image:
     alt: Ghent,Belgium,downtown castle
@@ -1405,7 +1379,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,downtown castle
 - city: Seattle
-  color: gray, silver, navy, black
+  color: sky_blue, gray, navy, black
   country: WA
   image:
     alt: Seattle,WA,on wobbling floating concrete
@@ -1415,7 +1389,7 @@ items:
   timestamp: ''
   title: Seattle,WA,on wobbling floating concrete
 - city: Seattle
-  color: gray, navy, black, silver
+  color: gray, navy, black, bright_gray
   country: WA
   image:
     alt: Seattle,WA,waiting for sister at Seatac airport
@@ -1425,7 +1399,7 @@ items:
   timestamp: ''
   title: Seattle,WA,waiting for sister at Seatac airport
 - city: Seattle
-  color: black, brown, gray, beige
+  color: black, brown, gray, sky_blue, beige
   country: WA
   image:
     alt: Seattle,WA,smiling cool bartender
@@ -1436,7 +1410,7 @@ items:
   timestamp: ''
   title: Seattle,WA,smiling cool bartender
 - city: Ulsan
-  color: gray, black, brown, silver, beige, navy
+  color: gray, black, brown, sky_blue, navy, bright_gray
   country: Korea
   image:
     alt: Ulsan,Korea,Once upon a time in college
@@ -1446,7 +1420,7 @@ items:
   timestamp: ''
   title: Ulsan,Korea,Once upon a time in college
 - city: Inle
-  color: gray, black, beige, white, silver
+  color: gray, black, white, sky_blue, beige
   country: Myanmar
   image:
     alt: Inle,Myanmar,little girl on a boat with a school bag
@@ -1457,7 +1431,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,little girl on a boat with a school bag
 - city: Inle
-  color: brown, silver, gray, black
+  color: brown, sky_blue, gray, black
   country: Myanmar
   image:
     alt: Inle,Myanmar,brown Inle Lake
@@ -1467,7 +1441,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,brown Inle Lake
 - city: Chicago
-  color: gray, brown, silver, black, pink
+  color: gray, brown, bright_gray, black, pink
   country: IL
   image:
     alt: Chicago,IL,solo CSO
@@ -1477,7 +1451,7 @@ items:
   timestamp: ''
   title: Chicago,IL,solo CSO
 - city: Inle
-  color: brown, beige, black, gray, silver
+  color: brown, beige, black, gray, sky_blue
   country: Myanmar
   image:
     alt: Inle,Myanmar,market,fruits,lady
@@ -1487,7 +1461,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,market,fruits,lady
 - city: Seattle
-  color: gray, beige, black, silver
+  color: gray, black, sky_blue, bright_gray, beige
   country: WA
   image:
     alt: Seattle,WA,man on black jacket with nice hat
@@ -1507,7 +1481,7 @@ items:
   timestamp: ''
   title: Chicago,IL,driving mustang at night in Chicago
 - city: Sanjose
-  color: black, gray, brown, orange, silver
+  color: black, gray, brown, sky_blue, orange
   country: CA
   image:
     alt: Sanjose,CA,picking up matcha and egg sandwitch
@@ -1518,7 +1492,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,picking up matcha and egg sandwitch
 - city: Leogang
-  color: navy, gray, black, silver, beige, blue, olive
+  color: navy, sky_blue, gray, black, olive
   country: Austria
   image:
     alt: Leogang,Austria,little trekking in Leogang with friends
@@ -1529,7 +1503,7 @@ items:
   timestamp: ''
   title: Leogang,Austria,little trekking in Leogang with friends
 - city: Kohtao
-  color: silver, gray, blue
+  color: sky_blue, bright_gray, gray
   country: Thai
   image:
     alt: Kohtao,Thai,Sairee beach1
@@ -1538,18 +1512,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Kohtao,Thai,Sairee beach1
-- city: Sahara Desert
-  color: orange, gray, silver, pink, brown
-  country: Morocco
-  image:
-    alt: Sahara Desert,Morocco,walking on desert
-    src: /assets/img/photos_optimized/Sahara Desert,Morocco,walking on desert.jpg
-  objects: person
-  sentiment: ''
-  timestamp: ''
-  title: Sahara Desert,Morocco,walking on desert
 - city: Annapurna
-  color: gray, black, navy, silver, beige
+  color: sky_blue, gray, black, navy, bright_gray, beige
   country: Nepal
   image:
     alt: Annapurna,Nepal,Gold mountain
@@ -1559,7 +1523,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,Gold mountain
 - city: Inle
-  color: gray, black, brown, silver
+  color: black, gray, brown, bright_gray, sky_blue
   country: Myanmar
   image:
     alt: Inle,Myanmar,street food noodle soup cooking
@@ -1569,7 +1533,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,street food noodle soup cooking
 - city: Champaign
-  color: gray, pink, brown, black, silver, beige
+  color: gray, pink, brown, black, bright_gray, sky_blue
   country: IL
   image:
     alt: Champaign,IL,the most authentic korean azeosi cosplay
@@ -1580,7 +1544,7 @@ items:
   timestamp: ''
   title: Champaign,IL,the most authentic korean azeosi cosplay
 - city: Inle
-  color: gray, black, navy, brown
+  color: gray, black, sky_blue, navy, brown
   country: Myanmar
   image:
     alt: Inle,Myanmar,ladies on street
@@ -1590,7 +1554,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,ladies on street
 - city: Seattle
-  color: black, pink, beige, silver, brown
+  color: black, sky_blue, pink, brown
   country: WA
   image:
     alt: Seattle,WA,found a nice place (human people beer cafe)
@@ -1602,7 +1566,7 @@ items:
   timestamp: ''
   title: Seattle,WA,found a nice place (human people beer cafe)
 - city: Champaign
-  color: gray, black, silver, blue, orange, beige
+  color: gray, black, bright_gray, sky_blue, orange, beige
   country: IL
   image:
     alt: Champaign,IL,hotpot diner with friends at Henry's place
@@ -1613,7 +1577,7 @@ items:
   timestamp: ''
   title: Champaign,IL,hotpot diner with friends at Henry's place
 - city: Gosausee
-  color: navy, silver, blue, gray, black, brown, beige
+  color: sky_blue, navy, gray, black, brown
   country: Austria
   image:
     alt: Gosausee,Austria,see2
@@ -1633,7 +1597,7 @@ items:
   timestamp: ''
   title: Taghazout,Morocco,surfing and sunset
 - city: Annapurna
-  color: navy, gray, silver, black, white, brown
+  color: navy, gray, bright_gray, black, white, brown
   country: Nepal
   image:
     alt: Annapurna,Nepal,Annapurna
@@ -1643,7 +1607,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,Annapurna
 - city: Ghent
-  color: gray, silver, beige, brown, black
+  color: gray, sky_blue, brown, black, bright_gray, beige
   country: Belgium
   image:
     alt: Ghent,Belgium,my apt during internship
@@ -1654,7 +1618,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,my apt during internship
 - city: Annapurna
-  color: gray, navy, black, silver
+  color: sky_blue, black, navy, gray
   country: Nepal
   image:
     alt: Annapurna,Nepal,view1
@@ -1664,7 +1628,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,view1
 - city: Ghent
-  color: gray, beige, black, silver, brown
+  color: gray, beige, sky_blue, black, brown
   country: Belgium
   image:
     alt: Ghent,Belgium,Hologram at Technological park office
@@ -1675,7 +1639,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Hologram at Technological park office
 - city: Chicago
-  color: gray, silver, black, beige, brown
+  color: gray, bright_gray, black, beige, brown
   country: IL
   image:
     alt: Chicago,IL,eating real korean foods at hidden restaurant inside Joonbu market
@@ -1687,7 +1651,7 @@ items:
   timestamp: ''
   title: Chicago,IL,eating real korean foods at hidden restaurant inside Joonbu market
 - city: Seattle
-  color: gray, silver, navy, beige
+  color: sky_blue, gray, navy
   country: WA
   image:
     alt: Seattle,WA,walking to starbucks
@@ -1697,7 +1661,7 @@ items:
   timestamp: ''
   title: Seattle,WA,walking to starbucks
 - city: Seattle
-  color: gray, silver, black, navy, brown
+  color: gray, bright_gray, black, navy, brown, sky_blue
   country: WA
   image:
     alt: Seattle,WA,buying sourdough at nice bakery in pike place
@@ -1718,7 +1682,7 @@ items:
   timestamp: ''
   title: Kohtao,Thailand,freediving into blue water
 - city: Taghazout
-  color: gray, black, silver, pink, brown
+  color: gray, black, sky_blue, brown, bright_gray
   country: Morocco
   image:
     alt: Taghazout,Morocco,airbnb place with cooked foods2
@@ -1728,7 +1692,7 @@ items:
   timestamp: ''
   title: Taghazout,Morocco,airbnb place with cooked foods2
 - city: Renton
-  color: gray, silver, pink, black, beige, brown
+  color: gray, bright_gray, pink, black, beige, brown
   country: WA
   image:
     alt: Renton,WA,deliciousss
@@ -1738,7 +1702,7 @@ items:
   timestamp: ''
   title: Renton,WA,deliciousss
 - city: Renton
-  color: gray, silver, black, beige, brown
+  color: gray, bright_gray, black, beige, brown
   country: WA
   image:
     alt: Renton,WA,almost looking like local haha
@@ -1758,7 +1722,7 @@ items:
   timestamp: ''
   title: Seattle,WA,yo comfy couch
 - city: Inle
-  color: gray, black, silver
+  color: gray, black, bright_gray, sky_blue
   country: Myanmar
   image:
     alt: Inle,Myanmar,fishing
@@ -1768,7 +1732,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,fishing
 - city: Seattle
-  color: gray, black, brown, silver
+  color: gray, black, brown, bright_gray
   country: WA
   image:
     alt: Seattle,WA,fyi this dog is not his dog
@@ -1778,7 +1742,7 @@ items:
   timestamp: ''
   title: Seattle,WA,fyi this dog is not his dog
 - city: Seattle
-  color: silver, gray, black, beige
+  color: sky_blue, gray, black, beige, bright_gray
   country: WA
   image:
     alt: Seattle,WA,a guy who taught me fishing for the first time in my life
@@ -1789,7 +1753,7 @@ items:
   timestamp: ''
   title: Seattle,WA,a guy who taught me fishing for the first time in my life
 - city: Kohtao
-  color: navy, blue
+  color: navy, sky_blue
   country: Thai
   image:
     alt: Kohtao,Thai,freediving 1
@@ -1809,7 +1773,7 @@ items:
   timestamp: ''
   title: Beaufort,France,darkness and stars
 - city: Sanjose
-  color: black, silver, gray, navy, beige
+  color: black, gray, sky_blue, bright_gray, navy, beige
   country: CA
   image:
     alt: Sanjose,CA,sunny day view at bagel place
@@ -1831,7 +1795,7 @@ items:
   timestamp: ''
   title: Champaign,IL,my room at 711 in green light
 - city: Vienna
-  color: navy, black, gray, silver, blue, beige
+  color: navy, black, sky_blue, gray, bright_gray
   country: Austria
   image:
     alt: Vienna,Austria,drunk
@@ -1841,7 +1805,7 @@ items:
   timestamp: ''
   title: Vienna,Austria,drunk
 - city: Kohtao
-  color: blue, navy
+  color: blue, sky_blue, navy
   country: Thai
   image:
     alt: Kohtao,Thai,freediving2
@@ -1861,7 +1825,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,Slovakia night1
 - city: Annapurna
-  color: navy, black, gray
+  color: black, navy, sky_blue
   country: Nepal
   image:
     alt: Annapurna,Nepal,Golden tip
@@ -1888,7 +1852,7 @@ items:
   timestamp: ''
   title: Ghent,Belgium,tipsy night
 - city: Bratislava
-  color: black, gray, beige, silver, brown
+  color: sky_blue, black, gray, beige, brown
   country: Slovakia
   image:
     alt: Bratislava,Slovakia,trip with friends
@@ -1898,7 +1862,7 @@ items:
   timestamp: ''
   title: Bratislava,Slovakia,trip with friends
 - city: Seattle
-  color: silver, gray, black, beige, brown
+  color: bright_gray, gray, black, beige, brown
   country: WA
   image:
     alt: Seattle,WA,no run but rollerblade
@@ -1908,7 +1872,7 @@ items:
   timestamp: ''
   title: Seattle,WA,no run but rollerblade
 - city: Bagan
-  color: gray, black, silver, white
+  color: gray, black, bright_gray, white
   country: Myanmar
   image:
     alt: Bagan,Myanmar,mom an dad
@@ -1918,7 +1882,7 @@ items:
   timestamp: ''
   title: Bagan,Myanmar,mom an dad
 - city: Gorakpur
-  color: gray, black, silver, pink, beige
+  color: gray, black, bright_gray, beige, pink
   country: India
   image:
     alt: Gorakpur,India,train station in india
@@ -1929,7 +1893,7 @@ items:
   timestamp: ''
   title: Gorakpur,India,train station in india
 - city: Bellevue
-  color: black, gray, silver, beige
+  color: black, gray, sky_blue
   country: US
   image:
     alt: Bellevue,US,bytedance office my desk 1
@@ -1939,7 +1903,7 @@ items:
   timestamp: ''
   title: Bellevue,US,bytedance office my desk 1
 - city: Springfield
-  color: gray, brown, black, orange, silver, pink
+  color: gray, brown, sky_blue, black, orange, pink
   country: IL
   image:
     alt: Springfield,IL,picking up my new car tesla model y
@@ -1950,7 +1914,7 @@ items:
   timestamp: ''
   title: Springfield,IL,picking up my new car tesla model y
 - city: Bellevue
-  color: gray, black, silver, brown
+  color: gray, black, bright_gray, brown, sky_blue
   country: US
   image:
     alt: Bellevue,US,construction view from the bytedance office 1
@@ -1960,7 +1924,7 @@ items:
   timestamp: ''
   title: Bellevue,US,construction view from the bytedance office 1
 - city: Marrakesh
-  color: black, gray, brown, silver, beige, white
+  color: black, gray, brown, bright_gray, beige, white
   country: Morocco
   image:
     alt: Marrakesh,Morocco,colors
@@ -1970,7 +1934,7 @@ items:
   timestamp: ''
   title: Marrakesh,Morocco,colors
 - city: Sanjose
-  color: black, gray, silver, navy, beige
+  color: black, gray, sky_blue, navy, bright_gray, beige
   country: CA
   image:
     alt: Sanjose,CA,view from bagel place
@@ -1982,7 +1946,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,view from bagel place
 - city: Inle
-  color: gray, black, silver, beige, navy, brown
+  color: gray, black, bright_gray, beige, sky_blue, navy, brown
   country: Myanmar
   image:
     alt: Inle,Myanmar,Street food roti
@@ -1991,18 +1955,8 @@ items:
   sentiment: ''
   timestamp: ''
   title: Inle,Myanmar,Street food roti
-- city: Champaign
-  color: gray, silver, brown, black, beige, navy, pink
-  country: IL
-  image:
-    alt: Champaign,IL,D eating katsu
-    src: /assets/img/photos_optimized/Champaign,IL,D eating katsu.JPG
-  objects: person,bowl,bowl,apple,dining table,bottle,person,apple
-  sentiment: ''
-  timestamp: ''
-  title: Champaign,IL,D eating katsu
 - city: Brussel
-  color: gray, black, silver, beige
+  color: gray, black, bright_gray, beige
   country: Belgium
   image:
     alt: Brussel,Belgium,chocolate crepe
@@ -2013,7 +1967,7 @@ items:
   timestamp: ''
   title: Brussel,Belgium,chocolate crepe
 - city: Sanjose
-  color: gray, black, brown, pink, silver, beige
+  color: gray, black, brown, pink, bright_gray, beige
   country: CA
   image:
     alt: Sanjose,CA,insideout 2 with B
@@ -2023,7 +1977,7 @@ items:
   timestamp: ''
   title: Sanjose,CA,insideout 2 with B
 - city: Seattle
-  color: black, gray, silver
+  color: black, gray, bright_gray, sky_blue
   country: WA
   image:
     alt: Seattle,WA,Say goodbye to Zoka for now see you soon
@@ -2044,7 +1998,7 @@ items:
   timestamp: ''
   title: Quinsac,France,baking cookie
 - city: Varanasi
-  color: gray, black, silver, brown, beige, white
+  color: gray, black, bright_gray, brown, beige, white
   country: India
   image:
     alt: Varanasi,India,alley in Varanasi
@@ -2054,7 +2008,7 @@ items:
   timestamp: ''
   title: Varanasi,India,alley in Varanasi
 - city: Inle
-  color: black, gray, brown, navy, beige
+  color: black, gray, brown, navy, beige, sky_blue
   country: Myanmar
   image:
     alt: Inle,Myanmar,cooking
@@ -2064,7 +2018,7 @@ items:
   timestamp: ''
   title: Inle,Myanmar,cooking
 - city: Annapurna
-  color: gray, silver, pink
+  color: gray, sky_blue, bright_gray
   country: Nepal
   image:
     alt: Annapurna,Nepal,People at ABC
@@ -2074,7 +2028,7 @@ items:
   timestamp: ''
   title: Annapurna,Nepal,People at ABC
 - city: Chicago
-  color: gray, silver, black, brown, beige
+  color: gray, bright_gray, black, sky_blue, brown, beige
   country: IL
   image:
     alt: Chicago,IL,having fun at some og korean mart
@@ -2084,7 +2038,7 @@ items:
   timestamp: ''
   title: Chicago,IL,having fun at some og korean mart
 - city: Yangon
-  color: brown, beige, white, gray, black, pink, silver
+  color: brown, beige, white, gray, black, pink, bright_gray
   country: Myanmar
   image:
     alt: Yangon,Myanmar,Barefoo at Shedagon pagoda
@@ -2094,7 +2048,7 @@ items:
   timestamp: ''
   title: Yangon,Myanmar,Barefoo at Shedagon pagoda
 - city: Seattle
-  color: gray, black, white, silver
+  color: gray, black, white, bright_gray
   country: WA
   image:
     alt: Seattle,WA,Zoka Greenlake monochrome
@@ -2104,7 +2058,7 @@ items:
   timestamp: ''
   title: Seattle,WA,Zoka Greenlake monochrome
 - city: Champaign
-  color: gray, black, silver, beige, brown
+  color: gray, black, bright_gray, beige, brown
   country: IL
   image:
     alt: Champaign,IL,buying shit tons at costco with Henry and Jason
@@ -2115,7 +2069,7 @@ items:
   timestamp: ''
   title: Champaign,IL,buying shit tons at costco with Henry and Jason
 - city: Riomaggiore
-  color: silver, gray, navy, brown, black, beige
+  color: sky_blue, gray, brown, navy, black
   country: Italy
   image:
     alt: Riomaggiore,Italy,Village on Cliff
@@ -2125,7 +2079,7 @@ items:
   timestamp: ''
   title: Riomaggiore,Italy,Village on Cliff
 - city: Yangon
-  color: brown, black, gray, olive, orange
+  color: brown, black, sky_blue, olive, orange
   country: Myanmar
   image:
     alt: Yangon,Myanmar,Shedagon Pagoda at night
@@ -2135,7 +2089,7 @@ items:
   timestamp: ''
   title: Yangon,Myanmar,Shedagon Pagoda at night
 - city: Champaign
-  color: silver, gray, black, beige, navy, pink
+  color: sky_blue, black, gray, bright_gray, beige, navy, pink
   country: IL
   image:
     alt: Champaign,IL,Sunset in complete peace
@@ -2144,6 +2098,1355 @@ items:
   sentiment: ''
   timestamp: ''
   title: Champaign,IL,Sunset in complete peace
+- city: Springfield
+  color: bright_gray, gray, beige, pink, black
+  country: IL
+  image:
+    alt: Springfield,IL,abracadabra harryporter sorting hat at boardgame store at
+      Springfield IL
+    src: /assets/img/photos_optimized/Springfield,IL,abracadabra harryporter sorting
+      hat at boardgame store at Springfield IL.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Springfield,IL,abracadabra harryporter sorting hat at boardgame store at
+    Springfield IL
+- city: Seattle
+  color: gray, bright_gray, black, navy, sky_blue, brown
+  country: WA
+  image:
+    alt: Seattle,WA,eyecontact
+    src: /assets/img/photos_optimized/Seattle,WA,eyecontact.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,eyecontact
+- city: Seattle
+  color: gray, bright_gray, black
+  country: WA
+  image:
+    alt: Seattle,WA,babies
+    src: /assets/img/photos_optimized/Seattle,WA,babies.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,babies
+- city: Seattle
+  color: gray, black, sky_blue
+  country: WA
+  image:
+    alt: Seattle,WA,kid and dad eyecontact
+    src: /assets/img/photos_optimized/Seattle,WA,kid and dad eyecontact.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,kid and dad eyecontact
+- city: Seattle
+  color: black, gray, bright_gray
+  country: WA
+  image:
+    alt: Seattle,WA,Zoka cafe in GreenLake
+    src: /assets/img/photos_optimized/Seattle,WA,Zoka cafe in GreenLake.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,Zoka cafe in GreenLake
+- city: Klamath
+  color: navy, sky_blue
+  country: CA
+  image:
+    alt: Klamath,CA,glowing lights on the ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,glowing
+      lights on the ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,glowing lights on the ocean
+- city: Crescent city
+  color: sky_blue, navy, gray
+  country: CA
+  image:
+    alt: Crescent city,CA,Crescent city
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Crescent
+      city,CA,Crescent city.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Crescent city,CA,Crescent city
+- city: Orick
+  color: black, gray, brown, bright_gray, beige
+  country: CA
+  image:
+    alt: Orick,CA,light between trees
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,light
+      between trees.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,light between trees
+- city: Fort Bragg
+  color: black, brown
+  country: CA
+  image:
+    alt: Fort Bragg,CA,sunset on beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,sunset
+      on beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,sunset on beach
+- city: Klamath
+  color: sky_blue, gray, black, beige, pink, brown
+  country: CA
+  image:
+    alt: Klamath,CA,me with danger
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,me
+      with danger.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,me with danger
+- city: Ukiah
+  color: gray, bright_gray, brown, black, beige
+  country: CA
+  image:
+    alt: Ukiah,CA,in and out employees
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,in
+      and out employees.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,in and out employees
+- city: Klamath
+  color: black, brown
+  country: CA
+  image:
+    alt: Klamath,CA,aura
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,aura.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,aura
+- city: Orick
+  color: gray, black, bright_gray, beige, brown
+  country: CA
+  image:
+    alt: Orick,CA,in front of big redwood
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,in
+      front of big redwood.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,in front of big redwood
+- city: Klamath
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,turquios ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,turquios
+      ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,turquios ocean
+- city: Sanfrancisco
+  color: bright_gray, gray, black, beige
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,on the way to hote lcheckout
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,on
+      the way to hote lcheckout.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,on the way to hote lcheckout
+- city: Orick
+  color: black, gray, beige
+  country: CA
+  image:
+    alt: Orick,CA,tall redwoods
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,tall
+      redwoods.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,tall redwoods
+- city: Klamath
+  color: sky_blue, black, gray, bright_gray, beige, brown
+  country: CA
+  image:
+    alt: Klamath,CA,danger stay back
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,danger
+      stay back.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,danger stay back
+- city: Klamath
+  color: black, gray, bright_gray, white
+  country: CA
+  image:
+    alt: Klamath,CA,messy and comforming frontseat
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,messy
+      and comforming frontseat.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,messy and comforming frontseat
+- city: Fort Bragg
+  color: gray, black, brown, navy, orange, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Fort Bragg,CA,sunset on seaside beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,sunset
+      on seaside beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,sunset on seaside beach
+- city: Klamath
+  color: gray, bright_gray, black
+  country: CA
+  image:
+    alt: Klamath,CA,desert looking beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,desert
+      looking beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,desert looking beach
+- city: Klamath
+  color: sky_blue, gray, navy, black
+  country: CA
+  image:
+    alt: Klamath,CA,hazy road
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,hazy
+      road.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,hazy road
+- city: Grants Pass
+  color: sky_blue, gray, navy
+  country: OR
+  image:
+    alt: Grants Pass,OR,in and out sign in the sky
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Grants Pass,OR,in
+      and out sign in the sky.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Grants Pass,OR,in and out sign in the sky
+- city: Klamath
+  color: brown, sky_blue, gray, black, bright_gray, pink, beige
+  country: CA
+  image:
+    alt: Klamath,CA,destroyed road on pacific ocean side
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,destroyed
+      road on pacific ocean side.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,destroyed road on pacific ocean side
+- city: Fort Bragg
+  color: gray, black, sky_blue, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,gazing ocean together
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,gazing
+      ocean together.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,gazing ocean together
+- city: Sanjose
+  color: sky_blue, navy
+  country: CA
+  image:
+    alt: Sanjose,CA,road 101 to sanjose
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanjose,CA,road
+      101 to sanjose.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanjose,CA,road 101 to sanjose
+- city: Klamath
+  color: sky_blue, gray, navy, black, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,wave from pacific ocean 1
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,wave
+      from pacific ocean-1.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,wave from pacific ocean 1
+- city: Fort Bragg
+  color: gray, black, navy, bright_gray, orange, sky_blue
+  country: CA
+  image:
+    alt: Fort Bragg,CA,sunset on seaside beach 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,sunset
+      on seaside beach-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,sunset on seaside beach 2
+- city: Klamath
+  color: black, gray
+  country: CA
+  image:
+    alt: Klamath,CA,dark sun
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,dark
+      sun.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,dark sun
+- city: Orick
+  color: gray, black, bright_gray, beige, brown, sky_blue
+  country: CA
+  image:
+    alt: Orick,CA,hug redwoods
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,hug
+      redwoods.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,hug redwoods
+- city: Orick
+  color: gray, brown, bright_gray, navy, black
+  country: CA
+  image:
+    alt: Orick,CA,lady bird johnson grove sign
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,lady
+      bird johnson grove sign.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,lady bird johnson grove sign
+- city: Fort Bragg
+  color: sky_blue, black, gray, beige, brown, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,tree on cliff having lived with wind
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,tree
+      on cliff having lived with wind.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,tree on cliff having lived with wind
+- city: Klamath
+  color: gray, black, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Klamath,CA,I wonder what there is over there
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,I
+      wonder what there is over there.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,I wonder what there is over there
+- city: Ukiah
+  color: gray, black, bright_gray, beige, brown
+  country: CA
+  image:
+    alt: Ukiah,CA,breakfast at in and out
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,breakfast
+      at in and out.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,breakfast at in and out
+- city: Fort Bragg
+  color: gray, black, navy
+  country: CA
+  image:
+    alt: Fort Bragg,CA,rock and beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,rock
+      and beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,rock and beach
+- city: Klamath
+  color: sky_blue, gray, black, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,ocean and mountain
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,ocean
+      and mountain.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,ocean and mountain
+- city: Fort Bragg
+  color: black, sky_blue, beige, gray, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,cliff and a family
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,cliff
+      and a family.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,cliff and a family
+- city: Klamath
+  color: sky_blue, navy, black, gray
+  country: CA
+  image:
+    alt: Klamath,CA,resting on viewpoint
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,resting
+      on viewpoint.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,resting on viewpoint
+- city: Grants Pass
+  color: gray, black, bright_gray, brown, sky_blue, navy
+  country: OR
+  image:
+    alt: Grants Pass,OR,welcom to black bear
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Grants Pass,OR,welcom
+      to black bear.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Grants Pass,OR,welcom to black bear
+- city: Klamath
+  color: gray, bright_gray, sky_blue, brown, navy
+  country: CA
+  image:
+    alt: Klamath,CA,me in the middle of road in north california
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,me
+      in the middle of road in north california.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,me in the middle of road in north california
+- city: Klamath
+  color: black, gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,the Sun
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,the
+      Sun.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,the Sun
+- city: Klamath
+  color: sky_blue, black, gray, bright_gray, beige
+  country: CA
+  image:
+    alt: Klamath,CA,broken road next to ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,broken
+      road next to ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,broken road next to ocean
+- city: Klamath
+  color: sky_blue, gray, pink, brown, black
+  country: CA
+  image:
+    alt: 'Klamath,CA,me next to waves from pacific ocean '
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,me
+      next to waves from pacific ocean .JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: 'Klamath,CA,me next to waves from pacific ocean '
+- city: Sanfrancisco
+  color: gray, sky_blue, black, navy
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,mist
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,mist.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,mist
+- city: Willits
+  color: black
+  country: CA
+  image:
+    alt: Willits,CA,willits heart of mendocino county
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Willits,CA,willits
+      heart of mendocino county.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Willits,CA,willits heart of mendocino county
+- city: Klamath
+  color: sky_blue, gray, black, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,waves from pacific ocean 3
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,waves
+      from pacific ocean-3.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,waves from pacific ocean 3
+- city: Klamath
+  color: sky_blue, blue, navy, brown, gray, pink, beige, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,ultimate clean blue sky and eagle
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,ultimate
+      clean blue sky and eagle.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,ultimate clean blue sky and eagle
+- city: Klamath
+  color: sky_blue, navy, gray, black, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,waves from pacific ocean 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,waves
+      from pacific ocean-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,waves from pacific ocean 2
+- city: Klamath
+  color: sky_blue, black, gray, navy, brown
+  country: CA
+  image:
+    alt: Klamath,CA,harmony
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,harmony.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,harmony
+- city: Fort Bragg
+  color: gray, black
+  country: CA
+  image:
+    alt: Fort Bragg,CA,lets take a selfie
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,lets
+      take a selfie.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,lets take a selfie
+- city: Klamath
+  color: black, gray, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,me driving
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,me
+      driving.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,me driving
+- city: Orick
+  color: gray, black
+  country: CA
+  image:
+    alt: Orick,CA,texture of redwoods tree
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,texture
+      of redwoods tree.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,texture of redwoods tree
+- city: Klamath
+  color: sky_blue, gray, beige, navy, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,quietly magnificent ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,quietly
+      magnificent ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,quietly magnificent ocean
+- city: Fort Bragg
+  color: black, pink, gray, bright_gray, beige
+  country: CA
+  image:
+    alt: Fort Bragg,CA,couple watching a sunset
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,couple
+      watching a sunset.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,couple watching a sunset
+- city: Bellevue
+  color: black, sky_blue, brown, gray, bright_gray
+  country: WA
+  image:
+    alt: Bellevue,WA,packing for road trip
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Bellevue,WA,packing
+      for road trip.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Bellevue,WA,packing for road trip
+- city: Klamath
+  color: gray, black, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,ocean and tesla
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,ocean
+      and tesla.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,ocean and tesla
+- city: Klamath
+  color: black, navy, gray
+  country: CA
+  image:
+    alt: Klamath,CA,silluotte
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,silluotte.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,silluotte
+- city: Klamath
+  color: gray, sky_blue, black, bright_gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,leica q and ocean 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,leica
+      q and ocean-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,leica q and ocean 2
+- city: Sanfrancisco
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,foggy pacific ocean is calling you 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,foggy
+      pacific ocean is calling you-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,foggy pacific ocean is calling you 2
+- city: Klamath
+  color: sky_blue, gray, black, beige, navy, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,waves from pacific ocean 5
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,waves
+      from pacific ocean-5.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,waves from pacific ocean 5
+- city: Klamath
+  color: sky_blue, navy, gray, bright_gray, brown, pink
+  country: CA
+  image:
+    alt: Klamath,CA,beautiful ocean cliff
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,beautiful
+      ocean cliff.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,beautiful ocean cliff
+- city: Klamath
+  color: black, gray, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,dark water under the sun
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,dark
+      water under the sun.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,dark water under the sun
+- city: Klamath
+  color: navy, black, brown
+  country: CA
+  image:
+    alt: Klamath,CA,road work ahead
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,road
+      work ahead.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,road work ahead
+- city: Ukiah
+  color: gray, sky_blue, navy, beige
+  country: CA
+  image:
+    alt: Ukiah,CA,after checkout
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,after
+      checkout.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,after checkout
+- city: Klamath
+  color: sky_blue, navy
+  country: CA
+  image:
+    alt: Klamath,CA,ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,ocean.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,ocean
+- city: Klamath
+  color: black, pink, navy, bright_gray, gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,with good guy
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,with
+      good guy.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,with good guy
+- city: Klamath
+  color: sky_blue, black, bright_gray, gray
+  country: CA
+  image:
+    alt: Klamath,CA,road 1
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,road
+      1.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,road 1
+- city: Sanfrancisco
+  color: gray, beige, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,road 101 south and 101 north
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,road
+      101 south and 101 north.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,road 101 south and 101 north
+- city: Sanfrancisco
+  color: sky_blue, gray
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,foggy pacific ocean is calling you
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,foggy
+      pacific ocean is calling you.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,foggy pacific ocean is calling you
+- city: Klamath
+  color: gray, sky_blue, black, beige, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,waves from pacific ocean 6
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,waves
+      from pacific ocean-6.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,waves from pacific ocean 6
+- city: Grants Pass
+  color: gray, black, bright_gray, sky_blue, brown, beige
+  country: OR
+  image:
+    alt: Grants Pass,OR,brunch at black bear
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Grants Pass,OR,brunch
+      at black bear.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Grants Pass,OR,brunch at black bear
+- city: Ukiah
+  color: black, beige, brown, gray
+  country: CA
+  image:
+    alt: Ukiah,CA,double double
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,double-double.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,double double
+- city: Fort Bragg
+  color: sky_blue, black, gray, navy, bright_gray, beige
+  country: CA
+  image:
+    alt: Fort Bragg,CA,sharkspin rock
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,sharkspin
+      rock.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,sharkspin rock
+- city: Klamath
+  color: sky_blue, brown, gray, pink
+  country: CA
+  image:
+    alt: Klamath,CA,yellow green and blue
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,yellow
+      green and blue.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,yellow green and blue
+- city: Fort Bragg
+  color: sky_blue, gray, navy, black, pink, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,me dead tree and big rock on seaside beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,me
+      dead tree and big rock on seaside beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,me dead tree and big rock on seaside beach
+- city: Fort Bragg
+  color: black, sky_blue, pink, gray, bright_gray, beige
+  country: CA
+  image:
+    alt: Fort Bragg,CA,me on seaside beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,me
+      on seaside beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,me on seaside beach
+- city: Ukiah
+  color: bright_gray, sky_blue, gray, brown, black
+  country: CA
+  image:
+    alt: Ukiah,CA,in and out for breakfast
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,in
+      and out for breakfast.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,in and out for breakfast
+- city: Sanfrancisco
+  color: gray, navy, sky_blue, bright_gray, black
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,stunning downhill road
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,stunning
+      downhill road.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,stunning downhill road
+- city: Bellevue
+  color: black, gray, bright_gray, sky_blue, beige, brown
+  country: WA
+  image:
+    alt: Bellevue,WA,moving
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Bellevue,WA,moving.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Bellevue,WA,moving
+- city: Ukiah
+  color: black, gray, beige, brown
+  country: CA
+  image:
+    alt: Ukiah,CA,6th charging
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Ukiah,CA,6th
+      charging.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Ukiah,CA,6th charging
+- city: Grants Pass
+  color: gray, blue, sky_blue, black, brown, bright_gray
+  country: OR
+  image:
+    alt: Grants Pass,OR,bony trees
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Grants Pass,OR,bony
+      trees.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Grants Pass,OR,bony trees
+- city: Klamath
+  color: sky_blue, black, brown, gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,skyroad to wonderland
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,skyroad
+      to wonderland.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,skyroad to wonderland
+- city: Fort Bragg
+  color: gray, black, bright_gray, pink
+  country: CA
+  image:
+    alt: Fort Bragg,CA,watching sunset together
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,watching
+      sunset together.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,watching sunset together
+- city: Klamath
+  color: brown, navy, black, gray
+  country: CA
+  image:
+    alt: Klamath,CA,high contrast
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,high
+      contrast.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,high contrast
+- city: Orick
+  color: gray, black, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Orick,CA,hollow tree
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,hollow
+      tree.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,hollow tree
+- city: Orick
+  color: black, gray
+  country: CA
+  image:
+    alt: Orick,CA,woods is calling you
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,woods
+      is calling you.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,woods is calling you
+- city: Klamath
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,a man with a cane on quiet beach
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,a
+      man with a cane on quiet beach.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,a man with a cane on quiet beach
+- city: Fort Bragg
+  color: gray, black, navy, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Fort Bragg,CA,lonely rock
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,lonely
+      rock.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,lonely rock
+- city: Klamath
+  color: sky_blue, brown, black
+  country: CA
+  image:
+    alt: Klamath,CA,dreamy view
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,dreamy
+      view.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,dreamy view
+- city: Klamath
+  color: sky_blue, gray, black, bright_gray, brown
+  country: CA
+  image:
+    alt: Klamath,CA,robot captain sourous mountain
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,robot
+      captain sourous mountain.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,robot captain sourous mountain
+- city: Fort Bragg
+  color: black, gray, pink, bright_gray, beige
+  country: CA
+  image:
+    alt: Fort Bragg,CA,watching sunset together 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,watching
+      sunset together-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,watching sunset together 2
+- city: Klamath
+  color: sky_blue, brown, gray, olive, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,on a ocean view point
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,on
+      a ocean view point.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,on a ocean view point
+- city: Klamath
+  color: sky_blue, black, gray, navy, bright_gray
+  country: CA
+  image:
+    alt: Klamath,CA,danger stay back 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,danger
+      stay back-2.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,danger stay back 2
+- city: Miranda
+  color: bright_gray, navy, gray
+  country: CA
+  image:
+    alt: Miranda,CA,oh my god curly road
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Miranda,CA,oh
+      my god curly road.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Miranda,CA,oh my god curly road
+- city: Orick
+  color: black, gray
+  country: CA
+  image:
+    alt: Orick,CA,still alive
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,still
+      alive.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,still alive
+- city: Fort Bragg
+  color: black
+  country: CA
+  image:
+    alt: Fort Bragg,CA,night drive
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,night
+      drive.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,night drive
+- city: Fort Bragg
+  color: gray, black, pink, bright_gray, sky_blue
+  country: CA
+  image:
+    alt: Fort Bragg,CA,five seconds before sunset
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,five
+      seconds before sunset.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,five seconds before sunset
+- city: Sanfrancisco
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,foggy golden bridge 2
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,foggy
+      golden bridge-2.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,foggy golden bridge 2
+- city: Sanfrancisco
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,road 101 to SF
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,road
+      101 to SF.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,road 101 to SF
+- city: Orick
+  color: gray, black, bright_gray, brown
+  country: CA
+  image:
+    alt: Orick,CA,survival
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,survival.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,survival
+- city: Klamath
+  color: gray, black, bright_gray, beige, brown, sky_blue
+  country: CA
+  image:
+    alt: Klamath,CA,roadtrip bike on redwoods road
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,roadtrip
+      bike on redwoods road.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,roadtrip bike on redwoods road
+- city: Orick
+  color: black, gray, beige, sky_blue
+  country: CA
+  image:
+    alt: Orick,CA,tall tree
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Orick,CA,tall
+      tree.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Orick,CA,tall tree
+- city: Sanfrancisco
+  color: sky_blue, gray
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,foggy golden bridge 1
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,foggy
+      golden bridge-1.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,foggy golden bridge 1
+- city: Fort Bragg
+  color: gray, black
+  country: CA
+  image:
+    alt: Fort Bragg,CA,endless waiting
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,endless
+      waiting.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,endless waiting
+- city: Selma
+  color: gray, sky_blue, navy, bright_gray
+  country: OR
+  image:
+    alt: Selma,OR,road narrow
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Selma,OR,road
+      narrow.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Selma,OR,road narrow
+- city: Klamath
+  color: sky_blue, navy, gray
+  country: CA
+  image:
+    alt: Klamath,CA,waves from pacific ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,waves
+      from pacific ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,waves from pacific ocean
+- city: Klamath
+  color: black, gray, beige
+  country: CA
+  image:
+    alt: Klamath,CA,Helios sun and horizon
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,Helios
+      sun and horizon.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,Helios sun and horizon
+- city: Sanfrancisco
+  color: bright_gray, gray, brown, sky_blue, black
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,golden bridge behind fog
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,golden
+      bridge behind fog.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,golden bridge behind fog
+- city: Klamath
+  color: black, sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Klamath,CA,pacific ocean view inside car
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,pacific
+      ocean view inside car.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,pacific ocean view inside car
+- city: Sanfrancisco
+  color: navy, sky_blue, black
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,foggy golden bridge 4
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,foggy
+      golden bridge-4.jpg
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,foggy golden bridge 4
+- city: Fort Bragg
+  color: black, sky_blue, gray, bright_gray
+  country: CA
+  image:
+    alt: Fort Bragg,CA,curiosity
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,curiosity.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,curiosity
+- city: Klamath
+  color: bright_gray, gray, white, black
+  country: CA
+  image:
+    alt: Klamath,CA,me monochrome
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,me
+      monochrome.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,me monochrome
+- city: Klamath
+  color: black, gray, white
+  country: CA
+  image:
+    alt: Klamath,CA,monochrome sun
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,monochrome
+      sun.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,monochrome sun
+- city: Sanfrancisco
+  color: sky_blue, gray, navy
+  country: CA
+  image:
+    alt: Sanfrancisco,CA,uphill to battery spencer
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Sanfrancisco,CA,uphill
+      to battery spencer.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Sanfrancisco,CA,uphill to battery spencer
+- city: Osaka
+  color: gray, black, sky_blue, bright_gray, navy, beige
+  country: Japan
+  image:
+    alt: Osaka,Japan,sleepy kid on a bike rear seat
+    src: /assets/img/photos_optimized/Osaka,Japan,sleepy kid on a bike rear seat.JPG
+  objects: person,person,bicycle,chair,handbag
+  sentiment: ''
+  timestamp: ''
+  title: Osaka,Japan,sleepy kid on a bike rear seat
+- city: Darjeeling
+  color: bright_gray, brown, gray, black, sky_blue, pink, navy
+  country: India
+  image:
+    alt: Darjeeling,India,cool cleaning guy at stay
+    src: /assets/img/photos_optimized/Darjeeling,India,cool cleaning guy at stay.JPG
+  objects: person,chair,bed,bed
+  sentiment: ''
+  timestamp: ''
+  title: Darjeeling,India,cool cleaning guy at stay
+- city: GrantsPass
+  color: ''
+  country: CA
+  image:
+    alt: GrantsPass,CA,me in grantspass
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/GrantsPass,CA,me
+      in grantspass.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: GrantsPass,CA,me in grantspass
+- city: GrantsPass
+  color: ''
+  country: CA
+  image:
+    alt: GrantsPass,CA,right after waking up
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/GrantsPass,CA,right
+      after waking up.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: GrantsPass,CA,right after waking up
+- city: Klamath
+  color: ''
+  country: CA
+  image:
+    alt: Klamath,CA,Leica q and ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Klamath,CA,Leica
+      q and ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Klamath,CA,Leica q and ocean
+- city: Grants Pass
+  color: ''
+  country: CA
+  image:
+    alt: Grants Pass,CA,Welcoming black bear
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Grants Pass,CA,Welcoming
+      black bear.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Grants Pass,CA,Welcoming black bear
+- city: Fort Bragg
+  color: ''
+  country: CA
+  image:
+    alt: Fort Bragg,CA,a house on cliff and ocean
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Fort Bragg,CA,a
+      house on cliff and ocean.JPG
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Fort Bragg,CA,a house on cliff and ocean
+- city: Bellevue
+  color: ''
+  country: WA
+  image:
+    alt: Bellevue,WA,Seattle to San jose road trip route on map
+    src: /assets/img/photos_optimized/seattle_to_sanjose_roadtrip_photos/Bellevue,WA,Seattle
+      to San jose road trip route on map.png
+  objects: ''
+  sentiment: ''
+  timestamp: ''
+  title: Bellevue,WA,Seattle to San jose road trip route on map
+- city: Ulsan
+  color: sky_blue, brown, gray, black, navy
+  country: Korea
+  image:
+    alt: Ulsan,Korea,UNIST engineering building
+    src: /assets/img/photos_optimized/Ulsan,Korea,UNIST engineering building.jpeg
+  objects: person,person,person,person,person,person,person,person,person,person,person,person
+  sentiment: ''
+  timestamp: ''
+  title: Ulsan,Korea,UNIST engineering building
+- city: Ulsan
+  color: brown, sky_blue
+  country: Korea
+  image:
+    alt: Ulsan,Korea,view from UNIST dorm
+    src: /assets/img/photos_optimized/Ulsan,Korea,view from UNIST dorm.jpeg
+  objects: None
+  sentiment: ''
+  timestamp: ''
+  title: Ulsan,Korea,view from UNIST dorm
+- city: Seattle
+  color: gray, black, sky_blue, olive, brown
+  country: WA
+  image:
+    alt: Seattle,WA,uncoordinated but not a problem at all it's life
+    src: /assets/img/photos_optimized/Seattle,WA,uncoordinated but not a problem at
+      all it's life.jpg
+  objects: person,person,car,car,car,bicycle,car,car,car,car,car,car,car,car,car,car,car
+  sentiment: ''
+  timestamp: ''
+  title: Seattle,WA,uncoordinated but not a problem at all it's life
 layout: photos
 slug: /photos
 title: Life

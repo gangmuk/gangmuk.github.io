@@ -232,7 +232,7 @@
   <style>
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-auto-rows: 200px;
       grid-auto-flow: dense;
       gap: 8px;
@@ -259,21 +259,6 @@
       grid-column: span 3;
       grid-row: span 2;
     }
-    
-
-    /* slight crop for some photos */
-    /*
-    .grid-image {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      background-color: white;
-      display: block;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-    */
 
     /* no crop */
     .grid-image { position: absolute; 
@@ -289,8 +274,6 @@
       opacity: 0; 
     } 
 
-
-
     .grid-image.loaded {
       opacity: 1;
     }
@@ -305,7 +288,6 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    
 
     /* zoom on hover effect */
     .grid-item:hover .grid-info {
@@ -318,20 +300,6 @@
       filter: brightness(1.03) saturate(1.05);
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
-    
-    /* wiggle effect on hover */
-    /* 
-    .grid-item:hover {
-      z-index: 10;
-      animation: wiggle 0.5s ease-in-out;
-    }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(1deg); }
-      75% { transform: rotate(-1deg); }
-    }
-    */
 
     /* Floating Popup textbox tooltip styles */
     .photo-tooltip {
@@ -523,7 +491,7 @@
     else if (aspectRatio > 1.6) {
       item.classList.add('wide');
     }
-    else if (aspectRatio < 0.5) {
+    else if (aspectRatio < 0.75) {
       item.classList.add('tall');
     } 
     else if ((aspectRatio > 1.5 && img.naturalWidth > 2500) || 

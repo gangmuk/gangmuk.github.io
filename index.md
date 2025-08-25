@@ -15,13 +15,13 @@ h2 {
 </style>
 
 <p>
-I am a third year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign. I am working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>, and also closely working with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. 
+I am a fourth year Ph.D. student at the Computer Science Department of the University of Illinois Urbana-Champaign. I am working with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a>, and also closely working with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. 
 
 Also, I earned my Bachelor and Master at the Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
 </p>
 
 <p>
-I am broadly interested in system and networking. Some keywords for my current interests are Request routing, Infrastructure for LLM inference applications, Optimizing microservices-based application in cloud, and ML for system.
+I am broadly interested in system and networking. Some keywords for my current interests are request routing, infrastructure for LLM inference applications, optimizing microservices-based application in cloud, and ML for system.
 </p>
 
 Most likely, you can find me on the 3rd floor at Siebel Center for Computer Science at Urbana, IL (or at a cafe in Urbana-Champaign)<br>
@@ -118,22 +118,22 @@ In Proceedings of the 36th IEEE International Conference on Data Engineering (IC
 ## Experiences
 
 <div class="publication-item">
-Bytedance, Seattle, Compute Infra team, Research intern, 2025 Jan - Jun
+Bytedance, Seattle, Compute Infra team, Research intern, 2025 Jan - 2025 Jun
 <br>
 </div>
 <div class="publication-item">
-Rebellions, Seongnam, Korea, Software engineer, 2025 Jul - Apr
+Rebellions, Seongnam, Korea, Software engineer, 2021 Jul - 2022 Apr
 <br>
 </div>
 <div class="publication-item">
-Ghent University, Ghent, Belgium, Media Lab, Research intern, 2018 Jan - Jun
+Ghent University, Ghent, Belgium, Media Lab, Research intern, 2018 Jun - 2018 Aug
 <br>
 </div>
 
-## Others Facts
+## Other Facts about me
 
 ### Sports
-I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennnis, and more.
+I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennis, and more.
 <br>
 
 ### Backpacking

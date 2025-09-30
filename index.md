@@ -21,7 +21,10 @@ Also, I earned my Bachelor and Master at the Computer Science at UNIST, South Ko
 </p>
 
 <p>
-I am broadly interested in system and networking. Some keywords for my current interests are request routing, infrastructure for LLM inference applications, optimizing microservices-based application in cloud, and ML for system.
+I am broadly interested in system and networking. 
+Current interest is to make infrastructure smarter by connecting different cluster resource schedulers and also to make infrastructure more application-aware to improve application performance, reduce monetary cost and enhance cluster reliability. More specifically, some of my projects are/were request routing for microservice applications in geo-distributed multi-clusters (SLATE), machine learning based request router for LLM inference application in heterogeneous GPU clusters, and verifying cluster manager to make it more reliable (Kivi).
+
+<!-- All of my works heavily involve K8S and all done in K8S and some with Envoy proxy and Istio service mesh. -->
 </p>
 
 Most likely, you can find me on the 3rd floor at Siebel Center for Computer Science at Urbana, IL (or at a cafe in Urbana-Champaign)<br>

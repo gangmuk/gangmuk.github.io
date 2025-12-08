@@ -1,5 +1,8 @@
 .post-header {
   margin-bottom: $spacing-unit;
+  max-width: 750px; /* Match content width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .post-title {
@@ -38,22 +41,19 @@
     margin-bottom: $spacing-unit;
     font-family: Helvetica, sans-serif;
     width: 100%;
+    max-width: 750px; /* Main content column width */
+    margin-left: auto;
+    margin-right: auto;
     position: relative; /* Allow absolute positioning of side notes */
-
-    /* Restrict width of standard content to allow space for side notes */
-    > p, > h1, > h2, > h3, > h4, > h5, > h6, > ul, > ol, > blockquote, > pre, > figure, > div {
-        max-width: 750px;
-        position: relative; /* Allow absolute positioning within paragraphs */
-    }
+    line-height: 1.75; /* Increased line spacing for better readability */
 
     /* Side note style - appears in the right margin (Tufte-style) */
     .side-note {
-      display: block; /* Make span behave as block for floating */
-      float: right;
-      clear: right;
-      margin-right: -350px; /* Push into the empty space on the right */
-      width: 300px;
-      margin-top: 0.3rem;
+      position: absolute;
+      left: 100%; /* Position to the right of the main content */
+      width: 280px;
+      margin-left: 40px; /* Gap between content and side note */
+      margin-top: 0;
       margin-bottom: 1rem;
       font-size: 0.85rem;
       line-height: 1.5;
@@ -64,16 +64,16 @@
 
       @include media-query($on-laptop) {
         /* On smaller laptops, adjust positioning */
-        margin-right: -320px;
-        width: 260px;
+        width: 240px;
+        margin-left: 30px;
         font-size: 0.8rem;
       }
 
       @include media-query($on-mobile) {
         /* On mobile, display inline as a footnote-style element */
-        float: none;
-        margin-right: 0;
+        position: static;
         width: 100%;
+        margin-left: 0;
         display: block;
         margin: 10px 0;
         color: #444;
@@ -82,11 +82,6 @@
         border-left: 3px solid #ccc;
         font-size: 0.9rem;
       }
-    }
-
-    /* Make sure parent paragraphs can contain floats */
-    p {
-      overflow: visible;
     }
     
     /* Add specific styling for headings */

@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Process a single prediction in a thread"
+date: 2025-05-14
+---
+
 The Hidden Performance Killer: When Asyncio Meets ThreadPoolExecutor
 Have you ever stared at your performance logs, completely baffled about where your latency is coming from? That was me last week, debugging a GPU-accelerated prediction service that was inexplicably slow. I had timestamps everywhere, yet none of them explained why requests were taking 7+ seconds when the actual predictions took mere milliseconds.
 The culprit? A single line of code: await asyncio.gather(*tasks).

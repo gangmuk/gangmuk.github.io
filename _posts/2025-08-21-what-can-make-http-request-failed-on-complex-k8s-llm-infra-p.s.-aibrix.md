@@ -1,3 +1,9 @@
+---
+layout: post
+title: "aibrix-reserved-router - handles requests for extension processing"
+date: 2025-08-21
+---
+
 
 ## TLDR; 
 Low disk space makes HTTP request routing fail due to WASM cache in envoy controller not being loaded properly. This can cause very weird failure pattern where a request only with additional header (routing-strategy) fails with no healthy upstream and a request without this header works perpectly...

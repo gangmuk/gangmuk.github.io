@@ -1,3 +1,9 @@
+---
+layout: post
+title: "How enjoyable it is just to see people"
+date: 2025-06-21
+---
+
 # How enjoyable it is just to see people
 
 NOTE: Watch out cynism!

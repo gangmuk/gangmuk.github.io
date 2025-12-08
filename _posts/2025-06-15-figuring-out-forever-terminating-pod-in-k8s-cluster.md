@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Debugging Forever Terminating Pods in Kubernetes"
+date: 2025-06-15
+---
+
 # Debugging Forever Terminating Pods in Kubernetes
 
 *Tracking down why a pod was stuck in "Terminating" state for 10+ hours.*

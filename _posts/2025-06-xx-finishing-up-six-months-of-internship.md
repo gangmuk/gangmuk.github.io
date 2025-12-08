@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Finishing up six months of internship"
+date: 2025-06-30
+---
+
 A bag of some (new) thoughts, opinions, and lessons I have had for the last six months of my life (Jan-Jun, 2025) at Renton, Bellevue, and Seattle while doing internship.
 
 ### Professional relationship, professional work, and research

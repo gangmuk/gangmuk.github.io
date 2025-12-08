@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Random notes during Thomas Wenisch talk at UIUC"
+date: 2025-04-09
+---
+
 # Random notes during Thomas Wenisch talk at UIUC
 
 You need to talk to your advisor about existential concern early 

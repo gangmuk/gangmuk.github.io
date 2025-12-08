@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Debugging istiod failure: 'why is it so hard to find out disk pressure?'"
+date: 2024-06-05
+---
+
 # Debugging istiod failure: 'why is it so hard to find out disk pressure?'
 
 *How a simple disk space issue turned into a 3-hour debugging*

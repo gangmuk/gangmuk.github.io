@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Random notes during Thomas Wenisch talk at UIUC"
+date: 2025-05-06
+---
+
 # Random notes during Thomas Wenisch talk at UIUC
 
 GPU world underutilization problem

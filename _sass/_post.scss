@@ -46,41 +46,47 @@
         position: relative; /* Allow absolute positioning within paragraphs */
     }
 
-    /* Side note style - appears in the right margin */
+    /* Side note style - appears in the right margin (Tufte-style) */
     .side-note {
+      display: block; /* Make span behave as block for floating */
       float: right;
       clear: right;
-      width: 280px;
-      margin-right: -320px; /* Push into the empty space on the right */
-      margin-top: 0;
-      margin-bottom: 1em;
-      font-size: 0.85em;
-      color: #555;
+      margin-right: -350px; /* Push into the empty space on the right */
+      width: 300px;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
       line-height: 1.5;
+      color: #555;
       padding: 10px 15px;
-      text-align: left;
       border-left: 2px solid #ddd;
       background-color: #fafafa;
 
       @include media-query($on-laptop) {
-        /* On smaller laptops, keep the side note visible */
-        margin-right: -300px;
+        /* On smaller laptops, adjust positioning */
+        margin-right: -320px;
         width: 260px;
-        font-size: 0.8em;
+        font-size: 0.8rem;
       }
 
       @include media-query($on-mobile) {
+        /* On mobile, display inline as a footnote-style element */
         float: none;
-        width: 100%;
         margin-right: 0;
+        width: 100%;
         display: block;
         margin: 10px 0;
         color: #444;
         background: #f9f9f9;
         padding: 10px 15px;
         border-left: 3px solid #ccc;
-        font-size: 0.9em;
+        font-size: 0.9rem;
       }
+    }
+
+    /* Make sure parent paragraphs can contain floats */
+    p {
+      overflow: visible;
     }
     
     /* Add specific styling for headings */

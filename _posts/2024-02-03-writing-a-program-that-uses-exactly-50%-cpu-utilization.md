@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Writing a program that uses exactly 50% CPU utilization"
+date: 2024-02-03
+---
+
 # Writing a program that uses exactly 50% CPU utilization
 
 In one of my project, we needed to add noisy neighbor process. And apparently it was not very straightforward how it should be. The first program was simply alternating between doing work and sleeping for equal amounts of time. 

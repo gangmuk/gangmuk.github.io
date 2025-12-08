@@ -1,3 +1,9 @@
+---
+layout: post
+title: "The AI Debugging Paradox: When Your AI Assistant Leads You Down a Rabbit Hole"
+date: 2025-05-18
+---
+
 # The AI Debugging Paradox: When Your AI Assistant Leads You Down a Rabbit Hole
 
 As software engineers, we increasingly rely on AI assistants to help solve complex problems. These tools offer impressive capabilities, but what happens when an AI confidently suggests a flawed approach? This post explores a real-world case where an AI-recommended debugging technique created a phantom performance problem—sending me on a wild goose chase to solve an issue that never existed.

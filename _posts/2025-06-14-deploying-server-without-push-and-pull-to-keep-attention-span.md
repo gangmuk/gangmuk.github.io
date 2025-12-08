@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Deploying modified server without build,push,pull, and restart"
+date: 2025-06-14
+---
+
 # Deploying modified server without build,push,pull, and restart
 
 ## The Daily Development Nightmare

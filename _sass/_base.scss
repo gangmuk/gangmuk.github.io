@@ -27,7 +27,7 @@ figure {
  */
 body {
   font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-size: 16px;
   line-height: $base-line-height;
   font-weight: 300;
   color: $text-color;
@@ -196,12 +196,12 @@ pre {
 }
 
 .wrapper.post-wrapper {
-  max-width: -webkit-calc(1100px - (#{$spacing-unit} * 2));
-  max-width:         calc(1100px - (#{$spacing-unit} * 2));
+  max-width: -webkit-calc(900px - (#{$spacing-unit} * 2));
+  max-width:         calc(900px - (#{$spacing-unit} * 2));
 
   @include media-query($on-laptop) {
-    max-width: -webkit-calc(1100px - (#{$spacing-unit}));
-    max-width:         calc(1100px - (#{$spacing-unit}));
+    max-width: -webkit-calc(900px - (#{$spacing-unit}));
+    max-width:         calc(900px - (#{$spacing-unit}));
   }
 }
 

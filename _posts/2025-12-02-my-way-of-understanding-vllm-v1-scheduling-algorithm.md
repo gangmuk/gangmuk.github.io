@@ -130,39 +130,39 @@ The scheduler determines the number of tokens to execute (`num_tokens`) by start
 
 It applies four filters in order:
   1) **Completion Check (`max_tokens`):**
-      - **Purpose:** Prevents over-scheduling when a request is effectively finished but still has "placeholder" tokens from a previous speculative step.
-      - **Logic:** If the request has effectively reached its completion limit (`max_tokens`), the scheduler skips it entirely for this iteration.
-      - **Example:** A request with `max_tokens=100` has `num_computed=98` and `2` speculative placeholders. Since `98 + 2 >= 100`, it is skipped.
+    - **Purpose:** Prevents over-scheduling when a request is effectively finished but still has "placeholder" tokens from a previous speculative step.
+    - **Logic:** If the request has effectively reached its completion limit (`max_tokens`), the scheduler skips it entirely for this iteration.
+    - **Example:** A request with `max_tokens=100` has `num_computed=98` and `2` speculative placeholders. Since `98 + 2 >= 100`, it is skipped.
 
   2) **Fairness Threshold between requests (`long_prefill_token_threshold`):**
-      - **Purpose:** Prevents a single long request from monopolizing the GPU for too long, which would starve other requests. It forces Chunking—splitting a large prefill into smaller batches across multiple iterations.
-      - **Logic:** If `required_tokens` (remaining work: `num_tokens - num_computed_tokens`) exceeds the threshold, `num_tokens` is capped (reduced) to equal the threshold.
-      - **Example:** `long_prefill_token_threshold=512`. `Request A` needs to process 2000 tokens. The scheduler only allows 512 tokens in this step. The remaining 1488 tokens must wait for future iterations.
+    - **Purpose:** Prevents a single long request from monopolizing the GPU for too long, which would starve other requests. It forces Chunking—splitting a large prefill into smaller batches across multiple iterations.
+    - **Logic:** If `required_tokens` (remaining work: `num_tokens - num_computed_tokens`) exceeds the threshold, `num_tokens` is capped (reduced) to equal the threshold.
+    - **Example:** `long_prefill_token_threshold=512`. `Request A` needs to process 2000 tokens. The scheduler only allows 512 tokens in this step. The remaining 1488 tokens must wait for future iterations.
 
   3) **Token Budget (`max_num_batched_tokens`):**
-      - **Purpose:**
-          - **Latency Control:** Limits the total work in one kernel launch to keep execution time short (crucial for Inter-Token Latency).
-          - **System Capacity (KV Cache & Compute):** While higher batch sizes generally improve throughput, there are diminishing returns rooted in GPU microarchitecture.
-              - *SM Saturation (Compute Bound):* The NVIDIA A100 has 108 Streaming Multiprocessors (SMs). To maximize utilization, we need enough thread blocks to fill these SMs ("waves"). Once all SMs are fully occupied, adding more tokens linearly increases execution time (latency) without improving throughput (tokens/sec).
-              - *FlashAttention Tile Quantization:* FlashAttention splits computation into fixed-size tiles (e.g., 128x64) to fit into the SM's SRAM (192KB). If the batch size creates a "tail effect"—where the total number of tiles isn't a multiple of 108—you get a "partial wave" where some SMs sit idle while others finish, reducing efficiency.
-              - *Example:* For a Llama 3 8B model on an A100, throughput often saturates at a batch size of 128-256 sequences (during decode). For prefill, allowing extremely large batches (e.g., >32k tokens) yields minimal throughput gains but causes massive Inter-Token Latency (ITL) spikes for concurrent decode requests. `max_num_batched_tokens` caps this to keep the system in the efficient, low-latency zone.
-      - **Logic:** If the request needs more tokens than the *remaining* budget (which starts at `max_num_batched_tokens` and decreases as other requests are scheduled), it consumes *all* the remaining budget.
-      - **Example:** `max_num_batched_tokens=2048`. `Request A` is scheduled for 512 tokens. `Remaining Budget = 1536`. `Request B` (Waiting) needs 2000 tokens. It is capped at 1536 tokens (the remaining budget). It cannot run fully in this step.
+    - **Purpose:**
+      - **Latency Control:** Limits the total work in one kernel launch to keep execution time short (crucial for Inter-Token Latency).
+      - **System Capacity (KV Cache & Compute):** While higher batch sizes generally improve throughput, there are diminishing returns rooted in GPU microarchitecture.
+        - *SM Saturation (Compute Bound):* The NVIDIA A100 has 108 Streaming Multiprocessors (SMs). To maximize utilization, we need enough thread blocks to fill these SMs ("waves"). Once all SMs are fully occupied, adding more tokens linearly increases execution time (latency) without improving throughput (tokens/sec).
+        - *FlashAttention Tile Quantization:* FlashAttention splits computation into fixed-size tiles (e.g., 128x64) to fit into the SM's SRAM (192KB). If the batch size creates a "tail effect"—where the total number of tiles isn't a multiple of 108—you get a "partial wave" where some SMs sit idle while others finish, reducing efficiency.
+        - *Example:* For a Llama 3 8B model on an A100, throughput often saturates at a batch size of 128-256 sequences (during decode). For prefill, allowing extremely large batches (e.g., >32k tokens) yields minimal throughput gains but causes massive Inter-Token Latency (ITL) spikes for concurrent decode requests. `max_num_batched_tokens` caps this to keep the system in the efficient, low-latency zone.
+    - **Logic:** If the request needs more tokens than the *remaining* budget (which starts at `max_num_batched_tokens` and decreases as other requests are scheduled), it consumes *all* the remaining budget.
+    - **Example:** `max_num_batched_tokens=2048`. `Request A` is scheduled for 512 tokens. `Remaining Budget = 1536`. `Request B` (Waiting) needs 2000 tokens. It is capped at 1536 tokens (the remaining budget). It cannot run fully in this step.
 
   4) **Model Context Limit (`max_model_len`):**
-      - **Purpose:** Hard safety check for model context window.
-      - **Logic:** `num_tokens` is capped to ensure the total sequence length stays within `max_model_len`.
-      - **Example:** `max_model_len=8192`. A request asks to generate past this limit. The scheduler caps the tokens so the total length is exactly 8192.
+    - **Purpose:** Hard safety check for model context window.
+    - **Logic:** `num_tokens` is capped to ensure the total sequence length stays within `max_model_len`.
+    - **Example:** `max_model_len=8192`. A request asks to generate past this limit. The scheduler caps the tokens so the total length is exactly 8192.
 
 **2. Allocate & Schedule:**
-    *   For the requests that passed the above filters, the scheduler attempts to allocate physical KV cache blocks for these tokens.
-    *   *High-Level Allocation Logic:* The scheduler asks the `KVCacheManager` for the needed blocks. The manager first checks the Prefix Cache (to reuse existing blocks with the same token sequence) and then pulls from the Free Block Queue if needed. (The full mechanics of block layout, hashing, and LRU eviction are detailed in the Memory Allocation Details section later).
-    *   Success: If blocks are successfully allocated, the request is officially scheduled for this iteration. The `token_budget` is reduced.
-    *   Failure (Preemption Loop): If the system runs out of free blocks, the scheduler *cannot* schedule the current request without freeing up space. (See the Preemption Analysis section below for real-world triggers like *Decode Accumulation* and *Chunked Prefill*). It enters a preemption loop:
-        *   Logic: It preempts the lowest priority request (or most recently added if FCFS) and retries the allocation for the current request. This repeats until allocation succeeds or the current request itself becomes the victim.
-        *   If Self-Preemption: If the victim selection logic picks the current request itself (e.g., because it's the lowest priority), the loop breaks. The request is NOT scheduled in this iteration and waits for the next one. It does *not* execute the tokens.
-        *   If Success: The victim remains preempted (moved to waiting queue), and the current request proceeds to be scheduled.
-    *   Next Step: If the request is successfully scheduled, the scheduler moves to the next request in the running queue. Once all running requests are processed, if (and only if) no preemptions occurred, it proceeds to Phase 2 (Waiting Requests).
+  - For the requests that passed the above filters, the scheduler attempts to allocate physical KV cache blocks for these tokens.
+  - *High-Level Allocation Logic:* The scheduler asks the `KVCacheManager` for the needed blocks. The manager first checks the Prefix Cache (to reuse existing blocks with the same token sequence) and then pulls from the Free Block Queue if needed. (The full mechanics of block layout, hashing, and LRU eviction are detailed in the Memory Allocation Details section later).
+  - Success: If blocks are successfully allocated, the request is officially scheduled for this iteration. The `token_budget` is reduced.
+  - Failure (Preemption Loop): If the system runs out of free blocks, the scheduler *cannot* schedule the current request without freeing up space. (See the Preemption Analysis section below for real-world triggers like *Decode Accumulation* and *Chunked Prefill*). It enters a preemption loop:
+    - Logic: It preempts the lowest priority request (or most recently added if FCFS) and retries the allocation for the current request. This repeats until allocation succeeds or the current request itself becomes the victim.
+    - If Self-Preemption: If the victim selection logic picks the current request itself (e.g., because it's the lowest priority), the loop breaks. The request is NOT scheduled in this iteration and waits for the next one. It does *not* execute the tokens.
+    - If Success: The victim remains preempted (moved to waiting queue), and the current request proceeds to be scheduled.
+  - Next Step: If the request is successfully scheduled, the scheduler moves to the next request in the running queue. Once all running requests are processed, if (and only if) no preemptions occurred, it proceeds to Phase 2 (Waiting Requests).
         
 
 #### **Phase 2: Scheduling Waiting Requests**
@@ -175,14 +175,14 @@ The scheduling algorithm for waiting requests is almost similar to the running q
 1.  Check Constraints: It iterates through the `WAITING` queue (FIFO or Priority order). It stops if the `token_budget` is exhausted or the `RUNNING` queue has reached its size limit (`max_num_seqs`).
 2.  Prefix Cache Lookup: For a request being considered for the first time, the scheduler checks the prefix cache to see if any initial blocks can be reused from previous requests.
 3.  Calculate Tokens: The logic is similar to Phase 1, but simpler because waiting requests are essentially starting their execution (processing the initial prompt).
-    *   *Note:* Technically, a request could be in the waiting queue with `num_computed_tokens > 0` if it was preempted previously. In that case, it is resuming, but for scheduling purposes, it's treated as a batch of tokens to be processed (just like a prefill).
-    *   It calculates the required tokens (`total_len - cached_len`).
-    *   It applies the same Fairness Threshold and Token Budget caps to ensure the prefill doesn't monopolize the system.
-    *   *Result:* If the request is huge (e.g., 2000 tokens) and the budget is small (e.g., 512 remaining), it gets chunked—only the first 512 tokens are scheduled, and the rest wait.
+    - *Note:* Technically, a request could be in the waiting queue with `num_computed_tokens > 0` if it was preempted previously. In that case, it is resuming, but for scheduling purposes, it's treated as a batch of tokens to be processed (just like a prefill).
+    - It calculates the required tokens (`total_len - cached_len`).
+    - It applies the same Fairness Threshold and Token Budget caps to ensure the prefill doesn't monopolize the system.
+    - *Result:* If the request is huge (e.g., 2000 tokens) and the budget is small (e.g., 512 remaining), it gets chunked—only the first 512 tokens are scheduled, and the rest wait.
 4.  Allocate: It attempts to allocate blocks for the request.
-    *   Success: If successful, the request status changes to `RUNNING`, it is moved to the running queue, and the `token_budget` is reduced.
-    *   Failure: (difference vs Phase 1) If allocation fails here, the scheduler stops admitting new requests immediately. It does not trigger preemption.
-        *   *Why?* We never kill an active, running request just to let a new one in. The waiting request simply waits for the next iteration when more memory might be available.
+    - Success: If successful, the request status changes to `RUNNING`, it is moved to the running queue, and the `token_budget` is reduced.
+    - Failure: (difference vs Phase 1) If allocation fails here, the scheduler stops admitting new requests immediately. It does not trigger preemption.
+        - *Why?* We never kill an active, running request just to let a new one in. The waiting request simply waits for the next iteration when more memory might be available.
 
 Finally, the scheduler returns the final batch of scheduled requests to be executed by the GPU.
 

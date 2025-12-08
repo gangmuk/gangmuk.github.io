@@ -96,8 +96,8 @@ At the high level, vLLM schedules a batch of tokens in a lock-step manner. All t
 
 At the start of each iteration (which will be launched as one GPU kernel), the scheduler resets the `token_budget` to `max_num_batched_tokens`. It then proceeds in two distinct phases to fill this budget.
 
-#### vllm's Scheduler Algorithm's Philosophies
-vllm scheduler follows certain scheduling philosophies. Before diving into the detailed scheduling logic, let's see what I mean by that. It will help you picture why the scheduling algorithm is designed in such a way.
+#### vllm's scheduler algorithm's design choices
+vllm scheduler made certain scheduling choices. Before diving into the detailed scheduling logic, let's see what I mean by that. It will help you picture why the scheduling algorithm is designed in such a way.
 
 1.  Batch & Lock-Step Execution: vLLM is a batch scheduler. It groups tokens from multiple requests into a single batch to execute as one GPU kernel launch. This maximizes GPU compute saturation (throughput) at the cost of coupling their execution timing.
 2.  Run-to-Completion (mostly): Unlike the Linux CFS (Completely Fair Scheduler) which aggressively context-switches processes to ensure fairness (giving every process a tiny "time slice" of CPU), vLLM tries to keep a request in the `Running` state until it finishes.
@@ -106,33 +106,29 @@ vllm scheduler follows certain scheduling philosophies. Before diving into the d
         2.  Equal Priority: Since most inference requests have the same priority, pausing Request A to run Request B (time-slicing) just delays Request A without adding value, while incurring the swap penalty that delays *both*. Run-to-completion minimizes the average completion time for everyone.
 3.  Continuous Batching (Iteration-Level Scheduling): Traditional schedulers might wait to build a batch. vLLM uses "iteration-level" scheduling, meaning it can inject new requests into the *next* token generation step of running requests immediately. This solves the "head-of-line blocking" problem where short requests got stuck behind long ones in older batching systems.
 4.  Optimistic Memory Allocation (Zero-Reservation):
-    *   *Philosophy:* Never reserve memory for the *future* tokens of a request. Only allocate for the token being generated *right now*.
+    *   *design choice:* Never reserve memory for the *future* tokens of a request. Only allocate for the token being generated *right now*.
     *   *Why?* LLM output lengths are highly unpredictable. Pessimistically reserving memory for `max_tokens` (e.g., 4096) for every request would drastically limit concurrency (batch size). vLLM allocates blocks just-in-time. If the system runs out of memory, it relies on Reactive Preemption (pausing a request) as a safety valve. This trades a rare preemption cost for a massive increase in average concurrency.
 5.  Decode-First Prioritization (Heterogeneous Workload Packing):
-    *   *Philosophy:* The scheduler strictly prioritizes the `RUNNING` queue (Decode phase) over the `WAITING` queue (Prefill phase).
-    *   *Researcher View:* This implements a Multi-Level Priority Queue where "Interactive/Memory-Bound" tasks (Decodes) have strictly higher priority than "Batch/Compute-Bound" tasks (Prefills).
+    * *design choice:* The scheduler strictly prioritizes the `RUNNING` queue (Decode phase) over the `WAITING` queue (Prefill phase).
     *   *Why?*
         1.  QoS: It protects active users (Inter-Token Latency) from stuttering when new users join (Time to First Token).
         2.  Utilization: It enables Heterogeneous Packing. Decodes are memory-bandwidth bound (leaving Compute units idle). Prefills are compute-bound. By scheduling Decodes first and filling the *remaining* budget with a Prefill chunk, vLLM "hides" the memory access latency of decodes behind the heavy arithmetic of prefills, maximizing total hardware efficiency.
 
 
-#### Phase 1: Scheduling Running Requests
+#### **Phase 1: Scheduling Running Requests**
 
 The scheduler processes all requests currently in the `RUNNING` queue. It iterates through them one by one in FCFS order (based on when they were admitted).
 It has two steps, 1. Calculate Tokens and 2. Allocate & Schedule. In *1. Calculate Tokens*, the scheduler determines the number of tokens to execute (`num_tokens`). In *2. Allocate & Schedule*, the scheduler attempts to allocate KV cache blocks for these tokens.
 The following steps are performed sequentially for each request before moving to the next request.
 
-##### 1. Calculate Tokens
+**1. Calculate Tokens**
 The scheduler determines the number of tokens to execute (`num_tokens`) by starting with the base calculation: `num_tokens = min(tokens_remaining, long_prefill_token_threshold, token_budget, max_model_len - 1 - num_computed_tokens)`
-
-
 * Standard Prefill: `num_tokens` = Total Prompt Length (since `computed=0`).
 * Chunked Prefill (Resumed): `num_tokens` = Remaining Prompt Length (e.g., `2000 - 512 = 1488`).
 * Standard Decode: `num_tokens` = 1.
 * Speculative Decode: `num_tokens` = 1 + K (where K is the number of speculative/draft tokens, e.g., 5).
 
 It applies four filters in order:
-
   1) **Completion Check (`max_tokens`):**
       - **Purpose:** Prevents over-scheduling when a request is effectively finished but still has "placeholder" tokens from a previous speculative step.
       - **Logic:** If the request has effectively reached its completion limit (`max_tokens`), the scheduler skips it entirely for this iteration.
@@ -169,7 +165,7 @@ It applies four filters in order:
     *   Next Step: If the request is successfully scheduled, the scheduler moves to the next request in the running queue. Once all running requests are processed, if (and only if) no preemptions occurred, it proceeds to Phase 2 (Waiting Requests).
         
 
-#### Phase 2: Scheduling Waiting Requests
+#### **Phase 2: Scheduling Waiting Requests**
 
 If it reaches here, awesome! It means all the running requests are successfully scheduled without preemption. If even a single running request triggered preemption, Phase 2 is skipped entirely. It makes sense since if there was a preemption during running queue scheduling, then it means it was not even able to schedule all the running request without memory pressure. Hence, in that case, there is no point of trying to schedule new requests from the waiting queue.
 

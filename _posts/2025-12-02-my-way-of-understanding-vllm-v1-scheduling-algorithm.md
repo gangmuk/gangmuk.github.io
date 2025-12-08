@@ -129,30 +129,31 @@ The scheduler determines the number of tokens to execute (`num_tokens`) by start
 * Speculative Decode: `num_tokens` = 1 + K (where K is the number of speculative/draft tokens, e.g., 5).
 
 It applies four filters in order:
-  1) **Completion Check (`max_tokens`):**
-    - **Purpose:** Prevents over-scheduling when a request is effectively finished but still has "placeholder" tokens from a previous speculative step.
-    - **Logic:** If the request has effectively reached its completion limit (`max_tokens`), the scheduler skips it entirely for this iteration.
-    - **Example:** A request with `max_tokens=100` has `num_computed=98` and `2` speculative placeholders. Since `98 + 2 >= 100`, it is skipped.
 
-  2) **Fairness Threshold between requests (`long_prefill_token_threshold`):**
-    - **Purpose:** Prevents a single long request from monopolizing the GPU for too long, which would starve other requests. It forces Chunking—splitting a large prefill into smaller batches across multiple iterations.
-    - **Logic:** If `required_tokens` (remaining work: `num_tokens - num_computed_tokens`) exceeds the threshold, `num_tokens` is capped (reduced) to equal the threshold.
-    - **Example:** `long_prefill_token_threshold=512`. `Request A` needs to process 2000 tokens. The scheduler only allows 512 tokens in this step. The remaining 1488 tokens must wait for future iterations.
+1) **Completion Check (`max_tokens`):**
+- **Purpose:** Prevents over-scheduling when a request is effectively finished but still has "placeholder" tokens from a previous speculative step.
+- **Logic:** If the request has effectively reached its completion limit (`max_tokens`), the scheduler skips it entirely for this iteration.
+- **Example:** A request with `max_tokens=100` has `num_computed=98` and `2` speculative placeholders. Since `98 + 2 >= 100`, it is skipped.
 
-  3) **Token Budget (`max_num_batched_tokens`):**
-    - **Purpose:**
-      - **Latency Control:** Limits the total work in one kernel launch to keep execution time short (crucial for Inter-Token Latency).
-      - **System Capacity (KV Cache & Compute):** While higher batch sizes generally improve throughput, there are diminishing returns rooted in GPU microarchitecture.
-        - *SM Saturation (Compute Bound):* The NVIDIA A100 has 108 Streaming Multiprocessors (SMs). To maximize utilization, we need enough thread blocks to fill these SMs ("waves"). Once all SMs are fully occupied, adding more tokens linearly increases execution time (latency) without improving throughput (tokens/sec).
-        - *FlashAttention Tile Quantization:* FlashAttention splits computation into fixed-size tiles (e.g., 128x64) to fit into the SM's SRAM (192KB). If the batch size creates a "tail effect"—where the total number of tiles isn't a multiple of 108—you get a "partial wave" where some SMs sit idle while others finish, reducing efficiency.
-        - *Example:* For a Llama 3 8B model on an A100, throughput often saturates at a batch size of 128-256 sequences (during decode). For prefill, allowing extremely large batches (e.g., >32k tokens) yields minimal throughput gains but causes massive Inter-Token Latency (ITL) spikes for concurrent decode requests. `max_num_batched_tokens` caps this to keep the system in the efficient, low-latency zone.
-    - **Logic:** If the request needs more tokens than the *remaining* budget (which starts at `max_num_batched_tokens` and decreases as other requests are scheduled), it consumes *all* the remaining budget.
-    - **Example:** `max_num_batched_tokens=2048`. `Request A` is scheduled for 512 tokens. `Remaining Budget = 1536`. `Request B` (Waiting) needs 2000 tokens. It is capped at 1536 tokens (the remaining budget). It cannot run fully in this step.
+2) **Fairness Threshold between requests (`long_prefill_token_threshold`):**
+- **Purpose:** Prevents a single long request from monopolizing the GPU for too long, which would starve other requests. It forces Chunking—splitting a large prefill into smaller batches across multiple iterations.
+- **Logic:** If `required_tokens` (remaining work: `num_tokens - num_computed_tokens`) exceeds the threshold, `num_tokens` is capped (reduced) to equal the threshold.
+- **Example:** `long_prefill_token_threshold=512`. `Request A` needs to process 2000 tokens. The scheduler only allows 512 tokens in this step. The remaining 1488 tokens must wait for future iterations.
 
-  4) **Model Context Limit (`max_model_len`):**
-    - **Purpose:** Hard safety check for model context window.
-    - **Logic:** `num_tokens` is capped to ensure the total sequence length stays within `max_model_len`.
-    - **Example:** `max_model_len=8192`. A request asks to generate past this limit. The scheduler caps the tokens so the total length is exactly 8192.
+3) **Token Budget (`max_num_batched_tokens`):**
+- **Purpose:**
+    - **Latency Control:** Limits the total work in one kernel launch to keep execution time short (crucial for Inter-Token Latency).
+    - **System Capacity (KV Cache & Compute):** While higher batch sizes generally improve throughput, there are diminishing returns rooted in GPU microarchitecture.
+    - *SM Saturation (Compute Bound):* The NVIDIA A100 has 108 Streaming Multiprocessors (SMs). To maximize utilization, we need enough thread blocks to fill these SMs ("waves"). Once all SMs are fully occupied, adding more tokens linearly increases execution time (latency) without improving throughput (tokens/sec).
+    - *FlashAttention Tile Quantization:* FlashAttention splits computation into fixed-size tiles (e.g., 128x64) to fit into the SM's SRAM (192KB). If the batch size creates a "tail effect"—where the total number of tiles isn't a multiple of 108—you get a "partial wave" where some SMs sit idle while others finish, reducing efficiency.
+    - *Example:* For a Llama 3 8B model on an A100, throughput often saturates at a batch size of 128-256 sequences (during decode). For prefill, allowing extremely large batches (e.g., >32k tokens) yields minimal throughput gains but causes massive Inter-Token Latency (ITL) spikes for concurrent decode requests. `max_num_batched_tokens` caps this to keep the system in the efficient, low-latency zone.
+- **Logic:** If the request needs more tokens than the *remaining* budget (which starts at `max_num_batched_tokens` and decreases as other requests are scheduled), it consumes *all* the remaining budget.
+- **Example:** `max_num_batched_tokens=2048`. `Request A` is scheduled for 512 tokens. `Remaining Budget = 1536`. `Request B` (Waiting) needs 2000 tokens. It is capped at 1536 tokens (the remaining budget). It cannot run fully in this step.
+
+4) **Model Context Limit (`max_model_len`):**
+- **Purpose:** Hard safety check for model context window.
+- **Logic:** `num_tokens` is capped to ensure the total sequence length stays within `max_model_len`.
+- **Example:** `max_model_len=8192`. A request asks to generate past this limit. The scheduler caps the tokens so the total length is exactly 8192.
 
 **2. Allocate & Schedule:**
   - For the requests that passed the above filters, the scheduler attempts to allocate physical KV cache blocks for these tokens.

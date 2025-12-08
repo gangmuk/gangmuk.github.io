@@ -205,7 +205,7 @@ When a request reaches a stop condition:
 This enables future requests to benefit from the cached blocks if they share common prefixes.
 
 ## Memory Allocation Details
-
+`allocate_slots()` is the function that allocates blocks for a request. It is called when the scheduler attempts to allocate blocks for a request in Phase 1 or Phase 2.
 When `allocate_slots()` is called, the KVCacheManager performs this process:
 
 ### Block Layout

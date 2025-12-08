@@ -38,6 +38,50 @@
     margin-bottom: $spacing-unit;
     font-family: Helvetica, sans-serif;
     width: 100%;
+    position: relative; /* Allow absolute positioning of side notes */
+
+    /* Restrict width of standard content to allow space for side notes */
+    > p, > h1, > h2, > h3, > h4, > h5, > h6, > ul, > ol, > blockquote, > pre, > figure, > div {
+        max-width: 750px;
+        position: relative; /* Allow absolute positioning within paragraphs */
+    }
+
+    /* Side note style - appears in the right margin */
+    .side-note {
+      float: right;
+      clear: right;
+      width: 280px;
+      margin-right: -320px; /* Push into the empty space on the right */
+      margin-top: 0;
+      margin-bottom: 1em;
+      font-size: 0.85em;
+      color: #555;
+      line-height: 1.5;
+      padding: 10px 15px;
+      text-align: left;
+      border-left: 2px solid #ddd;
+      background-color: #fafafa;
+
+      @include media-query($on-laptop) {
+        /* On smaller laptops, keep the side note visible */
+        margin-right: -300px;
+        width: 260px;
+        font-size: 0.8em;
+      }
+
+      @include media-query($on-mobile) {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        display: block;
+        margin: 10px 0;
+        color: #444;
+        background: #f9f9f9;
+        padding: 10px 15px;
+        border-left: 3px solid #ccc;
+        font-size: 0.9em;
+      }
+    }
     
     /* Add specific styling for headings */
     h1, h2, h3, h4, h5, h6 {

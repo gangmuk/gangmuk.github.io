@@ -7,14 +7,15 @@ tags: [vllm, scheduling, memory management]
 
 - [vLLM V1 Scheduling and Memory Management](#vllm-v1-scheduling-and-memory-management)
   - [Introduction](#introduction)
-  - [Components and misc info](#components-and-misc-info)
-    - [**Scheduler**](#scheduler)
-    - [**KVCacheManager**](#kvcachemanager)
-    - [Configs \& Variables](#configs--variables)
+  - [Overview of Components](#overview-of-components)
+      - [Scheduler](#scheduler)
+      - [KVCacheManager](#kvcachemanager)
+      - [Configs \& Variables](#configs--variables)
   - [Request Lifecycle](#request-lifecycle)
     - [Request Arrives](#request-arrives)
     - [Scheduler Iteration](#scheduler-iteration)
-    - [vllm's Scheduler Algorithm's Philosophies](#vllms-scheduler-algorithms-philosophies)
+      - [Phase 1: Scheduling Running Requests](#phase-1-scheduling-running-requests)
+      - [Phase 2: Scheduling Waiting Requests](#phase-2-scheduling-waiting-requests)
     - [Request Completion](#request-completion)
   - [Memory Allocation Details](#memory-allocation-details)
     - [Block Layout](#block-layout)
@@ -42,9 +43,9 @@ It has the reason (philosophy) why vllm chooses this specific scheduling algorit
 
 Let's start by defining the core components.
 
-## Components and misc info
+## Overview of Components
 
-### **Scheduler**
+#### Scheduler
 The scheduler runs every iteration (one GPU kernel launch) to:
 - Decide which requests to process
 - Determine how many tokens to schedule per request
@@ -54,7 +55,7 @@ It maintains two queues:
 - **Waiting queue**: Newly arrived requests (FIFO for FCFS, priority heap for Priority).
 - **Running queue**: Requests currently being executed.
 
-### **KVCacheManager**
+#### KVCacheManager
 Manages KV cache blocks for all requests:
 - Allocates memory blocks when scheduler needs them.
 - Checks prefix cache for reusable blocks.
@@ -73,7 +74,7 @@ KV is divided into fixed-size blocks (typically 16 tokens). Each block contains:
 
 Note: A block can be free but still has kv content in it. It happens if kv blocks were freed because the request having them was preempted but only a part of freed blocks are used by another request who preempted it. Then the remaining freed blocks are in free block queue but still has kv content in it. So it can go into allocated state again without computation if it is hit.
 
-### Configs & Variables
+#### Configs & Variables
 - `num_computed_tokens`: The number of tokens that have been processed/computed by the model so far.
 - `num_tokens`: The current length of `all_token_ids` (input prompt tokens + output tokens generated so far).
 - `num_output_placeholders`: Used in async scheduling to reserve space for potential speculative tokens (draft tokens).
@@ -95,7 +96,7 @@ At the high level, vLLM schedules a batch of tokens in a lock-step manner. All t
 
 At the start of each iteration (which will be launched as one GPU kernel), the scheduler resets the `token_budget` to `max_num_batched_tokens`. It then proceeds in two distinct phases to fill this budget.
 
-### vllm's Scheduler Algorithm's Philosophies
+**vllm's Scheduler Algorithm's Philosophies**
 vllm scheduler follows certain scheduling philosophies. Before diving into the detailed scheduling logic, let's see what I mean by that. It will help you picture why the scheduling algorithm is designed in such a way.
 
 1.  **Batch & Lock-Step Execution:** vLLM is a batch scheduler. It groups tokens from multiple requests into a single batch to execute as one GPU kernel launch. This maximizes GPU compute saturation (throughput) at the cost of coupling their execution timing.
@@ -115,7 +116,7 @@ vllm scheduler follows certain scheduling philosophies. Before diving into the d
         2.  **Utilization:** It enables **Heterogeneous Packing**. Decodes are memory-bandwidth bound (leaving Compute units idle). Prefills are compute-bound. By scheduling Decodes first and filling the *remaining* budget with a Prefill chunk, vLLM "hides" the memory access latency of decodes behind the heavy arithmetic of prefills, maximizing total hardware efficiency.
 
 
-**Phase 1: Scheduling Running Requests**
+#### Phase 1: Scheduling Running Requests
 
 The scheduler processes all requests currently in the `RUNNING` queue. It iterates through them one by one in FCFS order (based on when they were admitted).
 
@@ -170,7 +171,7 @@ The scheduler processes all requests currently in the `RUNNING` queue. It iterat
     *   **Next Step:** If the request is successfully scheduled, the scheduler moves to the next request in the running queue. Once all running requests are processed, if (and only if) **no preemptions occurred**, it proceeds to **Phase 2** (Waiting Requests).
         
 
-**Phase 2: Admitting Waiting Requests**
+#### Phase 2: Scheduling Waiting Requests
 
 If it reaches here, awesome! It means all the running requests are successfully scheduled without preemption. If even a single running request triggered preemption, Phase 2 is skipped entirely. It makes sense since if there was a preemption during running queue scheduling, then it means it was not even able to schedule all the running request without memory pressure. Hence, in that case, there is no point of trying to schedule new requests from the waiting queue.
 

@@ -32,12 +32,20 @@ tags: [vllm, scheduling, memory management]
 vLLM has been a de-facto LLM serving engine. Though it is highly complicated system with many moving parts, the scheduler is the core of the system. This blog is the polished version of my version of understanding on vLLM scheduling algorithm. (my version as in everybody has different way to understand the same thing even if the target is the same). 
 
 Why am I writing this blog post? There are aleady many blog posts that explain the vLLM scheduling. But it is either too shallow, incomplete, or deep and complete but not in a way that I wish. 
+Why am I writing this blog post? There are already many blog posts that explain the vLLM scheduling. <span class="side-note">Alexa Gordic's blog post on vLLM is great (https://alexagordic.github.io/vllm-scheduler/). It is more in details. Mine focuses on the scheduling algorithm.</span> But it is either too shallow, incomplete, or deep and complete but not in a way that I wish.
 
 
 **What I promise to you in this post.**
 - What happens in vllm from the time a request arrives to the time it is completed in details.
 - My educated guess on why vllm chooses this specific scheduling algorithm.
 - Performance implication of the vllm scheduling algorithm in different scenarios.
+
+**What it does not have**
+- Other parts of vLLM e.g., tokenizer, how exact paged attention works, model loading, kernel launch, etc.
+- How the LLM model is computed in the GPU.
+- Benchmark numbers.
+
+I trimmed out others to more cleanly understand the scheduling algorithm.
 
 It has the reason (philosophy) why vllm chooses this specific scheduling algorithm and the complete journey of a request from arrival to completion, how memory allocation and preemption work, and the performance implication of the vllm scheduling algorithm in different scenarios includingn preemption cases.
 

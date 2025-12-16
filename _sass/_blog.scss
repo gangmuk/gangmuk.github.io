@@ -1,21 +1,91 @@
 .blog-post-list {
+  .blog-post-item {
+    margin-bottom: 20px;
+    
+    @include media-query($on-mobile) {
+      margin-bottom: 18px;
+    }
+  }
+
+  .blog-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+
   .blog-post-date {
-    width: 6em;
     color: #777;
-    display: block;
-    float: left;
+    font-size: 14px;
+    font-weight: 500;
 
     @include media-query($on-mobile) {
-      display: block;
-      float: none;
-      color: #333;
-      font-size: 11px;
-      margin-top: 14px;
+      font-size: 12px;
     }
   }
 
   .blog-post-title {
-    font-size: 100%;
+    font-size: 18px;
+    font-weight: 500;
     letter-spacing: normal;
+    display: block;
+    line-height: 1.4;
+
+    @include media-query($on-mobile) {
+      font-size: 16px;
+    }
+  }
+
+  .blog-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+    color: #333;
+    background-color: #ddd;
+    border-radius: 4px;
+    line-height: 1;
+
+    @include media-query($on-mobile) {
+      font-size: 12px;
+      padding: 2px 8px;
+    }
+  }
+
+  // Different pastel colors for different tag types
+  .blog-tag-tech {
+    background-color: #a8d5ff; // pastel blue
+    color: #1a5490;
+  }
+
+  .blog-tag-gpu,
+  .blog-tag-communication,
+  .blog-tag-nccl,
+  .blog-tag-nvshmem,
+  .blog-tag-nvlink {
+    background-color: #d4b5f7; // pastel purple
+    color: #5a2d8c;
+  }
+
+  .blog-tag-llm,
+  .blog-tag-kv-cache,
+  .blog-tag-latency {
+    background-color: #ffb3ba; // pastel red/pink
+    color: #a31e2e;
+  }
+
+  .blog-tag-random-thoughts,
+  .blog-tag-consumption {
+    background-color: #b8e6b8; // pastel green
+    color: #2d6e2d;
+  }
+
+  .blog-tag-vllm,
+  .blog-tag-scheduling,
+  .blog-tag-memory-management {
+    background-color: #ffd7a8; // pastel orange
+    color: #a05800;
   }
 }

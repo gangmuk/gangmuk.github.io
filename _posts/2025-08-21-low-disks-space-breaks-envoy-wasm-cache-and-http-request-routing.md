@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "aibrix-reserved-router - handles requests for extension processing"
+title: "How low disks space breaks envoy wasm cache and eventually makes http request routing fail (AIBrix LLM inference infra)"
 date: 2025-08-21
 ---
 

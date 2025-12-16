@@ -142,6 +142,55 @@
         background-color: #f5f5f5;
         border-radius: 3px;
       }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      font-size: 14px;
+      overflow-x: auto;
+      display: block;
+      
+      @include media-query($on-mobile) {
+        font-size: 12px;
+      }
+    }
+    
+    thead {
+      background-color: #f8f9fa;
+      border-bottom: 2px solid #ddd;
+    }
+    
+    th {
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid #ddd;
+      background-color: #f8f9fa;
+      
+      @include media-query($on-mobile) {
+        padding: 8px 6px;
+      }
+    }
+    
+    td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      
+      @include media-query($on-mobile) {
+        padding: 8px 6px;
+      }
+    }
+    
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    tbody tr:hover {
+      background-color: #f5f5f5;
+    }
   }
 
 .post-pic {

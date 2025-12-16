@@ -1,39 +1,58 @@
 .blog-post-list {
   .blog-post-item {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     
     @include media-query($on-mobile) {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
   }
 
-  .blog-post-meta {
+  .blog-post-header {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+
+    @include media-query($on-mobile) {
+      gap: 8px;
+      margin-bottom: 4px;
+    }
   }
 
   .blog-post-date {
     color: #777;
     font-size: 14px;
     font-weight: 500;
+    flex-shrink: 0;
+    width: 6em;
 
     @include media-query($on-mobile) {
       font-size: 12px;
+      width: 5em;
     }
   }
 
   .blog-post-title {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 400;
     letter-spacing: normal;
-    display: block;
     line-height: 1.4;
+    flex: 1;
 
     @include media-query($on-mobile) {
-      font-size: 16px;
+      font-size: 15px;
+    }
+  }
+
+  .blog-post-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-left: 6em;
+
+    @include media-query($on-mobile) {
+      margin-left: 5em;
+      gap: 5px;
     }
   }
 

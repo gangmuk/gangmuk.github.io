@@ -73,6 +73,7 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - _posts/unpublished/
 
 # Used for defeating caching
 version: 1

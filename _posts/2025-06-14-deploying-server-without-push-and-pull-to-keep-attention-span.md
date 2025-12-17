@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Deploying modified server without build,push,pull, and restart"
+title: "Deploying modified server without build, push, pull, and restart"
+tags: [flask, k8s]
 date: 2025-06-14
 ---
 

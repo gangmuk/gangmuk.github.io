@@ -1,13 +1,9 @@
 ---
 layout: post
-title:  "Learning CUDA"
-date:   2024-05-14 14:22:40
-blurb: "A look at an example post using Bay Jekyll theme."
-og_image: /assets/img/content/post-example/Banner.jpg
+title:  "Intuition behind NVIDIA GPU architecture and CUDA programming model"
+date:   2024-05-14
+tags: [GPU, CUDA, FLOPS]
 ---
-
-initial date: 2024-05-14
-updated: 2025-07-13
 
 #### Intuition behind NVIDIA GPU architecture
 

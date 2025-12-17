@@ -2,6 +2,7 @@
 layout: post
 title: "How enjoyable it is just to see people"
 date: 2025-06-21
+tags: [life]
 ---
 
 # How enjoyable it is just to see people

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How low disks space breaks envoy wasm cache and eventually makes http request routing fail (AIBrix LLM inference infra)"
+tags: [failure, debugging, k8s, aibrix, envoy, wasm]
 date: 2025-08-21
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Memory bandwidth and latency for KV load"
+tags: [kv_cache, memory, bandwidth, latency]
 date: 2025-11-21
 ---
 

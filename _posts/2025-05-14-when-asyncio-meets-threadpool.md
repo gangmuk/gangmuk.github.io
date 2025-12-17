@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Process a single prediction in a thread"
+tags: [asyncio, threadpool, performance, debugging]
 date: 2025-05-14
 ---
 

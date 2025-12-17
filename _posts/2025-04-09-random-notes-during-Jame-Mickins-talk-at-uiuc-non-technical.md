@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Random notes during Thomas Wenisch talk at UIUC"
+tags: [random_notes]
 date: 2025-04-09
 ---
 

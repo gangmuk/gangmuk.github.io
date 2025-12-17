@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Kubernetes Scalability: From etcd Limitations to Kube-Brain Solutions"
+tags: [k8s, scalability, etcd]
 date: 2025-08-25
 ---
 

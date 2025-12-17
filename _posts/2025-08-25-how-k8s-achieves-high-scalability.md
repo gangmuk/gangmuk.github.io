@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Kubernetes Scalability: From etcd Limitations to Kube-Brain Solutions"
+title: "Kubernetes Scalability"
 tags: [k8s, scalability, etcd]
 date: 2025-08-25
 ---
@@ -9,9 +9,18 @@ date: 2025-08-25
 
 ## Introduction
 
-Kubernetes has become the de facto standard for container orchestration, but as organizations scale to hyperscale environments with tens of thousands of nodes and hundreds of thousands of pods, fundamental architectural limitations emerge. This comprehensive guide explores how Kubernetes manages state, why traditional architectures hit scalability walls, and how innovative solutions like Kube-Brain are reshaping the future of large-scale Kubernetes deployments.
+Kubernetes has become the de facto standard for container orchestration. I have not experienced scalability issue since I have used mostly tens of nodes in kubernetes. But during my internship at Bytedance, I heard that when it scales out to tens of thousands of nodes and hundreds of thousands of pods, it faces scalability issues. This post is a note of my understanding of how kubernetes achieves high scalability. 
 
-## Part I: Understanding Kubernetes Architecture and State Management
+What this post promises to you is
+- explaining some part of Kubernetes design and why it is designed in such a way
+- potential scalability bottlenecks in kubernetes (etcd)
+- some existing solutions
+
+What it does not have is
+- implementation detail explanation of either K8S or other solutions
+- performance numbers
+
+## Understanding Kubernetes Architecture and State Management
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -100,7 +109,7 @@ etcd wasn't selected arbitrarily as Kubernetes' backing store. Two fundamental r
 
 Without these features, Kubernetes would be either unreliable (lacking consistency) or inefficient (requiring constant polling).
 
-## Part II: The Scalability Limitation (etcd)
+## The Scalability Limitation in etcd
 
 ### etcd's Architectural Bottlenecks
 
@@ -114,127 +123,211 @@ Despite client-side caching, etcd faces fundamental scalability limitations that
 
 **Initial Synchronization Impact**: New clients must perform expensive `List` operations against large datasets. In clusters with hundreds of thousands of objects, these operations can severely impact etcd performance.
 
-### Real-World Impact
-
 These limitations manifest as:
 - Increased API server response times
 - Watch event delays affecting controller reactivity  
 - Cluster instability under high load
 - Practical limits around 5,000-10,000 nodes per cluster
 
-## Part III: Some trials for more scalable k8s (replacing etcd!)
+## Scalability Bottleneck
 
-I found kube-brain project that aims to replace etcd with a more scalable solution.
+Before exploring solutions, let's clarify what etcd actually is by understanding the layered architecture of distributed storage systems.
 
-### Kube-Brain
+### Understanding the Building Blocks
 
-Kube-Brain, a part of KubeWharf, tries to solve the scalability problem of etcd. Etcd is scalable until a few thousand nodes. Okay, so what about just creating multiple clusters and each will be able to handle the scale with the current etcd. But what if you want a single k8s cluster for easier managment and you have tens of thousands of nodes in your cluster. Then, etcd will be a bottleneck. Kube-Brain aims to replace etcd.
+**Key-Value Store**: A data structure that maps keys to values, like a hash table. Simple operations: `put(key, value)`, `get(key)`, `delete(key)`. No complex queries, no joins—just fast key-based lookups. Examples: HashMap (in-memory), RocksDB (single-machine persistent).
 
-### Kube-Brain Architecture
+**Replicated State Machine**: A technique for achieving fault tolerance. The idea: multiple servers maintain identical copies of the same state machine (e.g., a key-value store). They receive the same sequence of commands in the same order, so they all produce the same state. If one server fails, others continue serving requests. The challenge: ensuring all replicas agree on the order of operations.
 
-**Stateless Proxy Layer**: Kube-Brain itself is completely stateless, acting as an intelligent proxy between the kube-apiserver and a high-performance distributed storage backend.
+**Consensus Algorithm**: Consensus algorithms solve the ordering problem in replicated state machines by ensuring all non-faulty replicas agree on a consistent sequence of operations, despite network delays, partitions, and crash failures. Raft elects a leader who proposes the order of operations; followers replicate the leader's log. An operation is committed once replicated to a majority of servers, guaranteeing it won't be lost even if the leader fails
 
-**etcd API Compatibility**: Kube-Brain implements the exact same gRPC interface that kube-apiserver expects from etcd, including the critical watch API functionality. This ensures zero changes are required to existing Kubernetes code.
+**Distributed Key-Value Store**: A system that combines the above concepts—a key-value store replicated across multiple machines using consensus to ensure both fault tolerance and strong consistency. When you write to etcd, Raft ensures all replicas agree on the operation's order, then each replica applies it to its local KV store, producing identical state across all nodes. This is precisely what etcd is.
 
-**Pluggable Storage Backend**: The actual data storage is delegated to a separate, horizontally scalable distributed database system designed for high throughput and massive scale.
+### The Relationship in etcd
 
-### How Kube-Brain Achieves Scalability
-
-**Horizontal Scaling of Proxy Layer**: Since Kube-Brain instances are stateless, they can be horizontally scaled behind a load balancer. Multiple API servers can connect to different Kube-Brain instances, distributing the request load.
-
-**Backend Optimization**: Kube-Brain can leverage storage backends specifically optimized for Kubernetes' metadata access patterns (dominated by List and Watch operations rather than random key lookups).
-
-**Decoupled Architecture**: By separating the API compatibility layer from the storage implementation, Kube-Brain allows the use of storage systems that would be impossible to integrate directly with Kubernetes.
-
-### Standard vs. Kube-Brain Architecture
+etcd implements the **replicated state machine** using the Raft consensus algorithm, where the "state machine" being replicated is a key-value store.
 
 ```
-Standard Kubernetes:
-kube-apiserver ──→ etcd (single Raft group)
+┌─────────────────────────────────────────────────┐
+│           etcd's Architecture                   │
+├─────────────────────────────────────────────────┤
+│  Consensus Layer (Raft)                         │
+│  - Leader election, log replication             │
+│  - Ensures all replicas see operations in       │
+│    the same order                               │
+│  - Output: totally-ordered log of operations    │
+│                    ↓                            │
+│  Application State Machine (KV Store)           │
+│  - Deterministically applies operations from log│
+│  - put(k,v), get(k), delete(k)                  │
+│  - Output: consistent key-value state           │
+└─────────────────────────────────────────────────┘
 
-Kube-Brain Architecture:  
-kube-apiserver ──→ Kube-Brain (stateless proxy) ──→ Distributed Storage Backend
+Result: All replicas execute the same operations in the same order,
+        producing identical key-value state → Fault Tolerance
 ```
 
-## Part IV: More performant distributed key-value store (TiKV)
+**The design question for scalability**: How do you organize consensus and state across multiple machines?
 
-Etcd's scalability is limited by its single Raft group architecture, which creates a bottleneck as the cluster size increases. There are other more performant distributed key-value stores like TiKV. Let's see how TiKV is different from etcd, how it scales better and why k8s can't simply use TiKV but sort of forced to stick to etcd.
+- **etcd's approach**: ONE Raft group manages the ENTIRE keyspace. Simple, strongly consistent, but fundamentally sequential.
+- **Alternative approach (TiKV)**: MULTIPLE Raft groups, each managing a KEY RANGE. More complex, but enables parallel processing.
 
-### Why Standard Kubernetes Cannot Use TiKV Directly
+This design choice—the granularity at which you apply consensus—determines scalability limits. Solutions like Kube-Brain replace etcd with distributed systems that choose different consensus granularity.
 
-The kube-apiserver is hard-coded to communicate with etcd's specific API, including its consistency model and watch mechanisms. There's no pluggable storage interface that would allow direct integration with other databases like TiKV.
+However, simply saying "etcd is slow" oversimplifies the problem. To understand why replacing etcd helps and what exactly Kube-Brain and TiKV solve, we need to examine the specific design constraints that etcd operates under and why they become bottlenecks.
 
-Even if such an interface existed, TiKV and similar distributed stores don't natively provide etcd's watch API semantics that Kubernetes depends on for its reactive architecture.
+### Why etcd's Single Raft Group Architecture Limits Scalability
 
-### TiKV's Architectural Advantages
+etcd was designed with a critical constraint: **all data must live in a single Raft consensus group**. This decision stems from etcd's core use case—storing critical cluster coordination state where strong consistency and linearizability are non-negotiable.
 
-**Sharded Raft Architecture**: Unlike etcd's single Raft group, TiKV automatically partitions data into smaller regions, each managed by its own independent Raft group with dedicated leaders and followers.
+**Why this design?** A single Raft group provides the strongest consistency guarantees. Every write goes through one leader, which serializes all operations and ensures a global ordering of events. This makes reasoning about consistency trivial—there's never any ambiguity about which state is "correct" because there's only one authoritative source of truth. For small clusters (hundreds to low thousands of nodes), this provides rock-solid reliability with acceptable performance.
 
-**Parallel Consensus**: Multiple write operations can be processed concurrently across different regions, each handled by different leaders. This parallelism eliminates the single-leader bottleneck that constrains etcd.
+**The fundamental bottleneck:** The single-leader architecture means all write operations, regardless of which keys they affect, must be processed sequentially by one node. Even if you're updating completely independent keys (a pod in namespace A and a node status in the cluster), both writes must wait for their turn through the same leader. This is a **fundamental sequential bottleneck** that cannot be parallelized.
 
-**Linear Scalability**: Adding more nodes increases both storage capacity and throughput almost linearly, as new nodes can host additional regions and participate in parallel consensus operations.
+As cluster size grows, write volume grows proportionally:
+- Node heartbeats (every node sends status updates every 10 seconds)
+- Pod status updates (every pod lifecycle change)
+- Endpoint updates (as services scale)
+- Custom resource updates (from operators and controllers)
 
-**Massive Scale Support**: TiKV is designed to handle petabytes of data across thousands of nodes, far exceeding etcd's typical few-gigabyte limitations.
+All of this write traffic converges on a single Raft leader that must:
+1. Receive the write request
+2. Append it to its log
+3. Replicate to a majority of followers
+4. Wait for acknowledgment
+5. Apply to its state machine
+6. Respond to the client
 
-### Comparison: etcd vs. TiKV
+Only then can it process the next write. This sequential processing creates a hard throughput ceiling that no amount of vertical scaling can overcome.
 
-| Feature | etcd | TiKV |
-|---------|------|------|
-| **Consensus Model** | Single Raft group for entire dataset | Sharded Raft groups per region |
-| **Write Scalability** | Limited by single leader | Parallel processing across regions |
-| **Storage Capacity** | ~2GB recommended maximum | Petabyte-scale capable |
-| **Node Scaling** | 3-7 nodes optimal | Thousands of nodes supported |
-| **Use Case** | Small, critical metadata | Large-scale, high-throughput applications |
+### The Watch Stream Multiplication Problem
 
-### Why Distributed KV Stores Scale Better
+The second bottleneck is how etcd serves watch streams. When a client watches a key prefix (e.g., all pods), etcd must:
+1. Track that watch registration in memory
+2. For every write to keys under that prefix, match it against all active watches
+3. Queue the event for delivery to each matching watcher
+4. Handle flow control if watchers fall behind
 
-The key insight is in the consensus distribution:
+At hyperscale, you might have:
+- Hundreds of controllers each watching multiple resource types
+- Thousands of kubelets each watching pods scheduled to them
+- Multiple kube-apiserver instances, each maintaining watch streams from many clients
 
-**etcd**: All data changes must go through a single Raft leader, creating a sequential bottleneck regardless of cluster size.
+This creates a **watch stream amplification effect**: a single write to etcd might need to be delivered to hundreds or thousands of watch streams. While etcd handles this efficiently at moderate scale, it becomes a memory and CPU bottleneck when watch streams number in the thousands and write frequency is high.
 
-**TiKV**: Data is automatically sharded across multiple regions, each with its own Raft leader. Write operations to different regions can be processed in parallel, allowing throughput to scale with the number of regions.
+### Why Kubernetes Can't Just "Shard" etcd
 
-This architectural difference enables TiKV to achieve linear scalability—adding more nodes directly increases the system's ability to handle concurrent operations.
+You might ask: why not run multiple etcd clusters, one per namespace or one per region? The problem is **cross-resource dependencies in Kubernetes' data model**.
 
+The scheduler needs to see:
+- All unscheduled pods (across all namespaces)
+- All nodes (cluster-wide resource)
+- All persistent volumes (cluster-wide resource)
+- Various scheduling policies
 
-### Seamless Integration into Kubernetes
+Similarly, controllers often operate on resources across namespace boundaries. Sharding etcd would require either:
+1. Cross-shard queries (destroying consistency guarantees)
+2. Maintaining duplicate data across shards (creating consistency nightmares)
+3. Restricting Kubernetes' data model (breaking existing applications)
 
-Kube-Brain solves the integration challenge by providing perfect API compatibility:
+This is why etcd's architecture—designed for correctness—becomes the bottleneck as Kubernetes scales. The solution isn't to make etcd faster, but to replace it with a storage system designed for horizontal scalability while preserving the consistency semantics Kubernetes requires.
 
-1. **Translation Layer**: Kube-Brain translates etcd API calls into the appropriate protocol for its storage backend
-2. **Watch API Implementation**: Complex logic maintains etcd-compatible watch streams backed by the distributed storage system
-3. **Consistency Guarantees**: Ensures that the same consistency semantics expected by Kubernetes controllers are preserved
+### Design Space for Scalable Kubernetes Storage
 
-### Deployment Architecture
+Given the constraints we've identified, what design-level approaches could improve Kubernetes scalability? Let's examine the fundamental tradeoffs and solution categories.
 
+#### Approach 1: Partition the Consensus Scope
+
+**Core idea**: Instead of one consensus group for the entire keyspace, partition into multiple independent consensus groups based on key ranges.
+
+**Design rationale**: Kubernetes writes to logically independent keys (node-1's heartbeat vs pod-1's status) have no causal dependencies. Forcing them through the same consensus protocol creates **false serialization**. Partitioning allows parallel consensus on independent key ranges.
+
+**Example architecture**:
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌──────────────────┐
-│   kube-apiserver│────│  Kube-Brain     │────│  TiKV Cluster    │
-│                 │    │  (Stateless     │    │  (Sharded        │
-│                 │    │   Proxy)        │    │   Storage)       │
-└─────────────────┘    └─────────────────┘    └──────────────────┘
-                              │
-                       ┌─────────────────┐
-                       │  Load Balancer  │
-                       │  (Multiple      │
-                       │   Instances)    │
-                       └─────────────────┘
+Single Consensus Group (etcd):
+  ALL keys → ONE Raft group → ONE leader → Sequential writes
+
+Multiple Consensus Groups (sharded approach):
+  Key range [0x00, 0x10) → Raft group A → Leader A ┐
+  Key range [0x10, 0x20) → Raft group B → Leader B ├→ Parallel writes
+  Key range [0x20, 0x30) → Raft group C → Leader C ┘
 ```
 
-In summary performance gain comes from...
+**The scalability gain**: Write throughput scales with the number of partitions. Independent leaders process disjoint key ranges simultaneously, eliminating the single-leader bottleneck.
 
-**Request Distribution**: Multiple Kube-Brain instances can handle concurrent requests from multiple API servers, eliminating the single-endpoint bottleneck.
+**The compatibility challenge**: Kubernetes assumes etcd's API, which presupposes a single consistent keyspace with global ordering. Partitioned storage requires:
+- An **adaptation layer** that presents etcd's single-keyspace API while dispatching to multiple consensus groups underneath
+- **Watch stream translation** from per-partition watches to global watch semantics
+- **Cross-partition consistency** when Kubernetes operations span multiple key ranges
 
-**Backend Optimization**: TiKV's sharded architecture allows write operations to be processed in parallel across multiple regions simultaneously.
+Real-world implementations: TiKV (multi-region Raft), CockroachDB (range-based replication). Systems like KubeWharf's Kube-Brain provide the adaptation layer.
 
-**Read Scalability**: Both the proxy layer and storage backend can scale reads independently, supporting massive numbers of concurrent watch streams and list operations.
+#### Approach 2: Optimize the Watch Distribution Model
 
-## Conclusion
+**Core idea**: Decouple watch event storage and distribution from the primary consensus path.
 
-Kubernetes' current architecture, built around etcd's strong consistency and watch API, has enabled the container orchestration revolution. However, the single-cluster, single-Raft-group model hits fundamental scalability walls at hyperscale.
+**Design rationale**: In etcd, the leader must both:
+1. Achieve consensus on writes (necessary for correctness)
+2. Notify all watchers of changes (expensive fan-out operation)
 
-Kube-Brain represents an innovative architectural approach that preserves Kubernetes' operational model while unlocking the scalability potential of modern distributed storage systems like TiKV. By providing a stateless proxy layer that maintains perfect etcd API compatibility while leveraging horizontally scalable storage backends, Kube-Brain enables Kubernetes to scale far beyond its traditional limitations.
+These concerns could be separated. The consensus layer commits writes; a separate **watch distribution layer** asynchronously propagates events to watchers.
 
-This architectural evolution is crucial for organizations operating at hyperscale, where traditional Kubernetes clusters become bottlenecked by etcd's inherent design constraints. As the cloud-native ecosystem continues to mature, solutions like Kube-Brain will become increasingly important for unlocking the next generation of large-scale, distributed applications.
+**Potential architecture**:
+```
+Write path:  Client → Consensus → Commit (minimize latency)
+Watch path:  Commit → Event Log → Watch Fanout → Clients (parallel distribution)
+```
 
-The future of Kubernetes scalability lies not in replacing its proven architectural patterns, but in evolving the underlying storage layer to match the scale demands of modern cloud-native workloads.
+**The scalability gain**: Watch distribution can be horizontally scaled independently of consensus. Multiple watch servers read the committed log and serve different subsets of clients.
+
+**The consistency tradeoff**: Introducing asynchrony between commits and watch notifications creates eventual consistency windows. Kubernetes controllers might see stale state briefly. This requires careful analysis of whether Kubernetes' reconciliation model can tolerate such delays.
+
+#### Approach 3: Hierarchical Control Plane Architecture
+
+**Core idea**: Instead of a flat cluster where all nodes connect to one control plane, introduce hierarchy—regional control planes with a lightweight coordination layer above.
+
+**Design rationale**: Many Kubernetes operations are **locality-preserving**. Pods on rack A rarely need to coordinate with pods on rack B. Yet the flat architecture forces all state through the same global store. A hierarchical design could keep local operations local.
+
+**Conceptual structure**:
+```
+Flat architecture (current):
+  All kubelets → Single API server fleet → Single etcd
+
+Hierarchical architecture:
+  Kubelets (Region 1) → Regional API server → Regional storage
+  Kubelets (Region 2) → Regional API server → Regional storage
+             ↓                    ↓
+        Global coordinator (minimal cross-region state)
+```
+
+**The scalability gain**: Regional control planes handle most traffic locally. The global layer only coordinates cross-region operations (scheduling decisions, global services).
+
+**The operational complexity**: Now you have multiple control planes with complex failure modes. What happens when a regional control plane fails? How do you migrate pods between regions? This significantly complicates Kubernetes' operational model.
+
+#### The Fundamental Tradeoff
+
+All approaches face the same essential tension:
+
+**Kubernetes' original design**:
+- Strong consistency (all components see the same state)
+- Global visibility (controllers can watch anything)
+- Simple mental model (one source of truth)
+- **Cost**: Sequential bottleneck at moderate scale
+
+**Scalability-oriented designs**:
+- Partitioned consensus or eventual consistency
+- Limited visibility (regional or namespace-scoped)
+- Complex mental model (multiple coordination domains)
+- **Benefit**: Horizontal scalability to massive scale
+
+There's no free lunch. Improving scalability requires **either** relaxing consistency guarantees **or** partitioning visibility **or** accepting significant operational complexity. The choice depends on whether your use case can tolerate these tradeoffs.
+
+### Implications for Kubernetes Evolution
+
+The Kubernetes community has largely accepted that pushing beyond ~5,000-10,000 nodes requires fundamental architectural changes, not incremental optimizations. Organizations operating at hyperscale (tens of thousands of nodes) typically choose one of:
+
+1. **Multi-cluster architectures**: Run many independent Kubernetes clusters with cross-cluster coordination at the application layer
+2. **Storage layer replacement**: Keep Kubernetes' API unchanged but replace etcd with partitioned storage (requires compatibility layers)
+3. **Fork and customize**: Modify Kubernetes itself to introduce hierarchy or relaxed consistency
+
+Each represents a different point in the design space we outlined above. The "right" choice depends on your scale requirements, operational constraints, and tolerance for diverging from standard Kubernetes.

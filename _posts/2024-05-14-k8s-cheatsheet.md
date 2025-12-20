@@ -5,6 +5,7 @@ date:   2024-05-14 14:22:40
 blurb: "A look at an example post using Bay Jekyll theme."
 og_image: /assets/img/content/post-example/Banner.jpg
 tags: [k8s, notes]
+category: blog
 ---
 
 <img src="{{ "/assets/img/content/post-example/Banner.jpg" | absolute_url }}" alt="bay" class="post-pic"/>

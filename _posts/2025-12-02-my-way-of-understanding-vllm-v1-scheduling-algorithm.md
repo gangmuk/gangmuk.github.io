@@ -3,6 +3,7 @@ layout: post
 title: "My Way of Understanding vLLM V1 Scheduling Algorithm"
 date: 2025-12-02
 tags: [vLLM, scheduling, memory management]
+category: blog
 ---
 <!-- 
 - [vLLM V1 Scheduling and Memory Management](#vllm-v1-scheduling-and-memory-management)

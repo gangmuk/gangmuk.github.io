@@ -3,6 +3,7 @@ layout: post
 title:  "Intuition behind NVIDIA GPU architecture and CUDA programming model"
 date:   2024-05-14
 tags: [GPU, CUDA, FLOPS]
+category: blog
 ---
 
 #### Intuition behind NVIDIA GPU architecture

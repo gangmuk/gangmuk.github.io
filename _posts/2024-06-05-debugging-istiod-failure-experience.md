@@ -3,6 +3,7 @@ layout: post
 title: "Debugging istiod failure: 'why is it so hard to find out disk pressure?'"
 date: 2024-06-05
 tags: [k8s, istio, debugging, failure]
+category: blog
 ---
 
 # Debugging istiod failure: 'why is it so hard to find out disk pressure?'

@@ -21,6 +21,9 @@ header:
     - name: Photos
       # slug: /photos
     - name: Blog
+      slug: /blog
+    - name: Notes
+      slug: /notes
 
 footer:
   show_powered_by: false

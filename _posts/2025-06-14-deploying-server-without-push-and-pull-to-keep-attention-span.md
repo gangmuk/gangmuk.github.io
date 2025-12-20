@@ -3,6 +3,7 @@ layout: post
 title: "Deploying modified server without build, push, pull, and restart"
 tags: [flask, k8s]
 date: 2025-06-14
+category: blog
 ---
 
 # Deploying modified server without build,push,pull, and restart

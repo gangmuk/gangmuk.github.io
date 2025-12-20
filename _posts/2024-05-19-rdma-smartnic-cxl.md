@@ -5,6 +5,7 @@ date:   2024-05-19 20:11:00
 blurb: "A look at an example post using Bay Jekyll theme."
 og_image: /assets/img/content/post-example/Banner.jpg
 tags: [networking, notes]
+category: blog
 ---
 
 Studying RDMA, SmartNIC, CXL to find a potential research project in this area.

@@ -3,6 +3,7 @@ layout: post
 title: "Memory bandwidth and latency for KV load"
 tags: [kv_cache, memory, bandwidth, latency]
 date: 2025-11-21
+category: blog
 ---
 
 The calculation is based on the llama3 7B model with sequence length 1024.

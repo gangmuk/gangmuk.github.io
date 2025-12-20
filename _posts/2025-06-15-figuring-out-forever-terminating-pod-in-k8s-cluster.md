@@ -3,6 +3,7 @@ layout: post
 title: "Debugging Forever Terminating Pods in Kubernetes"
 date: 2025-06-15
 tags: [k8s, debugging, failure, disk pressure]
+category: blog
 ---
 
 # Debugging Forever Terminating Pods in Kubernetes

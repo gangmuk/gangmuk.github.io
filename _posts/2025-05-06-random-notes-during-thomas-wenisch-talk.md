@@ -3,6 +3,7 @@ layout: post
 title: "Random notes during Thomas Wenisch talk at UIUC"
 tags: [random_notes]
 date: 2025-05-06
+category: notes
 ---
 
 # Random notes during Thomas Wenisch talk at UIUC

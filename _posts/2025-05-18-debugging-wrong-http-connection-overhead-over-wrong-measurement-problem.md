@@ -3,6 +3,7 @@ layout: post
 title: "Debugging HTTP Connection Overhead: When the Measurement Was the Problem"
 tags: [failure, performance debugging, aibrix]
 date: 2025-05-18
+category: blog
 ---
 
 ## Intro

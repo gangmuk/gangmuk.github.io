@@ -2,7 +2,8 @@
 layout: blog
 title: Blog
 slug: /blog
+category_filter: blog
 ---
 
-Blog posts!
+Technical blog posts.
 <br />

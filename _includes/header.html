@@ -1,9 +1,14 @@
 <!-- header.html -->
 
 <header class="site-header">
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="theme-icon">🌙</span>
+  </button>
+
   <div class="wrapper">
     <a class="site-title" href="{{ "" | prepend: site.baseurl | prepend: site.url }}/">
-      <img src="{{ "/assets/img/gangmuk.png" | absolute_url }}" alt="{{ site.title }}" />
+      <span class="site-title-text">{{ site.title }}</span>
     </a>
 
     <nav class="site-nav">

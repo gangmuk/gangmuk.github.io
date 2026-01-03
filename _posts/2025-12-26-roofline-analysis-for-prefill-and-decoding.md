@@ -137,16 +137,17 @@ arithmetic intensity ≈ 10,000 / 32 FLOPs/byte ≈ 300 FLOPs/byte
 
 Still compute-bound in theory (above H100's 295 FLOPs/byte).
 
-Hardware specification:
-GPU Model | Compute (TFLOPs, bf16/fp16) | Memory BW (GB/s) | Intensity (FLOPs/byte)
-----------|------------------------------|------------------|----------------------
-H100 SXM  | 989                          | 3,350            | 295
-H100 PCIe | 756                          | 2,000            | 378
-A100 SXM  | 312                          | 2,039            | 153
-A100 PCIe | 312                          | 1,555            | 201
-L40S      | 362                          | 864              | 419
-A10       | 125                          | 600              | 208
-V100      | 125 (fp16)                   | 900              | 139
+**Hardware specification**
+
+| GPU Model | Compute (TFLOPs, bf16/fp16) | Memory BW (GB/s) | Intensity (FLOPs/byte) |
+|-----------|------------------------------|------------------|-------------------------|
+| H100 SXM  | 989                          | 3,350            | 295                      |
+| H100 PCIe | 756                          | 2,000            | 378                      |
+| A100 SXM  | 312                          | 2,039            | 153                      |
+| A100 PCIe | 312                          | 1,555            | 201                      |
+| L40S      | 362                          | 864              | 419                      |
+| A10       | 125                          | 600              | 208                      |
+| V100      | 125 (fp16)                   | 900              | 139                      |
 
 
 ## Decode

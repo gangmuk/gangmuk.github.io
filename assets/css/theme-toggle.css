@@ -1,0 +1,199 @@
+/* Theme toggle button */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#theme-toggle:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  user-select: none;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] #theme-toggle {
+  background-color: #2d2d2d;
+  border-color: #444;
+}
+
+[data-theme="dark"] #theme-toggle:hover {
+  background-color: #3d3d3d;
+}
+
+[data-theme="dark"] .site-header {
+  background-color: #2d2d2d;
+  border-bottom-color: #444;
+}
+
+[data-theme="dark"] .site-footer {
+  background-color: #2d2d2d;
+  border-top-color: #444;
+}
+
+/* Fix site title and navigation links in dark mode */
+[data-theme="dark"] .site-title,
+[data-theme="dark"] .site-title:visited,
+[data-theme="dark"] .site-title-text {
+  color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .site-nav .page-link {
+  color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .site-nav .page-link:hover {
+  color: #6db3f2 !important;
+}
+
+[data-theme="dark"] a {
+  color: #6db3f2;
+}
+
+[data-theme="dark"] a:hover {
+  color: #9cc9f7;
+}
+
+[data-theme="dark"] .post-content {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .post-content h1,
+[data-theme="dark"] .post-content h2,
+[data-theme="dark"] .post-content h3,
+[data-theme="dark"] .post-content h4,
+[data-theme="dark"] .post-content h5,
+[data-theme="dark"] .post-content h6 {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .post-content p {
+  color: #e0e0e0;
+}
+
+/* Dark theme for inline code - all variations */
+[data-theme="dark"] p > code,
+[data-theme="dark"] li > code,
+[data-theme="dark"] td > code,
+[data-theme="dark"] h1 > code,
+[data-theme="dark"] h2 > code,
+[data-theme="dark"] h3 > code,
+[data-theme="dark"] h4 > code,
+[data-theme="dark"] code.highlighter-rouge,
+[data-theme="dark"] p > code.highlighter-rouge,
+[data-theme="dark"] li > code.highlighter-rouge,
+[data-theme="dark"] td > code.highlighter-rouge {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+  border-color: #444 !important;
+}
+
+/* Dark theme for spans inside inline code */
+[data-theme="dark"] p > code span,
+[data-theme="dark"] li > code span,
+[data-theme="dark"] td > code span,
+[data-theme="dark"] code.highlighter-rouge span {
+  color: #e0e0e0 !important;
+}
+
+/* Dark theme for code blocks - keep syntax highlighting */
+[data-theme="dark"] .highlight {
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+}
+
+/* Increase font size in banner/header */
+.site-title,
+.site-title-text {
+  font-size: 30px !important;
+}
+
+.site-nav .page-link {
+  font-size: 19px !important;
+}
+
+/* Increase font size on home page */
+.page-content {
+  font-size: 17px;
+}
+
+.page-content p,
+.page-content li {
+  font-size: 17px;
+}
+
+/* Dark theme for home page content */
+[data-theme="dark"] .page-content {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #f0f0f0 !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] td,
+[data-theme="dark"] span,
+[data-theme="dark"] div {
+  color: #e0e0e0;
+}
+
+/* Dark theme for specific text elements */
+[data-theme="dark"] em,
+[data-theme="dark"] i {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] strong,
+[data-theme="dark"] b {
+  color: #f0f0f0;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 500px) {
+  #theme-toggle {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+

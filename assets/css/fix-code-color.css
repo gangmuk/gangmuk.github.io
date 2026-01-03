@@ -1,0 +1,48 @@
+/* Fix inline code color - ONLY target inline code, NOT code blocks */
+
+/* Make code blocks more visible and readable - higher specificity */
+div.highlight code,
+div.highlight pre code,
+.highlight code,
+.highlight pre code,
+figure.highlight code,
+figure.highlight pre code {
+  color: #efefef !important;
+  opacity: 1 !important;
+}
+
+/* Target ONLY inline code (code NOT inside pre) with direct child selector */
+p > code.highlighter-rouge,
+li > code.highlighter-rouge,
+td > code.highlighter-rouge,
+h1 > code.highlighter-rouge,
+h2 > code.highlighter-rouge,
+h3 > code.highlighter-rouge,
+h4 > code.highlighter-rouge,
+p > code.language-python,
+li > code.language-python,
+td > code.language-python,
+p > code.language-plaintext,
+li > code.language-plaintext,
+td > code.language-plaintext,
+p > code,
+li > code,
+td > code {
+  color: #24292e !important;
+  background-color: #f6f8fa !important;
+  border: 1px solid #e1e4e8 !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace !important;
+}
+
+/* Target spans inside INLINE code only (not inside pre) */
+p > code span,
+li > code span,
+td > code span,
+h1 > code span,
+h2 > code span,
+h3 > code span,
+h4 > code span {
+  color: #24292e !important;
+}

@@ -2,7 +2,7 @@
 layout: post
 title: "Debugging istiod failure: 'why is it so hard to find out disk pressure?'"
 date: 2024-06-05
-tags: [k8s, istio, debugging, failure]
+tags: [k8s, istio, debugging, istio ingress failure, disk pressure]
 category: blog
 ---
 
@@ -10,9 +10,19 @@ category: blog
 
 *How a simple disk space issue turned into a 3-hour debugging*
 
-I have been using istio service mesh in kubernetes cluster for my research project. It makes the infra one layer more complicated with sidecar layer with additional istio-gateway and istiod. It is cost that you have to pay to enjoy the nice netwwork network layer abstraction. One day, while I was running experiments, the `istiod` control plane went down, and istio-ingress gateway pods were failing. What should have been a simple connectivity issue turned into unnecessarily annoying root cause analysis.
+I have been using Istio service mesh in a Kubernetes cluster for my research project. A service mesh is an application networking infrastructure layer that transparently manages all service-to-service communication in a microservices architecture, enabling traffic control (request routing, request rate limiting, etc.), security (like mutual TLS), and observability without requiring changes to application code.
+It has been pretty popular but it is definitely not easy to manage. How tricky and annoying is it? There are companies who makes millions of millions of dollars by providing service mesh as a service (Solo.io, Tetrate, Buoyant, HashiCorp, etc.). It adds complexity to the infrastructure with a sidecar layer, Istio gateway, and istiod control plane. This is the cost you pay for the nice network layer abstraction. 
 
-Look at this beautiful k8s pod status. What a great reliable system. maybe it is built to panic the user when something goes wrong. maybe it is design choice?
+And I also paid a lot of cost (my time) to use it. This blog will cover one of them.
+
+One day, while I was running experiments, the `istiod` control plane went down, and Istio ingress gateway pods were failing.
+
+**TLDR:** The root cause was disk pressure on the Kubernetes node—the istiod pod was evicted due to low ephemeral storage, which caused a cascade failure of all ingress gateway pods that couldn't connect to istiod. The debugging took 3 hours because Kubernetes doesn't surface disk pressure issues clearly: `kubectl get pods` shows cryptic statuses like `Completed`, `ContainerStatusUnknown`, and `Evicted` without explaining why, and `kubectl describe deployment` provides no useful information. The fix required cleaning up Docker images to free disk space and manually deleting all evicted pods (since Kubernetes doesn't automatically clean them up). The real issue: Kubernetes knows about disk pressure but buries this critical infrastructure information deep in `kubectl describe node`, making it unnecessarily difficult to diagnose what should be a simple problem.
+
+Let me start it with the beautiful k8s pod status (`kubectl get pods -n istio-system`). What a great reliable system. maybe it is built to panic the user when something goes wrong. maybe it is design choice?
+*(a new note on 2026-01-19: I was mad at the time this issue happened since it made me spend so many hours to figure out the root cause. K8S is great..)*
+
+<div class="expandable" markdown="1">
 
 ```bash
 gangmuk@node0:~$ kubectl get pod -n istio-system
@@ -188,6 +198,7 @@ istiod-67c6566457-wtvd4                0/1     Completed                0       
 istiod-67c6566457-x4q9q                0/1     Evicted                  0          98m
 
 ```
+</div>
 
 TLDR; the root cause was
 
@@ -222,23 +233,7 @@ I described istiod deployment to see what was going on. Basically, it does not s
 
 ```yaml
 k describe deploy istiod -n istio-system
-Name:                   istiod
-Namespace:              istio-system
-CreationTimestamp:      Tue, 16 Jul 2024 05:17:45 +0000
-Labels:                 app=istiod
-                        istio=pilot
-                        istio.io/rev=default
-Annotations:            deployment.kubernetes.io/revision: 3
-Selector:               istio=pilot
-Replicas:               1 desired | 1 updated | 1 total | 0 available | 1 unavailable
-  ...
-Conditions:
-  Type           Status  Reason
-  ----           ------  ------
-  Progressing    True    NewReplicaSetAvailable
-  Available      False   MinimumReplicasUnavailable
-OldReplicaSets:  istiod-bc4584967 (0/0 replicas created), istiod-67c6566457 (0/0 replicas created)
-NewReplicaSet:   istiod-7fb964cc7b (1/1 replicas created)
+...
 Events:
   Type    Reason             Age    From                   Message
   ----    ------             ----   ----                   -------
@@ -261,12 +256,6 @@ istiod-bc4584967                  0         0         0       9d
 
 ```yaml
 $ k describe rs istiod-7fb964cc7b -n istio-system
-Name:           istiod-7fb964cc7b
-Namespace:      istio-system
-Selector:       istio=pilot,pod-template-hash=7fb964cc7b
-Labels:         app=istiod
-                install.operator.istio.io/owning-resource=unknown
-                istio=pilot
 ...
 
 Events:
@@ -275,11 +264,15 @@ Events:
   Normal  SuccessfulCreate  8m35s  replicaset-controller  Created pod: istiod-7fb964cc7b-gqxz5
   Normal  SuccessfulCreate  3m36s  replicaset-controller  Created pod: istiod-7fb964cc7b-7r4z7
 ```
-AMAZING. Nothing useful. 
+
+Great. Everything looks normal also in istiod's ReplicaSet (rs).
 
 Okay, it is fine, I never expected replicaset will give some useful information. Let's check something more details than what kubectl describe command gives. Let's check actual istiod's pod log.
 
-(it is long. I put all to give how bad it is to debug)
+I have attached the entire raw output of kubectl logs istiod. It is very long and almost impossible to parse any useful information from it since it is too messy. It should be verbose by design since it is log and it is supposed to be comprehensive than to be concise and readable. But still it was hard to use for debugging. Still to let you feel how it is, here is the log.
+
+<div class="expandable" markdown="1">
+
 ```bash
 gangmuk@node0:~$ k logs -n istio-system istiod-67c6566457-4f9xt
 2024-07-25T20:12:52.265556Z	info	FLAG: --caCertFile=""
@@ -547,25 +540,7 @@ gangmuk@node0:~$ k logs -n istio-system istiod-67c6566457-4f9xt
 2024-07-25T20:12:52.342216Z	info	Use self-signed certificate as the CA certificate
 2024-07-25T20:12:52.588321Z	info	pkica	Load signing key and cert from existing secret istio-system/istio-ca-secret
 2024-07-25T20:12:52.589959Z	info	pkica	Set secret name for self-signed CA cert rotator to istio-ca-secret
-2024-07-25T20:12:52.589979Z	info	pkica	Using existing public key: -----BEGIN CERTIFICATE-----
-MIIC/TCCAeWgAwIBAgIRAJ+arN6JF5YnbytSHvUdMIswDQYJKoZIhvcNAQELBQAw
-GDEWMBQGA1UEChMNY2x1c3Rlci5sb2NhbDAeFw0yNDA3MTYwNTE4MzdaFw0zNDA3
-MTQwNTE4MzdaMBgxFjAUBgNVBAoTDWNsdXN0ZXIubG9jYWwwggEiMA0GCSqGSIb3
-DQEBAQUAA4IBDwAwggEKAoIBAQC2KW8DwTqUAn6oyJZYXb3abOhfxHPYXIV7gaj9
-kR0Mgpfzn6ve0Wc1OdG9Hv9MCnk8rP0S2mM4/1thIIFtqp+N5pAJJJGmssyQEc5Q
-bfkLdssaHAHzODs40+SrNmSkva8IGh7MDzMxtbYAtsGCf++1pniAEJlH49riO8kl
-xuZFixTwkCu9h+IdT08E84SlLcuRVkoQ+wk0eNLs5m6TjLpO1DvMzDZRyMc7VC3B
-ogWn8Z1yYCVRYJf6zVVf1aswSDlWViTn5NIF1NNqU940WJ8ibTNPo8bE/EBRrgOR
-ZS+K/zpLhPzTlpThhSlSvYjRzoBkcmVnthSQInMk9n8BXFQ5AgMBAAGjQjBAMA4G
-A1UdDwEB/wQEAwICBDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQvieTEXxns
-aw/2Cy/rXfDvDSLtfzANBgkqhkiG9w0BAQsFAAOCAQEAb5/O6ASeLkoSGYHhv0H2
-zJAfs35/39MXFChphw5boduUoVuqsTFR7ZnMypq8WXcSCBeVuo46ojHfde0FzH0h
-3PK9jrMdcXIenjWmdpWPbhCz6UhcVvEdyCcvrFh3kXJm8s2jAmYDGCAtJuLA6EEf
-gWfsXFBl8mb13hLG+MkjSnGB5xV9M4p2qKUEXo/49vo/p5KbNQ5YVu8YVy36IwfX
-Ky7DBmQsCdlKta4b/NWMLIyPULtHTDEc2Ycwix2iOHaUEX1HNOMl3RTwJZDSxA6r
-4SfWVLVolC1ien+6vCDbwl8ivYxpc0lsZEN0ISlIbTU3bO5kpOE4LdGtwpFbd4P0
-0g==
------END CERTIFICATE-----
+
 
 2024-07-25T20:12:52.590014Z	info	rootcertrotator	Set up back off time 33m30s to start rotator.
 2024-07-25T20:12:52.590041Z	info	initializing controllers
@@ -573,28 +548,6 @@ Ky7DBmQsCdlKta4b/NWMLIyPULtHTDEc2Ycwix2iOHaUEX1HNOMl3RTwJZDSxA6r
 2024-07-25T20:12:52.590775Z	info	Adding Kubernetes registry adapter
 2024-07-25T20:12:52.590832Z	info	Discover server subject alt names: [istio-pilot.istio-system.svc istiod-remote.istio-system.svc istiod.istio-system.svc]
 2024-07-25T20:12:52.590880Z	info	initializing Istiod DNS certificates host: istiod.istio-system.svc, custom host:
-2024-07-25T20:12:53.242039Z	info	Generating istiod-signed cert for [istio-pilot.istio-system.svc istiod-remote.istio-system.svc istiod.istio-system.svc]:
- -----BEGIN CERTIFICATE-----
-MIIDaTCCAlGgAwIBAgIQSp8mpy2dhDmhnNuHRVfBqDANBgkqhkiG9w0BAQsFADAY
-MRYwFAYDVQQKEw1jbHVzdGVyLmxvY2FsMB4XDTI0MDcyNTIwMTA1M1oXDTM0MDcy
-MzIwMTI1M1owADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGoHhwE
-+Hl2FQ3rewtWFEWZsEJBBDXPL6S4nq5V7IK3Ev69F3zwT2YWNbKai03zpOoH8cQQ
-bDNhdBcZs8iBbJU6qSxsAYho1fDrvTu1E0FWpjfH5XeuDFDmn+QlWXVTOU30rGgY
-zznoA67EaBnxj9NbCXlb0Bk9wfHoEkhp69bfwq0/zznIrTirO2876Glaw+7bDaQG
-T2WHZgFZ/81tFaKVRmkLHw5BfJNwl0R8tCeFzDbKaT9a83c9FI2icEHKV6R+eGOI
-OIHPT5tjByg3C5+vGCAf3+qQUXy+HATd+PG9vqUVc6ZINOJjRSZgKYsz/3CqNdyS
-oxATSLaszeBttfUCAwEAAaOBxjCBwzAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYw
-FAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
-L4nkxF8Z7GsP9gsv613w7w0i7X8wYwYDVR0RAQH/BFkwV4IcaXN0aW8tcGlsb3Qu
-aXN0aW8tc3lzdGVtLnN2Y4IeaXN0aW9kLXJlbW90ZS5pc3Rpby1zeXN0ZW0uc3Zj
-ghdpc3Rpb2QuaXN0aW8tc3lzdGVtLnN2YzANBgkqhkiG9w0BAQsFAAOCAQEAQxN4
-iwotxPmBjhQJDSHnYWR9hS16bSCIokrn4OriVBCdTT+lmhS0/j0X3RfwcDQI0id9
-tXcRvh1c0IpkFr9lAxP8HlNhfKYibOSIGFlEQNJyDV0xmz53ckSgRyT1z0866+F0
-5/+Xz9pyxiiI/hu2hvF1wkOso9rrEfmsyPaB6voIEn4v/9vLFwI6GxLQhxxtBXvS
-/bP31/G2OSeLRic375tDmZ0IgZRFBOj5kLDreasxVtJ4pSY/KzmWAYHsVhfI/ded
-1sjwWF08qUcSUT6/bm1Ep6Pzwp/xDg/sA6tS74xCfvOpNBcAHRC0NxQUUK8oAYvj
-/kV3JZ09TesB24NIdg==
------END CERTIFICATE-----
 
 2024-07-25T20:12:53.242113Z	info	Using istiod file format for signing ca files
 2024-07-25T20:12:53.242128Z	info	Use istio-generated cacerts at etc/cacerts/ca-key.pem or istio-ca-secret
@@ -877,6 +830,7 @@ tXcRvh1c0IpkFr9lAxP8HlNhfKYibOSIGFlEQNJyDV0xmz53ckSgRyT1z0866+F0
 2024-07-25T20:13:20.905401Z	info	ads	Push debounce stable[15] 1 for config ServiceEntry/istio-system/istio-ingressgateway.istio-system.svc.cluster.local: 100.269744ms since last change, 100.269455ms since last push, full=false
 2024-07-25T20:13:20.905502Z	info	ads	XDS: Incremental Pushing ConnectedEndpoints:9 Version:2024-07-25T20:12:54Z/2
 ```
+</div>
 
 Basically, a bunch of network conneciton failure.
 
@@ -884,129 +838,11 @@ Okay, so deployment description is not enough but pod log is too much. Let's che
 
 ```bash
 $ k describe pod istiod-7fb964cc7b-7r4z7 -n istio-system
-
-Name:             istiod-7fb964cc7b-7r4z7
-Namespace:        istio-system
-Priority:         0
-Service Account:  istiod
-Node:             node0.bufferbloater.istio-pg0.clemson.cloudlab.us/130.127.133.92
-Start Time:       Thu, 25 Jul 2024 21:22:31 +0000
-Labels:           app=istiod
-                  install.operator.istio.io/owning-resource=unknown
-                  istio=pilot
-                  istio.io/rev=default
-                  operator.istio.io/component=Pilot
-                  pod-template-hash=7fb964cc7b
-                  sidecar.istio.io/inject=false
-Annotations:      ambient.istio.io/redirection: disabled
-                  kubectl.kubernetes.io/restartedAt: 2024-07-25T21:10:34Z
-                  prometheus.io/port: 15014
-                  prometheus.io/scrape: true
-                  sidecar.istio.io/inject: false
+...
 Status:           Failed
 Reason:           Evicted
 Message:          The node was low on resource: ephemeral-storage. Threshold quantity: 10057513974, available: 9670764Ki.
-IP:               10.244.0.253
-IPs:
-  IP:           10.244.0.253
-Controlled By:  ReplicaSet/istiod-7fb964cc7b
-Containers:
-  discovery:
-    Container ID:
-    Image:         docker.io/istio/pilot:1.20.3
-    Image ID:
-    Ports:         8080/TCP, 15010/TCP, 15017/TCP
-    Host Ports:    0/TCP, 0/TCP, 0/TCP
-    Args:
-      discovery
-      --monitoringAddr=:15014
-      --log_output_level=default:info
-      --domain
-      cluster.local
-      --keepaliveMaxServerConnectionAge
-      30m
-    State:          Terminated
-      Reason:       ContainerStatusUnknown
-      Message:      The container could not be located when the pod was terminated
-      Exit Code:    137
-      Started:      Mon, 01 Jan 0001 00:00:00 +0000
-      Finished:     Mon, 01 Jan 0001 00:00:00 +0000
-    Last State:     Terminated
-      Reason:       ContainerStatusUnknown
-      Message:      The container could not be located when the pod was deleted.  The container used to be Running
-      Exit Code:    137
-      Started:      Mon, 01 Jan 0001 00:00:00 +0000
-      Finished:     Mon, 01 Jan 0001 00:00:00 +0000
-    Ready:          False
-    Restart Count:  1
-    Requests:
-      cpu:      500m
-      memory:   2Gi
-    Readiness:  http-get http://:8080/ready delay=1s timeout=5s period=3s #success=1 #failure=3
-    Environment:
-      REVISION:               default
-      JWT_POLICY:             third-party-jwt
-      PILOT_CERT_PROVIDER:    istiod
-      POD_NAME:               istiod-7fb964cc7b-7r4z7 (v1:metadata.name)
-      POD_NAMESPACE:          istio-system (v1:metadata.namespace)
-      SERVICE_ACCOUNT:         (v1:spec.serviceAccountName)
-      KUBECONFIG:             /var/run/secrets/remote/config
-      PILOT_TRACE_SAMPLING:   1
-      PILOT_ENABLE_ANALYSIS:  false
-      CLUSTER_ID:             Kubernetes
-      GOMEMLIMIT:             node allocatable (limits.memory)
-      GOMAXPROCS:             node allocatable (limits.cpu)
-      PLATFORM:
-    Mounts:
-      /etc/cacerts from cacerts (ro)
-      /var/run/secrets/istio-dns from local-certs (rw)
-      /var/run/secrets/istiod/ca from istio-csr-ca-configmap (ro)
-      /var/run/secrets/istiod/tls from istio-csr-dns-cert (ro)
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2rqr8 (ro)
-      /var/run/secrets/remote from istio-kubeconfig (ro)
-      /var/run/secrets/tokens from istio-token (ro)
-Conditions:
-  Type               Status
-  DisruptionTarget   True
-  Initialized        True
-  Ready              False
-  ContainersReady    False
-  PodScheduled       True
-Volumes:
-  local-certs:
-    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
-    Medium:     Memory
-    SizeLimit:  <unset>
-  istio-token:
-    Type:                    Projected (a volume that contains injected data from multiple sources)
-    TokenExpirationSeconds:  43200
-  cacerts:
-    Type:        Secret (a volume populated by a Secret)
-    SecretName:  cacerts
-    Optional:    true
-  istio-kubeconfig:
-    Type:        Secret (a volume populated by a Secret)
-    SecretName:  istio-kubeconfig
-    Optional:    true
-  istio-csr-dns-cert:
-    Type:        Secret (a volume populated by a Secret)
-    SecretName:  istiod-tls
-    Optional:    true
-  istio-csr-ca-configmap:
-    Type:      ConfigMap (a volume populated by a ConfigMap)
-    Name:      istio-ca-root-cert
-    Optional:  true
-  kube-api-access-2rqr8:
-    Type:                    Projected (a volume that contains injected data from multiple sources)
-    TokenExpirationSeconds:  3607
-    ConfigMapName:           kube-root-ca.crt
-    ConfigMapOptional:       <nil>
-    DownwardAPI:             true
-QoS Class:                   Burstable
-Node-Selectors:              <none>
-Tolerations:                 node-role.kubernetes.io/control-plane:NoSchedule op=Exists
-                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
-                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+...
 Events:
   Type     Reason               Age   From               Message
   ----     ------               ----  ----               -------
@@ -1022,22 +858,13 @@ Events:
   Warning  ExceededGracePeriod  10m   kubelet            Container runtime did not kill the pod within specified grace period.
 ```
 
-Nice, it is here. The istiod pod was evicted due to low ephemeral storage on the node. and istio-ingressgateway pods were not able to connect to istiod because the only istiod pod was unavailable. Istio-ingressgateway pods were not ready and terminated considered unhealthy pod and replicaset recreated the pods, and it repeats. The root cause was the ephemeral storage issue on the k8s node where istiod was running.
+**Nice, it is here. The istiod pod was evicted due to low ephemeral storage on the node. and istio-ingressgateway pods were not able to connect to istiod because the only istiod pod was unavailable. Istio-ingressgateway pods were not ready and terminated considered unhealthy pod and replicaset recreated the pods, and it repeats. The root cause was the ephemeral storage issue on the k8s node where istiod was running.**
 
-To confirm, I checked the node 0 status. It shows up as a healthy node (STATUS: ready) but no pod can be scheduled anymore due to disk pressure. It looks weird since I doubt it is what the user expects. This is critical information that affects the pod schedulability. This issue should be shown some where more than in kubectl describe node.
+To confirm, I checked node 0's status. The node appears healthy (STATUS: ready), yet no pods can be scheduled due to disk pressure. This discrepancy is problematic because users would expect a "ready" node to be schedulable. Since disk pressure directly affects pod schedulability, this critical information should be more prominently displayed beyond just `kubectl describe node`.
 
 ```bash
 gangmuk@node0:~$ kubectl describe node node0.bufferbloater.istio-pg0.clemson.cloudlab.us
-Name:               node0.bufferbloater.istio-pg0.clemson.cloudlab.us
-Roles:              control-plane
-Labels:             beta.kubernetes.io/arch=amd64
-                    beta.kubernetes.io/os=linux
-                    kubernetes.io/arch=amd64
-                    kubernetes.io/hostname=node0.bufferbloater.istio-pg0.clemson.cloudlab.us
-                    
-CreationTimestamp:  Tue, 16 Jul 2024 04:59:24 +0000
-Taints:             node-role.kubernetes.io/control-plane:NoSchedule
-                    node.kubernetes.io/disk-pressure:NoSchedule
+...
 Unschedulable:      false
 Conditions:
   Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
@@ -1047,33 +874,7 @@ Conditions:
   **DiskPressure         True    Thu, 25 Jul 2024 21:47:46 +0000   Thu, 25 Jul 2024 21:45:12 +0000   KubeletHasDiskPressure       kubelet has disk pressure**
   PIDPressure          False   Thu, 25 Jul 2024 21:47:46 +0000   Tue, 16 Jul 2024 04:59:22 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
   Ready                True    Thu, 25 Jul 2024 21:47:46 +0000   Tue, 16 Jul 2024 04:59:55 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
-Addresses:
-  InternalIP:  130.127.133.92
-  Hostname:    node0.bufferbloater.istio-pg0.clemson.cloudlab.us
-Capacity:
-  cpu:                40
-  ephemeral-storage:  65478604Ki
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             257841Mi
-  pods:               110
-Allocatable:
-  cpu:                40
-  ephemeral-storage:  60345081347
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             257741Mi
-  pods:               110
-
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests    Limits
-  --------           --------    ------
-  cpu                950m (2%)   0 (0%)
-  memory             290Mi (0%)  340Mi (0%)
-  ephemeral-storage  0 (0%)      0 (0%)
-  hugepages-1Gi      0 (0%)      0 (0%)
-  hugepages-2Mi      0 (0%)      0 (0%)
+...
 Events:
   Type     Reason                 Age                    From     Message
   ----     ------                 ----                   ----     -------
@@ -1082,15 +883,8 @@ Events:
   Warning  FreeDiskSpaceFailed    14s (x31 over 150m)    kubelet  (combined from similar events): Failed to garbage collect required amount of images. Attempted to free 3077055283 bytes, but only found 0 bytes eligible to free.
 ```
 
-"**DiskPressure         True    Thu, 25 Jul 2024 21:47:46 +0000   Thu, 25 Jul 2024 21:45:12 +0000   KubeletHasDiskPressure       kubelet has disk pressure**"
-
-"**Warning  EvictionThresholdMet   10m (x336 over 3h15m)  kubelet  Attempting to reclaim ephemeral-storage**"
-
-"**Warning  FreeDiskSpaceFailed    14s (x31 over 150m)    kubelet  (combined from similar events): Failed to garbage collect required amount of images. Attempted to free 3077055283 bytes, but only found 0 bytes eligible to free.**"
-
 FYI, I installed k8s in baremetal machine, so k8s node is a baremetal machine not a virtual machine.
-
-And cloudlab machine disk partition where home dir is mounted is god damn small. why....
+And cloudlab machine disk partition where root dir is mounted is god damn small. why....
 
 high disk space pressure.
 ```bash
@@ -1100,9 +894,8 @@ tmpfs                                     26G  2.9M   26G   1% /run
 /dev/sda3                                 63G   51G  9.1G  85% /
 ```
 
-But it seems there are still 9GB (15% of the disk) available. Why is it not enough?
+**But it seems there are still 9GB (15% of the disk) available. Why is it not enough? Ephemeral storage used by pods were almost out and kubelet eviction policy is set to evict pod when there is less than 15% disk space is available**
 
-Ephemeral storage used by pods were almost out and kubelet eviction policy is set to evict pod when there is less than 15% disk space is available
 
 It was because of kublet configuration regarding disk pressure situation. To find it out, we need to dump the kublet config. To do it, you run proxy and then curl the kubelet config endpoint.
 
@@ -1115,7 +908,7 @@ Then, in another terminal, run the following command:
 ```bash
 gangmuk@node0:~$ curl -X GET <node_name>/proxy/configz | jq . > proxy_config.txt
 ```
-
+You can see there is eviction policy configured. It is saying that if imagefs.available is less than 15% of the disk, evict the pod.
 `proxy_config.txt`
 ```json
 {
@@ -1138,13 +931,13 @@ gangmuk@node0:~$ curl -X GET <node_name>/proxy/configz | jq . > proxy_config.txt
 
 Anything can easily consume 60GB. In my case, the major culprit was Docker images. I had accumulated a lot of unused Docker images over time, which were taking up significant disk space.
 
-So the solution is to clean up unused Docker images to make some space?
+So the first thing I tried to make space on disk was to clean up unused Docker images.
 
 ```bash
 docker system prune -a
 ```
 
-Okay, WTF. even now, none of the pods were coming back to ready state. WHY.
+Okay, WTF. Even now, none of the pods were coming back to ready state yet. W H Y
 
 Whatever, let's restart 
 ```bash
@@ -1152,26 +945,22 @@ kubectl rollout restart deployment istiod -n istio-system
 kubectl rollout restart deployment istio-ingressgateway -n istio-system
 ```
 
-BUT it didn't still bring the pods back... all pods were `Completed`, `ContainerStatusUnknown`, or `Evicted`.
+BUT it didn't still bring the pods back... **all pods were `Completed`, `ContainerStatusUnknown`, or `Evicted`.**
 
 
 
 WHAT THE HELL.
 
-The Key Issue: Evicted Pods Are NOT Automatically Cleaned Up
-Evicted pods persist until their count exceeds the --terminated-pod-gc-threshold parameter in kube-controller-manager (default is 12,500 pods), and they hang around with a status of "Failed" but reason of "Evicted" Stack OverflowSpacelift.
-Why kubectl rollout restart Failed
+**The key issue was Evicted Pods Are NOT Automatically Cleaned Up!!!!! Evicted pods persist until their count exceeds the --terminated-pod-gc-threshold parameter in kube-controller-manager (default is 12,500 pods), and they hang around with a status of "Failed" but reason of "Evicted" Stack OverflowSpacelift.** I am not sure this is how it is supposed to be... but anyway it is the current k8s behavior.
 
-Rollout restart creates NEW ReplicaSets but doesn't clean up old evicted pods from previous ReplicaSets
-When there are replicas in a deployment, evicted pods are typically not deleted automatically How to Delete Pods from a Kubernetes Node with Examples
-The hundreds of evicted/failed pods remained in the cluster taking up API server resources and potentially interfering with scheduling decisions
-Even after scaling deployment to 0 replicas, evicted pods from old ReplicaSets don't get cleaned up How to Delete Pods from a Kubernetes Node with Examples
+And then why `kubectl rollout restart <deployment_name>` didn't resolve the issue again?
 
-Why kubectl delete pods --all Worked
+**Rollout restart creates NEW ReplicaSets but doesn't clean up old evicted pods from previous ReplicaSets**
+When there are replicas in a deployment, evicted pods are typically not deleted automatically. And therefore, the hundreds of evicted/failed pods will still remain in the cluster taking up API server resources and potentially interfering with scheduling decisions. Even after scaling deployment to 0 replicas, evicted pods from old ReplicaSets don't get cleaned up.
 
-Immediately removed ALL problematic pods - evicted, completed, failed, unknown status pods
-Forced the ReplicaSet controllers to create completely fresh pods without any historical baggage
-Cleaned the slate - no old evicted pods cluttering the namespace
+Why `kubectl delete pods --all` worked.
+
+This command immediately removed ALL problematic pods—evicted, completed, failed, and unknown status pods. **It forced the ReplicaSet controllers to create completely fresh pods without any historical baggage**, effectively cleaning the slate so no old evicted pods were cluttering the namespace.
 
 So, it finally worked when I ran 
 ```bash
@@ -1179,4 +968,4 @@ kubectl delete pods --all -n istio-system
 ```
 
 
-I think it is such a mess and unreliable. I would say that K8s knows what's happening in very much details. It shouldn't be this difficult to find the root cause of such simple issue (disk pressure). Particularly, the node disk space resourec is infra layer not application layer. User shouldn't be bothered this much when K8s has all this information. K8s should automatically detect the root cause, notify the user, and provide a solution or even just fix it automatically. 
+MY STRONG OPINION about all this stuff: **I think it is such a mess and unreliable. I would say that K8s knows what's happening in very much details. It shouldn't be this difficult to find the root cause of such simple issue (disk pressure). Particularly, the node disk space resourec is infra layer not application layer. User shouldn't be bothered this much when K8s has all this information. K8s should automatically detect the root cause, notify the user, and provide a solution or even just fix it automatically.** 

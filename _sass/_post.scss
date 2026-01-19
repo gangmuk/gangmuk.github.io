@@ -46,6 +46,7 @@
     margin-right: auto;
     position: relative; /* Allow absolute positioning of side notes */
     line-height: 1.75; /* Increased line spacing for better readability */
+    overflow: visible; /* Ensure expandable buttons above are visible */
 
     /* Side note style - appears in the right margin (Tufte-style) */
     .side-note {
@@ -230,5 +231,215 @@ div.footnotes {
 
   a {
     color: #330000;
+  }
+}
+
+/* Expandable text sections */
+.expandable {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1.75; /* Match post-content line-height */
+  margin-top: 45px; /* Make room for the button above */
+  padding-top: 0; /* No padding needed */
+  overflow: visible !important; /* Ensure button above is never clipped */
+  
+  /* Collapsed state: show only 5 lines but allow scrolling */
+  &.collapsed {
+    max-height: calc(1.75em * 5); /* 5 lines */
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow: visible; /* Don't clip the button above */
+    display: block;
+    
+    /* Ensure button is visible even when collapsed - override overflow for button */
+    &::after {
+      top: -40px !important;
+      visibility: visible !important;
+      display: inline-block !important;
+      overflow: visible !important;
+    }
+    
+    /* Button styles are inherited from main &::after definition below */
+    
+    /* Custom scrollbar styling - Light theme (default) */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    
+    /* Webkit scrollbar styling - Light theme */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+  
+  /* Remove line-clamp restrictions when scrollable */
+  &.collapsed > p,
+  &.collapsed > div:not(pre),
+  &.collapsed > ul,
+  &.collapsed > ol {
+    display: block;
+    overflow: visible;
+  }
+  
+  /* Expanded state */
+  &.expanded {
+    max-height: none;
+    display: block;
+    -webkit-line-clamp: none;
+  }
+  
+  /* Expand/Collapse button positioned above the text block */
+  &::before {
+    content: "" !important; /* Empty content for spacing */
+    display: block !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  &::after {
+    content: "Expand" !important; /* Force content to show */
+    position: absolute !important;
+    top: -40px !important; /* Position ABOVE the text block */
+    right: 0 !important; /* Align to the right edge */
+    color: #333 !important;
+    font-size: 0.85em !important;
+    font-weight: 500 !important;
+    padding: 6px 12px !important;
+    background-color: #ffffff !important; /* Solid white background */
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    white-space: nowrap !important;
+    z-index: 10000 !important; /* Very high z-index to ensure visibility */
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    pointer-events: auto !important;
+    display: inline-block !important; /* Use inline-block instead of block */
+    visibility: visible !important; /* Ensure it's visible */
+    opacity: 1 !important; /* Ensure it's not transparent */
+    line-height: 1.2 !important;
+    min-width: 60px !important;
+    text-align: center !important;
+  }
+  
+  &.expanded::after {
+    content: "Collapse" !important;
+    background-color: rgba(255, 255, 255, 0.98) !important;
+  }
+  
+  /* Ensure button is visible in collapsed state too */
+  &.collapsed::after {
+    content: "Expand" !important;
+  }
+  
+  /* Ensure button shows even without collapsed/expanded class */
+  &:not(.collapsed):not(.expanded)::after {
+    content: "Expand" !important;
+  }
+  
+  /* Hover effect on button */
+  &:hover::after {
+    background-color: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Hover effect on entire block */
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+  
+  /* Ensure nested elements work correctly */
+  p, div, ul, ol {
+    margin: 0;
+    padding: 0;
+  }
+  
+  p + p {
+    margin-top: 1em;
+  }
+  
+  /* Handle code blocks inside expandable sections */
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* When collapsed, code blocks should also be scrollable */
+  &.collapsed pre {
+    max-height: calc(1.4em * 5); /* Approximate 5 lines for code (smaller line-height) */
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: auto; /* Allow horizontal scrolling for long lines */
+    margin-top: 0; /* Remove top margin since we have padding-top on parent */
+    
+    /* Scrollbar styling for code blocks - Light theme */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+  
+  &.expanded pre {
+    max-height: none;
+  }
+  
+  /* Dark theme scrollbar styling for expandable sections */
+  [data-theme="dark"] &.collapsed {
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+    pre::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+    pre {
+      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
   }
 }

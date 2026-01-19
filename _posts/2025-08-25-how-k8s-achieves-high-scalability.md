@@ -22,7 +22,7 @@ What it does not have is
 - performance numbers
 
 ## Understanding Kubernetes Architecture and State Management
-
+(got helped by ai to draw the diagram)
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                                 CONTROL PLANE                                      │

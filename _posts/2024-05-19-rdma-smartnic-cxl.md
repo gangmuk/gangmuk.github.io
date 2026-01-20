@@ -1,9 +1,7 @@
 ---
 layout: post
-title:  "RDMA, SmartNIC, CXL"
-date:   2024-05-19 20:11:00
-blurb: "A look at an example post using Bay Jekyll theme."
-og_image: /assets/img/content/post-example/Banner.jpg
+title:  "DCQCN, RDMA, CXL"
+date:   2024-05-19
 tags: [networking, notes]
 category: blog
 ---

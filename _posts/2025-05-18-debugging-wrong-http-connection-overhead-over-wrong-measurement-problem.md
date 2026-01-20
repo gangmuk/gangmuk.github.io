@@ -1,14 +1,25 @@
 ---
 layout: post
-title: "Debugging HTTP Connection Overhead: When the Measurement Was the Problem"
-tags: [failure, performance debugging, aibrix]
+title: "Debugging HTTP Connection Overhead"
+tags: [failure, performance debugging, gateway, aibrix]
 date: 2025-05-18
 category: blog
 ---
 
-## Intro
+This is basically a journal about a stupid debugging experience on microservice-applications on K8S.
 
-I have been working on LLM inference routing project. I built a new request routing stack on AIBrix. Specifically, the existing AIBrix gateway (envoy proxy) will call my routing agent service with HTTP call. And each component, AIBrix gateway and routing agent service are running in aibrix k8s infrastructure as pods (meaning microservice architectures). I observed high latency in my routing agent service call. To find the overhead source, I logged the times of every step. First, I needed to check if it is caused by HTTP connection overhead or the routing agent service's routing logic computation has high overhead. It is serving infrastructure, so there will be multiple concurrent requests submitted to the system. It needs to process(making routing decision) them with low overhead. And based on my logging, it was showing high latency (~500ms) during http connection between AIBrix gateway and routing agent service. And I spent quite a lot of times on trying to reduce http connection overhead. But it was not the root cause... My measurement (time logging) was wrong... It was measuring connection time outside the HTTP client's connection pool, creating artificial overhead that didn't exist in the actual requests. Very frustrating. (And yes in 2025, obivously this stupid mistake was made with the help of AI hallucination... Essentially, I am the one who was stupid though.)
+I wrote this post to log how stupid the performance debugging can be...
+
+## TLDR; 
+I was doing performance debugging on AIBrix gateway and my request routing agent service. I added timing code and it showed ~500ms "connection" time. But the number was bogus from completely wrong measurement. I used `net.DialTimeout` (it dials a fresh TCP connection and returns a raw `net.Conn`) when measuring the http connection overhead. But `net.DialTimeout` does not use `http.Client`’s connection pool. Instead, it creates a separate http connection outside `http.Client`’s pool. The wrong measurement made me spend lots of hours trying to optimize the connection overhead which was NOT a problem at all. The lesson is *make sure that you are measuring the right thing in a right way.*. Yes, it is such an obivous thing but it is not easy! After instrumenting the real request path with `httptrace`, the connection time was ~0ms—connection reuse was fine; the measurement method was wrong.
+
+## What happened
+I have been working on LLM inference routing project. I have been modifying AIBrix gateway and implement a new request routing agent service for my research project. 
+The existing AIBrix gateway (envoy proxy) will invoke my routing agent service with HTTP call. AIBrix gateway and routing agent service are running in aibrix k8s infrastructure as individual application in each pod. 
+
+It adds more logics on the request critical path to run more complex request routing logic and also there is additional http call between gateway and request routing agent service. The early implementation was not optimized at all and had lots of inefficient codes. It was showing high latency in processing the routing logic. To find where the overhead is, I printed times in each critical section. 
+
+First, I needed to check if it is caused by HTTP connection overhead or the routing agent service's routing logic computation has high overhead. It is serving infrastructure, so there will be multiple concurrent requests submitted to the system. It needs to process(making routing decision) them with low overhead. And based on my logging, it was showing high latency (~500ms) during http connection between AIBrix gateway and routing agent service. And I spent quite a lot of times on trying to reduce http connection overhead. But it was not the root cause... My measurement (time logging) was wrong... It was measuring connection time outside the HTTP client's connection pool, creating artificial overhead that didn't exist in the actual requests. Very frustrating. (And yes in 2025, obivously this stupid mistake was made with the help of AI hallucination... Essentially, I am the one who was stupid though.)
 
 This is what I was measuring. I was trying to measure as detailed as possible. From DNS resolution to connection establishment to request sending to response receiving.
 
@@ -188,11 +199,11 @@ The AI analyzed this code and even suggested enhancements, adding instrumentatio
 
 Over several days, I spent hours implementing the AI's suggestions:
 
-1. I modified the connection pool settings
-2. I implemented more aggressive warmup strategies
-3. I added detailed logging
-4. I increased timeouts
-5. I experimented with HTTP/2 vs HTTP/1.1
+1. Modified the connection pool settings
+2. Implemented more aggressive warmup strategies
+3. Added detailed logging
+4. Increased timeouts
+5. Experimented with HTTP/2 vs HTTP/1.1
 
 Each time, I returned to the AI with my results, and each time it offered new theories and more sophisticated approaches. We discussed:
 
@@ -275,49 +286,8 @@ I shared these results with the AI, asking why there was such a discrepancy. The
 
 It turned out that while I thought I was measuring the connection overhead of my HTTP requests, I was actually measuring the time to establish a new TCP connection that wasn't even being used for the actual request. Meanwhile, the HTTP client was correctly reusing connections from its pool, resulting in near-zero connection times.
 
-Simply put, **I had spent days trying to optimize a non-existent problem**.
-
-## How AI and I Got Confused Together
-
-Looking back, I realized several factors led to this misdirection:
-
-1. **Uncritical acceptance**: The AI examined my flawed measurement code and treated it as valid, even suggesting enhancements rather than questioning its fundamental approach
-
-2. **Plausible problem**: The connection overhead issue seemed reasonable enough that neither I nor the AI questioned its existence
-
-3. **Expertise gap**: I lacked the specific networking expertise to spot the flaw in the measurement approach, and relied on the AI's apparent confidence
-
-4. **Reinforcing loop**: As I reported back with continued issues, the AI offered increasingly complex solutions, reinforcing the idea that we were solving a real problem
-
-5. **Authoritative tone**: The AI's clear, confident explanations made me trust its analysis more than I should have
-
-## Lessons for Working with AI on Technical Problems
-
-This routine debugging exercise taught me several valuable lessons about working with AI assistants:
-
-1. **Scrutinize methodology**: Before implementing any optimization, verify that your measurement approach is actually measuring what you think it is—even when an AI endorses it.
-
-2. **Understand AI limitations**: AI assistants don't necessarily recognize conceptual flaws in your approach, especially when those flaws aren't obvious syntax or logic errors.
-
-3. **Check assumptions regularly**: If you're spending too much time optimizing without seeing results, revisit your fundamental assumptions about the problem itself.
-
-4. **Use multiple measurement methods**: Different measurement approaches provide valuable cross-checks. If they give significantly different results, investigate why before proceeding.
-
-5. **Be aware of overconfidence**: AI assistants can appear authoritative even when working from incorrect premises. Their confident tone doesn't always reflect accuracy.
-
-## The Technical Root Cause
-
-For those interested in the technical details, the original measurement approach was flawed because:
-
-1. We were creating a fresh TCP connection using `net.DialTimeout()` just for measurement
-2. This connection was completely separate from the pooled connections the HTTP client used
-3. While the HTTP client was efficiently reusing connections (0ms connection time), our measurement was repeatedly establishing new connections (500ms)
-4. We were spending time optimizing the connection pool based on measurements from outside the pool
+Simply put, **I had spent hours trying to optimize a non-existent problem...**
 
 ## Lessons Learned...
-
-
-
-
 
 We know LLM has hallucination due to fundamental reason. I am not going to complain about it. But I think it is wrong to argue that hallucination was the problem. And also personally I believe my lack of understanding in the LLM generated code was the problem. AI will be just more and more common (likely exponentially) and it is not right to expect users to understand generated code even if it was used by software engineers. That's essentially the opposite of what we envision in the AI-ebiqutous world. LLM at the first place should have asked me if that's what I want before doing if I didn't provide enough context (prompt). So, if AI can have better ability to tell if it has enough context or not and also the ability to ask user the right clarification question when needed is going to be more critical. Probably it is not new concern but this ability in LLM seems like not getting enough attention.

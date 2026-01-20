@@ -186,6 +186,37 @@
   color: #f0f0f0;
 }
 
+/* Dark theme table styling inside posts */
+[data-theme="dark"] .post-content table {
+  border-color: #444 !important;
+  background-color: #111 !important;
+}
+
+[data-theme="dark"] .post-content thead {
+  background-color: #1e1e1e !important;
+  border-bottom-color: #444 !important;
+}
+
+[data-theme="dark"] .post-content th {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+  border-color: #444 !important;
+}
+
+[data-theme="dark"] .post-content td {
+  background-color: #111 !important;
+  color: #f0f0f0 !important;
+  border-color: #444 !important;
+}
+
+[data-theme="dark"] .post-content tbody tr:nth-child(even) {
+  background-color: #181818 !important;
+}
+
+[data-theme="dark"] .post-content tbody tr:hover {
+  background-color: #222 !important;
+}
+
 /* Mobile responsive */
 @media screen and (max-width: 500px) {
   #theme-toggle {

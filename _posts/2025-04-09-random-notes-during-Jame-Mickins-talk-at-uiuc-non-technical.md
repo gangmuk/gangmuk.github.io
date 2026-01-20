@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Random notes during Thomas Wenisch talk at UIUC"
-tags: [random_notes]
+title: "Random notes during James Mickins talk at UIUC"
+tags: [non-technical, random_notes]
 date: 2025-04-09
 category: notes
 ---
 
-# Random notes during Thomas Wenisch talk at UIUC
+# Random notes during James Mickins talk at UIUC
 
 You need to talk to your advisor about existential concern early 
 

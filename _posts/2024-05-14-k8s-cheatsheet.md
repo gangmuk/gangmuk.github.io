@@ -12,7 +12,7 @@ category: blog
 <br />
 <br />
 
-This K8S cheat sheet is not organized at all. It started as a small note to cache what I often repetiviely search. It was created at Aug 2023
+This K8S cheat sheet is not organized at all. It started as a small note to cache what I often repeatedly search. This note was created around Aug 2023.
 <br />
 
 

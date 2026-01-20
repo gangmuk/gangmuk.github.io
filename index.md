@@ -26,7 +26,7 @@ Also, I earned my Bachelor and Master at the Computer Science at UNIST, South Ko
 
 <p>
 I am broadly interested in system and networking. 
-My current research focuses on cloud infrastructure, specifically for LLM inference. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. My projects include request routing for microservices in geo-distributed clusters (SLATE), ML-based routing for LLM inference in heterogeneous GPU clusters, verification for reliable cluster management (Kivi), and Memory-aware ML training job co-location framework (Zico).
+My current research focuses on cloud infrastructure, specifically for LLM inference. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. My projects include request routing for microservices in geo-distributed clusters (SLATE), LLM inference routing system (Quicksilver), verification for cluster manager (Kivi), and DNN training co-location framework (Zico).
 
 <!-- All of my works heavily involve K8S and all done in K8S and some with Envoy proxy and Istio service mesh. -->
 </p>

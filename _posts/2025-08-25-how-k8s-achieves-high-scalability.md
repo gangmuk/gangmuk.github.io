@@ -8,28 +8,27 @@ category: blog
 
 # Kubernetes Scalability: From etcd Limitations to Kube-Brain Solutions
 
-## Introduction
 
-Kubernetes has become the de facto standard for container orchestration. I have not experienced scalability issue since I have used mostly tens of nodes in kubernetes. But during my internship at Bytedance, I heard that when it scales out to tens of thousands of nodes and hundreds of thousands of pods, it faces scalability issues. This post is a note of my understanding of how kubernetes achieves high scalability. 
+Kubernetes has become the de facto standard for container orchestration. I have not experienced scalability issue since I have used mostly tens of nodes in kubernetes. But during my internship at Bytedance, I heard that when it scales out to tens of thousands of nodes and hundreds of thousands of pods, it faces scalability issues. This post is a note of my understanding of how kubernetes achieves high scalability.
 
-What this post promises to you is
+**What this post promises is**
 - explaining some part of Kubernetes design and why it is designed in such a way
 - potential scalability bottlenecks in kubernetes (etcd)
 - some existing solutions
 
-What it does not have is
+**What it does not have is**
 - implementation detail explanation of either K8S or other solutions
 - performance numbers
 
 ## Understanding Kubernetes Architecture and State Management
 (got helped by ai to draw the diagram)
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                 CONTROL PLANE                                      │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│                                 CONTROL PLANE                                     │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                   │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐     │
-│  │ kube-scheduler│    │controller-mgr│    │   kubectl    │    │  Other       │     │
+│  │kube-scheduler│    │controller-mgr│    │   kubectl    │    │  Other       │     │
 │  │              │    │              │    │   (CLI)      │    │  Controllers │     │
 │  │              │    │              │    │              │    │              │     │
 │  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘    └──────┬───────┘     │
@@ -43,8 +42,8 @@ What it does not have is
 │  │                        kube-apiserver                                       │  │
 │  │                                                                             │  │
 │  │  • Validates requests                                                       │  │
-│  │  • Applies RBAC                                                            │  │
-│  │  • Serializes/deserializes objects                                         │  │
+│  │  • Applies RBAC                                                             │  │
+│  │  • Serializes/deserializes objects                                          │  │
 │  │  • Manages watch streams                                                    │  │
 │  │  • Coordinates with etcd                                                    │  │
 │  └─────────────────────────┬───────────────────────────────────────────────────┘  │
@@ -55,26 +54,26 @@ What it does not have is
 │  ┌─────────────────────────────────────────────────────────────────────────────┐  │
 │  │                          etcd Cluster                                       │  │
 │  │                                                                             │  │
-│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                        │  │
-│  │   │etcd-node-1  │  │etcd-node-2  │  │etcd-node-3  │                        │  │
-│  │   │   (Leader)  │  │ (Follower)  │  │ (Follower)  │                        │  │
-│  │   └─────────────┘  └─────────────┘  └─────────────┘                        │  │
+│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                         │  │
+│  │   │etcd-node-1  │  │etcd-node-2  │  │etcd-node-3  │                         │  │
+│  │   │   (Leader)  │  │ (Follower)  │  │ (Follower)  │                         │  │
+│  │   └─────────────┘  └─────────────┘  └─────────────┘                         │  │
 │  │            │              │              │                                  │  │
 │  │            └──────────────┼──────────────┘                                  │  │
 │  │                      Raft Consensus                                         │  │
 │  │                                                                             │  │
-│  │  • Stores ALL cluster state                                                │  │
+│  │  • Stores ALL cluster state                                                 │  │
 │  │  • Provides strong consistency                                              │  │
-│  │  • Single Raft group for entire keyspace                                   │  │
+│  │  • Single Raft group for entire keyspace                                    │  │
 │  │  • Watch API for real-time notifications                                    │  │
 │  └─────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                     │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+│                                                                                   │
+└───────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### The Core Kubernetes Control Plane
+### Kubernetes Control Plane
 
-At the heart of every Kubernetes cluster lies the **kube-apiserver**, which serves as the central nervous system for all cluster operations. Every interaction with the cluster—whether from kubectl commands, controller operations, or kubelet communications—flows through this single API endpoint.
+At the heart of every Kubernetes cluster lies the **kube-apiserver**, which serves as the central component for all cluster operations. Every interaction with the cluster—whether from kubectl commands, controller operations, or kubelet communications—flows through this API server.
 
 The standard Kubernetes architecture follows this flow:
 

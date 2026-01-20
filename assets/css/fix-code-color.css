@@ -1,25 +1,5 @@
 /* Fix inline code color - ONLY target inline code, NOT code blocks */
 
-/* Make code blocks more visible and readable - highest specificity */
-div.highlight code,
-div.highlight pre code,
-.highlight code,
-.highlight pre code,
-figure.highlight code,
-figure.highlight pre code,
-div.highlight code span,
-.highlight code span {
-  color: #efefef !important;
-  opacity: 1 !important;
-}
-
-/* Override any default text color in code blocks */
-.highlight,
-div.highlight,
-figure.highlight {
-  color: #efefef !important;
-}
-
 /* Target ONLY inline code (code NOT inside pre) with direct child selector */
 p > code.highlighter-rouge,
 li > code.highlighter-rouge,

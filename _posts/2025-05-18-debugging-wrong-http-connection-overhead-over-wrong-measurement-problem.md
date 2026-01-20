@@ -19,31 +19,19 @@ The existing AIBrix gateway (envoy proxy) will invoke my routing agent service w
 
 It adds more logics on the request critical path to run more complex request routing logic and also there is additional http call between gateway and request routing agent service. The early implementation was not optimized at all and had lots of inefficient codes. It was showing high latency in processing the routing logic. To find where the overhead is, I printed times in each critical section. 
 
-First, I needed to check if it is caused by HTTP connection overhead or the routing agent service's routing logic computation has high overhead. It is serving infrastructure, so there will be multiple concurrent requests submitted to the system. It needs to process(making routing decision) them with low overhead. And based on my logging, it was showing high latency (~500ms) during http connection between AIBrix gateway and routing agent service. And I spent quite a lot of times on trying to reduce http connection overhead. But it was not the root cause... My measurement (time logging) was wrong... It was measuring connection time outside the HTTP client's connection pool, creating artificial overhead that didn't exist in the actual requests. Very frustrating. (And yes in 2025, obivously this stupid mistake was made with the help of AI hallucination... Essentially, I am the one who was stupid though.)
+First, I needed to check if it is caused by HTTP connection overhead or the routing agent service's routing logic computation has high overhead. It is serving infrastructure, so there will be multiple concurrent requests submitted to the system. It needs to process(making routing decision) them with low overhead. And based on my logging, it was showing high latency (~500ms) during http connection between AIBrix gateway and routing agent service. And I spent quite a lot of times on trying to reduce http connection overhead. But it was not the root cause... My measurement (time logging) was wrong.
 
 This is what I was measuring. I was trying to measure as detailed as possible. From DNS resolution to connection establishment to request sending to response receiving.
 
 ```go
-func SendRequestWithTiming(
-    client *http.Client,
-    url string,
-    method string,
-    reqBody []byte,
-    headers map[string]string,
-    requestID string,
-    timeout time.Duration,
-) ([]byte, TimingResult, error) {
+func SendRequestWithTiming(...) ([]byte, TimingResult, error) {
     var result TimingResult
-    
-    // Parse URL to get hostname
     parsedURL, _ := url.Parse(url)
     hostName := parsedURL.Hostname()
-    
     // Measurement 1: DNS Resolution
     dnsStart := time.Now()
     hosts, dnsErr := net.LookupHost(hostName)
     result.DNSTime = time.Since(dnsStart)
-
     // Measurement 2: Connection Test - THE PROBLEMATIC PART
     result.ConnectionTime = 0
     if len(hosts) > 0 {
@@ -52,34 +40,27 @@ func SendRequestWithTiming(
         if strings.HasPrefix(url, "https://") {
             port = "443"
         }
-        
-        // This creates a new TCP connection which is separate from the connection pool
+        // Wrong measurement root cause. This creates a new TCP connection which is separate from the connection pool
         conn, dialErr := net.DialTimeout("tcp", hosts[0]+":"+port, timeout/2)
         result.ConnectionTime = time.Since(connStart)
-        
         if dialErr != nil {
             log.Printf("Connection test failed: %v", dialErr)
         } else if conn != nil {
             conn.Close()  // Immediately close this test connection
         }
     }
-    
     // 3. Actual HTTP request. It uses connection pool, meaning it will reuse the existing connection. When reusing the existing connection, there is no overhead.
     req, reqErr := http.NewRequest(method, url, bytes.NewBuffer(reqBody))
     if reqErr != nil {
         return nil, result, reqErr
     }
-    
     for key, value := range headers {
         req.Header.Set(key, value)
     }
-    
     reqStart := time.Now()
     resp, err := client.Do(req)
     result.RequestTime = time.Since(reqStart)
-    
-    // ... rest of the request handling ...
-```
+    ...
 
 When I was sending requests, this is what I saw:
 
@@ -95,8 +76,6 @@ What `net.DialTimeout()` actually does at line 45 is ...
 ```go
 conn, dialErr := net.DialTimeout("tcp", hosts[0]+":"+port, timeout/2)
 ```
-
-**What happens:**
 1. DNS resolution (if needed)
 2. TCP 3-way handshake (SYN → SYN-ACK → ACK)
 3. Returns a raw TCP connection (`net.Conn`)
@@ -107,8 +86,8 @@ This creates a **brand new TCP connection every single time** I measure. For HTT
 However, on line 66, when I call `client.Do(req)`, the `http.Client` uses a completely different connection from its connection pool. If connection pooling is working (which it was), `http.Client` reuses an existing connection with zero overhead.
 
 **So what was I measuring?**
-- Line 45: Creating a throwaway connection just for timing → 500ms
-- Line 66: Using a pooled connection for the actual request → 0ms
+- Creating a throwaway connection just for timing → 500ms overhead
+- Using a pooled connection for the actual request → 0ms overhead
 
 I was measuring Connection A while optimizing for Connection B. They're not the same connection!
 
@@ -214,28 +193,17 @@ Each time, I returned to the AI with my results, and each time it offered new th
 
 The AI's suggestions became increasingly complex, requiring significant code changes. I was spending more and more time chasing a performance issue that seemed stubborn and mysterious.
 
-## A Different Approach: Alternative Measurement Method
+## How it was supposed to be measured
 
-After lots of unproductive optimization attempts, I asked the AI for other ways to measure connection overhead. The AI suggested using Go's `httptrace` package:
+I was supposed to use Go's `httptrace` package to measure the right http connection overhead.
 
 ```go
-func SendRequestWithTiming(
-    client *http.Client,
-    url string,
-    method string,
-    reqBody []byte,
-    headers map[string]string,
-    requestID string,
-    timeout time.Duration,
-) ([]byte, TimingResult, error) {
-    // ... initial setup ...
-    
-    // Variables for httptrace
+func SendRequestWithTiming(...)
+    ...
     var dnsStart, dnsEnd, connectStart, connectEnd, tlsStart, tlsEnd time.Time
     
     // Create HTTP request
     req, reqErr := http.NewRequest(method, url, bytes.NewBuffer(reqBody))
-    // ... error handling ...
     
     // Set up HTTP tracing
     trace := &httptrace.ClientTrace{
@@ -261,33 +229,12 @@ func SendRequestWithTiming(
         },
         // More trace points...
     }
-    
-    // Apply trace to request
-    ctx := httptrace.WithClientTrace(req.Context(), trace)
-    req = req.WithContext(ctx)
-    
-    // Send request and calculate timings...
+    ...
 }
 ```
-
-I implemented this approach, ran the code, and was surprised by the results:
 
 ```
 I0514 18:45:12.882154       1 latency_prediction_based.go:646] requestID: 451 -  Timing breakdown took, DNS: 0ms, Conn: 0ms, ConnReuse: true, Req: 0ms, Send: 18ms, Read: 2ms, Parse: 0ms, Total: 21ms
 ```
 
-Connection time: **0ms**. The 500ms overhead had completely disappeared.
-
-## The Realization (Ahhhhhh!!!! human beings are becoming lazy and passive...)
-
-I shared these results with the AI, asking why there was such a discrepancy. The AI explained something that should have been obvious earlier:
-
-"The key difference between your old version and your new version is that your original measurement technique was flawed. You were creating a separate TCP connection just for measurement, completely separate from the one that the HTTP client was using."
-
-It turned out that while I thought I was measuring the connection overhead of my HTTP requests, I was actually measuring the time to establish a new TCP connection that wasn't even being used for the actual request. Meanwhile, the HTTP client was correctly reusing connections from its pool, resulting in near-zero connection times.
-
-Simply put, **I had spent hours trying to optimize a non-existent problem...**
-
-## Lessons Learned...
-
-We know LLM has hallucination due to fundamental reason. I am not going to complain about it. But I think it is wrong to argue that hallucination was the problem. And also personally I believe my lack of understanding in the LLM generated code was the problem. AI will be just more and more common (likely exponentially) and it is not right to expect users to understand generated code even if it was used by software engineers. That's essentially the opposite of what we envision in the AI-ebiqutous world. LLM at the first place should have asked me if that's what I want before doing if I didn't provide enough context (prompt). So, if AI can have better ability to tell if it has enough context or not and also the ability to ask user the right clarification question when needed is going to be more critical. Probably it is not new concern but this ability in LLM seems like not getting enough attention.
+Connection time: **0ms**. The 500ms overhead just disappeared beacuse 500ms connection overhead never existed in the first place.

@@ -79,4 +79,4 @@ exclude:
   - _posts/unpublished/
 
 # Used for defeating caching
-version: 1
+version: 2

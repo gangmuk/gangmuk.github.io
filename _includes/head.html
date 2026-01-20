@@ -72,9 +72,10 @@
   </script>
   <script async src="https://www.google-analytics.com/analytics.js"></script>
 
-  <link rel="stylesheet" href="{{ "/assets/css/syntax-highlighting.css" | absolute_url }}"/>
-  <link rel="stylesheet" href="{{ "/assets/css/fix-code-color.css" | absolute_url }}"/>
-  <link rel="stylesheet" href="{{ "/assets/css/theme-toggle.css" | absolute_url }}"/>
+  {% assign v = site.version | default: 1 %}
+  <link rel="stylesheet" href="{{ "/assets/css/syntax-highlighting.css" | absolute_url }}?v={{ v }}"/>
+  <link rel="stylesheet" href="{{ "/assets/css/fix-code-color.css" | absolute_url }}?v={{ v }}"/>
+  <link rel="stylesheet" href="{{ "/assets/css/theme-toggle.css" | absolute_url }}?v={{ v }}"/>
   
   <script src="{{ "/assets/js/theme-toggle.js" | absolute_url }}"></script>
 

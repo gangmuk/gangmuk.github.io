@@ -78,6 +78,7 @@ exclude:
   - vendor/ruby/
   - _posts/unpublished/
   - scripts/
+  - Makefile
 
 # Used for defeating caching
 version: 2

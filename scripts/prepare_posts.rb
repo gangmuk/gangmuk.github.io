@@ -10,15 +10,17 @@
 
 require 'fileutils'
 
-POSTS_DIR = File.expand_path('../_posts', __dir__)
-ASSETS_DIR = File.expand_path('../assets/posts', __dir__)
+POSTS_DIR     = File.expand_path('../_posts', __dir__)
+GENERATED_DIR = File.join(POSTS_DIR, '_generated')
+ASSETS_DIR    = File.expand_path('../assets/posts', __dir__)
 
+FileUtils.mkdir_p(GENERATED_DIR)
 FileUtils.mkdir_p(ASSETS_DIR)
 
 Dir.glob(File.join(POSTS_DIR, '*', 'post.md')).sort.each do |post_md|
   slug_dir  = File.dirname(post_md)
   slug      = File.basename(slug_dir)
-  out_file  = File.join(POSTS_DIR, "#{slug}.md")
+  out_file  = File.join(GENERATED_DIR, "#{slug}.md")
   asset_dst = File.join(ASSETS_DIR, slug)
 
   # 1. Copy assets (all non-.md files), preserving relative paths under SLUG/

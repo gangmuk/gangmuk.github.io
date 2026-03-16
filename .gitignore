@@ -4,5 +4,5 @@ _site
 *.pt
 
 # Auto-generated from _posts/*/post.md during CI build — do not commit
-_posts/_generated/
+_posts/generated/
 assets/posts/

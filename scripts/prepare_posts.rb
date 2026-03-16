@@ -14,6 +14,7 @@ POSTS_DIR     = File.expand_path('../_posts', __dir__)
 GENERATED_DIR = File.join(POSTS_DIR, 'generated')
 ASSETS_DIR    = File.expand_path('../assets/posts', __dir__)
 
+FileUtils.rm_rf(GENERATED_DIR)
 FileUtils.mkdir_p(GENERATED_DIR)
 FileUtils.mkdir_p(ASSETS_DIR)
 

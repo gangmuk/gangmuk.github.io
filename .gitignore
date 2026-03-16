@@ -2,3 +2,7 @@ _site
 .sass-cache
 .jekyll-cache
 *.pt
+
+# Auto-generated from _posts/*/post.md during CI build — do not commit
+_posts/????-??-??-*.md
+assets/posts/

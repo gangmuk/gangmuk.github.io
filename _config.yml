@@ -81,4 +81,4 @@ exclude:
   - Makefile
 
 # Used for defeating caching
-version: 2
+version: 3

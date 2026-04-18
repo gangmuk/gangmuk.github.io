@@ -21,7 +21,7 @@
   font-size: 26px;
   letter-spacing: -1px;
   line-height: 1;
-  color: #777;
+  color: $text-color;
   font-family: $base-font-family;
   font-style: oblique;
   position: relative;
@@ -47,6 +47,21 @@
     position: relative; /* Allow absolute positioning of side notes */
     line-height: 1.75; /* Increased line spacing for better readability */
     overflow: visible; /* Ensure expandable buttons above are visible */
+
+    /* Side note reference number in main text */
+    .side-note-ref {
+      font-size: 0.75em;
+      color: #2a7ae2;
+      cursor: default;
+      margin-left: 1px;
+    }
+
+    /* Side note number label inside the note */
+    .side-note-number {
+      font-weight: bold;
+      color: #2a7ae2;
+      font-size: 0.9em;
+    }
 
     /* Side note style - appears in the right margin (Tufte-style) */
     .side-note {

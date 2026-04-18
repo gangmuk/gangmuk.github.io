@@ -37,6 +37,27 @@ $("a#wechat-link").on("mouseleave", function(event) {
 });
 
 /**
+ * Side note numbering
+ */
+$(function() {
+  var sideNotes = document.querySelectorAll(".post-content .side-note");
+  for (var i = 0; i < sideNotes.length; i++) {
+    var num = i + 1;
+    var note = sideNotes[i];
+    // Insert superscript number before the side note in the main text
+    var sup = document.createElement("sup");
+    sup.className = "side-note-ref";
+    sup.textContent = num;
+    note.parentNode.insertBefore(sup, note);
+    // Prepend number inside the side note
+    var numSpan = document.createElement("span");
+    numSpan.className = "side-note-number";
+    numSpan.textContent = num + " ";
+    note.insertBefore(numSpan, note.firstChild);
+  }
+});
+
+/**
  * Expandable text sections
  */
 $(document).ready(function() {

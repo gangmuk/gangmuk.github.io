@@ -46,7 +46,6 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   }
   .news-date {
     min-width: 100px;
-    font-weight: bold;
     color: #666;
     font-size: 0.9em;
     padding-top: 2px;
@@ -108,37 +107,40 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   </div>
 </div>
 
-
-
+<div style="margin-bottom: 40px;"></div>
 
 ## Publication
 <style>
   .pub-item {
-    margin-bottom: 12px;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: baseline;
+  }
+  .pub-venue {
+    min-width: 120px;
+    font-weight: bold;
+    font-size: 1.0em;
+    padding-right: 16px;
+    flex-shrink: 0;
+  }
+  .pub-details {
+    flex: 1;
+    font-family: Charter, Georgia, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
   }
   .pub-title {
-    /* font-weight: bold; */
-    color: #000;
-    font-size: 1.0em;
-  }
-  .pub-venue-badge {
-    /* font-weight: bold; */
-    color: #000;
-    margin-right: 6px;
+    font-size: 16px;
   }
   .pub-authors {
-    margin: 0px 0 2px 0;
-    color: #333;
-    display: block;
+    margin: 2px 0;
+    font-style: italic;
   }
   .pub-conf-details {
-    font-style: italic;
-    color: #666;
-    font-size: 0.9em;
-    display: block;
+    margin: 2px 0;
   }
   .pub-note {
-    font-size: 0.9em;
+    font-size: 13px;
     color: #666;
     margin-top: 1px;
   }
@@ -146,53 +148,59 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
 
 <div class="pub-list">
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[NSDI '26]</span>SLATE: Service Layer Traffic Engineering
+    <div class="pub-venue">NSDI'26</div>
+    <div class="pub-details">
+      <div class="pub-title">SLATE: Service Layer Traffic Engineering</div>
+      <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
+      <div class="pub-conf-details">In Proceedings of the 23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI'26), Renton, WA, May 2026.</div>
+      <div class="pub-note">(* co-first author)</div>
     </div>
-    <div class="pub-authors"><i><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</i></div>
-    <div class="pub-conf-details">In Proceedings of the 23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI'26), Renton, WA, May 2026.</div>
-    <div class="pub-note">(* co-first author)</div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[arXiv]</span>AIBrix: Towards Scalable, Cost-Effective Large Language Model Inference Infrastructure
+    <div class="pub-venue">arXiv</div>
+    <div class="pub-details">
+      <div class="pub-title">AIBrix: Towards Scalable, Cost-Effective Large Language Model Inference Infrastructure</div>
+      <div class="pub-authors">Jiaxin Shan et al.</div>
+      <div class="pub-conf-details">arXiv:2504.03648, March 2025.</div>
     </div>
-    <div class="pub-authors"><i>Jiaxin Shan, Varun Gupta, Le Xu, Haiyang Shi, Jingyuan Zhang, Ning Wang, Linhui Xu, Rong Kang, Tongping Liu, Yifei Zhang, Yiqing Zhu, Shuowei Jin, <ins>Gangmuk Lim</ins>, Binbin Chen, Zuzhi Chen, Xiao Liu, Xin Chen, Kante Yin, Chak-Pong Chung, Chenyu Jiang, Yicheng Lu, Jianjun Chen, Caixue Lin, Wu Xiang, Rui Shi, Liguang Xie</i></div>
-    <div class="pub-conf-details">arXiv:2504.03648, March 2025.</div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[HotNets '24]</span>Opportunities and Challenges in Service Layer Traffic Engineering
+    <div class="pub-venue">HotNets'24</div>
+    <div class="pub-details">
+      <div class="pub-title">Opportunities and Challenges in Service Layer Traffic Engineering</div>
+      <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
+      <div class="pub-conf-details">In Proceedings of the 23rd ACM Workshop on Hot Topics in Networks (HotNets'24), Irvine, California, November 2024.</div>
+      <div class="pub-note">(* co-first author)</div>
     </div>
-    <div class="pub-authors"><i><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</i></div>
-    <div class="pub-note">(*co-first author)</div>
-    <div class="pub-conf-details">In Proceedings of the 23rd ACM Workshop on Hot Topics in Networks (HotNets'24), Irvine, California, November 2024.</div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[USENIX ATC '24]</span>Kivi: Verification for Cluster Management
+    <div class="pub-venue">ATC'24</div>
+    <div class="pub-details">
+      <div class="pub-title">Kivi: Verification for Cluster Management</div>
+      <div class="pub-authors">Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</div>
+      <div class="pub-conf-details">In Proceedings of the 2024 USENIX Annual Technical Conference (USENIX ATC'24), Santa Clara, CA, July 2024.</div>
     </div>
-    <div class="pub-authors"><i>Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</i></div>
-    <div class="pub-conf-details">In Proceedings of the 2024 USENIX Annual Technical Conference (USENIX ATC'24), Santa Clara, CA, July 2024.</div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[USENIX ATC '21]</span>Zico: Efficient GPU Memory Sharing for Concurrent DNN Training
+    <div class="pub-venue">ATC'21</div>
+    <div class="pub-details">
+      <div class="pub-title">Zico: Efficient GPU Memory Sharing for Concurrent DNN Training</div>
+      <div class="pub-authors"><ins>Gangmuk Lim</ins>, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</div>
+      <div class="pub-conf-details">In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), July 2021.</div>
     </div>
-    <div class="pub-authors"><i><ins>Gangmuk Lim</ins>, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</i></div>
-    <div class="pub-conf-details">In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), July 2021.</div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-title">
-      <span class="pub-venue-badge">[ICDE '20]</span>Approximate Quantiles for Data Center Telemetry Monitoring <span style="font-weight: normal; font-size: 0.9em;">(short paper)</span>
+    <div class="pub-venue">ICDE'20</div>
+    <div class="pub-details">
+      <div class="pub-title">Approximate Quantiles for Data Center Telemetry Monitoring <span style="font-weight: normal; font-size: 0.9em;">(short paper)</span></div>
+      <div class="pub-authors"><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</div>
+      <div class="pub-conf-details">In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.</div>
     </div>
-    <div class="pub-authors"><i><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</i></div>
-    <div class="pub-conf-details">In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.</div>
   </div>
 </div>
 
@@ -204,15 +212,15 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   margin-bottom: 20px;
 }
 .experience-date {
-  min-width: 160px;
-  font-weight: bold;
+  min-width: 180px;
+  padding-right: 20px;
   color: #666;
+  flex-shrink: 0;
 }
 .experience-details {
   flex: 1;
 }
 .experience-role {
-  font-weight: bold;
   color: #333;
 }
 .experience-company {

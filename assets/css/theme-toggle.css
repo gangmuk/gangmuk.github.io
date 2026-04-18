@@ -178,7 +178,26 @@
 /* Dark theme for specific text elements */
 [data-theme="dark"] em,
 [data-theme="dark"] i {
-  color: #b0b0b0;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] figcaption {
+  color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .side-note {
+  color: #c0c0c0 !important;
+  background-color: #242424 !important;
+  border-left-color: #444 !important;
+}
+
+[data-theme="dark"] .side-note-ref,
+[data-theme="dark"] .side-note-number {
+  color: #6db3f2 !important;
+}
+
+[data-theme="dark"] .pub-note {
+  color: #999 !important;
 }
 
 [data-theme="dark"] strong,

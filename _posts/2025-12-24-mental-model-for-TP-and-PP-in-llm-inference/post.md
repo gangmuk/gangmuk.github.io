@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "comparison between TP and PP in llm inference"
+title: "Mental model for TP and PP in LLM inference"
 tags: [TP, PP, llm inference]
 date: 2025-12-24
 category: blog
 ---
 
-# TP and PP comparison
+# Mental model for TP and PP in LLM inference
 
 ## Perspective
 

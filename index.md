@@ -26,9 +26,12 @@ Also, I earned my Bachelor and Master at the Computer Science at UNIST, South Ko
 
 <p>
 I am broadly interested in system and networking. 
-My current research focuses on cloud infrastructure, specifically for LLM inference. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. My projects include request routing for microservices in geo-distributed clusters (SLATE), LLM inference routing system (Quicksilver), verification for cluster manager (Kivi), and DNN training co-location framework (Zico).
+My current focus is research on infrastructure, specifically for LLM inference. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. 
+</p>
+<p>
 
-<!-- All of my works heavily involve K8S and all done in K8S and some with Envoy proxy and Istio service mesh. -->
+My research are/were LLM inference request routing system (Lodestar), Multi-cluster request routing system for microservice applications (SLATE), Verification for cluster manager (Kivi), and GPU sharing framework for DNN training (Zico).
+
 </p>
 
 Most likely, you can find me on the 3rd floor at Siebel Center for Computer Science at Urbana, IL (or at a cafe in Urbana-Champaign)<br>
@@ -40,6 +43,42 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
 
 ## News!
 <style>
+  .news-scroll-wrap {
+    position: relative;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .news-list {
+    height: 260px;
+    overflow-y: scroll;
+    padding: 6px 18px 0 0;
+    margin-top: 0;
+    border-radius: 6px;
+    scrollbar-width: none;
+  }
+  .news-list::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .news-scrollbar {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 8px;
+    height: 260px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  .news-scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 24px;
+    background: #b3b3b3;
+    border-radius: 8px;
+  }
   .news-item {
     display: flex;
     margin-bottom: 8px;
@@ -56,7 +95,30 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   }
 </style>
 
-<div class="news-list">
+<div class="news-scroll-wrap">
+<div class="news-list" id="news-list">
+
+  <div class="news-item">
+    <div class="news-date">May, 2026</div>
+    <div class="news-content">
+      Will start the summer internship at Microsoft Research, Redmond!
+    </div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-date">May, 2026</div>
+    <div class="news-content">
+      My first Tandemn blog post has been release. Check it out! <a href="https://tandemn.com/blog/3">Your LLM Inference Cluster Is Probably Operating Suboptimally</a>.
+    </div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-date">May, 2026</div>
+    <div class="news-content">
+      I have been building self-optimizing LLM inference infrastructure with the amazing team, Tandemn. It is fully open-source. Check it out! <a href="https://github.com/Tandemn-Labs/tandemn-system">Tandemn-system</a>.
+    </div>
+  </div>
+
   <div class="news-item">
     <div class="news-date">Jul, 2025</div>
     <div class="news-content">
@@ -67,7 +129,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   <div class="news-item">
     <div class="news-date">Jan, 2025</div>
     <div class="news-content">
-      Started internship at Bytedance, Compute Infra team, Seattle. Cloud-native infrastructure for GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)
+      Started the internship at Bytedance, Compute Infra team, Seattle. Cloud-native infrastructure for GenAI inference. (project <a href="https://github.com/vllm-project/aibrix">AIBrix</a>)
     </div>
   </div>
 
@@ -106,6 +168,43 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     </div>
   </div>
 </div>
+<div class="news-scrollbar" aria-hidden="true">
+  <div class="news-scrollbar-thumb" id="news-scrollbar-thumb"></div>
+</div>
+</div>
+
+<script>
+(function() {
+  var newsList = document.getElementById("news-list");
+  var thumb = document.getElementById("news-scrollbar-thumb");
+  if (!newsList || !thumb) return;
+
+  function updateThumb() {
+    var viewport = newsList.clientHeight;
+    var content = newsList.scrollHeight;
+    var maxScroll = content - viewport;
+
+    if (maxScroll <= 0) {
+      thumb.style.height = "100%";
+      thumb.style.transform = "translateY(0)";
+      return;
+    }
+
+    var ratio = viewport / content;
+    var thumbHeight = Math.max(24, viewport * ratio);
+    var travel = viewport - thumbHeight;
+    var top = (newsList.scrollTop / maxScroll) * travel;
+
+    thumb.style.height = thumbHeight + "px";
+    thumb.style.transform = "translateY(" + top + "px)";
+  }
+
+  newsList.addEventListener("scroll", updateThumb);
+  window.addEventListener("resize", updateThumb);
+  window.addEventListener("load", updateThumb);
+  updateThumb();
+})();
+</script>
 
 <div style="margin-bottom: 40px;"></div>
 
@@ -152,7 +251,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     <div class="pub-details">
       <div class="pub-title">SLATE: Service Layer Traffic Engineering</div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
-      <div class="pub-conf-details">In Proceedings of the 23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI'26), Renton, WA, May 2026.</div>
+      <!-- <div class="pub-conf-details">In Proceedings of the 23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI'26), Renton, WA, May 2026.</div> -->
       <div class="pub-note">(* co-first author)</div>
     </div>
   </div>
@@ -161,7 +260,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     <div class="pub-venue">arXiv</div>
     <div class="pub-details">
       <div class="pub-title">AIBrix: Towards Scalable, Cost-Effective Large Language Model Inference Infrastructure</div>
-      <div class="pub-authors">Jiaxin Shan et al.</div>
+      <div class="pub-authors">AIBrix team</div>
       <div class="pub-conf-details">arXiv:2504.03648, March 2025.</div>
     </div>
   </div>
@@ -171,26 +270,26 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     <div class="pub-details">
       <div class="pub-title">Opportunities and Challenges in Service Layer Traffic Engineering</div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
-      <div class="pub-conf-details">In Proceedings of the 23rd ACM Workshop on Hot Topics in Networks (HotNets'24), Irvine, California, November 2024.</div>
+      <!-- <div class="pub-conf-details">In Proceedings of the 23rd ACM Workshop on Hot Topics in Networks (HotNets'24), Irvine, California, November 2024.</div> -->
       <div class="pub-note">(* co-first author)</div>
     </div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-venue">ATC'24</div>
+    <div class="pub-venue">USENIX ATC'24</div>
     <div class="pub-details">
       <div class="pub-title">Kivi: Verification for Cluster Management</div>
       <div class="pub-authors">Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</div>
-      <div class="pub-conf-details">In Proceedings of the 2024 USENIX Annual Technical Conference (USENIX ATC'24), Santa Clara, CA, July 2024.</div>
+      <!-- <div class="pub-conf-details">In Proceedings of the 2024 USENIX Annual Technical Conference (USENIX ATC'24), Santa Clara, CA, July 2024.</div> -->
     </div>
   </div>
 
   <div class="pub-item">
-    <div class="pub-venue">ATC'21</div>
+    <div class="pub-venue">USENIX ATC'21</div>
     <div class="pub-details">
       <div class="pub-title">Zico: Efficient GPU Memory Sharing for Concurrent DNN Training</div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</div>
-      <div class="pub-conf-details">In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), July 2021.</div>
+      <!-- <div class="pub-conf-details">In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), July 2021.</div> -->
     </div>
   </div>
 
@@ -199,7 +298,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     <div class="pub-details">
       <div class="pub-title">Approximate Quantiles for Data Center Telemetry Monitoring <span style="font-weight: normal; font-size: 0.9em;">(short paper)</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</div>
-      <div class="pub-conf-details">In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.</div>
+      <!-- <div class="pub-conf-details">In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.</div> -->
     </div>
   </div>
 </div>
@@ -233,20 +332,39 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
 </style>
 
 <div class="experience-list">
+
+  <div class="experience-item">
+    <div class="experience-date">May 2026 - Present</div>
+    <div class="experience-details">
+      <div class="experience-company">Microsoft Research, Research Intern</div>
+      <!-- <div class="experience-role">Research Intern</div> -->
+      <div class="experience-location">Redmond, WA</div>
+    </div>
+  </div>
+
+  <div class="experience-item">
+    <div class="experience-date">Aug 2025 - Present</div>
+    <div class="experience-details">
+      <div class="experience-role"><a href="https://tandemn.com/">Tandemn</a>, Researcher and engineer</div>
+      <!-- <div class="experience-company">Tandemn</div> -->
+      <div class="experience-location">Remote</div>
+    </div>
+  </div>
+
   <div class="experience-item">
     <div class="experience-date">Jan 2025 - Jun 2025</div>
     <div class="experience-details">
-      <div class="experience-role">Research Intern, Compute Infra Team</div>
-      <div class="experience-company">Bytedance</div>
-      <div class="experience-location">Seattle, WA</div>
+      <div class="experience-role">Bytedance <a href="https://github.com/vllm-project/aibrix">AIBrix</a> Team, Research Intern</div>
+      <!-- <div class="experience-company"></div> -->
+      <div class="experience-location">Bellevue, WA</div>
     </div>
   </div>
 
   <div class="experience-item">
     <div class="experience-date">Jul 2021 - Apr 2022</div>
     <div class="experience-details">
-      <div class="experience-role">Software Engineer</div>
-      <div class="experience-company">Rebellions</div>
+      <div class="experience-role"><a href="https://rebellions.ai/">Rebellions</a>, Research Engineer</div>
+      <!-- <div class="experience-company">Rebellions</div> -->
       <div class="experience-location">Seongnam, Korea</div>
     </div>
   </div>
@@ -254,14 +372,14 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   <div class="experience-item">
     <div class="experience-date">Jun 2018 - Aug 2018</div>
     <div class="experience-details">
-      <div class="experience-role">Research Intern, Media Lab</div>
-      <div class="experience-company">Ghent University</div>
+      <div class="experience-role">Ghent University <a href="https://media.idlab.ugent.be/">IDLab-MEDIA</a>, Research Intern</div>
+      <!-- <div class="experience-company"></div> -->
       <div class="experience-location">Ghent, Belgium</div>
     </div>
   </div>
 </div>
 
-## Other Facts about me
+## Other facts about me
 
 ### Sports
 I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennis, and more. So, half of my joints have been gone...

@@ -381,12 +381,16 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
 
 ## Other facts about me
 
-### Sports
-I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennis, and more. So, half of my joints have been gone...
-<br>
-
 ### Backpacking
 In the past, I enjoyed rather extreme backpacking trips, mostly solo trips. Extreme as in no plan, no reservation (hotel or transportation), just a backpack and taking a flight to a new place by myself, not knowing where to go other than the first city. It is like an unopened gift box. I did it intentionally to meet as many new and diverse people as possible and hidden gems in the world. And it definitely worked.
 This extreme style of traveling started from a solo backpacking that I made at 15 years old to Japan where I lost all the cashes I had and cried on a random street.
 The places I have been are from Japan, Thailand, India, Nepal, Myammar, Cambodia, Morroco, all Europe countries except for the north part, etc. 
+<br>
+
+### Sports
+I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennis, and more. So, half of my joints have been gone...
+<br>
+
+### Coffee
+I love coffee. Especially light roasted coffee brewed in pour-over. Cafes I was highly impressved by (when I brew) are Gwang Coffee (Jeonju, Korea), Coffee Place (Gyeongju, Korea), Kuraso Coffee (Kyoto, Japan). Coffee beans (roasteries) I think it is impressive to me so far are almost all the beans from Sey Coffee (Brooklyn, NY), some beans from Metric (Chicago, IL), all beans from Kuraso (Kyoto, Japan). Please email me if you know any IMPRESSIVE cafe or roastery!
 <br>

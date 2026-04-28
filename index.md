@@ -101,7 +101,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   <div class="news-item">
     <div class="news-date">May, 2026</div>
     <div class="news-content">
-      Will start the summer internship at Microsoft Research, Redmond!
+      I will be interning at Microsoft Research in the RiSE group this summer! Very excited to work with Aashaka Shah and Anand Bonde!
     </div>
   </div>
 

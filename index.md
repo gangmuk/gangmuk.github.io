@@ -26,11 +26,11 @@ Also, I earned my Bachelor and Master at the Computer Science at UNIST, South Ko
 
 <p>
 I am broadly interested in system and networking. 
-My current focus is research on infrastructure, specifically for LLM inference. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. 
+My current research interest is making infrastructure more intelligent. I aim to improve application performance, reduce costs, and enhance reliability by making infrastructure more application-aware. 
 </p>
 <p>
 
-My research are/were LLM inference request routing system (Lodestar), Multi-cluster request routing system for microservice applications (SLATE), Verification for cluster manager (Kivi), and GPU sharing framework for DNN training (Zico).
+My research are/were LLM inference request routing system (Lodestar), Multi-cluster request routing system for microservice applications (SLATE), Verification for cluster management system (Kivi), and GPU sharing framework for DNN training (Zico).
 
 </p>
 
@@ -101,7 +101,7 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
   <div class="news-item">
     <div class="news-date">May, 2026</div>
     <div class="news-content">
-      I will be interning at Microsoft Research in the RiSE group this summer! Very excited to work with Aashaka Shah and Anand Bonde!
+      I will be interning at Microsoft Research in the RiSE group this summer!
     </div>
   </div>
 

@@ -24,6 +24,8 @@ header:
       slug: /blog
     - name: Notes
       slug: /notes
+    - name: Coffee
+      slug: /coffee
 
 footer:
   show_powered_by: false
@@ -77,6 +79,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - _posts/unpublished/
+  - _posts/coffee_log/
   - scripts/
   - Makefile
 

@@ -168,10 +168,17 @@
       font-size: 14px;
       overflow-x: auto;
       display: block;
-      
+
       @include media-query($on-mobile) {
         font-size: 12px;
       }
+    }
+
+    /* Coffee-log brew-param tables: shrink to content instead of stretching */
+    .lang-content table {
+      display: table;
+      width: auto;
+      max-width: 100%;
     }
     
     thead {
@@ -231,6 +238,75 @@
 
 div.footnotes {
   font-size: 80%;
+}
+
+/* Left sidebar table of contents — populated by assets/js/post-toc.js.
+   Hidden by default (via `hidden` attr); JS removes the attr when a TOC is found.
+   Fixed position so it follows the scroll. Hidden on narrow viewports where
+   the centered .post-wrapper (max-width 1200) leaves no room beside it. */
+.post-toc {
+  position: fixed;
+  top: 200px;
+  left: calc(50vw - 600px); /* wrapper-left outer edge — gives ~50px gap to content */
+  width: 170px;
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-family: Helvetica, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #555;
+  z-index: 50;
+  padding-right: 10px;
+
+  .post-toc-heading {
+    font-family: Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin: 0 0 14px 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  ul ul {
+    padding-left: 14px;
+    margin-top: 6px;
+  }
+
+  a {
+    color: #555;
+    text-decoration: none;
+
+    &:hover {
+      color: #2a7ae2;
+      text-decoration: underline;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .post-toc { display: none; }
 }
 
 .draft-banner {

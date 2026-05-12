@@ -11,14 +11,14 @@
 require 'fileutils'
 
 POSTS_DIR     = File.expand_path('../_posts', __dir__)
-GENERATED_DIR = File.join(POSTS_DIR, 'generated')
+GENERATED_DIR = File.join(POSTS_DIR, 'generated_for_live_mode')
 ASSETS_DIR    = File.expand_path('../assets/posts', __dir__)
 
 FileUtils.rm_rf(GENERATED_DIR)
 FileUtils.mkdir_p(GENERATED_DIR)
 FileUtils.mkdir_p(ASSETS_DIR)
 
-Dir.glob(File.join(POSTS_DIR, '*', 'post.md')).sort.each do |post_md|
+Dir.glob(File.join(POSTS_DIR, '{blog,notes}', '*', 'post.md')).sort.each do |post_md|
   slug_dir  = File.dirname(post_md)
   slug      = File.basename(slug_dir)
   out_file  = File.join(GENERATED_DIR, "#{slug}.md")
@@ -52,4 +52,61 @@ Dir.glob(File.join(POSTS_DIR, '*', 'post.md')).sort.each do |post_md|
   # 3. Write generated flat .md
   File.write(out_file, content)
   puts "Generated: #{out_file}"
+end
+
+# --- Coffee log posts ---
+# Find *-polished-en.md files in _posts/coffee_log/, pair with *-polished-ko.md,
+# and generate a combined bilingual post.
+COFFEE_DIR = File.join(POSTS_DIR, 'coffee_log')
+
+if File.directory?(COFFEE_DIR)
+  Dir.glob(File.join(COFFEE_DIR, '*-polished-en.md')).sort.each do |en_file|
+    ko_file = en_file.sub('-polished-en.md', '-polished-ko.md')
+    next unless File.exist?(ko_file)
+
+    en_content = File.read(en_file)
+    ko_content = File.read(ko_file)
+
+    # Parse title from first line
+    title = en_content.lines.first.strip
+
+    # Parse date from "from YYYY.MM.DD" line
+    date_match = en_content.match(/from\s+(\d{4})\.(\d{2})\.(\d{2})/)
+    next unless date_match
+    date = "#{date_match[1]}-#{date_match[2]}-#{date_match[3]}"
+
+    # Build slug from the base filename
+    base = File.basename(en_file, '-polished-en.md')
+    slug = "#{date}-#{base.downcase.gsub(/[^a-z0-9]+/, '-').gsub(/-+$/, '')}"
+
+    # Strip the first line (title) from both — it's in the front matter now
+    en_body = en_content.lines.drop(1).join
+    ko_body = ko_content.lines.drop(1).join
+
+    # Generate combined post
+    combined = <<~POST
+      ---
+      layout: post
+      title: "#{title}"
+      date: #{date}
+      category: coffee
+      tags: [#{title.split(',').map(&:strip).reject(&:empty?).map { |t| t.gsub('"', '\\"') }.join(', ')}]
+      languages: [ko, en]
+      default_lang: en
+      original_lang: ko
+      ---
+
+      <div class="lang-content" data-lang="en" markdown="1">
+      #{en_body}
+      </div>
+
+      <div class="lang-content" data-lang="ko" style="display:none;" markdown="1">
+      #{ko_body}
+      </div>
+    POST
+
+    out_file = File.join(GENERATED_DIR, "#{slug}.md")
+    File.write(out_file, combined.gsub(/^      /, ''))
+    puts "Generated (coffee): #{out_file}"
+  end
 end

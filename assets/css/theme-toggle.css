@@ -1,15 +1,16 @@
 /* Theme toggle button */
 #theme-toggle {
+  /* Hidden in production; toggle implementation kept intact for future re-enable. */
+  display: none !important;
   position: fixed;
   top: 20px;
   right: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: #fdfdfd;
   border: 2px solid #ddd;
   cursor: pointer;
-  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
@@ -19,7 +20,7 @@
 }
 
 #theme-toggle:hover {
-  background-color: #e0e0e0;
+  background-color: #fdfdfd;
   transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -35,12 +36,12 @@
 /* Dark theme styles */
 [data-theme="dark"] {
   background-color: #1a1a1a;
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] body {
   background-color: #1a1a1a;
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] #theme-toggle {
@@ -66,11 +67,11 @@
 [data-theme="dark"] .site-title,
 [data-theme="dark"] .site-title:visited,
 [data-theme="dark"] .site-title-text {
-  color: #e0e0e0 !important;
+  color: #fdfdfd !important;
 }
 
 [data-theme="dark"] .site-nav .page-link {
-  color: #e0e0e0 !important;
+  color: #fdfdfd !important;
 }
 
 [data-theme="dark"] .site-nav .page-link:hover {
@@ -86,7 +87,7 @@
 }
 
 [data-theme="dark"] .post-content {
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .post-content h1,
@@ -95,11 +96,11 @@
 [data-theme="dark"] .post-content h4,
 [data-theme="dark"] .post-content h5,
 [data-theme="dark"] .post-content h6 {
-  color: #f0f0f0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] .post-content p {
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 /* Dark theme for inline code - all variations */
@@ -115,7 +116,7 @@
 [data-theme="dark"] li > code.highlighter-rouge,
 [data-theme="dark"] td > code.highlighter-rouge {
   background-color: #2d2d2d !important;
-  color: #e0e0e0 !important;
+  color: #fdfdfd !important;
   border-color: #444 !important;
 }
 
@@ -124,7 +125,7 @@
 [data-theme="dark"] li > code span,
 [data-theme="dark"] td > code span,
 [data-theme="dark"] code.highlighter-rouge span {
-  color: #e0e0e0 !important;
+  color: #fdfdfd !important;
 }
 
 /* Dark theme for code blocks - keep syntax highlighting */
@@ -155,7 +156,7 @@
 
 /* Dark theme for home page content */
 [data-theme="dark"] .page-content {
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] h1,
@@ -164,7 +165,7 @@
 [data-theme="dark"] h4,
 [data-theme="dark"] h5,
 [data-theme="dark"] h6 {
-  color: #f0f0f0 !important;
+  color: #fdfdfd !important;
 }
 
 [data-theme="dark"] p,
@@ -172,17 +173,17 @@
 [data-theme="dark"] td,
 [data-theme="dark"] span,
 [data-theme="dark"] div {
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 /* Dark theme for specific text elements */
 [data-theme="dark"] em,
 [data-theme="dark"] i {
-  color: #e0e0e0;
+  color: #fdfdfd;
 }
 
 [data-theme="dark"] figcaption {
-  color: #e0e0e0 !important;
+  color: #fdfdfd !important;
 }
 
 [data-theme="dark"] .side-note {
@@ -202,7 +203,7 @@
 
 [data-theme="dark"] strong,
 [data-theme="dark"] b {
-  color: #f0f0f0;
+  color: #fdfdfd;
 }
 
 /* Dark theme table styling inside posts */
@@ -218,13 +219,13 @@
 
 [data-theme="dark"] .post-content th {
   background-color: #1e1e1e !important;
-  color: #f5f5f5 !important;
+  color: #fdfdfd !important;
   border-color: #444 !important;
 }
 
 [data-theme="dark"] .post-content td {
   background-color: #111 !important;
-  color: #f0f0f0 !important;
+  color: #fdfdfd !important;
   border-color: #444 !important;
 }
 
@@ -234,6 +235,44 @@
 
 [data-theme="dark"] .post-content tbody tr:hover {
   background-color: #222 !important;
+}
+
+/* Dark theme for blog listing */
+[data-theme="dark"] .blog-post-date {
+  color: #fdfdfd !important;
+}
+
+[data-theme="dark"] a.blog-post-title,
+[data-theme="dark"] a.blog-post-title:visited {
+  color: #c9a96e !important;
+}
+
+[data-theme="dark"] a.blog-post-title:hover {
+  color: #e0c58a !important;
+}
+
+[data-theme="dark"] .blog-description p {
+  color: #fdfdfd !important;
+}
+
+/* Dark theme for language toggle */
+[data-theme="dark"] .lang-label {
+  color: #fdfdfd !important;
+}
+
+[data-theme="dark"] .lang-btn {
+  color: #999;
+  border-color: #555;
+}
+
+[data-theme="dark"] .lang-btn:hover {
+  background: #3d3d3d;
+  color: #fdfdfd;
+}
+
+[data-theme="dark"] .lang-btn.active {
+  background: #e0e0e0;
+  color: #1a1a1a;
 }
 
 /* Mobile responsive */

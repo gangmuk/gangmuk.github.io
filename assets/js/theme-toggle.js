@@ -34,12 +34,14 @@
     applyTheme(newTheme);
   }
   
-  // Initialize theme on page load
+  // Initialize theme on page load.
+  // Toggle button is hidden via CSS; force light on every load so users who
+  // previously saved 'dark' in localStorage also revert. Toggle implementation
+  // remains intact and can be re-enabled by unhiding #theme-toggle in CSS.
   function initTheme() {
-    const theme = getTheme();
-    applyTheme(theme);
-    
-    // Add click handler to toggle button
+    applyTheme('light');
+
+    // Click handler is still wired in case the button is unhidden later.
     const toggle = document.getElementById('theme-toggle');
     if (toggle) {
       toggle.addEventListener('click', toggleTheme);

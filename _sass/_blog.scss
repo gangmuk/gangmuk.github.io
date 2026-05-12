@@ -1,9 +1,20 @@
+.blog-description {
+  font-family: Charter, "Noto Serif KR", Georgia, serif;
+  margin-bottom: 28px;
+  line-height: 1.5;
+
+  p {
+    font-size: 22px !important;
+    color: #333;
+  }
+}
+
 .blog-post-list {
   .blog-post-item {
-    margin-bottom: 24px;
-    
+    margin-bottom: 12px;
+
     @include media-query($on-mobile) {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
   }
 
@@ -21,28 +32,41 @@
 
   .blog-post-date {
     color: #777;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     flex-shrink: 0;
     width: 6em;
 
     @include media-query($on-mobile) {
-      font-size: 12px;
+      font-size: 14px;
       width: 5em;
     }
   }
 
   .blog-post-title {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 500;
-    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+    font-family: Charter, "Noto Serif KR", Georgia, serif;
     letter-spacing: normal;
     line-height: 1.4;
     flex: 1;
+    color: #111;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
 
     @include media-query($on-mobile) {
       font-size: 15px;
     }
+  }
+
+  .blog-post-readtime {
+    color: #999;
+    font-size: 14px;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .blog-post-tags {
@@ -62,7 +86,7 @@
     padding: 3px 10px;
     font-size: 13px;
     font-weight: 600;
-    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+    font-family: Charter, "Noto Serif KR", Georgia, serif;
     color: #333;
     background-color: #ddd;
     border-radius: 4px;

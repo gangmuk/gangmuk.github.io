@@ -9,6 +9,8 @@
       <div class="wrapper post-wrapper">
         <div class="post">
 
+          <aside class="post-toc" aria-label="Table of contents" hidden></aside>
+
           <header class="post-header">
 
             {% if page.draft %}
@@ -26,6 +28,18 @@
             {% if page.subtitle %}<h1 class="post-subtitle">{{ page.subtitle }}</h1>{% endif %}
             <p class="post-meta"><span class="post-date">{{ page.date | date: "%B %-d, %Y" }}
             </span>{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+
+            {% if page.languages %}
+            <div class="lang-toggle">
+              <span class="lang-label">Language:</span>
+              {% for lang in page.languages %}
+                <button class="lang-btn {% if lang == page.default_lang %}active{% endif %}" data-lang="{{ lang }}">
+                  {% if lang == "en" %}English{% elsif lang == "ko" %}Korean{% endif %}
+                </button>
+              {% endfor %}
+              {% if page.original_lang %}<span class="lang-original">Originally written in {% if page.original_lang == "ko" %}Korean{% elsif page.original_lang == "en" %}English{% endif %}</span>{% endif %}
+            </div>
+            {% endif %}
           </header>
 
           <article class="post-content">
@@ -43,5 +57,24 @@
     {% include footer.html %}
 
     {% include foot.html %}
+
+    <script src="{{ "/assets/js/post-toc.js" | absolute_url }}"></script>
+
+    {% if page.languages %}
+    <script>
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var lang = this.getAttribute('data-lang');
+        document.querySelectorAll('.lang-content').forEach(function(el) {
+          el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+        });
+        document.querySelectorAll('.lang-btn').forEach(function(b) {
+          b.classList.remove('active');
+        });
+        this.classList.add('active');
+      });
+    });
+    </script>
+    {% endif %}
   </body>
 </html>

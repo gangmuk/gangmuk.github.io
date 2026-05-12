@@ -2,8 +2,10 @@
 // Detect a "table of contents"-style bullet list at the top of the post body
 // (a <ul> whose links all point to in-page #anchors). If found, rebuild it as
 // a "spine + dot" sidebar in .post-toc: a thin vertical line with one dot per
-// heading. Labels are hidden until the user hovers the sidebar. A scroll-spy
-// marks passed / active dots based on which section is currently in view.
+// heading. Each dot is positioned at the y-coordinate proportional to its
+// heading's actual position in the article — so the spacing between dots
+// mirrors the spacing of the sections themselves. Labels are hidden until
+// the user hovers the sidebar. A scroll handler marks passed / active dots.
 (function () {
   function isTocList(ul) {
     var links = ul.querySelectorAll('a');
@@ -70,31 +72,85 @@
       a.appendChild(label);
       li.appendChild(a);
       ul.appendChild(li);
+
+      item.li = li; // back-reference for later layout / scroll-spy
     });
 
     sidebar.appendChild(ul);
     return ul;
   }
 
-  function setupScrollSpy(items, listEl) {
-    var sections = items.map(function (item) {
-      var id = item.href.replace(/^#/, '');
-      return {
-        id: id,
-        el: document.getElementById(id),
-        li: listEl.querySelector('[data-target="' + CSS.escape(id) + '"]'),
-      };
-    }).filter(function (s) { return s.el && s.li; });
+  // Position each dot at the y proportional to its heading's actual location
+  // in the article. After computing the "ideal" positions, walk top-down and
+  // push later dots down so consecutive dots are at least MIN_GAP px apart —
+  // otherwise the labels collide on hover. The list height grows if needed
+  // (the sidebar has overflow-y:auto, so it scrolls when it exceeds canvas).
+  function applySpatialLayout(items, listEl, article) {
+    var MIN_GAP = 18; // keeps room around each label even after font shrinks
+
+    var entries = [];
+    for (var i = 0; i < items.length; i++) {
+      var id = items[i].href.replace(/^#/, '');
+      var el = document.getElementById(id);
+      if (el && items[i].li) entries.push({ item: items[i], el: el });
+    }
+    if (entries.length < 2) return;
+
+    var firstY = entries[0].el.getBoundingClientRect().top + window.scrollY;
+    var articleBottom =
+      article.getBoundingClientRect().bottom + window.scrollY;
+    var range = Math.max(articleBottom - firstY, 1);
+
+    var topPad = 6;
+    var bottomPad = 18;
+    var canvas = Math.max(window.innerHeight - 180, 240);
+
+    // First pass: ideal proportional positions.
+    var tops = new Array(entries.length);
+    for (var k = 0; k < entries.length; k++) {
+      var y = entries[k].el.getBoundingClientRect().top + window.scrollY;
+      var ratio = (y - firstY) / range;
+      if (ratio < 0) ratio = 0;
+      if (ratio > 1) ratio = 1;
+      tops[k] = topPad + ratio * canvas;
+    }
+
+    // Second pass: enforce minimum gap by pushing later dots down.
+    for (var m = 1; m < tops.length; m++) {
+      if (tops[m] < tops[m - 1] + MIN_GAP) {
+        tops[m] = tops[m - 1] + MIN_GAP;
+      }
+    }
+
+    // Apply positions and size the list to fit (grows past canvas if needed).
+    for (var n = 0; n < entries.length; n++) {
+      var li = entries[n].item.li;
+      li.style.position = 'absolute';
+      li.style.top = tops[n] + 'px';
+      li.style.left = '0';
+      li.style.right = '0';
+    }
+    var lastBottom = tops[tops.length - 1] + bottomPad;
+    listEl.style.height =
+      Math.max(canvas + topPad + bottomPad, lastBottom) + 'px';
+  }
+
+  function setupScrollSpy(items) {
+    var sections = items
+      .map(function (item) {
+        var id = item.href.replace(/^#/, '');
+        return { id: id, el: document.getElementById(id), li: item.li };
+      })
+      .filter(function (s) { return s.el && s.li; });
 
     if (sections.length === 0) return;
 
     function update() {
-      // A section is "active" once its top has scrolled above ~30% of the viewport.
       var threshold = window.scrollY + window.innerHeight * 0.3;
       var activeIdx = -1;
       for (var i = 0; i < sections.length; i++) {
-        var rect = sections[i].el.getBoundingClientRect();
-        var top = rect.top + window.scrollY;
+        var top =
+          sections[i].el.getBoundingClientRect().top + window.scrollY;
         if (top <= threshold) activeIdx = i;
         else break;
       }
@@ -111,12 +167,14 @@
     var ticking = false;
     function onScroll() {
       if (!ticking) {
-        requestAnimationFrame(function () { update(); ticking = false; });
+        requestAnimationFrame(function () {
+          update();
+          ticking = false;
+        });
         ticking = true;
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
   }
 
   function init() {
@@ -132,8 +190,24 @@
 
     var listEl = buildSidebar(items, sidebar);
     tocUl.style.display = 'none';
+
+    applySpatialLayout(items, listEl, article);
     sidebar.hidden = false;
-    setupScrollSpy(items, listEl);
+    setupScrollSpy(items);
+
+    // Recompute on resize (article layout may shift).
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        applySpatialLayout(items, listEl, article);
+      }, 150);
+    });
+
+    // Re-layout after late asset loads (images, fonts) settle the heights.
+    window.addEventListener('load', function () {
+      applySpatialLayout(items, listEl, article);
+    });
   }
 
   if (document.readyState === 'loading') {

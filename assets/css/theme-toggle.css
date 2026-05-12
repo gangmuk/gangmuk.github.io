@@ -144,15 +144,10 @@
   font-size: 19px !important;
 }
 
-/* Increase font size on home page */
-.page-content {
-  font-size: 17px;
-}
-
-.page-content p,
-.page-content li {
-  font-size: 17px;
-}
+/* (Removed: a broad `.page-content p / li { font-size: 17px }` rule used to
+   live here, intended for the home page, but `.page-content` is the wrapper
+   on every page including posts. It was silently overriding `.post-content`
+   font-size changes via higher selector specificity.) */
 
 /* Dark theme for home page content */
 [data-theme="dark"] .page-content {

@@ -1,24 +1,24 @@
 .post-header {
   margin-bottom: $spacing-unit;
-  max-width: 750px; /* Match content width */
+  max-width: 650px; /* Match content width */
   margin-left: auto;
   margin-right: auto;
 }
 
 .post-title {
-  font-size: 40px;
+  font-size: 30px;
   letter-spacing: -1px;
   line-height: 1.2;
 
   font-family: $base-font-family;
 
   @include media-query($on-mobile) {
-    font-size: 34px;
+    font-size: 24px;
   }
 }
 
 .post-subtitle {
-  font-size: 26px;
+  font-size: 20px;
   letter-spacing: -1px;
   line-height: 1;
   color: $text-color;
@@ -28,7 +28,7 @@
   top: -0.3em;
 
   @include media-query($on-mobile) {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 
@@ -41,7 +41,7 @@
     margin-bottom: $spacing-unit;
     font-family: Helvetica, sans-serif;
     width: 100%;
-    max-width: 750px; /* Main content column width */
+    max-width: 650px; /* Main content column width */
     margin-left: auto;
     margin-right: auto;
     position: relative; /* Allow absolute positioning of side notes */
@@ -105,21 +105,30 @@
       font-family: Helvetica, sans-serif; /* Make headings match content font */
       font-weight: 600; /* Slightly bold */
     }
-    
+
+
     /* Existing heading sizes, which you can also adjust if needed */
+    h1 {
+      font-size: 24px;
+
+      @include media-query($on-mobile) {
+        font-size: 20px;
+      }
+    }
+
     h2 {
-      font-size: 28px; /* Reduced from 32px */
+      font-size: 22px; /* Reduced from 32px */
   
       @include media-query($on-mobile) {
-        font-size: 24px; /* Reduced from 28px */
+        font-size: 18px; /* Reduced from 28px */
       }
     }
   
     h3 {
-      font-size: 22px; /* Reduced from 26px */
+      font-size: 20px; /* Reduced from 26px */
   
       @include media-query($on-mobile) {
-        font-size: 20px; /* Reduced from 22px */
+        font-size: 16px; /* Reduced from 22px */
       }
     }
   
@@ -127,7 +136,7 @@
       font-size: 18px; /* Reduced from 20px */
   
       @include media-query($on-mobile) {
-        font-size: 16px; /* Reduced from 18px */
+        font-size: 14px; /* Reduced from 18px */
       }
     }
 
@@ -267,35 +276,39 @@ div.footnotes {
   overflow-y: auto;
   overflow-x: visible; /* labels overflow column on hover */
   font-family: Helvetica, sans-serif;
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: #555;
 
   .post-toc-list {
     list-style: none;
     margin: 0;
-    padding: 6px 0;
+    padding: 0;
     position: relative;
+    /* Height is set inline by JS to match the article range; the spine spans it. */
 
     /* Thin vertical spine line that the dots sit on. */
     &::before {
       content: "";
       position: absolute;
       left: 5px;
-      top: 10px;
-      bottom: 10px;
+      top: 6px;
+      bottom: 6px;
       width: 1px;
       background: #d0d0d0;
     }
   }
 
   .post-toc-item {
-    position: relative;
+    /* JS sets `position: absolute; top: <px>` on each item so the vertical
+       spacing matches each heading's real position in the article. */
     margin: 0;
+    line-height: 1;
 
     a {
       display: block;
-      padding: 5px 0 5px 20px;
+      padding: 0 0 0 20px;
+      min-height: 14px;
       text-decoration: none;
       color: #555;
       position: relative;
@@ -305,23 +318,38 @@ div.footnotes {
     }
   }
 
+  /* All dots are centered on the spine at x=5. left = 5 - width/2 keeps the
+     center on the line regardless of dot size. */
   .post-toc-dot {
     position: absolute;
-    left: 1px; /* sits on the spine (which is at left:5px inside .a-padding offset) */
     top: 50%;
     transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
     border-radius: 50%;
-    border: 1.5px solid #aaa;
     background: #fdfdfd; /* matches page bg so it hides the spine behind it */
     box-sizing: border-box;
+    border: 1.5px solid #aaa;
     transition: background-color 0.15s ease, border-color 0.15s ease,
                 width 0.15s ease, height 0.15s ease;
+
+    /* depth-0 default: largest */
+    width: 10px;
+    height: 10px;
+    left: 0;
   }
 
-  .post-toc-item.depth-1 .post-toc-dot { width: 6px; height: 6px; border-width: 1px; }
-  .post-toc-item.depth-2 .post-toc-dot { width: 5px; height: 5px; border-width: 1px; }
+  .post-toc-item.depth-1 .post-toc-dot {
+    width: 8px;
+    height: 8px;
+    left: 1px;
+    border-width: 1.25px;
+  }
+
+  .post-toc-item.depth-2 .post-toc-dot {
+    width: 6px;
+    height: 6px;
+    left: 2px;
+    border-width: 1px;
+  }
 
   .post-toc-item.is-passed .post-toc-dot {
     background: #888;

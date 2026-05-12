@@ -241,71 +241,123 @@ div.footnotes {
 }
 
 /* Left sidebar table of contents — populated by assets/js/post-toc.js.
-   Hidden by default (via `hidden` attr); JS removes the attr when a TOC is found.
-   Fixed position so it follows the scroll. Hidden on narrow viewports where
-   the centered .post-wrapper (max-width 1200) leaves no room beside it. */
+   Lives in its own grid column on .post so there's no chance of overlap with the
+   article body. position: sticky keeps it in view as the user scrolls. The right
+   grid column (`right`) is intentionally empty and the same width as `toc`, so
+   the centered article column stays visually centered. Below a viewport breakpoint
+   the grid collapses back to block layout and the sidebar is hidden. */
+.post {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) 160px;
+  grid-template-areas:
+    "toc header right"
+    "toc content right";
+  column-gap: 0;
+}
+
+.post-header  { grid-area: header; }
+.post-content { grid-area: content; }
+
 .post-toc {
-  position: fixed;
-  top: 200px;
-  left: calc(50vw - 600px); /* wrapper-left outer edge — gives ~50px gap to content */
-  width: 170px;
-  max-height: calc(100vh - 240px);
+  grid-area: toc;
+  position: sticky;
+  top: 140px;
+  align-self: start;
+  max-height: calc(100vh - 180px);
   overflow-y: auto;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-x: visible; /* labels overflow column on hover */
   font-family: Helvetica, sans-serif;
   font-size: 12.5px;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #555;
-  z-index: 50;
-  padding-right: 10px;
 
-  .post-toc-heading {
-    font-family: Helvetica, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #999;
-    margin: 0 0 14px 0;
-  }
-
-  ul {
+  .post-toc-list {
     list-style: none;
     margin: 0;
-    padding-left: 0;
-  }
+    padding: 6px 0;
+    position: relative;
 
-  li {
-    margin-bottom: 6px;
-    line-height: 1.4;
-  }
-
-  ul ul {
-    padding-left: 14px;
-    margin-top: 6px;
-  }
-
-  a {
-    color: #555;
-    text-decoration: none;
-
-    &:hover {
-      color: #2a7ae2;
-      text-decoration: underline;
+    /* Thin vertical spine line that the dots sit on. */
+    &::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: #d0d0d0;
     }
   }
 
-  &::-webkit-scrollbar {
-    width: 6px;
+  .post-toc-item {
+    position: relative;
+    margin: 0;
+
+    a {
+      display: block;
+      padding: 5px 0 5px 20px;
+      text-decoration: none;
+      color: #555;
+      position: relative;
+      white-space: nowrap; /* keep label on one line; overflows column on hover */
+
+      &:hover { color: #2a7ae2; }
+    }
   }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+
+  .post-toc-dot {
+    position: absolute;
+    left: 1px; /* sits on the spine (which is at left:5px inside .a-padding offset) */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #aaa;
+    background: #fdfdfd; /* matches page bg so it hides the spine behind it */
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+                width 0.15s ease, height 0.15s ease;
   }
+
+  .post-toc-item.depth-1 .post-toc-dot { width: 6px; height: 6px; border-width: 1px; }
+  .post-toc-item.depth-2 .post-toc-dot { width: 5px; height: 5px; border-width: 1px; }
+
+  .post-toc-item.is-passed .post-toc-dot {
+    background: #888;
+    border-color: #888;
+  }
+
+  .post-toc-item.is-active .post-toc-dot {
+    background: #2a7ae2;
+    border-color: #2a7ae2;
+  }
+
+  .post-toc-label {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .post-toc-item.is-active .post-toc-label {
+    color: #111;
+    font-weight: 600;
+  }
+
+  /* Reveal labels when hovering the sidebar. Add a small white shadow so they
+     stay readable when they overflow into the article area. */
+  &:hover .post-toc-label {
+    opacity: 1;
+    background: rgba(253, 253, 253, 0.92);
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar { width: 0; }  /* hide scrollbar — minimal look */
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1200px) {
+  .post { display: block; }
   .post-toc { display: none; }
 }
 

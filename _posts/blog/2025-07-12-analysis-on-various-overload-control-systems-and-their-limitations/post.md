@@ -34,7 +34,6 @@ Before going into analysis of each system, let's talk about different states of 
 Goroutine is a lightweight software thread managed by the Go runtime like C++'s `std::thread` or Python's `threading.Thread`. Goroutines are designed to be cheap to create and easy to manage, allowing developers to write concurrent programs without worrying about the underlying thread management. The Go runtime manages goroutines through a well-defined state machine. There are five primary states a goroutine can be based on its execution context.
 
 **Runnable**: The goroutine is ready to execute and is waiting in the scheduler's run queue for an available OS thread. It has all the resources it needs except CPU time.
-
 **Running**: The goroutine is currently executing on an OS thread, actively running application code.
 
 **Waiting**: The goroutine is blocked, waiting for some condition to be satisfied before it can proceed. This includes waiting for I/O, locks, channels, timers, or other synchronization primitives. It is considered as non-runnable. It is also told as "parked" in Go term.

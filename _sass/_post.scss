@@ -1,20 +1,33 @@
 .post-header {
+  display: block;
+  width: 100%;          /* fill the grid cell, then cap with max-width */
   margin-bottom: $spacing-unit;
-  max-width: 650px; /* Match content width */
+  max-width: 650px;     /* Match content width */
   margin-left: auto;
   margin-right: auto;
+  text-align: left;     /* Override any inherited centering */
+  justify-self: stretch; /* Be explicit for grid item behavior */
+  box-sizing: border-box;
 }
 
 .post-title {
+  display: block;
+  width: 100%;
   font-size: 30px;
   letter-spacing: -1px;
   line-height: 1.2;
-
+  text-align: left;
   font-family: $base-font-family;
 
   @include media-query($on-mobile) {
     font-size: 24px;
   }
+}
+
+.post-meta {
+  display: block;
+  width: 100%;
+  text-align: left;
 }
 
 .post-subtitle {

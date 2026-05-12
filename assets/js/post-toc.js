@@ -177,19 +177,43 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  // Fallback when no manual <ul> TOC is present: harvest <h2>/<h3>/<h4>
+  // elements with id attributes (kramdown auto-generates IDs) and build a
+  // flat TOC list directly. h2 → depth 0, h3 → depth 1, h4 → depth 2.
+  function buildAutoToc(article) {
+    var headings = article.querySelectorAll('h2[id], h3[id], h4[id]');
+    var items = [];
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      var level = parseInt(h.tagName.charAt(1), 10);
+      items.push({
+        href: '#' + h.id,
+        label: h.textContent.trim(),
+        depth: level - 2,
+      });
+    }
+    return items;
+  }
+
   function init() {
     var article = document.querySelector('.post-content');
     var sidebar = document.querySelector('.post-toc');
     if (!article || !sidebar) return;
 
+    var items;
     var tocUl = findTocUl(article);
-    if (!tocUl) return;
+    if (tocUl) {
+      items = flattenToc(tocUl, 0, []);
+    } else {
+      items = buildAutoToc(article);
+      tocUl = null; // no inline list to hide
+    }
 
-    var items = flattenToc(tocUl, 0, []);
-    if (items.length === 0) return;
+    // Only show the sidebar when there are enough headings to warrant one.
+    if (items.length < 2) return;
 
     var listEl = buildSidebar(items, sidebar);
-    tocUl.style.display = 'none';
+    if (tocUl) tocUl.style.display = 'none';
 
     applySpatialLayout(items, listEl, article);
     sidebar.hidden = false;

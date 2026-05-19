@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Random notes during James Mickins talk at UIUC"
+title: "Notes during James Mickins talk at UIUC"
 tags: [non-technical, random_notes]
 date: 2025-04-09
 category: notes

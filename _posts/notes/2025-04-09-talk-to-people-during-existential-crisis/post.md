@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "Notes during James Mickins talk at UIUC"
+title: "Talking to people is the first solution you should try when experiencing existential crisis in phd life."
 tags: [non-technical, random_notes]
 date: 2025-04-09
 category: notes
 ---
+
+This is a sparse note that I took during James Mickins' talk at UIUC. He is hilarious and great speaker who knows how to grab the audience's attention. As reference, it was non-technical talk.
 
 You need to talk to your advisor about existential concern early 
 

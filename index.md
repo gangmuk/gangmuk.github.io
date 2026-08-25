@@ -30,7 +30,7 @@ My current research interest is making infrastructure more intelligent. I aim to
 </p>
 <p>
 
-My research are/were LLM inference request routing system (Lodestar), Multi-cluster request routing system for microservice applications (SLATE), Verification for cluster management system (Kivi), and GPU sharing framework for DNN training (Zico).
+My research are/were request level resource scheduling for online LLM inference and RL post training for LLM, multi-cluster request routing system for microservice applications (SLATE), verification for cluster management system (Kivi), and GPU sharing for DNN training (Zico).
 
 </p>
 

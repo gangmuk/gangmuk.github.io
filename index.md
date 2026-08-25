@@ -112,12 +112,12 @@ Most likely, you can find me on the 3rd floor at Siebel Center for Computer Scie
     </div>
   </div>
 
-  <div class="news-item">
+  <!-- <div class="news-item">
     <div class="news-date">May, 2026</div>
     <div class="news-content">
-      I have been building self-optimizing LLM inference infrastructure with the amazing team, Tandemn. It is fully open-source. Check it out! <a href="https://github.com/Tandemn-Labs/tandemn-system">Tandemn-system</a>.
+      I have been building self-optimizing LLM inference infrastructure with Tandemn. It is fully open-source. Check it out! <a href="https://github.com/Tandemn-Labs/tandemn-system">Tandemn-system</a>.
     </div>
-  </div>
+  </div> -->
 
   <div class="news-item">
     <div class="news-date">Jul, 2025</div>

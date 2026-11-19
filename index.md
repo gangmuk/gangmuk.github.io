@@ -413,5 +413,5 @@ I love doing all different kinds of sports such as basketball, running, swimming
 <br>
 
 ### Coffee
-I love coffee, especially light-roasted coffee brewed as pour-over. The cafes that have impressed me most are Gwang Coffee (Jeonju, Korea), Coffee Place (Gyeongju, Korea), and Kuraso Coffee (Kyoto, Japan). As for beans, I've been consistently impressed by almost everything from Sey Coffee (Brooklyn, NY), some beans from Metric (Chicago, IL), and all of the beans from Kuraso (Kyoto, Japan). If you know of any impressive cafe or roastery, please email me!
+I love coffee, especially light-roasted coffee brewed as pour-over. Some of the roasteries that I really like are Sey Coffee (Brooklyn, NY), DAK Coffee Roasters (Rotterdam, Netherlands), Coffee Place (Gyeongju, Korea), Kuraso Coffee (Kyoto, Japan), Gwang Coffee (Jeonju, Korea), and Metric (Chicago, IL). If you know of a great cafe or roastery, please email me!
 <br>

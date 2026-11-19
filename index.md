@@ -19,11 +19,11 @@ h3 {
 </style>
 
 <p>
-I am a fourth-year Ph.D. student in the Computer Science Department at the University of Illinois Urbana-Champaign, where I work with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a> and collaborate closely with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. Before that, I earned my B.S. and M.S. in Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
+I am a fifth-year Ph.D. student in the Computer Science Department at the University of Illinois Urbana-Champaign, where I work with Professor <a href="https://pbg.cs.illinois.edu">Brighten Godfrey</a> and collaborate closely with Professor <a href="https://radhikam.web.illinois.edu/">Radhika Mittal</a>. Before that, I earned my B.S. and M.S. in Computer Science at UNIST, South Korea, working with Professor <a href="https://sites.google.com/site/myeongjae/">Myeongjae Jeon</a>.
 </p>
 
 <p>
-I am broadly interested in systems and networking. My current research focuses on making infrastructure more intelligent: by making it application-aware, I aim to improve application performance, reduce costs, and enhance reliability. Concretely, I work on request-level resource scheduling for online LLM inference and RL post-training of LLMs. I have also worked on multi-cluster request routing for microservice applications and verification for cluster management systems.
+I am broadly interested in systems and networking. My current research focuses on making infrastructure more intelligent. By making it application-aware, I aim to improve application performance, reduce costs, and enhance reliability. I work on request-level resource scheduling for LLM inference serving and post-training. I have also worked on multi-cluster request routing for microservice applications and verification for cluster management systems.
 </p>
 
 <p>

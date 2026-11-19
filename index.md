@@ -212,7 +212,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
 .experience-date {
   min-width: 180px;
   padding-right: 20px;
-  color: #666;
+  color: #000;
   flex-shrink: 0;
 }
 .experience-details {
@@ -233,7 +233,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
 <div class="experience-list">
 
   <div class="experience-item">
-    <div class="experience-date">May 2026 - Present</div>
+    <div class="experience-date">May 2026 - Aug 2026</div>
     <div class="experience-details">
       <div class="experience-company">Microsoft Research <a href="https://www.microsoft.com/en-us/research/group/research-software-engineering-rise/">RiSE</a> Group, Research Intern</div>
       <!-- <div class="experience-role">Research Intern</div> -->
@@ -242,7 +242,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   </div>
 
   <div class="experience-item">
-    <div class="experience-date">Aug 2025 - Present</div>
+    <div class="experience-date">Aug 2025 - Sep 2026</div>
     <div class="experience-details">
       <div class="experience-role"><a href="https://tandemn.com/">Tandemn</a>, Research engineer</div>
       <!-- <div class="experience-company">Tandemn</div> -->
@@ -319,7 +319,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">HotNets'26</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://conferences.sigcomm.org/hotnets/2026/program.html">The Cloud Should Adapt to Its Applications, Not the Other Way Around!</a></div>
+      <div class="pub-title">The Cloud Should Adapt to Its Applications, Not the Other Way Around! <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://conferences.sigcomm.org/hotnets/2026/program.html">paper</a>]</span></div>
       <div class="pub-authors">Sachin Ashok<sup>*</sup>, Karuna Grewal<sup>*</sup>, Talha Waheed, <ins>Gangmuk Lim</ins>, Gerard Matthew, Aditya S Prerepa, P. Brighten Godfrey, Justin Hsu, Radhika Mittal</div>
       <div class="pub-note">(* co-first author)</div>
     </div>
@@ -328,7 +328,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">arXiv</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://arxiv.org/abs/2610.24355">Koi: Evidence-Guided, Self-Calibrating Planning for Multi-Cloud, Heterogeneous LLM Inference Fleets</a> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://github.com/Tandemn-Labs/tandemn-koi">code</a>] [<a href="https://tandemn.com/blog/koi">blog</a>]</span></div>
+      <div class="pub-title">Koi: Evidence-Guided, Self-Calibrating Planning for Multi-Cloud, Heterogeneous LLM Inference Fleets <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://arxiv.org/abs/2610.24355">paper</a>] [<a href="https://github.com/Tandemn-Labs/tandemn-koi">code</a>] [<a href="https://tandemn.com/blog/koi">blog</a>]</span></div>
       <div class="pub-authors">Mankeerat Sidhu<sup>*</sup>, <ins>Gangmuk Lim</ins><sup>*</sup>, Hetarth Chopra, Maximillian Eisenberg, Quan Hao Ng, Aryan Gosaliya, Shu Liu, Luka Govedič, Jiaxin Shan, Hongkuan Zhou, Vikram Sharma Mailthody, P. Brighten Godfrey, Ion Stoica</div>
       <div class="pub-conf-details">arXiv preprint arXiv:2610.24355, 2026.</div>
       <div class="pub-note">(* co-first author)</div>
@@ -338,7 +338,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">arXiv</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://arxiv.org/abs/2606.00946">Lodestar: An Online-Learning LLM Inference Router</a> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://github.com/gangmuk/Lodestar">code</a>]</span></div>
+      <div class="pub-title">Lodestar: An Online-Learning LLM Inference Router <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://arxiv.org/abs/2606.00946">paper</a>] [<a href="https://github.com/gangmuk/Lodestar">code</a>]</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Wanyu Zhao, Brighten Godfrey, Jiaxin Shan, Le Xu, Liguang Xie</div>
       <div class="pub-conf-details">arXiv preprint arXiv:2606.00946, 2026.</div>
     </div>
@@ -347,7 +347,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">NSDI'26</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://www.usenix.org/conference/nsdi26/presentation/lim">SLATE: Service Layer Traffic Engineering</a> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://github.com/ServiceLayerNetworking/SLATE">code</a>]</span></div>
+      <div class="pub-title">SLATE: Service Layer Traffic Engineering <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://www.usenix.org/conference/nsdi26/presentation/lim">paper</a>] [<a href="https://github.com/ServiceLayerNetworking/SLATE">code</a>]</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Aditya Prerepa, Brighten Godfrey, Radhika Mittal</div>
       <div class="pub-conf-details">23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2026.</div>
     </div>
@@ -356,7 +356,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">arXiv</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://arxiv.org/abs/2504.03648">AIBrix: Towards Scalable, Cost-Effective Large Language Model Inference Infrastructure</a> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://github.com/vllm-project/aibrix">code</a>]</span></div>
+      <div class="pub-title">AIBrix: Towards Scalable, Cost-Effective Large Language Model Inference Infrastructure <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://arxiv.org/abs/2504.03648">paper</a>] [<a href="https://github.com/vllm-project/aibrix">code</a>]</span></div>
       <div class="pub-authors">AIBrix team</div>
       <div class="pub-conf-details">arXiv:2504.03648, March 2025.</div>
     </div>
@@ -365,7 +365,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">HotNets'24</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://conferences.sigcomm.org/hotnets/2024/papers/hotnets24-107.pdf">Opportunities and Challenges in Service Layer Traffic Engineering</a></div>
+      <div class="pub-title">Opportunities and Challenges in Service Layer Traffic Engineering <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://conferences.sigcomm.org/hotnets/2024/papers/hotnets24-107.pdf">paper</a>]</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
       <!-- <div class="pub-conf-details">In Proceedings of the 23rd ACM Workshop on Hot Topics in Networks (HotNets'24), Irvine, California, November 2024.</div> -->
       <div class="pub-note">(* co-first author)</div>
@@ -375,7 +375,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">USENIX ATC'24</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">Kivi: Verification for Cluster Management</a> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://github.com/bingzheliu/Kivi">code</a>]</span></div>
+      <div class="pub-title">Kivi: Verification for Cluster Management <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://www.usenix.org/conference/atc24/presentation/liu-bingzhe">paper</a>] [<a href="https://github.com/bingzheliu/Kivi">code</a>]</span></div>
       <div class="pub-authors">Bingzhe Liu, <ins>Gangmuk Lim</ins>, Ryan Beckett, P. Brighten Godfrey.</div>
       <!-- <div class="pub-conf-details">In Proceedings of the 2024 USENIX Annual Technical Conference (USENIX ATC'24), Santa Clara, CA, July 2024.</div> -->
     </div>
@@ -384,7 +384,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">USENIX ATC'21</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://www.usenix.org/conference/atc21/presentation/lim">Zico: Efficient GPU Memory Sharing for Concurrent DNN Training</a></div>
+      <div class="pub-title">Zico: Efficient GPU Memory Sharing for Concurrent DNN Training <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://www.usenix.org/conference/atc21/presentation/lim">paper</a>]</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Jeongseob Ahn, Wencong Xiao, Youngjin Kwon, Myeongjae Jeon.</div>
       <!-- <div class="pub-conf-details">In Proceedings of the 2021 USENIX Annual Technical Conference (USENIX ATC'21), July 2021.</div> -->
     </div>
@@ -393,7 +393,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="pub-item">
     <div class="pub-venue">ICDE'20</div>
     <div class="pub-details">
-      <div class="pub-title"><a href="https://arxiv.org/abs/1906.00228">Approximate Quantiles for Data Center Telemetry Monitoring</a> <span style="font-weight: normal; font-size: 0.9em;">(short paper)</span></div>
+      <div class="pub-title">Approximate Quantiles for Data Center Telemetry Monitoring <span style="font-weight: normal; font-size: 0.9em;">(short paper)</span> <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://arxiv.org/abs/1906.00228">paper</a>]</span></div>
       <div class="pub-authors"><ins>Gangmuk Lim</ins>, Myeongjae Jeon, Stavros Volos, Mohamed Hassan, Ze Jin.</div>
       <!-- <div class="pub-conf-details">In Proceedings of the 36th IEEE International Conference on Data Engineering (ICDE'20), Dallas, Texas, April 2020.</div> -->
     </div>
@@ -409,9 +409,9 @@ The places I have been are from Japan, Thailand, India, Nepal, Myammar, Cambodia
 <br>
 
 ### Sports
-I love doing all different kinds of sports such as basketball, running, swimming, freediving, tennis, and more. So, half of my joints have been gone...
+I love doing all different kinds of sports such as basketball, freediving, tennis, swimming, and more. So, half of my joints already have been gone...
 <br>
 
 ### Coffee
-I love coffee, especially light-roasted coffee brewed as pour-over. Some of the roasteries that I really like are Sey Coffee (Brooklyn, NY), DAK Coffee Roasters (Rotterdam, Netherlands), Coffee Place (Gyeongju, Korea), Kuraso Coffee (Kyoto, Japan), Gwang Coffee (Jeonju, Korea), and Metric (Chicago, IL). If you know of a great cafe or roastery, please email me!
+I love coffee, especially light-roasted coffee brewed as pour-over. Some of the roasteries that I really like are Sey Coffee (NYC, NY), DAK Coffee Roasters (Rotterdam, Netherlands), Coffee Place (Gyeongju, Korea), Kuraso Coffee (Kyoto, Japan), Gwang Coffee (Jeonju, Korea), and Metric (Chicago, IL). If you know of a great cafe or roastery, please email me!
 <br>

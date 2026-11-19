@@ -348,8 +348,9 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
     <div class="pub-venue">NSDI'26</div>
     <div class="pub-details">
       <div class="pub-title">SLATE: Service Layer Traffic Engineering <span style="font-weight: normal; font-size: 0.9em;">[<a href="https://www.usenix.org/conference/nsdi26/presentation/lim">paper</a>] [<a href="https://github.com/ServiceLayerNetworking/SLATE">code</a>]</span></div>
-      <div class="pub-authors"><ins>Gangmuk Lim</ins>, Aditya Prerepa, Brighten Godfrey, Radhika Mittal</div>
+      <div class="pub-authors"><ins>Gangmuk Lim</ins><sup>*</sup>, Aditya Prerepa<sup>*</sup>, Brighten Godfrey, Radhika Mittal</div>
       <div class="pub-conf-details">23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2026.</div>
+      <div class="pub-note">(* co-first author)</div>
     </div>
   </div>
 

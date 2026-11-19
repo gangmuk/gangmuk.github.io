@@ -23,7 +23,7 @@ I am a fifth-year Ph.D. student in the Computer Science Department at the Univer
 </p>
 
 <p>
-I am broadly interested in systems and networking. My current research focuses on making infrastructure more intelligent. By making it application-aware, I aim to improve application performance, reduce costs, and enhance reliability. I work on request-level resource scheduling for LLM inference serving and post-training. I have also worked on multi-cluster request routing for microservice applications and verification for cluster management systems.
+I am broadly interested in distributed systems and networking. My current research focuses on making infrastructure more intelligent. By making it application-aware, I aim to improve application performance, reduce costs, and enhance reliability. I work on request-level resource scheduling for LLM inference serving and post-training. I have also worked on multi-cluster request routing for microservice applications and verification for cluster management systems.
 </p>
 
 <p>

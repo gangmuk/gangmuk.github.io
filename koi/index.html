@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koi: Self-Calibrating Planning for LLM Inference Fleets</title>
+<meta name="description" content="Koi plans the deployment of every LLM inference job on a heterogeneous, multi-cloud GPU fleet, and learns from every deployment it runs why it performed as it did.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15171b; --ink2:#4a4f57; --ink3:#7b818a; --line:#e4e6ea; --wash:#f6f7f9; --bg:#fff;
+  --koi:#4410FF; --koi-w:#eeeaff; --koi-l:#a993ff;
+  --learn:#00B050; --learn-d:#14794a; --learn-w:#e4f6eb;
+  --llm:#FFC000; --llm-w:#fff5d6;
+  --mech:#ED7D31; --mech-w:#fdefe5;
+  --bad:#C62828; --bad-w:#fcecec;
+  --gray:#9aa0a8; --gray-l:#d3d6db;
+  --chat:#1FA2D6; --batch1:#7030A0; --agent1:#00B050; --batch2:#DD6AB5; --agent2:#FFC000;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--koi)}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+.wide{max-width:1040px;margin:0 auto;padding:0 20px}
+button{font:inherit}
+
+header{padding:56px 0 0}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:0 0 10px}
+h1{font-size:48px;line-height:1.05;margin:0 0 8px;letter-spacing:-.025em;font-weight:800}
+.sub{font-size:22px;line-height:1.35;font-weight:600;margin:0 0 18px;letter-spacing:-.01em}
+.authors{font-size:16px;color:var(--ink2);margin:0}
+.affil{font-size:14px;color:var(--ink3);margin:4px 0 18px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.btn{display:inline-flex;align-items:center;padding:7px 15px;border-radius:999px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;background:#fff}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.off{border-color:var(--line);color:var(--ink3)}
+ol.teaser{list-style:none;padding:0;margin:0 0 24px;counter-reset:t}
+ol.teaser li{counter-increment:t;position:relative;padding:0 0 10px 42px;font-size:18px}
+ol.teaser li::before{content:counter(t);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.teaser a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gray-l)}
+ol.teaser a:hover{border-color:var(--ink)}
+.intro{font-size:20px;line-height:1.5;margin:0 0 26px;max-width:720px}
+.card .m{color:var(--ink);font-weight:600;font-size:13.5px}
+.cards-note{font-size:13px;color:var(--ink3);margin:2px 0 0}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 6px}
+.card{display:block;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.card:hover{border-color:var(--ink)}
+.card b{display:block;font-size:28px;line-height:1.1;letter-spacing:-.02em}
+.card span{display:block;font-size:13px;line-height:1.35;color:var(--ink2);margin-top:4px}
+
+section{padding:44px 0 0}
+.secno{font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin:0 0 4px}
+h2{font-size:28px;line-height:1.2;margin:0 0 8px;letter-spacing:-.015em}
+.lead{font-size:18px;margin:0 0 4px}
+
+.fig{border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:14px 0 0;background:#fff}
+.fig-top{display:flex;justify-content:flex-end;margin:0 0 4px}
+.pill{font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+.hint{font-size:13px;color:var(--ink3);margin-right:auto}
+.stage{cursor:pointer;outline:none;transition:filter .15s}
+.stage:hover,.stage:focus-visible{filter:drop-shadow(0 2px 7px rgba(20,23,27,.18))}
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 0}
+.diff[hidden]{display:none}
+.diff>div{border-radius:10px;padding:10px 14px;background:var(--wash)}
+.diff>div.k{background:var(--koi-w)}
+.diff p{margin:0;font-size:14.5px;line-height:1.45}
+.diff p.dk{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.diff .k p.dk{color:var(--koi)}
+@media (max-width:620px){.diff{grid-template-columns:1fr}.hint{display:none}}
+.pill.meas{border-color:#b9e3c8;background:var(--learn-w);color:#14592f}
+.scroll{overflow-x:auto}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:Inter,system-ui,sans-serif}
+.cap{font-size:15px;color:var(--ink2);margin:10px 0 0;min-height:48px}
+.fig>.cap{margin:2px 0 12px}
+.cap b{color:var(--ink)}
+
+/* player bar */
+.pbar{display:flex;align-items:center;gap:8px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.pbtn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:12px;line-height:1;color:var(--ink);flex:none}
+.pbtn:hover{border-color:var(--ink3)}
+.chaps{display:flex;gap:6px;flex:1;min-width:0}
+.chap{flex:1;min-width:0;border:0;background:none;padding:0;cursor:pointer;text-align:left}
+.chap .cf{display:block;height:3px;border-radius:2px;background:var(--line);margin-bottom:5px;transition:background .3s}
+.chap .cl{display:block;font-size:12.5px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chap.done .cf{background:var(--gray)}
+.chap.on .cf{background:var(--ink)}
+.chap.on .cl{color:var(--ink);font-weight:600}
+
+.mpick{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px}.mpick button{font-size:14px;padding:6px 13px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}.mpick button[aria-pressed="true"]{border-color:var(--mech);background:var(--mech-w);font-weight:700}
+.pair{max-width:1240px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;column-gap:28px}
+.pair>section{min-width:0;display:grid;grid-row:span 2;grid-template-rows:subgrid}
+.narrow svg{min-width:0!important}
+@media (max-width:1000px){.pair{grid-template-columns:1fr}.pair>section{display:block;grid-row:auto}}
+.rgrid{display:grid;grid-template-columns:var(--rcols,repeat(4,1fr));gap:14px}
+.rgrid>*{min-width:0}
+.rt{font-size:16px;font-weight:700;margin:0 0 2px}
+.legend{display:flex;gap:12px;font-size:14px;color:var(--ink2);margin:0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+
+pre.bib{background:var(--wash);border-radius:10px;padding:14px 16px;font-size:13.5px;overflow:auto;line-height:1.5;margin:0 0 8px}
+.cbtn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 11px;font-size:14px;cursor:pointer}
+footer{padding:28px 0 56px;color:var(--ink3);font-size:13.5px;border-top:1px solid var(--line);margin-top:44px}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:12.5px;padding:5px 8px;border-radius:6px;opacity:0;transition:opacity .12s;z-index:10}
+
+@media (max-width:820px){
+  h1{font-size:38px}.sub{font-size:19px}
+  .cards,.rgrid{grid-template-columns:repeat(2,1fr)}
+  .scroll svg{min-width:760px}
+  .chap .cl{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="tip" role="tooltip"></div>
+
+<header class="wrap">
+  <p class="kicker"><a href="/" style="color:inherit;text-decoration:none">Gangmuk Lim</a> · Project page</p>
+  <h1>Koi</h1>
+  <p class="sub">Evidence-guided, self-calibrating planning for multi-cloud, heterogeneous LLM inference fleets</p>
+  <p class="authors">Mankeerat Sidhu<sup>1*</sup>, Gangmuk Lim<sup>2*</sup>, Hetarth Chopra<sup>1</sup>, Maximillian Eisenberg<sup>1</sup>, Quan Hao Ng<sup>1</sup>, Aryan Gosaliya<sup>1</sup>, Shu Liu<sup>3</sup>, Luka Govedič<sup>4</sup>, Jiaxin Shan<sup>5</sup>, Hongkuan Zhou<sup>6</sup>, Vikram Sharma Mailthody<sup>6</sup>, P. Brighten Godfrey<sup>2</sup>, Ion Stoica<sup>3</sup></p>
+  <p class="affil"><sup>1</sup>Tandemn · <sup>2</sup>UIUC · <sup>3</sup>UC Berkeley · <sup>4</sup>NYU · <sup>5</sup>ByteDance · <sup>6</sup>NVIDIA &nbsp;·&nbsp; *co-first authors</p>
+  <div class="btns"><a class="btn dark" href="https://arxiv.org/abs/2610.24355">Paper (arXiv)</a><a class="btn" href="https://github.com/Tandemn-Labs/tandemn-koi">Code (GitHub)</a></div>
+  <p class="intro">Planning LLM inference across clouds and GPU types means choosing deployments no one has run before. Koi treats every deployment it runs as an experiment that explains <em>why</em> it performed as it did, and uses that answer for every job it plans next.</p>
+  
+</header>
+
+<section id="results">
+  <div class="wrap"><p class="secno">Results</p><h2>Heterogeneous cluster: 104 GPUs, three regions, three hours</h2>
+    <p class="lead">H100, A100 and RTX PRO 6000 GPUs in three Google Cloud regions; 25 online and batch workloads over ten models. Every planner gets the same snapshots, catalog, checks and language model.</p></div>
+  <div class="wide"><div class="fig" id="f5">
+    <div class="rgrid">
+      <div><p class="rt">Goodput (tok/s)</p><svg id="r-good" viewBox="0 0 300 232"></svg></div>
+      <div><p class="rt">Online SLO met (%)</p><div class="legend"><span><i style="background:#555b63"></i>TTFT</span><span><i style="background:#c3c7cd"></i>TPOT</span></div><svg id="r-slo" viewBox="0 0 300 216"></svg></div>
+      <div><p class="rt">Cost per token (10⁻⁴ $)</p><svg id="r-cost" viewBox="0 0 300 232"></svg></div>
+      <div><p class="rt">Ablation: goodput (tok/s)</p><svg id="r-abl" viewBox="0 0 400 232"></svg></div>
+    </div>
+    <p class="cap"><b>1.18× the goodput of the strongest baseline (OpenEvolve) at 20% lower cost per token.</b> Goodput counts only output that meets its SLO. The ablation is a 3-hour simulation: a GPT-5.6 planner with no tools and no memory across ticks gets 71% less goodput than Koi. Koi loses 44% when it stops learning from new runs, and 39% without its causal graph. In 400- and 800-GPU simulations, Koi improves goodput by up to 45% and lowers cost per token by up to 31%.</p>
+  </div></div>
+</section>
+
+
+<section id="flex">
+  <div class="wrap"><p class="secno">1 · What Koi does</p><h2>One hour on the same fleet: a fixed model vs Koi</h2>
+    <p class="lead">A fixed rule repeats its mistakes. Koi learns from every job, acts on rising SLO risk, and tries what it is unsure about.</p></div>
+  <div class="wide"><div class="fig" id="f0">
+    <div class="fig-top"><span class="pill">Illustrative</span></div>
+    <p class="cap" id="f0-cap" aria-live="polite"></p>
+    <div class="scroll"><svg id="f0-svg" viewBox="0 0 1000 624" role="img" aria-label="One hour on the same fleet, planned by a fixed analytical model and by Koi"></svg></div>
+  </div></div>
+</section>
+
+
+<section id="system">
+  <div class="wrap"><p class="secno">2 · How it works</p><h2>Inside one tick of the five-minute loop</h2>
+    <p class="lead">Why was batch job 2 slow, and what does that mean for a job that has never run?</p></div>
+  <div class="wide"><div class="fig" id="f1">
+    <div class="fig-top"><span class="hint">Click a stage to pause on it and compare with a typical planner</span><span class="pill">Illustrative</span></div>
+    <p class="cap" id="f1-cap" aria-live="polite"></p>
+    <div class="scroll"><svg id="f1-svg" viewBox="0 0 1000 488" role="img" aria-label="Inside one tick of Koi's loop: observe, learn, update, plan"></svg></div>
+    <div class="diff" id="f1-diff" hidden><div><p class="dk">Typical planner</p><p id="f1-do"></p></div><div class="k"><p class="dk">Koi</p><p id="f1-dk"></p></div></div>
+  </div></div>
+</section>
+
+<section id="hard">
+  <div class="wrap"><p class="secno">3 · Why it is hard</p><h2>One job, six deployments</h2>
+    <p class="lead">How a job is deployed decides its throughput and cost, for a given workload (here, 2,048-token prompts and 512-token outputs). A planner must choose this for every job at once, mostly for deployments it has never run. (Yes, the A10G is an old GPU, but the same idea holds on newer GPUs too!)</p></div>
+  <div class="wide"><div class="fig" id="f2">
+    <div class="fig-top"><span class="pill meas">Measured · from the paper</span></div>
+    <p class="cap" id="f2-cap" aria-live="polite"></p>
+    <div class="scroll"><svg id="f2-svg" viewBox="0 0 1000 340" role="img" aria-label="Six deployments of one job: throughput and cost"></svg></div>
+  </div></div>
+</section>
+
+<div class="pair">
+<section id="why">
+  <div class="phead"><p class="secno">4 · The insight</p><h2>Same E2E performance, different cause</h2>
+    <p class="lead">Search methods keep only the end-to-end score. Koi also measures what limits each deployment.</p></div>
+  <div class="fig" id="f3">
+    <div class="fig-top"><span class="pill">Illustrative</span></div>
+    <p class="cap" id="f3-cap" aria-live="polite"></p>
+    <div class="scroll narrow"><svg id="f3-svg" viewBox="0 0 500 700" role="img" aria-label="Two deployments with the same throughput and different causes"></svg></div>
+  </div>
+</section>
+
+<section id="test">
+  <div class="phead"><p class="secno">5 · The mechanism</p><h2>Every deployment is a test</h2>
+    <p class="lead">Each running deployment tests the mechanism that chose it: did the mediator and the outcome both behave as predicted?</p></div>
+  <div class="fig" id="f4">
+    <div class="fig-top"><span class="pill">Illustrative</span></div>
+    <p class="cap" id="f4-cap" aria-live="polite"></p>
+    <div class="mpick" id="f4-pick" role="group" aria-label="Choose a mechanism to test"></div>
+    <div class="scroll narrow"><svg id="f4-svg" viewBox="0 0 500 748" role="img" aria-label="One mechanism tested by one deployment: the four possible results, with what Koi and an outcome-only learner conclude in each"></svg></div>
+  </div>
+</section>
+</div>
+
+
+
+<section id="cite">
+  <div class="wrap"><h2>Citation</h2>
+<pre class="bib" id="bib">@article{sidhu2026koi,
+  title   = {Koi: Evidence-Guided, Self-Calibrating Planning for
+             Multi-Cloud, Heterogeneous LLM Inference Fleets},
+  author  = {Sidhu, Mankeerat and Lim, Gangmuk and Chopra, Hetarth and
+             Eisenberg, Maximillian and Ng, Quan Hao and Gosaliya, Aryan and
+             Liu, Shu and Govedi{\v{c}}, Luka and Shan, Jiaxin and
+             Zhou, Hongkuan and Mailthody, Vikram Sharma and
+             Godfrey, P. Brighten and Stoica, Ion},
+  journal = {arXiv preprint arXiv:2610.24355},
+  year    = {2026}
+}</pre>
+    <button class="cbtn" id="copybib">Copy BibTeX</button></div>
+</section>
+
+<footer><div class="wrap"><em>Measured</em> figures use the paper's numbers; <em>Illustrative</em> figures explain the mechanism with made-up values. · <a href="/">gangmuk.github.io</a></div></footer>
+
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+const V = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const C = {}; ['ink','ink2','ink3','line','wash','koi','koi-w','koi-l','learn','learn-d','learn-w','llm','llm-w','mech','mech-w','bad','bad-w','gray','gray-l','chat','batch1','agent1','batch2','agent2'].forEach(k => C[k] = V('--' + k));
+const $ = id => document.getElementById(id);
+function S(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in (a || {})) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+function T(p, x, y, s, a) { const t = S('text', Object.assign({x, y, 'font-size': 12, fill: C.ink}, a || {}), p); t.textContent = s; return t; }
+function E(tag, cls, p, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; if (p) p.appendChild(e); return e; }
+const ease = p => p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+const lerp = (a, b, p) => a + (b - a) * p;
+const fmt = n => n.toLocaleString('en-US');
+const op = (el, v) => el.setAttribute('opacity', v);
+function arrowDefs(svg, id, color) { const d = S('defs', {}, svg); const m = S('marker', {id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse'}, d); S('path', {d: 'M0,0 L10,5 L0,10 z', fill: color}, m); return d; }
+function colBar(g, x, y0, w, h, fill) { h = Math.max(h, .01); const r = Math.min(4, h); return S('path', {d: `M${x},${y0} v${-(h - r)} q0,${-r} ${r},${-r} h${w - 2 * r} q${r},0 ${r},${r} v${h - r} z`, fill}, g); }
+function rowBarD(x0, y, w, h) { w = Math.max(w, .01); const r = Math.min(4, w); return `M${x0},${y} h${w - r} q${r},0 ${r},${r} v${h - 2 * r} q0,${r} ${-r},${r} h${-(w - r)} z`; }
+const tip = $('tip');
+function bindTip(el, text) { el.addEventListener('mousemove', ev => { tip.textContent = text; tip.style.opacity = 1; tip.style.left = (ev.clientX + 12) + 'px'; tip.style.top = (ev.clientY + 12) + 'px'; }); el.addEventListener('mouseleave', () => tip.style.opacity = 0); }
+
+/* ---------- Player: autoplays a figure's scenes like a short video ---------- */
+const CANCEL = Symbol('cancel');
+class Player {
+  constructor(fig, scenes, reset, opt) {
+    this.scenes = scenes; this.reset = reset; this.gen = 0; this.paused = false; this.vis = false; this.started = false; this.opt = opt || {};
+    const bar = E('div', 'pbar', fig);
+    this.pb = E('button', 'pbtn', bar, '❚❚'); this.pb.setAttribute('aria-label', 'Pause'); this.pb.onclick = () => this.toggle();
+    const rb = E('button', 'pbtn', bar, '↺'); rb.setAttribute('aria-label', 'Replay'); rb.onclick = () => this.jump(0);
+    const ch = E('div', 'chaps', bar);
+    this.ch = scenes.map((s, i) => { const b = E('button', 'chap', ch, `<span class="cf"></span><span class="cl">${s.name}</span>`); b.onclick = () => this.jump(i); return b; });
+    this.cap = fig.querySelector('.cap'); this.ready = this.cap ? this.collect() : Promise.resolve();
+    new IntersectionObserver(es => es.forEach(e => { this.vis = e.isIntersecting; if (this.vis && !this.started) { this.started = true; this.ready.then(() => this.jump(RM ? scenes.length : 0)); } }), {threshold: .3}).observe(fig);
+  }
+  async collect() {
+    const cap = this.cap, seen = new Set(), mo = new MutationObserver(() => { if (cap.innerHTML) seen.add(cap.innerHTML); });
+    mo.observe(cap, {childList: true, characterData: true, subtree: true});
+    const g = ++this.gen; this.reset();
+    try { for (const sc of this.scenes) await sc.run(this.ctx(g, true)); } catch (e) { if (e !== CANCEL) throw e; }
+    await Promise.resolve(); mo.disconnect(); this.reset(); this.caps = [...seen];
+    let w = 0; const fit = () => { if (cap.clientWidth === w) return; w = cap.clientWidth;
+      const m = cap.cloneNode(false); m.removeAttribute('id'); m.removeAttribute('aria-live'); m.style.cssText = `position:absolute;visibility:hidden;left:-9999px;top:0;width:${w}px;min-height:0`;
+      document.body.appendChild(m); let h = 0; for (const t of this.caps) { m.innerHTML = t; h = Math.max(h, m.offsetHeight); } m.remove(); cap.style.minHeight = h + 'px'; };
+    fit(); new ResizeObserver(fit).observe(cap); document.fonts.ready.then(() => { w = 0; fit(); });
+  }
+  toggle() { this.paused = !this.paused; this.pb.innerHTML = this.paused ? '▶' : '❚❚'; this.pb.setAttribute('aria-label', this.paused ? 'Play' : 'Pause'); }
+  mark(i) { this.ch.forEach((b, k) => b.className = 'chap' + (k < i ? ' done' : k === i ? ' on' : '')); }
+  ctx(g, fast) {
+    const P = this;
+    const run = (ms, fn) => new Promise((res, rej) => {
+      if (fast || RM) { if (g !== P.gen) return rej(CANCEL); if (fn) fn(1, 1); return res(); }
+      let el = 0, last = performance.now();
+      const f = now => { if (g !== P.gen) return rej(CANCEL); if (!P.paused && P.vis) el += Math.max(0, now - last); last = now; const p = Math.min(1, el / ms); if (fn) fn(ease(p), p); p < 1 ? requestAnimationFrame(f) : res(); };
+      requestAnimationFrame(f);
+    });
+    return {wait: ms => run(ms), tw: (ms, fn) => run(ms, fn), raw: (ms, fn) => run(ms, (e, p) => fn(p))};
+  }
+  focus(i) { this.jump(i, true); }
+  async jump(i, focus) {
+    const g = ++this.gen; if (this.paused) this.toggle();
+    const F = this.opt.onFocus || (() => {}); F(focus ? i : null);
+    this.reset();
+    try {
+      for (let k = 0; k < Math.min(i, this.scenes.length); k++) await this.scenes[k].run(this.ctx(g, true));
+      for (let k = i; k < this.scenes.length; k++) { this.mark(k); await this.scenes[k].run(this.ctx(g, false));
+        if (focus && k === i) { if (RM) return; this.toggle(); await this.ctx(g, false).wait(1); F(null); } }
+      this.mark(this.scenes.length);
+      if (RM) return;
+      await this.ctx(g, false).wait(this.opt.hold || 3500);
+      this.jump(0);
+    } catch (e) { if (e !== CANCEL) throw e; }
+  }
+}
+
+/* =========================================================
+   Figure 0: one hour on the same fleet, a fixed analytical
+   model vs Koi. Four events: a job runs slower than predicted,
+   a new job arrives, the workload shifts, Koi explores.
+   ========================================================= */
+(function () {
+  const svg = $('f0-svg'), cap = $('f0-cap');
+  // goodput over the hour
+  const X0 = 84, X1 = 800, xt = t => X0 + t * (X1 - X0) / 12;
+  const PG = {y1: 70, y0: 210, lo: 2, hi: 4};
+  const yv = (P, v) => P.y0 - (v - P.lo) / (P.hi - P.lo) * (P.y0 - P.y1);
+  [[PG, 'goodput (tok/s)']].forEach(([P, n]) => { const cy = (P.y0 + P.y1) / 2; T(svg, 20, cy, n, {'font-size': 13, 'font-weight': 600, fill: C.ink2, 'text-anchor': 'middle', transform: `rotate(-90 20 ${cy})`}); });
+  [[PG, [2, 3, 4], v => v + 'k']].forEach(([P, ticks, f]) => ticks.forEach(v => { S('line', {x1: X0, x2: X1, y1: yv(P, v), y2: yv(P, v), stroke: C.line}, svg); T(svg, X0 - 10, yv(P, v) + 5, f(v), {'font-size': 15, fill: C.ink3, 'text-anchor': 'end'}); }));
+  [0, 3, 6, 9, 12].forEach(t => T(svg, xt(t), PG.y0 + 24, t === 12 ? '60 min' : String(t * 5), {'font-size': 15, fill: C.ink3, 'text-anchor': 'middle'}));
+  const EV = [[1, '① slow job'], [3, '② new job'], [6, '③ prompts grow'], [9, '④ explore']];
+  const flags = EV.map(([t, n]) => { const g = S('g', {opacity: 0}, svg); S('line', {x1: xt(t), x2: xt(t), y1: 54, y2: PG.y0, stroke: C.ink3, 'stroke-dasharray': '3 3'}, g); T(g, xt(t) + 6, 48, n, {'font-size': 15, 'font-weight': 700}); return g; });
+  const FX = [3.0, 2.7, 2.7, 2.7, 2.9, 2.9, 2.9, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5], KX = [3.0, 2.7, 3.0, 3.0, 3.5, 3.5, 3.5, 3.4, 3.4, 3.3, 3.7, 3.7, 3.7];
+  const mk = (col, w) => S('polyline', {fill: 'none', stroke: col, 'stroke-width': w, 'stroke-linejoin': 'round'}, svg);
+  const SER = [[FX, PG, mk(C.gray, 3)], [KX, PG, mk(C.koi, 3.5)]];
+  const head = S('line', {y1: 58, y2: PG.y0, stroke: C.ink, 'stroke-width': 1}, svg);
+  const lab = (col, w) => T(svg, 0, 0, '', {'font-size': 15, 'font-weight': w, fill: col});
+  const LG = [lab(C.ink2, 700), lab(C.koi, 800)];
+  const val = (A, t) => { const i = Math.min(11, Math.floor(t)); return lerp(A[i], A[i + 1], t - i); };
+  const pts = (A, P, t) => { const p = []; for (let i = 0; i <= Math.floor(t); i++) p.push(xt(i) + ',' + yv(P, A[i])); if (t % 1) p.push(xt(t) + ',' + yv(P, val(A, t))); return p.join(' '); };
+  const pair = (P, [lf, lk], vf, vk, fmt) => { const yf = yv(P, vf), yk = yv(P, vk), d = Math.max(0, 18 - Math.abs(yf - yk)) / 2, up = yk <= yf ? 1 : -1;
+    lk.setAttribute('y', yk + 5 - d * up); lf.setAttribute('y', yf + 5 + d * up); lk.textContent = 'Koi (' + fmt(vk) + ')'; lf.textContent = 'fixed (' + fmt(vf) + ')'; };
+  let now = 0;
+  const drawTo = t => { now = t; SER.forEach(([A, P, el]) => el.setAttribute('points', pts(A, P, t))); head.setAttribute('x1', xt(t)); head.setAttribute('x2', xt(t));
+    LG.forEach(l => l.setAttribute('x', xt(t) + 9));
+    pair(PG, LG, val(FX, t), val(KX, t), v => 'goodput: ' + v.toFixed(1) + 'k'); };
+  const run = async (c, t1, ms) => { const t0 = now; await c.raw(ms, p => drawTo(lerp(t0, t1, p))); };
+
+  // legend for the job colours and the miss badge
+  const JOBS = [['chat', C.chat], ['agentic code job 1', C.agent1], ['batch job 1', C.batch1], ['batch job 2', C.batch2], ['agentic code job 2', C.agent2]];
+  let lx = 70; JOBS.forEach(([n, c]) => { S('rect', {x: lx, y: 258, width: 13, height: 13, rx: 3, fill: c}, svg); T(svg, lx + 19, 270, n, {'font-size': 13.5, fill: C.ink2}); lx += 41 + n.length * 7.3; });
+  const badge = (p, x, y) => { const g = S('g', {}, p); S('circle', {cx: x, cy: y, r: 9, fill: C.bad}, g); T(g, x, y + 4.5, '✗', {'font-size': 12, 'font-weight': 800, fill: '#fff', 'text-anchor': 'middle'}); return g; };
+  badge(svg, lx + 9, 264); T(svg, lx + 24, 270, 'misses its SLO target', {'font-size': 13.5, fill: C.ink2});
+
+  // two lanes: the same fleet, planned by each
+  const CELL = 20, RW = 136;
+  const START = {chat: {r: 0, x: 0, y: 0, w: 4, h: 1}, 'batch job 1': {r: 0, x: 0, y: 1, w: 4, h: 1}, 'agentic code job 1': {r: 1, x: 0, y: 0, w: 4, h: 1}, 'batch job 2': {r: 2, x: 0, y: 0, w: 4, h: 1}};
+  function lane(y0, title, sub, koi) {
+    const L = {fx: 214, fy: y0 + 48};
+    S('rect', {x: 10, y: y0, width: 980, height: 156, rx: 14, fill: koi ? C['koi-w'] : C.wash}, svg);
+    T(svg, 26, y0 + 36, title, {'font-size': 20, 'font-weight': 800, fill: koi ? C.koi : C.ink});
+    T(svg, 26, y0 + 60, sub, {'font-size': 14, fill: C.ink2});
+    L.count = T(svg, 26, y0 + 104, '', {'font-size': 16, 'font-weight': 800});
+    ['H100', 'A100', 'RTX 6000 · PCIe'].forEach((n, r) => { const x = L.fx + r * RW; T(svg, x, L.fy - 10, n, {'font-size': 13, 'font-weight': 600, fill: C.ink2});
+      for (let cc = 0; cc < 6; cc++) for (let rr = 0; rr < 2; rr++) S('rect', {x: x + cc * CELL, y: L.fy + rr * CELL, width: CELL, height: CELL, fill: '#fff', stroke: C.line}, svg); });
+    L.j = {}; JOBS.forEach(([n, c]) => { const g = S('g', {}, svg); L.j[n] = {g, r: S('rect', {rx: 3, fill: c}, g), dv: S('g', {}, g), bd: S('g', {}, g), miss: false, on: false}; });
+    // Reasoning (why) and Decision (what), the two lines a reader compares across the lanes
+    T(svg, 632, y0 + 23, 'Reasoning', {'font-size': 17, 'font-weight': 800, fill: C.ink});
+    L.r1 = T(svg, 632, y0 + 46, '', {'font-size': 17.5, 'font-weight': 500, fill: C.ink}); L.r1b = T(svg, 632, y0 + 68, '', {'font-size': 17.5, 'font-weight': 500, fill: C.ink});
+    L.dl = T(svg, 632, y0 + 94, 'Decision', {'font-size': 17, 'font-weight': 800, fill: C.ink, opacity: 0});
+    L.r2 = T(svg, 632, y0 + 119, '', {'font-size': 19, 'font-weight': 600}); L.r2b = T(svg, 632, y0 + 144, '', {'font-size': 19, 'font-weight': 600});
+    L.chip = S('rect', {x: 632, y: y0 + 104, width: 17, height: 17, rx: 3, opacity: 0}, svg); L.chip2 = S('rect', {x: 632, y: y0 + 129, width: 17, height: 17, rx: 3, opacity: 0}, svg);
+    return L;
+  }
+  const F = lane(290, 'Fixed model', 'same fixed rule, every time', false);
+  const K = lane(458, 'Koi', 'learns every 5 minutes', true);
+  const bx = (L, s) => ({x: L.fx + s.r * RW + s.x * CELL + 2, y: L.fy + s.y * CELL + 2, w: s.w * CELL - 4, h: s.h * CELL - 4, rep: s.rep, hrep: s.hrep});
+  const place = (L, n, b) => { const j = L.j[n]; j.r.setAttribute('x', b.x); j.r.setAttribute('y', b.y); j.r.setAttribute('width', b.w); j.r.setAttribute('height', b.h); j.cur = b; j.dv.replaceChildren(); j.bd.replaceChildren();
+    if (b.rep > 1) for (let k = 1; k < b.rep; k++) S('rect', {x: b.x + k * (b.w + 4) / b.rep - 3, y: b.y, width: 2, height: b.h, fill: '#fff'}, j.dv);
+    if (b.hrep > 1) for (let k = 1; k < b.hrep; k++) S('rect', {x: b.x, y: b.y + k * (b.h + 4) / b.hrep - 3, width: b.w, height: 2, fill: '#fff'}, j.dv);
+    if (j.miss) badge(j.bd, b.x + b.w - 10, b.y + 8); };
+  const move = async (c, L, n, s) => { const j = L.j[n], b = bx(L, s);
+    if (!j.on) { j.on = true; place(L, n, b); count(L); await c.tw(600, e => op(j.g, e)); return; }
+    const a = j.cur; await c.tw(900, e => place(L, n, {x: lerp(a.x, b.x, e), y: lerp(a.y, b.y, e), w: lerp(a.w, b.w, e), h: lerp(a.h, b.h, e)})); place(L, n, b); };
+  function count(L) { const on = JOBS.filter(([n]) => L.j[n].on), ok = on.filter(([n]) => !L.j[n].miss).length;
+    L.count.textContent = `${ok}/${on.length} jobs on target`; L.count.setAttribute('fill', ok < on.length ? C.bad : C['learn-d']); }
+  const miss = (L, n, v) => { L.j[n].miss = v; place(L, n, L.j[n].cur); count(L); };
+  // the action line: a chip in the colour of the job it is about, black text, red when the job misses
+  const JC = Object.fromEntries(JOBS);
+  // decision text: a leading action word ("Migrate:", "Scale up:") is set in bold
+  const setD = (el, b) => { el.textContent = ''; if (b === 'No change') { S('tspan', {'font-weight': 800}, el).textContent = b; return; } const m = /^([A-Z][^:]*): (.*)$/.exec(b || ''); if (!m) { el.textContent = b || ''; return; } const t = S('tspan', {'font-weight': 800}, el); t.textContent = m[1] + ': '; el.appendChild(document.createTextNode(m[2])); };
+  const act = (L, b, job, bad) => { setD(L.r2, b); L.r2.setAttribute('fill', bad ? C.bad : C.ink); L.r2.setAttribute('x', job ? 656 : 632); op(L.chip, job ? 1 : 0); op(L.dl, b ? 1 : 0); if (job) L.chip.setAttribute('fill', JC[job]); };
+  const act2 = (L, b, job, bad) => { setD(L.r2b, b); L.r2b.setAttribute('fill', bad ? C.bad : C.ink); L.r2b.setAttribute('x', job ? 656 : 632); op(L.chip2, job ? 1 : 0); if (job) L.chip2.setAttribute('fill', JC[job]); };
+  const say = (L, a, b, job, bad) => { L.r1.textContent = a; L.r1b.textContent = ''; act(L, b, job, bad); act2(L, ''); };
+  function reset() {
+    [F, K].forEach(L => { JOBS.forEach(([n]) => { L.j[n].miss = false; L.j[n].on = !!START[n]; op(L.j[n].g, START[n] ? 1 : 0); if (START[n]) place(L, n, bx(L, START[n])); else { L.j[n].dv.replaceChildren(); L.j[n].bd.replaceChildren(); } }); count(L); say(L, '', ''); });
+    flags.forEach(f => op(f, 0)); drawTo(0); cap.innerHTML = '';
+  }
+  new Player($('f0'), [
+    {name: 'Start', run: async c => {
+      cap.innerHTML = '<b>Same fleet, same jobs, same first plan.</b> Watch what each planner does over one hour.';
+      say(F, 'predicts with a fixed rule', ''); say(K, 'predicts with what it has learned', ''); await c.wait(4200); }},
+    {name: '① Slow job', run: async c => {
+      cap.innerHTML = '<b>① A job runs slower than predicted.</b> The fixed model cannot explain it. Koi finds the cause and fixes it.';
+      await run(c, 1, 1100); op(flags[0], 1); [F, K].forEach(L => miss(L, 'batch job 2', true)); await c.wait(1000);
+      say(F, 'can\'t explain the miss', 'No change: batch job 2', 'batch job 2'); act2(F, 'result: still below its throughput target', null, true); await c.wait(1400);
+      say(K, 'big all-reduce over PCIe is the cause', 'TP decrease: batch job 2 → TP2 ×2', 'batch job 2'); await c.wait(500);
+      await move(c, K, 'batch job 2', {r: 2, x: 0, y: 0, w: 4, h: 1, rep: 2}); miss(K, 'batch job 2', false); await c.wait(500);
+      await run(c, 3, 1500); await c.wait(2800); }},
+    {name: '② New job', run: async c => {
+      cap.innerHTML = '<b>② A new job arrives.</b> Koi reuses the lesson for a job it has never run. The fixed rule repeats its mistake.';
+      op(flags[1], 1); await c.wait(500);
+      say(F, 'rule: TP4 beats TP2 on any GPU', 'Deploy: agentic code job 2 → TP4', 'agentic code job 2'); await move(c, F, 'agentic code job 2', {r: 2, x: 0, y: 1, w: 4, h: 1}); await c.wait(500);
+      say(K, 'same cause applies: 70B model on PCIe', 'Deploy: agentic code job 2 → TP2 ×3', 'agentic code job 2'); await move(c, K, 'agentic code job 2', {r: 2, x: 0, y: 1, w: 6, h: 1, rep: 3}); await c.wait(400);
+      await run(c, 4, 900); miss(F, 'agentic code job 2', true); act2(F, 'result: SLO violation (TPOT too high)', null, true);
+      await run(c, 6, 1500); await c.wait(2800); }},
+    {name: '③ Prompts grow', run: async c => {
+      cap.innerHTML = '<b>③ Chat\'s prompts grow longer.</b> Koi sees chat\'s SLO risk rise and re-plans two jobs before the miss. The fixed rule sees nothing.';
+      op(flags[2], 1); await c.wait(500);
+      say(K, '', ''); await c.tw(1300, e => { K.r1.textContent = `chat SLO violation risk: 5% → ${Math.round(lerp(5, 40, e))}%`; }); await c.wait(600);
+      K.r1b.textContent = 'A100 is enough for batch job 1'; await c.wait(2000);
+      act(K, 'Migrate: batch job 1 → A100', 'batch job 1'); await move(c, K, 'batch job 1', {r: 1, x: 0, y: 1, w: 4, h: 1}); await c.wait(1200);
+      act2(K, 'Scale up: chat → 2 replicas', 'chat'); await move(c, K, 'chat', {r: 0, x: 0, y: 0, w: 4, h: 2, hrep: 2}); await c.wait(1300);
+      say(F, 'its rule says chat is fine', 'No change: chat', 'chat'); await c.wait(900);
+      await run(c, 7, 900); miss(F, 'chat', true); act2(F, 'result: SLO violation (TTFT too high)', null, true);
+      await run(c, 9, 1300); await c.wait(2800); }},
+    {name: '④ Explore', run: async c => {
+      cap.innerHTML = '<b>④ Koi explores.</b> Unsure, and cheap to test: it tries, measures, keeps. Four switches in one hour, all automatic.';
+      op(flags[3], 1); await c.wait(500);
+      say(K, 'unsure, and cheap to test', 'Explore: batch job 1 → TP2 ×2', 'batch job 1'); await move(c, K, 'batch job 1', {r: 1, x: 0, y: 1, w: 4, h: 1, rep: 2});
+      say(F, 'trusts only its fixed rule', 'No change'); await c.wait(400);
+      await run(c, 10, 900); act(K, 'Keep: batch job 1 (+12%)', 'batch job 1');
+      await run(c, 12, 1500); await c.wait(3600); }},
+  ], reset, {hold: 3000});
+})();
+
+/* =========================================================
+   Figure 1: inside one tick. Batch job 2 (TP4 on RTX 6000) is slow.
+   LLMs propose causes; Koi tests each against every deployment
+   it has run. Only the conditional one fits: TP is slow over
+   PCIe only when the all-reduce is large (big model x batch),
+   and never on NVLink. Koi keeps it with that scope and uses it
+   for agentic code job 2 (70B), a job that has never run.
+   Each stage box is clickable: it plays that stage, pauses, and
+   shows what a typical planner would do at that step.
+   ========================================================= */
+(function () {
+  const svg = $('f1-svg'), cap = $('f1-cap');
+  arrowDefs(svg, 'a1', C.ink2);
+  const BW = 470, BH = 222;
+  const ST = {
+    O: {x: 15, y: 10, n: '1 · Observe', c: C.learn, w: C['learn-w'], i: 0},
+    L: {x: 515, y: 10, n: '2 · Learn', c: C.learn, w: C['learn-w'], i: 1},
+    U: {x: 515, y: 256, n: '3 · Update', c: C.learn, w: C['learn-w'], i: 2},
+    P: {x: 15, y: 256, n: '4 · Plan', c: C.koi, w: C['koi-w'], i: 3},
+  };
+  for (const k in ST) { const s = ST[k]; s.g = S('g', {}, svg); s.box = S('rect', {x: s.x, y: s.y, width: BW, height: BH, rx: 12, fill: '#fff', stroke: C['gray-l'], 'stroke-width': 1.5}, s.g); S('circle', {cx: s.x + 24, cy: s.y + 30, r: 6, fill: s.c}, s.g); T(s.g, s.x + 38, s.y + 37, s.n, {'font-size': 20, 'font-weight': 800}); }
+  S('line', {x1: 487, y1: 121, x2: 511, y2: 121, stroke: C.ink2, 'stroke-width': 2, 'marker-end': 'url(#a1)'}, svg);
+  S('line', {x1: 750, y1: 234, x2: 750, y2: 252, stroke: C.ink2, 'stroke-width': 2, 'marker-end': 'url(#a1)'}, svg);
+  S('line', {x1: 513, y1: 367, x2: 489, y2: 367, stroke: C.ink2, 'stroke-width': 2, 'marker-end': 'url(#a1)'}, svg);
+  S('line', {x1: 250, y1: 254, x2: 250, y2: 236, stroke: C.ink2, 'stroke-width': 2, 'marker-end': 'url(#a1)'}, svg); T(svg, 262, 250, 'next tick', {'font-size': 12.5, fill: C.ink2});
+
+  // 1 Observe: outcome (TPOT) and mediator (time in all-reduce) for every running job
+  const O = ST.O.g;
+  T(O, 470, 47, 'last 5 min', {'font-size': 14, 'text-anchor': 'end', fill: C.ink2});
+  [['job', 40], ['GPU · TP', 215], ['TPOT', 318], ['all-reduce', 388]].forEach(([n, x]) => T(O, x, 78, n, {'font-size': 14, 'font-weight': 600, fill: C.ink2}));
+  S('line', {x1: 36, x2: 466, y1: 87, y2: 87, stroke: C.line}, O);
+  const hot = S('rect', {x: 386, y: 166, width: 56, height: 24, rx: 5, fill: C['mech-w'], stroke: C.mech, 'stroke-width': 1.5, opacity: 0}, O);
+  const OBS = [['chat', C.chat, 'H100 · 4', '28 ms', '6%'], ['batch job 1', C.batch1, 'H100 · 4', '35 ms', '7%'], ['agentic code job 1', C.agent1, 'A100 · 4', '31 ms', '9%'], ['batch job 2', C.batch2, 'RTX · 4', '62 ms', '35%']];
+  const rows = OBS.map(([n, c, g, t, a], k) => { const y = 110 + k * 25, gr = S('g', {opacity: 0}, O), b = k === 3 ? 700 : 400;
+    S('rect', {x: 40, y: y - 11, width: 12, height: 12, rx: 2, fill: c}, gr); T(gr, 58, y, n, {'font-size': 15, 'font-weight': b});
+    T(gr, 215, y, g, {'font-size': 15, 'font-weight': b}); T(gr, 318, y, t, {'font-size': 15, 'font-weight': b}); T(gr, 396, y, a, {'font-size': 15, 'font-weight': b}); return gr; });
+  T(O, 40, 216, 'TPOT = outcome · all-reduce = mediator (why)', {'font-size': 13, fill: C.ink2});
+
+  // 2 Learn: test each candidate cause against every deployment run so far
+  const L = ST.L.g;
+  T(L, 535, 64, 'Which cause fits every run so far?', {'font-size': 15, fill: C.ink2});
+  const px0 = 578, px1 = 745, py0 = 190, py1 = 92, xs = s => lerp(px0, px1, s), ys = v => py0 - v / 40 * (py0 - py1);
+  [0, 20, 40].forEach(v => { S('line', {x1: px0, x2: px1, y1: ys(v), y2: ys(v), stroke: C.line}, L); T(L, px0 - 6, ys(v) + 4, v + '%', {'font-size': 12, fill: C.ink2, 'text-anchor': 'end'}); });
+  T(L, px0, 84, 'time in all-reduce', {'font-size': 12.5, fill: C.ink2});
+  T(L, px0, 212, 'all-reduce size (model × batch) →', {'font-size': 12.5, fill: C.ink2});
+  const NV = [[.15, 5], [.35, 6], [.55, 7], [.75, 8], [.92, 8]], PC = [[.1, 7], [.25, 9], [.42, 12]], B2 = [.85, 35];
+  const ptsG = S('g', {opacity: 0}, L);
+  const dots = [...NV.map(p => ({p, pc: 0})), ...PC.map(p => ({p, pc: 1}))].map(d => { d.el = S('circle', {cx: xs(d.p[0]), cy: ys(d.p[1]), r: 5.5, fill: d.pc ? C.mech : C.gray, stroke: '#fff', 'stroke-width': 1.5}, ptsG); return d; });
+  const b2g = S('g', {opacity: 0}, L); const b2 = {p: B2, pc: 1, el: S('circle', {cx: xs(B2[0]), cy: ys(B2[1]), r: 8, fill: C.mech, stroke: C.ink, 'stroke-width': 2}, b2g)};
+  T(b2g, xs(B2[0]) - 13, ys(B2[1]) + 5, 'batch job 2', {'font-size': 13, 'font-weight': 800, 'text-anchor': 'end'});
+  dots.push(b2);
+  const predG = S('g', {}, L), ringG = S('g', {}, L);
+  const PCURVE = s => 6 + 38 * Math.pow(s, 2.2);
+  const CAND = [
+    {n: 'never', nv: () => 8, pc: () => 8},
+    {n: 'on PCIe', nv: () => 7, pc: () => 30},
+    {n: 'on PCIe + large all-reduce', nv: () => 7, pc: PCURVE},
+  ];
+  T(L, 765, 96, 'LLM candidates: TP is slow…', {'font-size': 13, 'font-weight': 600, fill: C.ink2});
+  const crow = CAND.map((cd, i) => { const y = 126 + i * 30; return {t: T(L, 765, y, cd.n, {'font-size': 14.5}), m: T(L, 976, y, '', {'font-size': 17, 'font-weight': 800, 'text-anchor': 'end'})}; });
+  S('circle', {cx: 808, cy: 207, r: 5, fill: C.gray}, L); T(L, 817, 211, 'NVLink', {'font-size': 12.5, fill: C.ink2});
+  S('circle', {cx: 880, cy: 207, r: 5, fill: C.mech}, L); T(L, 889, 211, 'PCIe', {'font-size': 12.5, fill: C.ink2});
+  const curve = f => { let d = ''; for (let k = 0; k <= 30; k++) { const s = k / 30; d += (k ? 'L' : 'M') + xs(s).toFixed(1) + ',' + ys(Math.min(40, f(s))).toFixed(1); } return d; };
+  const showCand = cd => { predG.replaceChildren(); ringG.replaceChildren();
+    S('path', {d: curve(cd.nv), fill: 'none', stroke: C.gray, 'stroke-width': 2.5, 'stroke-dasharray': '6 4'}, predG);
+    S('path', {d: curve(cd.pc), fill: 'none', stroke: C.mech, 'stroke-width': 2.5, 'stroke-dasharray': '6 4'}, predG);
+    let bad = 0; dots.forEach(d => { const pr = (d.pc ? cd.pc : cd.nv)(d.p[0]); if (Math.abs(pr - d.p[1]) > 6) { bad++; S('circle', {cx: xs(d.p[0]), cy: ys(d.p[1]), r: 12, fill: 'none', stroke: C.bad, 'stroke-width': 2.5}, ringG); } }); return bad; };
+
+  // 3 Update: the mechanism is kept with its scope
+  const U = S('g', {transform: 'translate(0,20)'}, ST.U.g);
+  S('rect', {x: 535, y: 286, width: 430, height: 38, rx: 8, fill: C['mech-w'], stroke: C.mech, 'stroke-width': 1.5}, U);
+  T(U, 549, 311, 'PCIe all-reduce time grows with model × batch', {'font-size': 15.5, 'font-weight': 800});
+  const uh = S('g', {opacity: 0}, U); T(uh, 535, 354, 'holds', {'font-size': 15, 'font-weight': 800, fill: C['learn-d']}); T(uh, 592, 354, 'PCIe GPUs · large model or batch', {'font-size': 15});
+  const un = S('g', {opacity: 0}, U); T(un, 535, 380, 'not', {'font-size': 15, 'font-weight': 800, fill: C.ink2}); T(un, 592, 380, 'NVLink GPUs · small models', {'font-size': 15, fill: C.ink2});
+  T(U, 535, 414, 'confidence', {'font-size': 14, fill: C.ink2});
+  S('rect', {x: 622, y: 403, width: 180, height: 13, rx: 4, fill: '#fff', stroke: C.line}, U);
+  const ubar = S('rect', {x: 622, y: 403, width: 0, height: 13, rx: 4, fill: C.mech}, U);
+  const uval = T(U, 965, 414, '', {'font-size': 15, 'font-weight': 800, 'text-anchor': 'end'});
+  const ua = S('g', {opacity: 0}, U); T(ua, 535, 450, 'applies to', {'font-size': 14, fill: C.ink2});
+  S('rect', {x: 616, y: 439, width: 13, height: 13, rx: 3, fill: C.agent2}, ua); T(ua, 636, 450, 'agentic code job 2 (70B, never run)', {'font-size': 15, 'font-weight': 800});
+  // 4 Plan: LLM proposals for agentic code job 2 (yellow); code scores them with the learned model (blue)
+  const P = S('g', {transform: 'translate(0,20)'}, ST.P.g);
+  T(P, 35, 304, 'LLMs propose for agentic code job 2 (70B, never run)', {'font-size': 15, fill: C.ink2});
+  const PILL = [['RTX · TP4', .74, .45], ['RTX · TP2 ×3', .66, .66], ['A100 · TP4', .58, .58]];
+  const pills = PILL.map(([n], i) => { const x = 35 + i * 148, g = S('g', {opacity: 0}, P); const r = S('rect', {x, y: 318, width: 136, height: 34, rx: 8, fill: C['llm-w'], stroke: C.llm, 'stroke-width': 1.5}, g); T(g, x + 68, 340, n, {'font-size': 15, 'font-weight': 600, 'text-anchor': 'middle'});
+    return {g, r, sc: T(P, x + 68, 376, '', {'font-size': 15, 'text-anchor': 'middle', 'font-weight': 700, fill: C.koi, opacity: 0})}; });
+  const setSc = (k, v) => { pills[k].sc.textContent = 'score ' + v.toFixed(2); };
+  const pnote = T(P, 35, 408, '', {'font-size': 15, 'font-weight': 800});
+  const pl = T(P, 35, 446, '', {'font-size': 15.5, 'font-weight': 800, fill: C.koi});
+  const pick = (k, on) => { pills[k].r.setAttribute('stroke', on ? C.koi : C.llm); pills[k].r.setAttribute('stroke-width', on ? 3 : 1.5); };
+
+  const caps = {
+    O: '<b>Observe.</b> Every job reports its outcome (TPOT) and its mediator (time in all-reduce). Batch job 2 is slow: 35% of its time is all-reduce.',
+    L: '<b>Learn.</b> LLMs propose causes; Koi tests each against every run so far. Only one fits: TP is slow over PCIe <em>only</em> when the all-reduce is large.',
+    U: '<b>Update.</b> Koi keeps the mechanism with its scope: where it holds, and where it does not.',
+    P: '<b>Plan.</b> Agentic code job 2 has never run, but it is in scope. TP4 on RTX falls from best to worst; three TP2 replicas win.',
+  };
+  const DIFF = [
+    ['Records the outcome: TPOT is 62 ms.', 'Also records why: 35% of the time is all-reduce.'],
+    ['Fits a number for this one deployment, or a rule of thumb ("PCIe is slow").', 'Tests candidate causes against every run so far, and keeps the one that fits them all.'],
+    ['The lesson stays with the deployment that ran.', 'A mechanism with a scope: where it holds and where it does not, for jobs that have never run.'],
+    ['An LLM agent picks, or a search tries one job at a time.', 'LLMs only propose. Code scores each proposal with what Koi learned, checks it, and plans all jobs together.'],
+  ];
+  const diff = $('f1-diff'), dOther = $('f1-do'), dKoi = $('f1-dk');
+  const on = k => { for (const s in ST) { const a = s === k; ST[s].box.setAttribute('fill', a ? ST[s].w : '#fff'); ST[s].box.setAttribute('stroke', a ? ST[s].c : C['gray-l']); ST[s].box.setAttribute('stroke-width', a ? 3 : 1.5); op(ST[s].g, !k || a ? 1 : .35); } cap.innerHTML = k ? caps[k] : ''; };
+  function reset() {
+    rows.forEach(r => op(r, 0)); op(hot, 0); op(ptsG, 0); op(b2g, 0); predG.replaceChildren(); ringG.replaceChildren();
+    crow.forEach(r => { r.m.textContent = ''; r.t.setAttribute('font-weight', 400); r.t.setAttribute('fill', C.ink); });
+    [uh, un, ua].forEach(g => op(g, 0)); ubar.setAttribute('width', 180 * 2 / 3); uval.textContent = '2/3 = 0.67';
+    pills.forEach((p, k) => { op(p.g, 0); op(p.sc, 0); pick(k, false); setSc(k, PILL[k][1]); p.sc.setAttribute('fill', C.koi); }); pnote.textContent = pl.textContent = ''; on(null);
+  }
+  const player = new Player($('f1'), [
+    {name: 'Observe', run: async c => { on('O');
+      for (const r of rows) { await c.tw(350, e => op(r, e)); await c.wait(250); }
+      await c.wait(300); await c.tw(400, e => op(hot, e)); await c.wait(2600); }},
+    {name: 'Learn', run: async c => { on('L');
+      await c.tw(600, e => op(ptsG, e)); await c.wait(900);
+      await c.tw(500, e => op(b2g, e)); await c.wait(1200);
+      for (let i = 0; i < CAND.length; i++) { const r = crow[i]; r.t.setAttribute('font-weight', 800);
+        predG.replaceChildren(); ringG.replaceChildren(); await c.wait(300);
+        const bad = showCand(CAND[i]); op(predG, 0); op(ringG, 0); await c.tw(450, e => op(predG, e)); await c.wait(600); await c.tw(300, e => op(ringG, e));
+        r.m.textContent = bad ? '✗' : '✓'; r.m.setAttribute('fill', bad ? C.bad : C['learn-d']); if (!bad) r.t.setAttribute('fill', C['learn-d']);
+        await c.wait(1700); if (bad) { r.t.setAttribute('font-weight', 400); r.t.setAttribute('fill', C.ink2); } }
+      await c.wait(2200); }},
+    {name: 'Update', run: async c => { on('U'); await c.wait(600);
+      await c.tw(400, e => op(uh, e)); await c.wait(700); await c.tw(400, e => op(un, e)); await c.wait(900);
+      await c.tw(900, e => ubar.setAttribute('width', 180 * lerp(2 / 3, 3 / 4, e))); uval.textContent = '3/4 = 0.75'; await c.wait(700);
+      await c.tw(400, e => op(ua, e)); await c.wait(2400); }},
+    {name: 'Plan', run: async c => { on('P'); await c.wait(500);
+      for (const p of pills) { await c.tw(350, e => op(p.g, e)); await c.wait(150); } await c.wait(300);
+      await c.tw(500, e => pills.forEach(p => op(p.sc, e))); pick(0, true);
+      pnote.setAttribute('fill', C.ink2); pnote.textContent = 'without the lesson: RTX · TP4 wins'; await c.wait(1800);
+      pnote.setAttribute('fill', C.bad); pnote.textContent = 'with it: TP4 over PCIe, 70B → slow';
+      pills[0].sc.setAttribute('fill', C.bad); await c.tw(900, e => setSc(0, lerp(.74, .45, e))); pick(0, false); await c.wait(500);
+      pick(1, true); await c.tw(500, e => [0, 2].forEach(k => { op(pills[k].g, 1 - .35 * e); op(pills[k].sc, 1 - .35 * e); }));
+      await c.wait(400); pl.textContent = 'plan: agentic code job 2 → TP2 ×3 ✓ checks pass'; await c.wait(1600);
+      await c.tw(500, e => Object.keys(ST).forEach(k => { if (k !== 'P') op(ST[k].g, lerp(.35, 1, e)); })); await c.wait(2400); }},
+  ], reset, {hold: 2500, onFocus: i => { diff.hidden = i == null; if (i != null) { dOther.textContent = DIFF[i][0]; dKoi.textContent = DIFF[i][1]; } }});
+  Object.values(ST).forEach(s => { const el = s.g, n = s.n.split(' · ')[1]; el.classList.add('stage'); el.setAttribute('tabindex', 0); el.setAttribute('role', 'button'); el.setAttribute('aria-label', n + ': play this step and compare with a typical planner');
+    el.addEventListener('click', () => player.focus(s.i)); el.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); player.focus(s.i); } }); });
+})();
+
+/* =========================================================
+   Figure 2: one job, six deployments (paper Fig. 2)
+   ========================================================= */
+(function () {
+  const svg = $('f2-svg'), cap = $('f2-cap');
+  arrowDefs(svg, 'a2', C.ink2);
+  const gA = S('g', {}, svg);
+  const CF = [
+    {l: 'TP4·PP1', i: 'g5.12xlarge', tp: 4, pp: 1, dp: 1, oom: 1},
+    {l: 'TP4·PP2', i: '2× g5.12xlarge', tp: 4, pp: 2, dp: 1, t: 144, c: 12.63},
+    {l: 'TP8·PP1', i: 'g5.48xlarge', tp: 8, pp: 1, dp: 1, t: 130, c: 28.13},
+    {l: 'TP8·DP2', i: '2× g5.48xlarge', tp: 8, pp: 1, dp: 2, t: 268, c: 27.21},
+    {l: 'TP8·PP4', i: '4× g5.48xlarge', tp: 8, pp: 4, dp: 1, t: 381, c: 38.28},
+    {l: 'TP4·PP4', i: '4× g5.12xlarge', tp: 4, pp: 4, dp: 1, t: 574, c: 6.38},
+  ];
+  T(gA, 30, 26, 'Llama 3 70B on AWS A10G (24 GB per GPU)', {'font-size': 16, 'font-weight': 700});
+  T(gA, 30, 54, 'workload: every request', {'font-size': 14, fill: C.ink2});
+  S('rect', {x: 196, y: 40, width: 192, height: 19, rx: 3, fill: '#c3c7cd'}, gA); T(gA, 292, 54.5, '2,048 input tokens', {'font-size': 13.5, 'font-weight': 600, 'text-anchor': 'middle'});
+  S('rect', {x: 390, y: 40, width: 48, height: 19, rx: 3, fill: C.mech}, gA); T(gA, 444, 54.5, '512 output', {'font-size': 13.5, 'font-weight': 600});
+  T(gA, 30, 78, 'fixed lengths, no variation · 76,800 tokens per run', {'font-size': 14, fill: C.ink2});
+  const cfgT = T(gA, 30, 112, '', {'font-size': 24, 'font-weight': 800});
+  const cfgS = T(gA, 30, 134, '', {'font-size': 14.5, fill: C.ink2});
+  const cfgM = T(gA, 30, 156, '', {'font-size': 15, 'font-weight': 600});
+  const draw = S('g', {}, gA);
+  const X0 = 600, X1 = 925, Y0 = 280, Y1 = 64, xs = v => X0 + v / 600 * (X1 - X0), ys = v => Y0 - v / 42 * (Y0 - Y1);
+  S('line', {x1: X0, x2: X1, y1: Y0, y2: Y0, stroke: C.ink2}, gA); S('line', {x1: X0, x2: X0, y1: Y0, y2: Y1 - 4, stroke: C.ink2}, gA);
+  [0, 200, 400, 600].forEach(v => T(gA, xs(v), Y0 + 18, v, {'font-size': 14, 'text-anchor': 'middle', fill: C.ink2}));
+  [0, 10, 20, 30, 40].forEach(v => { T(gA, X0 - 8, ys(v) + 5, '$' + v, {'font-size': 14, 'text-anchor': 'end', fill: C.ink2}); if (v) S('line', {x1: X0, x2: X1, y1: ys(v), y2: ys(v), stroke: C.line}, gA); });
+  T(gA, (X0 + X1) / 2, Y0 + 40, 'throughput (input tok/s) →', {'font-size': 14, 'text-anchor': 'middle', fill: C.ink2});
+  T(gA, X0 - 52, 54, 'cost ($ per million tokens)', {'font-size': 14, fill: C.ink2});
+  const pts = S('g', {}, gA), span = S('g', {opacity: 0}, gA);
+  S('line', {x1: xs(130), x2: xs(574), y1: 30, y2: 30, stroke: C.ink2, 'stroke-width': 1.5, 'marker-start': 'url(#a2)', 'marker-end': 'url(#a2)'}, span);
+  T(span, (xs(130) + xs(574)) / 2, 22, '4.4× throughput', {'font-size': 14, 'font-weight': 700, 'text-anchor': 'middle'});
+  S('line', {x1: X1 + 16, x2: X1 + 16, y1: ys(6.38), y2: ys(38.28), stroke: C.ink2, 'stroke-width': 1.5, 'marker-start': 'url(#a2)', 'marker-end': 'url(#a2)'}, span);
+  T(span, X1 + 24, (ys(6.38) + ys(38.28)) / 2 + 4, '6×', {'font-size': 14, 'font-weight': 700}); T(span, X1 + 24, (ys(6.38) + ys(38.28)) / 2 + 21, 'cost', {'font-size': 14, 'font-weight': 700});
+  function drawCfg(c) {
+    draw.innerHTML = ''; const g = 17, gap = 3, pad = 5, iw = c.tp * (g + gap) - gap + 2 * pad, ih = g + 2 * pad, vg = 10, hg = 26;
+    const W = c.dp * iw + (c.dp - 1) * hg, H = c.pp * ih + (c.pp - 1) * vg, x0 = 70 + (440 - W) / 2, y0 = 170 + (140 - H) / 2;
+    if (c.pp > 1) { S('line', {x1: x0 - 16, y1: y0 + 4, x2: x0 - 16, y2: y0 + H - 4, stroke: C.ink2, 'stroke-width': 1.5, 'marker-end': 'url(#a2)'}, draw); T(draw, x0 - 22, y0 + H / 2 + 5, `${c.pp} stages`, {'font-size': 14, 'text-anchor': 'end', fill: C.ink2}); }
+    if (c.dp > 1) T(draw, x0 + W / 2, y0 - 10, `${c.dp} copies`, {'font-size': 14, 'text-anchor': 'middle', fill: C.ink2});
+    for (let d = 0; d < c.dp; d++) for (let s = 0; s < c.pp; s++) { const gx = x0 + d * (iw + hg), gy = y0 + s * (ih + vg);
+      S('rect', {x: gx, y: gy, width: iw, height: ih, rx: 6, fill: '#fff', stroke: c.oom ? C.bad : C.ink, 'stroke-width': 1.5}, draw);
+      for (let k = 0; k < c.tp; k++) S('rect', {x: gx + pad + k * (g + gap), y: gy + pad, width: g, height: g, rx: 2, fill: c.oom ? C['bad-w'] : C['koi-w'], stroke: c.oom ? C.bad : C.koi}, draw); }
+  }
+  const oom = S('g', {opacity: 0}, gA);
+  S('path', {d: `M${X0 + 12},${Y0 - 22} l12,12 M${X0 + 24},${Y0 - 22} l-12,12`, stroke: C.bad, 'stroke-width': 3, 'stroke-linecap': 'round'}, oom);
+  T(oom, X0 + 32, Y0 - 12, 'TP4·PP1: out of memory', {'font-size': 14, 'font-weight': 700, fill: C.bad});
+  function reset() { pts.innerHTML = ''; op(span, 0); op(oom, 0); draw.innerHTML = ''; cfgT.textContent = cfgS.textContent = cfgM.textContent = ''; cap.innerHTML = ''; }
+  const CAP0 = '<b>Same model, same workload, six deployments.</b> Each square is one A10G GPU and each box one instance. TP splits each layer across the GPUs in a box; PP chains boxes into pipeline stages; DP runs copies. Measured on AWS (paper Fig. 2). Cost per million tokens is the run\'s cost divided by its 76,800 input and output tokens.';
+  new Player($('f2'), CF.map((cf, idx) => ({name: cf.l, run: async c => {
+      cap.innerHTML = CAP0;
+      cfgT.textContent = cf.l; cfgS.textContent = cf.i; cfgM.textContent = ''; cfgM.setAttribute('fill', cf.oom ? C.bad : C.ink); drawCfg(cf); op(draw, 0); await c.tw(400, e => op(draw, e)); await c.wait(400);
+      if (cf.oom) { cfgM.textContent = 'out of memory: ~140 GB of weights, 96 GB of GPU memory'; const bb = draw.getBBox(); S('path', {d: `M${bb.x - 14},${bb.y - 14} L${bb.x + bb.width + 14},${bb.y + bb.height + 14} M${bb.x + bb.width + 14},${bb.y - 14} L${bb.x - 14},${bb.y + bb.height + 14}`, stroke: C.bad, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: .85}, draw); await c.tw(400, e => op(oom, e)); }
+      else { cfgM.textContent = `${cf.t} tok/s · $${cf.c.toFixed(2)} per M tokens`; const g = S('g', {}, pts), best = cf.t === 574, right = cf.t > 500 || cf.t === 130; const d = S('circle', {cx: xs(cf.t), cy: ys(cf.c), r: 0, fill: best ? C.koi : C.ink2}, g);
+        T(g, xs(cf.t) + (right ? -12 : 12), ys(cf.c) + 4, cf.l + (best ? ': fastest and cheapest' : ''), {'font-size': 14, 'font-weight': best ? 700 : 500, 'text-anchor': right ? 'end' : 'start'});
+        bindTip(d, `${cf.l} (${cf.i}): ${cf.t} tok/s, $${cf.c.toFixed(2)} per M tokens`); await c.tw(400, e => d.setAttribute('r', 7 * e)); }
+      await c.wait(1800);
+      if (idx === CF.length - 1) { await c.tw(600, e => op(span, e));
+        cap.innerHTML = '<b>4.4× apart in throughput and 6× in cost, and one does not fit.</b> This is one job on one GPU type; a fleet multiplies it by every GPU type, region and job.';
+        await c.wait(3500); } }})),
+  reset, {hold: 2500});
+})();
+
+/* =========================================================
+   Figure 3: same E2E performance, different cause
+   ========================================================= */
+(function () {
+  const svg = $('f3-svg'), cap = $('f3-cap');
+  const defs = S('defs', {}, svg); const pat = S('pattern', {id: 'hatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)'}, defs);
+  S('rect', {width: 6, height: 6, fill: '#f1f2f4'}, pat); S('line', {x1: 0, y1: 0, x2: 0, y2: 6, stroke: '#c9ccd2', 'stroke-width': 2}, pat);
+  const parts = [{x: 10, h: 'D1 · TP2·PP4 on A100-40GB'}, {x: 510, h: 'D2 · TP4·PP1 on A100-40GB'}].map((cd, ci) => {
+    const x = cd.x, o = {}, root = S('g', ci ? {transform: 'translate(-500,350)'} : {}, svg);
+    S('rect', {x, y: 10, width: 480, height: 340, rx: 12, fill: '#fff', stroke: C.line}, root);
+    T(root, x + 18, 38, cd.h, {'font-size': 14.5, 'font-weight': 700});
+    S('line', {x1: x + 22, x2: x + 74, y1: 300, y2: 300, stroke: C.ink3}, root);
+    o.bar = S('rect', {x: x + 28, y: 300, width: 40, height: 0, rx: 3, fill: C.gray}, root);
+    o.num = T(root, x + 48, 290, '', {'font-size': 14, 'font-weight': 700, 'text-anchor': 'middle'});
+    o.same = T(root, x + 48, 200, 'same performance', {'font-size': 13, 'font-weight': 700, fill: '#fff', 'text-anchor': 'middle', 'dominant-baseline': 'central', transform: `rotate(-90 ${x + 48} 200)`, opacity: 0});
+    T(root, x + 48, 320, 'throughput', {'font-size': 14, 'font-weight': 600, 'text-anchor': 'middle', fill: C.ink}); T(root, x + 48, 338, '(tok/s)', {'font-size': 14, 'font-weight': 600, 'text-anchor': 'middle', fill: C.ink});
+    o.in = S('g', {opacity: 0}, root); o.meds = S('g', {opacity: 0}, root); o.fix = S('g', {opacity: 0}, root);
+    return o;
+  });
+  const p1 = parts[0], ix = 110, cells = [], tints = [C.koi, '#6a45ff', '#8f75ff', '#b3a3ff'], sw = 22;
+  T(p1.in, ix, 66, 'pipeline schedule', {'font-size': 12, 'font-weight': 600, fill: C.ink2});
+  for (let s = 0; s < 4; s++) { T(p1.in, ix, 90 + s * 24, `stage ${s + 1}`, {'font-size': 11.5, fill: C.ink2});
+    for (let k = 0; k < 14; k++) { const m = (k % 7) - s; const busy = m >= 0 && m < 4; cells.push({k, el: S('rect', {x: ix + 56 + k * sw, y: 76 + s * 24, width: sw - 2, height: 19, rx: 2, fill: busy ? tints[m] : 'url(#hatch)', opacity: 0}, p1.in)}); } }
+  const cur = S('line', {x1: ix + 56, x2: ix + 56, y1: 72, y2: 174, stroke: C.ink, 'stroke-width': 1.5}, p1.in);
+  const r1 = T(p1.in, ix, 194, '', {'font-size': 12.5});
+  const p2 = parts[1], jx = 610, blocks = [];
+  T(p2.in, jx, 66, 'KV-cache blocks', {'font-size': 12, 'font-weight': 600, fill: C.ink2}); T(p2.in, jx + 300, 66, 'waiting', {'font-size': 12, 'font-weight': 600, fill: C.ink2});
+  for (let i = 0; i < 36; i++) blocks.push(S('rect', {x: jx + (i % 12) * 24, y: 76 + Math.floor(i / 12) * 26, width: 21, height: 22, rx: 3, fill: '#fff', stroke: C.line}, p2.in));
+  S('rect', {x: jx + 300, y: 74, width: 70, height: 76, rx: 8, fill: C.wash, stroke: C.line}, p2.in);
+  const wg = S('g', {}, p2.in); const r2 = T(p2.in, jx, 194, '', {'font-size': 12.5});
+  const reqC = ['#ED7D31', '#f19a5c', '#d9661c', '#f4b183', '#c0571a'];
+  function meds(o, x, vals, cause) { o.bars = []; vals.forEach(([n, v], i) => { const y = 214 + i * 22, hot = n === cause; T(o.meds, x, y + 9, n, {'font-size': 12, 'font-weight': hot ? 700 : 400, fill: hot ? C.ink : C.ink2}); S('rect', {x: x + 120, y, width: 200, height: 10, rx: 3, fill: C.wash}, o.meds); o.bars.push({r: S('rect', {x: x + 120, y, width: 0, height: 10, rx: 3, fill: hot ? C.mech : C['gray-l']}, o.meds), v}); T(o.meds, x + 330, y + 9, v + '%', {'font-size': 11.5, fill: C.ink2}); }); }
+  meds(p1, ix, [['KV-cache util.', 35], ['pipeline bubbles', 43], ['comm. overhead', 20], ['SM util.', 42]], 'pipeline bubbles');
+  meds(p2, jx, [['KV-cache util.', 97], ['pipeline bubbles', 2], ['comm. overhead', 37], ['SM util.', 50]], 'KV-cache util.');
+  function fix(o, x, t1, t2) { S('rect', {x, y: 306, width: 4, height: 34, fill: C.mech}, o.fix); T(o.fix, x + 12, 319, t1, {'font-size': 12.5, 'font-weight': 700}); T(o.fix, x + 12, 336, t2, {'font-size': 12.5, fill: C.ink2}); }
+  fix(p1, ix, 'Cause: pipeline bubbles', 'Fix: fewer pipeline stages');
+  fix(p2, jx, 'Cause: KV cache full (weights fill most of 4 × 40 GB)', 'Fix: more GPUs per replica, or more replicas');
+  const same = T(svg, 500, 196, '', {'font-size': 22, 'font-weight': 800, 'text-anchor': 'middle'});
+  function reset() { parts.forEach(o => { o.bar.setAttribute('y', 300); o.bar.setAttribute('height', 0); o.num.textContent = ''; op(o.same, 0); op(o.in, 0); op(o.meds, 0); op(o.fix, 0); o.bars.forEach(b => b.r.setAttribute('width', 0)); });
+    cells.forEach(c => op(c.el, 0)); blocks.forEach(b => { b.setAttribute('fill', '#fff'); b.setAttribute('stroke', C.line); }); wg.innerHTML = ''; r1.textContent = ''; r2.textContent = ''; same.textContent = ''; cap.innerHTML = ''; }
+  new Player($('f3'), [
+    {name: 'What search sees', run: async c => {
+      cap.innerHTML = '<b>A search method sees one number per deployment.</b> Two deployments of the same job (Llama 3 70B) on the same GPUs both reach 160 tok/s.';
+      await c.tw(1000, e => parts.forEach(o => { const h = 200 * e; o.bar.setAttribute('y', 300 - h); o.bar.setAttribute('height', h); o.num.setAttribute('y', 292 - h); o.num.textContent = Math.round(160 * e); op(o.same, e > .9 ? 1 : 0); }));
+       await c.wait(1600); }},
+    {name: 'What Koi sees', run: async c => {
+      cap.innerHTML = '<b>Koi also looks inside.</b> D1 has four pipeline stages, and they sit idle much of the time. D2 has only four GPUs, so the weights leave little room for the KV cache; it fills up with long-context requests, and new ones wait.';
+      same.textContent = ''; await c.tw(500, e => parts.forEach(o => op(o.in, e)));
+      let used = 0, wait = 0, r = 0;
+      await c.raw(4200, p => { const kk = p * 14; cur.setAttribute('x1', ix + 56 + kk * sw); cur.setAttribute('x2', ix + 56 + kk * sw); cells.forEach(cl => { if (cl.k < kk) op(cl.el, 1); });
+        r1.textContent = p > .5 ? `${Math.round(43 * Math.min(1, p * 1.05))}% of stage time idle` : '';
+        while (r < Math.floor(p * 9.5)) { if (used + 7 <= 36) { for (let i = used; i < used + 7; i++) { blocks[i].setAttribute('fill', reqC[r % 5]); blocks[i].setAttribute('stroke', '#fff'); } used += 7; } else { S('circle', {cx: jx + 314 + (wait % 3) * 20, cy: 92 + Math.floor(wait / 3) * 20, r: 6, fill: C.mech}, wg); wait++; } r++; }
+        r2.textContent = `KV cache ${Math.round(used / 36 * 100)}% full · ${wait} waiting`; });
+      await c.wait(900); }},
+    {name: 'Mediators', run: async c => {
+      cap.innerHTML = '<b>The mediators name the cause.</b> Koi reads KV-cache utilization, pipeline bubbles, communication overhead and SM utilization from telemetry.';
+      await c.tw(400, e => parts.forEach(o => op(o.meds, e)));
+      await c.tw(1000, e => parts.forEach(o => o.bars.forEach(b => b.r.setAttribute('width', 2 * b.v * e)))); await c.wait(1500); }},
+    {name: 'Different fixes', run: async c => {
+      cap.innerHTML = '<b>Same E2E performance, different causes, different fixes.</b> The cause also says which other jobs the lesson applies to.';
+      await c.tw(600, e => parts.forEach(o => op(o.fix, e))); await c.wait(2000); }},
+  ], reset);
+})();
+
+/* =========================================================
+   Figure 4: every deployment is a test (narrow layout, 500 wide)
+   One mechanism, one tick, four possible results. Checking the
+   mediator V as well as the outcome Y tells Koi whether the
+   mechanism was right, and keeps it from learning from luck.
+   ========================================================= */
+(function () {
+  const svg = $('f4-svg'), cap = $('f4-cap');
+  arrowDefs(svg, 'a4', C.mech);
+  cap.innerHTML = '<b>Koi checks the mediator as well as the outcome.</b> In the two shaded cases, a learner that sees only the outcome learns the wrong lesson: it blames a mechanism that held, or rewards luck.';
+  // the mechanism under test: X -> V -> Y
+  // three causal hypotheses Koi might be testing; the reader picks one
+  const MECHS = [
+    {b: 'PP → pipeline bubbles', x: 'PP = 4', v: 'pipeline bubbles', y: 'throughput', e: ['adds', 'lowers'], vs: 'bubbles were', scope: 'the target LLM workload, on A100'},
+    {b: 'TP on PCIe → all-reduce', x: 'TP = 4 on PCIe', v: 'all-reduce time', y: 'TPOT', e: ['raises', 'raises'], vs: 'all-reduce was', scope: '70B models, on PCIe GPUs (RTX 6000)'},
+    {b: 'batch size → KV cache', x: 'max batch 256', v: 'KV-cache usage', y: 'TTFT', e: ['raises', 'raises'], vs: 'KV cache was', scope: 'long-prompt chat, on H100'},
+  ];
+  const pick = $('f4-pick');
+  function draw(M) {
+  svg.replaceChildren(); arrowDefs(svg, 'a4', C.mech);
+  T(svg, 20, 22, 'The mechanism being tested', {'font-size': 16, 'font-weight': 700});
+  const BX = [20, 180, 340], BW = 140, BY = 50, BH = 62;
+  [['X · decision', M.x], ['V · mediator', M.v], ['Y · outcome', M.y]].forEach(([k, n], i) => {
+    S('rect', {x: BX[i], y: BY, width: BW, height: BH, rx: 10, fill: C['mech-w'], stroke: C.mech, 'stroke-width': 2}, svg);
+    T(svg, BX[i] + BW / 2, BY + 23, k, {'font-size': 14, fill: C.ink2, 'text-anchor': 'middle'});
+    T(svg, BX[i] + BW / 2, BY + 48, n, {'font-size': 15.5, 'font-weight': 700, 'text-anchor': 'middle'}); });
+  [[M.e[0], 0], [M.e[1], 1]].forEach(([w, i]) => { const x1 = BX[i] + BW + 1, x2 = BX[i + 1] - 2, cx = (BX[i] + BW + BX[i + 1]) / 2;
+    S('line', {x1, x2, y1: BY + BH / 2, y2: BY + BH / 2, stroke: C.mech, 'stroke-width': 2.5, 'marker-end': 'url(#a4)'}, svg);
+    T(svg, cx, BY - 8, w, {'font-size': 14, fill: C.ink2, 'text-anchor': 'middle'}); });
+  T(svg, 20, 136, 'scope of this hypothesis and causal reasoning:', {'font-size': 14, fill: C.ink2});
+  T(svg, 20, 155, M.scope, {'font-size': 14, 'font-weight': 600, fill: C.ink});
+  // 2x2: rows = runtime system metric (mediator), columns = performance outcome
+  const GX = 110, GW = 181, GAP = 8, GY = 240, GH = 244, ok = C['learn-d'];
+  const cx = j => GX + j * (GW + GAP), cy = i => GY + i * (GH + GAP);
+  T(svg, GX + GW + GAP / 2, 196, `performance outcome (${M.y})`, {'font-size': 16, 'font-weight': 700, 'text-anchor': 'middle'});
+  [['✓ as predicted', ok], ['✗ off', C.bad]].forEach(([w, c], j) => T(svg, cx(j) + GW / 2, 224, w, {'font-size': 14.5, 'font-weight': 700, fill: c, 'text-anchor': 'middle'}));
+  const rot = (x, y, w, a) => T(svg, x, y, w, Object.assign({'text-anchor': 'middle', transform: `rotate(-90 ${x} ${y})`}, a));
+  rot(22, GY + GH + GAP / 2, 'runtime system metric', {'font-size': 16, 'font-weight': 700});
+  [[['✓ as', 'predicted'], ok], [['✗ off'], C.bad]].forEach(([ls, c], i) => ls.forEach((w, k) => T(svg, 70, cy(i) + GH / 2 + 5 + (k - (ls.length - 1) / 2) * 19, w, {'font-size': 14.5, 'font-weight': 700, fill: c, 'text-anchor': 'middle'})));
+  const CELLS = [
+    [{q: 'Q1', k: 'Trust it more', ks: ['the mechanism held'], kc: ok, o: 'Reward', oc: ok},
+     {q: 'Q2', k: 'Find other cause', ks: [M.vs + ' fine,', 'so something else', 'hurt'], kc: '#9a7200', o: 'Penalize', oc: C.bad, wrong: 'misplaced blame'}],
+    [{q: 'Q3', k: 'No credit', ks: ['right outcome for', 'the wrong reason:', 'luck'], kc: '#9a7200', o: 'Reward', oc: ok, wrong: 'learns from luck'},
+     {q: 'Q4', k: 'Trust it less', ks: ['its prediction failed'], kc: C.bad, o: 'Penalize', oc: C.bad}]];
+  CELLS.forEach((row, i) => row.forEach((d, j) => { const x = cx(j), y = cy(i);
+    S('rect', {x, y, width: GW, height: GH, rx: 12, fill: d.wrong ? '#fff7e6' : '#fff', stroke: d.wrong ? '#e3b552' : C.line, 'stroke-width': 1.5}, svg);
+    T(svg, x + 14, y + 26, 'Koi', {'font-size': 14, 'font-weight': 700, fill: C.koi});
+    T(svg, x + GW - 14, y + 26, d.q, {'font-size': 14, 'font-weight': 700, fill: C.ink2, 'text-anchor': 'end'});
+    T(svg, x + 14, y + 53, d.k, {'font-size': 17, 'font-weight': 800, fill: d.kc});
+    d.ks.forEach((l, k) => T(svg, x + 14, y + 77 + k * 19, l, {'font-size': 14, fill: C.ink2}));
+    S('line', {x1: x + 14, x2: x + GW - 14, y1: y + 144, y2: y + 144, stroke: C.line}, svg);
+    T(svg, x + 14, y + 168, 'outcome-only learner', {'font-size': 14, fill: C.ink2});
+    T(svg, x + 14, y + 193, d.o, {'font-size': 16, 'font-weight': 700, fill: d.oc});
+    T(svg, x + 14, y + 218, d.wrong ? '✗ ' + d.wrong : 'same call as Koi', {'font-size': 14, 'font-weight': d.wrong ? 700 : 400, fill: d.wrong ? C.bad : C.ink2}); }));
+  }
+  const btns = MECHS.map((M, i) => { const bt = E('button', '', pick, M.b); bt.type = 'button'; bt.setAttribute('aria-pressed', i === 0);
+    bt.onclick = () => { btns.forEach((x, k) => x.setAttribute('aria-pressed', k === i)); draw(M); }; return bt; });
+  draw(MECHS[0]);
+})();
+
+/* =========================================================
+   Results: bars grow when they come into view (paper numbers)
+   ========================================================= */
+(function () {
+  const M = ['Bandit', 'EvoX', 'OpenEvolve', 'Koi'], anims = [];
+  const xlab = (svg, cx, y, w) => { const ls = w.split('|'), px = cx + 5 + (ls.length - 1) * 4; y += (ls.length - 1) * 5; ls.forEach((l, k) => T(svg, px, y + (k - (ls.length - 1) / 2) * 18, l, {'text-anchor': 'end', 'font-size': 17, fill: C.ink2, transform: `rotate(-45 ${px} ${y})`})); };
+  function vbars(id, labels, vals, max, ticks, f, unit, colors, notes, W = 300) {
+    const svg = $(id), x0 = 52, x1 = W - 4, y0 = 176, H = 146, step = (x1 - x0) / vals.length, bw = Math.min(40, step * .55);
+    ticks.forEach(t => { const y = y0 - t / max * H; S('line', {x1: x0, x2: x1, y1: y, y2: y, stroke: C.line}, svg); T(svg, x0 - 7, y + 5, f(t), {'text-anchor': 'end', 'font-size': 16.5, fill: C.ink3}); });
+    vals.forEach((v, i) => { const x = x0 + (step - bw) / 2 + i * step, h = v / max * H, g = S('g', {}, svg), name = labels[i].replace('|', '');
+      const lab = S('g', {opacity: 0}, svg); T(lab, x + bw / 2, y0 - h - 8, f(v), {'text-anchor': 'middle', 'font-size': 19, 'font-weight': colors[i] === C.koi ? 800 : 500}); if (notes && notes[i]) T(lab, x + bw / 2, y0 - h - 31, notes[i], {'text-anchor': 'middle', 'font-size': 19, 'font-weight': 800, fill: C.bad});
+      xlab(svg, x + bw / 2, y0 + 16, labels[i]);
+      anims.push(e => { g.innerHTML = ''; const b = colBar(g, x, y0, bw, h * e, colors[i]); bindTip(b, `${name}: ${f(v)}${unit}`); op(lab, e > .95 ? 1 : 0); }); });
+  }
+  const KC = [C.gray, C.gray, C.gray, C.koi];
+  vbars('r-good', M, [2291, 2348, 3497, 4120], 5000, [0, 2500, 5000], v => fmt(v), ' tok/s', KC);
+  vbars('r-cost', M, [.45, .44, .30, .24], .5, [0, .25, .5], v => v.toFixed(2), ' ×10⁻⁴ $/token', KC);
+  vbars('r-abl', ['LLM only|(GPT-5.6)', 'Koi w/o|online learning', 'Koi w/o|causal graph', 'Koi'], [856, 1621, 1770, 2911], 3500, [0, 1750, 3500], v => fmt(v), ' tok/s', [C.gray, C.gray, C.gray, C.koi], ['−71%', '−44%', '−39%', ''], 400);
+  (function () {
+    const svg = $('r-slo'), x0 = 52, y0 = 160, H = 132, bw = 18, step = 61, tt = [22.2, 28.1, 65.7, 79.1], tp = [33.7, 35.5, 91.4, 99.1];
+    [0, 50, 100].forEach(t => { const y = y0 - t / 100 * H; S('line', {x1: x0, x2: 296, y1: y, y2: y, stroke: C.line}, svg); T(svg, x0 - 7, y + 6, t, {'text-anchor': 'end', 'font-size': 16.5, fill: C.ink3}); });
+    M.forEach((m, i) => { const x = x0 + 12 + i * step, k = i === 3, g = S('g', {}, svg), name = m.replace('|', '');
+      const l1 = T(svg, x + bw / 2, y0 - tt[i] / 100 * H - 6, Math.round(tt[i]), {'text-anchor': 'middle', 'font-size': 16.5, 'font-weight': k ? 700 : 500, opacity: 0});
+      const l2 = T(svg, x + bw * 1.5 + 2, y0 - tp[i] / 100 * H - 6, Math.round(tp[i]), {'text-anchor': 'middle', 'font-size': 16.5, 'font-weight': k ? 700 : 500, opacity: 0});
+      xlab(svg, x + bw + 1, y0 + 16, m);
+      anims.push(e => { g.innerHTML = ''; const a = colBar(g, x, y0, bw, tt[i] / 100 * H * e, k ? C.koi : '#555b63'); bindTip(a, `${name}: TTFT met ${tt[i]}%`); const b = colBar(g, x + bw + 2, y0, bw, tp[i] / 100 * H * e, k ? C['koi-l'] : '#c3c7cd'); bindTip(b, `${name}: TPOT met ${tp[i]}%`); op(l1, e > .95 ? 1 : 0); op(l2, e > .95 ? 1 : 0); }); });
+  })();
+  anims.forEach(a => a(RM ? 1 : 0));
+  const ids = ['r-good', 'r-slo', 'r-cost', 'r-abl'], W0 = {'r-abl': 400};
+  const fit = () => { const ws = ids.map(id => { const sv = $(id), b = sv.getBBox(); if (!b.width) return W0[id] || 300;
+    const x0 = Math.min(0, Math.floor(b.x) - 2), w = Math.max(W0[id] || 300, Math.ceil(b.x + b.width) + 2) - x0;
+    sv.setAttribute('viewBox', `${x0} 0 ${w} ${Math.ceil(b.y + b.height) + 4}`); return w; });
+    $('f5').querySelector('.rgrid').style.setProperty('--rcols', ws.map(w => w + 'fr').join(' ')); };
+  fit(); document.fonts && document.fonts.ready.then(fit);
+  if (!RM) { const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.disconnect(); const t0 = performance.now(); const f = now => { const p = Math.min(1, Math.max(0, now - t0) / 1100); anims.forEach(a => a(ease(p))); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }), {threshold: .4}); io.observe($('f5')); }
+})();
+
+$('copybib').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('bib').textContent); const b = $('copybib'); b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy BibTeX', 1200); };
+})();
+</script>
+</body>
+</html>

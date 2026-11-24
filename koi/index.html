@@ -114,13 +114,23 @@ footer{padding:28px 0 56px;color:var(--ink3);font-size:13.5px;border-top:1px sol
   .chap .cl{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.gl-site{border-bottom:1px solid #e8e8e8;background:#fdfdfd;padding:10px 0;margin-bottom:34px;font-family:Charter,"Noto Serif KR",Georgia,serif}
+.gl-wrap{box-sizing:border-box;max-width:800px;margin:0 auto;padding:0 30px;min-height:56px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 0}
+.gl-title{font-size:30px;letter-spacing:-1px;color:#424242;text-decoration:none;line-height:56px}
+.gl-nav a{font-size:19px;color:#111;text-decoration:none;margin-left:25px}
+.gl-nav a:hover{text-decoration:underline}
+@media (max-width:800px){.gl-wrap{padding:0 15px}}
+@media (max-width:560px){.gl-title{font-size:24px;line-height:44px}.gl-nav{width:100%;padding-bottom:8px}.gl-nav a{font-size:16px;margin:0 16px 0 0}}
 </style>
 </head>
 <body>
+<header class="gl-site"><div class="gl-wrap"><a class="gl-title" href="/">Gangmuk Lim</a><nav class="gl-nav" aria-label="Site"><a href="/">Home</a><a href="/photos">Photos</a><a href="/blog">Blog</a><a href="/notes">Notes</a><a href="/coffee">Coffee</a></nav></div></header>
+
 <div id="tip" role="tooltip"></div>
 
 <header class="wrap">
-  <p class="kicker"><a href="/" style="color:inherit;text-decoration:none">Gangmuk Lim</a> · Project page</p>
+  <p class="kicker">Project page</p>
   <h1>Koi: Evidence-Guided, Self-Calibrating Planning for Multi-Cloud, Heterogeneous LLM Inference Fleets</h1>
   <p class="authors">Mankeerat Sidhu<sup>1*</sup>, Gangmuk Lim<sup>2*</sup>, Hetarth Chopra<sup>1</sup>, Maximillian Eisenberg<sup>1</sup>, Quan Hao Ng<sup>1</sup>, Aryan Gosaliya<sup>1</sup>, Shu Liu<sup>3</sup>, Luka Govedič<sup>4</sup>, Jiaxin Shan<sup>5</sup>, Hongkuan Zhou<sup>6</sup>, Vikram Sharma Mailthody<sup>6</sup>, P. Brighten Godfrey<sup>2</sup>, Ion Stoica<sup>3</sup></p>
   <p class="affil"><sup>1</sup>Tandemn · <sup>2</sup>UIUC · <sup>3</sup>UC Berkeley · <sup>4</sup>NYU · <sup>5</sup>ByteDance · <sup>6</sup>NVIDIA &nbsp;·&nbsp; *co-first authors</p>

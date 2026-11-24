@@ -95,7 +95,7 @@ Most likely, you can find me on the 3rd floor of the Siebel Center for Computer 
   <div class="news-item">
     <div class="news-date">Nov, 2026</div>
     <div class="news-content">
-      <em><b>Koi: Evidence-Guided, Self-Calibrating Planning for Multi-Cloud, Heterogeneous LLM Inference Fleets</b></em> is out, and the code is open source! <a href="/koi/">Project page</a> · <a href="https://arxiv.org/abs/2610.24355">Paper</a> · <a href="https://github.com/Tandemn-Labs/tandemn-koi">Code</a>
+      New post: <a href="/koi/"><em><b>Koi: Evidence-Guided, Self-Calibrating Planning for Multi-Cloud, Heterogeneous LLM Inference Fleets</b></em></a>. The paper is out, and the code is open source! <a href="https://arxiv.org/abs/2610.24355">Paper</a> · <a href="https://github.com/Tandemn-Labs/tandemn-koi">Code</a>
     </div>
   </div>
 

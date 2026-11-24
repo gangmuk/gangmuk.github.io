@@ -63,7 +63,7 @@
                         {% assign words = post.content | number_of_words %}
                         {% assign mins = words | divided_by: 200 %}
                         {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
-                        <span class="blog-post-readtime">{% if post.link %}project page{% else %}{{ mins }} min{% endif %}</span>
+                        <span class="blog-post-readtime">{% if post.read_time %}{{ post.read_time }}{% else %}{{ mins }}{% endif %} min</span>
                       </div>
                     </div>
                   {% endif %}
@@ -77,7 +77,7 @@
                       {% assign words = post.content | number_of_words %}
                       {% assign mins = words | divided_by: 200 %}
                       {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
-                      <span class="blog-post-readtime">{% if post.link %}project page{% else %}{{ mins }} min{% endif %}</span>
+                      <span class="blog-post-readtime">{% if post.read_time %}{{ post.read_time }}{% else %}{{ mins }}{% endif %} min</span>
                     </div>
                   </div>
                 {% endif %}
